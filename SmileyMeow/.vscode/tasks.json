@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/SmileyMeow/SmileyMeow.csproj",
+                "${workspaceFolder}/SmileyMeow.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/SmileyMeow/SmileyMeow.csproj",
+                "${workspaceFolder}/SmileyMeow.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/SmileyMeow/SmileyMeow.csproj"
+                "${workspaceFolder}/SmileyMeow.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
