@@ -1,13 +1,13 @@
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
-using SmileyMeow.DBContext;
+using SmileyMeow.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<SmileyMeowDBContext>(
+builder.Services.AddDbContext<SmileyMeowDbContext>(
         pgsql => pgsql.UseNpgsql(builder.Configuration.GetConnectionString("SmileyPSQLConnection"))
 );
 
