@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using VetClinicLibrary.Person;
+using VetClinicLibrary.User;
+namespace VetClinicLibrary.Person;
+
+public interface IPerson
+{
+    int PersonId { get; set; }
+    string FirstName { get; set; }
+    string MiddleName { get; set; }
+    string LastName { get; set; }
+    DateTime DOB { get; set; }
+    // after locations
+    // string DistrictId { get; set; }
+    // District District { get; set; }a
+    string PhoneNumber { get; set; }
+    int UserId { get; set; }
+    Userr Userr { get; set; }
+    int BalanceId { get; set; }
+    Balance Balance { get; set; }
+
+}
