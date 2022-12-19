@@ -5,5 +5,5 @@ namespace VetClinicLibrary.Person;
 
 public interface IPetParent : IPerson
 {
-
+    int PetParentId { get; set; }
 }

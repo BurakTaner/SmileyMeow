@@ -9,7 +9,7 @@ namespace VetClinicLibrary.Person;
 
 public class Doctor : IDoctor
 {
-    public int PersonId { get; set; }
+    public int DoctorId { get; set; }
     public string FirstName { get; set; }
     public string MiddleName { get; set; }
     public string LastName { get; set; }

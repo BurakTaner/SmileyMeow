@@ -8,7 +8,6 @@ namespace VetClinicLibrary.Person;
 
 public interface IPerson
 {
-    int PersonId { get; set; }
     string FirstName { get; set; }
     string MiddleName { get; set; }
     string LastName { get; set; }
