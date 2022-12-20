@@ -7,6 +7,7 @@ namespace VetClinicLibrary.PetnPersonn;
 
 public class PetnPerson
 {
+    public int PetnPersonId { get; set; }
     public int PetParentId { get; set; }
     public int AnimalId { get; set; }
 }
