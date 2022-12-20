@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SmileyMeow.Migrations
 {
     /// <inheritdoc />
-    public partial class First : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -282,7 +282,8 @@ namespace SmileyMeow.Migrations
                     specieid = table.Column<int>(type: "integer", nullable: false),
                     breedid = table.Column<int>(type: "integer", nullable: false),
                     patientİnformationpatientinformationid = table.Column<int>(type: "integer", nullable: true),
-                    adoptioninfoanimalid = table.Column<int>(type: "integer", nullable: true)
+                    adoptioninfoanimalid = table.Column<int>(type: "integer", nullable: true),
+                    isadoptable = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {

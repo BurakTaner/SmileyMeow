@@ -12,8 +12,8 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20221220135421_First")]
-    partial class First
+    [Migration("20221220222134_Dummy data for adopt view")]
+    partial class Dummydataforadoptview
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,11 +36,11 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("doctorid");
 
                     b.Property<DateTime>("AppointmentDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("appointmentdate");
 
                     b.Property<DateTime>("TimeCreated")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("timecreated");
 
                     b.HasKey("PetnPersonId", "DoctorId")
@@ -145,7 +145,7 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("balanceid");
 
                     b.Property<DateTime>("DOB")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("dob");
 
                     b.Property<string>("FirstName")
@@ -209,7 +209,7 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("balanceid");
 
                     b.Property<DateTime>("DOB")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("dob");
 
                     b.Property<string>("FirstName")
@@ -314,6 +314,13 @@ namespace SmileyMeow.Migrations
                         .HasName("pk_breeds");
 
                     b.ToTable("breeds", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            BreedId = 6,
+                            BName = "Ragdoll"
+                        });
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Pett.Gender.PetGender", b =>
@@ -333,6 +340,13 @@ namespace SmileyMeow.Migrations
                         .HasName("pk_petgenders");
 
                     b.ToTable("petgenders", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            PetGenderId = 6,
+                            GName = "Female"
+                        });
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Pett.Pet", b =>
@@ -353,8 +367,12 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("breedid");
 
                     b.Property<DateTime>("DOB")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("dob");
+
+                    b.Property<bool>("IsAdoptable")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isadoptable");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
@@ -391,6 +409,18 @@ namespace SmileyMeow.Migrations
                         .HasDatabaseName("ix_pets_specieid");
 
                     b.ToTable("pets", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            AnimalId = 6,
+                            BreedId = 6,
+                            DOB = new DateTime(2022, 12, 21, 1, 21, 33, 575, DateTimeKind.Local).AddTicks(2271),
+                            IsAdoptable = true,
+                            Name = "Sif",
+                            PetGenderId = 6,
+                            SpecieId = 6
+                        });
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Pett.Speciee.Specie", b =>
@@ -410,6 +440,13 @@ namespace SmileyMeow.Migrations
                         .HasName("pk_species");
 
                     b.ToTable("species", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            SpecieId = 6,
+                            SName = "Wolf"
+                        });
                 });
 
             modelBuilder.Entity("VetClinicLibrary.SchoolTypee.SchoolType", b =>
