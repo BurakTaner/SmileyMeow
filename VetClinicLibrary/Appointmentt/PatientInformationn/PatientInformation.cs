@@ -1,6 +1,6 @@
 using VetClinicLibrary.Appointmentt.StatusLevell;
 
-namespace VetClinicLibrary.Appointment.PatientInformationn;
+namespace VetClinicLibrary.Appointmentt.PatientInformationn;
 
 public class PatientInformation
 {
