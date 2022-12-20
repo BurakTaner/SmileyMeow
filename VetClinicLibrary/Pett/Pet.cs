@@ -22,4 +22,5 @@ public class Pet : IPet
     public List<PetParent> PetParents { get; set; }
     public PatientInformation Patientİnformation { get; set; }
     public AdoptInfo AdoptionInfo { get; set; }
+    public bool IsAdoptable { get; set; }
 }
