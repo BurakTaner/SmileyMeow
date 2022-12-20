@@ -1,4 +1,4 @@
-namespace VetClinicLibrary.Appointment.StatusLevell;
+namespace VetClinicLibrary.Appointmentt.StatusLevell;
 
 public class StatusLevel : IStatusLevel
 {
