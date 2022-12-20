@@ -11,6 +11,9 @@ builder.Services.AddDbContext<SmileyMeowDbContext>(
         pgsql => pgsql.UseNpgsql(builder.Configuration.GetConnectionString("SmileyPSQLConnection")).UseLowerCaseNamingConvention()
 );
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
