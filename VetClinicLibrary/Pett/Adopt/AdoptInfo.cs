@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using VetClinicLibrary.Pett;
 
 namespace VetClinicLibrary.Pett.Adopt;
