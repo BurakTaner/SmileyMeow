@@ -8,6 +8,6 @@ namespace VetClinicLibrary.Schooll;
 public class PersonSchool
 {
     // composite key
-    int PersonId { get; set; }
+    int DoctorId { get; set; }
     int SchoolId { get; set; }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VetClinicLibrary.Person;
+using VetClinicLibrary.Schooll;
 using VetClinicLibrary.User;
 
 namespace VetClinicLibrary.Person;
@@ -20,7 +21,7 @@ public class Doctor : IDoctor
     public Userr Userr { get; set ; }
     public int BalanceId { get ; set ; }
     public Balance Balance { get; set; }
-    public int SchoolId { get ; set ; }
+    public School School { get; set; }
     // public string DistrictId { get ; set ; }
     // public District District { get ; set ; }
 }

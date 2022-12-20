@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using VetClinicLibrary.Schooll;
 using VetClinicLibrary.SchoolTypee;
 
-namespace VetClinicLibrary.School;
+namespace VetClinicLibrary.Schooll;
 
 public class School : ISchool
 {
