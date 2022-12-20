@@ -10,6 +10,6 @@ public class Appointment : IAppointment
 {
     public int PetnPersonId { get; set; }
     public int DoctorId { get; set; }
-    public DateTime TimeCreated { get; set; }
+    public DateTime TimeCreated { get; set; } = DateTime.Now;
     public DateTime AppointmentDate { get; set; }
 }
