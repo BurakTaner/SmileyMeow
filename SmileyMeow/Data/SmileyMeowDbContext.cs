@@ -4,6 +4,7 @@ using VetClinicLibrary.Appointmentt;
 using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.Appointmentt.StatusLevell;
 using VetClinicLibrary.Person;
+using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.PetnPersonn;
 using VetClinicLibrary.Pett;
 using VetClinicLibrary.Pett.Adopt;
@@ -16,7 +17,7 @@ using VetClinicLibrary.User;
 
 namespace SmileyMeow.Data;
 public class SmileyMeowDbContext : DbContext
-{  
+{
     public SmileyMeowDbContext(DbContextOptions<SmileyMeowDbContext> options) : base(options)
     { }
 
@@ -39,51 +40,100 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<DoctorSchool> DoctorSchools { get; set; }
 
     //add configuration folder later
-    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
         // temporary 
         modelBuilder.Entity<Pet>()
                     .HasOne(p => p.AdoptionInfo)
                     .WithMany(a => a.Pet);
 
         modelBuilder.Entity<Appointment>()
-                    .HasKey(apo => new {apo.PetnPersonId, apo.DoctorId});     
+                    .HasKey(apo => new { apo.PetnPersonId, apo.DoctorId });
 
         modelBuilder.Entity<AdoptInfo>()
                     .HasKey(ado => ado.AnimalId);
-        
-        
+
+
         modelBuilder.Entity<Balance>()
                     .HasKey(bala => bala.BalanceId);
-        
-        
+
         modelBuilder.Entity<Pet>()
                     .HasKey(pet => pet.AnimalId);
 
         modelBuilder.Entity<DoctorSchool>()
-                    .HasKey(docs => new { docs.DoctorId, docs.SchoolId});
+                    .HasKey(docs => new { docs.DoctorId, docs.SchoolId });
+
+        modelBuilder.Entity<Userr>().Ignore(p => p.PasswordRepeat);
         //
 
-        // dum
+        // dummy data
         modelBuilder.Entity<Pet>().HasData(
-            new Pet {AnimalId = 6, PetGenderId = 6 ,BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif"}
+            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif" }
         );
 
         modelBuilder.Entity<PetGender>().HasData(
-            new PetGender {PetGenderId = 6, GName = "Female"}
+            new PetGender { PetGenderId = 6, GName = "Female" }
         );
 
         modelBuilder.Entity<Breed>().HasData(
-            new Breed {BreedId = 6, BName = "Ragdoll" }
+            new Breed { BreedId = 6, BName = "Ragdoll" }
         );
 
         modelBuilder.Entity<Specie>().HasData(
-            new Specie { SpecieId = 6, SName = "Wolf"}
+            new Specie { SpecieId = 6, SName = "Wolf" }
         );
 
         modelBuilder.Entity<AdoptInfo>().HasData(
-                new AdoptInfo { AnimalId = 6, AdoptText = "So cute"}
+            new AdoptInfo { AnimalId = 6, AdoptText = "So cute" }
+        );
+
+        modelBuilder.Entity<SchoolType>().HasData(
+            new SchoolType { SchoolTypeId = 6, Name = "University" }
+        );
+
+        modelBuilder.Entity<School>().HasData(
+            new School { SchoolId = 6, SchoolTypeId = 6, Name = "Harvard" }
+        );
+
+        modelBuilder.Entity<Userr>().HasData(
+            new Userr { UserrId = 6, Email = "artorias@gmail.com", Password = "sif123456", RoleeId = 6 },
+            new Userr { UserrId = 666, Email = "patches@gmail.com", Password = "patches123456", RoleeId = 666 }
+        );
+
+        modelBuilder.Entity<Rolee>().HasData(
+            new Rolee { RoleeId = 6, Name = "PetParent" },
+            new Rolee { RoleeId = 666, Name = "Doctor" }
+        );
+
+        modelBuilder.Entity<Doctor>().HasData(
+            new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66}
+        );
+
+        modelBuilder.Entity<PetParent>().HasData(
+            new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6}
+        );
+
+        modelBuilder.Entity<HumanGender>().HasData(
+            new HumanGender { HumanGenderId = 6, GName = "Non-Binary"}, 
+            new HumanGender { HumanGenderId = 66, GName = "Genderfluid"} 
+        );
+
+        modelBuilder.Entity<DoctorSchool>().HasData(
+            new DoctorSchool { DoctorId = 6, SchoolId = 6}
+        );
+
+        modelBuilder.Entity<PetnPerson>().HasData(
+            new PetnPerson { AnimalId = 6, PetParentId = 6, PetnPersonId = 6}
+        );
+
+        modelBuilder.Entity<Balance>().HasData(
+            new Balance { BalanceId = 6, PersonBalance = Convert.ToDecimal("150.55")},
+            new Balance { BalanceId = 666, PersonBalance = Convert.ToDecimal("90.65")}
+        );
+
+        modelBuilder.Entity<Appointment>().HasData(
+            new Appointment { PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30)}
         );
     }
-
 
 }
