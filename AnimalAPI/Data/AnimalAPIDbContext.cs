@@ -18,6 +18,19 @@ public class AnimalAPIDbContext : DbContext
     public DbSet<Specie> Species { get; set; }
     public DbSet<Breed> Breeds { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
+        //
+        modelBuilder.Entity<Animal>()
+                    .HasKey(ani => ani.AnimalId);
+
+        modelBuilder.Entity<Specie>()
+                    .HasKey(spec => spec.SpecieId);
+                    
+        modelBuilder.Entity<Breed>()
+                    .HasKey(brd => brd.BreedId);
+                    
+        //
+
+        // dummy data
         modelBuilder.Entity<Animal>().HasData(
             new Animal { AnimalId = 6, Name = "Torrent" , BreedId = 6, SpecieId = 6}
         );
@@ -29,5 +42,6 @@ public class AnimalAPIDbContext : DbContext
         modelBuilder.Entity<Breed>().HasData(
             new Breed { BreedId = 6, BName = "Mangalarga Marchador"}
         );
+        //
     }
 }
