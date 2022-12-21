@@ -8,7 +8,7 @@ using VetClinicLibrary.PetnPersonn;
 using VetClinicLibrary.Pett;
 using VetClinicLibrary.Pett.Adopt;
 using VetClinicLibrary.Pett.Breedd;
-using VetClinicLibrary.Pett.Gender;
+using VetClinicLibrary.Pett.PetGenderr;
 using VetClinicLibrary.Pett.Speciee;
 using VetClinicLibrary.Schooll;
 using VetClinicLibrary.SchoolTypee;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VetClinicLibrary.Pett.Gender;
+namespace VetClinicLibrary.Pett.PetGenderr;
 
 public class PetGender
 {
