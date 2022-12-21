@@ -79,6 +79,10 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Specie>().HasData(
             new Specie { SpecieId = 6, SName = "Wolf"}
         );
+
+        modelBuilder.Entity<AdoptInfo>().HasData(
+                new AdoptInfo { AnimalId = 6, AdoptText = "So cute"}
+        );
     }
 
 

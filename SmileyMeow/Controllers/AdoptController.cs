@@ -1,13 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmileyMeow.Data;
+using SmileyMeow.Helpers;
+using SmileyMeow.ViewModels;
 using VetClinicLibrary.Pett;
-using VetClinicLibrary.Pett.Adopt;
-using VetVetClinicLibrary.Pett;
 
 namespace SmileyMeow.Controllers;
-
-[Route("[controller]")]
 public class AdoptController : Controller
 {
     private readonly ILogger<AdoptController> _logger;
@@ -19,11 +17,26 @@ public class AdoptController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> AdoptList()
     {
         List<Pet> adoptablePets = await _context.Pets.Where(pet => pet.IsAdoptable == true).ToListAsync();
-        
+
         return View(adoptablePets);
+    }
+    
+    public async Task<IActionResult> AdoptInfo(int Id) {
+        PetAdoptInfoViewModel petAdoptInfoViewModel = new();
+
+        petAdoptInfoViewModel.AdoptablePet = await _context.Pets.Include(p => p.Breed)
+        .Include(p => p.PetGender)
+        .Include(p => p.Specie)
+        .FirstOrDefaultAsync(pet => pet.AnimalId == Id);
+
+        petAdoptInfoViewModel.AdoptablePetInfo = await _context.AdoptInfos.FirstOrDefaultAsync(adoptInfo => adoptInfo.AnimalId == Id);
+
+        petAdoptInfoViewModel.PetAge = AgeCalculator.CalculateAge(petAdoptInfoViewModel.AdoptablePet.DOB);
+        
+        return View(petAdoptInfoViewModel);
     }
 
     // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

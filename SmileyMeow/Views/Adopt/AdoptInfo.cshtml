@@ -1,0 +1,50 @@
+﻿@model PetAdoptInfoViewModel
+
+@{
+    ViewData["Title"] = "AdoptInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img class="card-img card-img-left" style="border-radius:10px;" src="~/Images/pet-@(Model.AdoptablePet.AnimalId).jpg" alt="An adoptable pet's image">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h4 class="card-title">@Model.AdoptablePet.Name</h4>
+                <p class="card-text" name="about">
+                    <label for="about"><strong>Specie:</strong></label>
+                    <br />
+                  @Model.AdoptablePet.Specie.SName
+                </p>
+                <p class="card-text" name="about">
+                <p class="card-text" name="about">
+                    <label for="about"><strong>Breed:</strong></label>
+                    <br />
+                  @Model.AdoptablePet.Breed.BName
+                </p>
+                <p class="card-text" name="about">
+                    <label for="about"><strong>Gender:</strong></label>
+                    <br />
+                  @Model.AdoptablePet.PetGender.GName
+                </p>
+                <p class="card-text" name="about">
+                    <label for="about"><strong>About:</strong></label>
+                    <br />
+                  @Model.AdoptablePetInfo.AdoptText
+                </p>
+                <p class="card-text" name="DOB">
+                    <label for="DOB"><strong>Date of Birth:</strong></label>
+                    @Model.AdoptablePet.DOB.ToShortDateString();    
+                    </p>
+                <p class="card-text" name="Age">
+                    <label for="Age"><strong>Age:</strong></label>
+                @Model.PetAge    
+                </p>
+                <a href="#" class="btn btn-primary d-block px-2 py-3">Apply</a>
+            </div>
+        </div>
+    </div>
+</div>
+
