@@ -10,7 +10,6 @@ public class PetParent : IPetParent
     public string MiddleName { get; set; }
     public string LastName { get; set; }
     public DateTime DOB { get; set; }
-    public string Address { get; set; }
     public string PhoneNumber { get; set; }
     public int UserId { get; set; }
     public Userr Userr { get; set; }
