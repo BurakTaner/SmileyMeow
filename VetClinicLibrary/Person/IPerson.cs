@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VetClinicLibrary.Person;
+using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.User;
 namespace VetClinicLibrary.Person;
 
@@ -12,6 +13,8 @@ public interface IPerson
     string MiddleName { get; set; }
     string LastName { get; set; }
     DateTime DOB { get; set; }
+    int HumanGenderId { get; set; }
+    HumanGender HumanGender { get; set; }
     // after locations
     // string DistrictId { get; set; }
     // District District { get; set; }a

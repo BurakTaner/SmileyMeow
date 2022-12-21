@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VetClinicLibrary.Person;
+using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.Schooll;
 using VetClinicLibrary.User;
 
@@ -15,6 +16,8 @@ public class Doctor : IDoctor
     public string MiddleName { get; set; }
     public string LastName { get; set; }
     public DateTime DOB { get; set; }
+    public int HumanGenderId { get; set; }
+    public HumanGender HumanGender { get; set; }
     public string PhoneNumber { get; set; }
     public int UserId { get; set; }
     public Userr Userr { get; set ; }
