@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AnimalAPI.Models.Animall;
+using AnimalAPI.Models.Breedd;
+using AnimalAPI.Models.Speciee;
 using Microsoft.EntityFrameworkCore;
-using VetClinicLibrary.Animall;
-using VetClinicLibrary.Pett.Breedd;
-using VetClinicLibrary.Pett.Speciee;
-
 namespace AnimalAPI.Data;
 
 public class AnimalAPIDbContext : DbContext

@@ -1,10 +1,12 @@
-using VetClinicLibrary.Pett.Breedd;
-using VetClinicLibrary.Pett.Speciee;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace VetClinicLibrary.Animall;
+namespace AnimalAPI.Models.Animall;
 
 public interface IAnimal
-{  
+{
     public int AnimalId { get; set; }
     public string Name { get; set; }
     public int SpecieId { get; set; }
