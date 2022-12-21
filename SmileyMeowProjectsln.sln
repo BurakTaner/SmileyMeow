@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmileyMeow", "SmileyMeow\Sm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetClinicLibrary", "VetClinicLibrary\VetClinicLibrary.csproj", "{FC0AA275-F032-40AC-B79A-F0DA50C09461}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalAPI", "AnimalAPI\AnimalAPI.csproj", "{AF0746D7-9E72-4EAB-BD6B-8F6D9924981C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,5 +34,9 @@ Global
 		{FC0AA275-F032-40AC-B79A-F0DA50C09461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC0AA275-F032-40AC-B79A-F0DA50C09461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC0AA275-F032-40AC-B79A-F0DA50C09461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF0746D7-9E72-4EAB-BD6B-8F6D9924981C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF0746D7-9E72-4EAB-BD6B-8F6D9924981C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF0746D7-9E72-4EAB-BD6B-8F6D9924981C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF0746D7-9E72-4EAB-BD6B-8F6D9924981C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
