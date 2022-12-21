@@ -53,7 +53,7 @@ public class SmileyMeowDbContext : DbContext
         
         
         modelBuilder.Entity<Balance>()
-                    .HasKey(bala => bala.PersonId);
+                    .HasKey(bala => bala.BalanceId);
         
         
         modelBuilder.Entity<Pet>()

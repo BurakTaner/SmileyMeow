@@ -8,6 +8,6 @@ namespace VetClinicLibrary.Person;
 
 public interface IBalance
 {
-    int PersonId { get; set; }
+    int BalanceId { get; set; }
     decimal PersonBalance { get; set; }
 }

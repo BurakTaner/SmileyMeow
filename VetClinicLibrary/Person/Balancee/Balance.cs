@@ -7,6 +7,6 @@ namespace VetClinicLibrary.Person;
 
 public class Balance : IBalance
 {
-    public int PersonId { get; set; }
+    public int BalanceId { get; set; }
     public decimal PersonBalance { get; set; }
 }
