@@ -17,8 +17,11 @@ public class AnimalAPIDbContext : DbContext
     public DbSet<Animal> Animals { get; set; }
     public DbSet<Specie> Species { get; set; }
     public DbSet<Breed> Breeds { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
-        //
+        
+        // temporary configuration
+        
         modelBuilder.Entity<Animal>()
                     .HasKey(ani => ani.AnimalId);
 
@@ -27,21 +30,32 @@ public class AnimalAPIDbContext : DbContext
                     
         modelBuilder.Entity<Breed>()
                     .HasKey(brd => brd.BreedId);
-                    
+
+        modelBuilder.Entity<Animal>()
+                    .HasOne(a => a.Breed)
+                    .WithMany(b => b.Animals);
+
+        modelBuilder.Entity<Animal>()
+                    .HasOne(a => a.Specie)
+                    .WithMany(s => s.Animals);
         //
 
         // dummy data
+        
         modelBuilder.Entity<Animal>().HasData(
-            new Animal { AnimalId = 6, Name = "Torrent" , BreedId = 6, SpecieId = 6}
+            new Animal { AnimalId = 6, Name = "Torrent", BreedId = 6, SpecieId = 6 }
         );
 
         modelBuilder.Entity<Specie>().HasData(
-            new Specie { SpecieId = 6, SName = "Horse"}
+            new Specie { SpecieId = 6, SName = "Horse" }
         );
 
         modelBuilder.Entity<Breed>().HasData(
+
             new Breed { BreedId = 6, BName = "Mangalarga Marchador"}
         );
+        
         //
+    
     }
 }
