@@ -10,5 +10,4 @@ public class Specie
 {
     public int SpecieId { get; set; }
     public string SName { get; set; }
-    public List<Animal> Animals { get; set; }
 }

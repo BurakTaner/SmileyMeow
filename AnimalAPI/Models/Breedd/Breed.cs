@@ -10,5 +10,4 @@ public class Breed
 {
     public int BreedId { get; set; }
     public string BName { get; set; }
-    public List<Animal> Animals { get; set; }
 }

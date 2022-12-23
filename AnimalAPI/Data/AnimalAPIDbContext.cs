@@ -30,14 +30,6 @@ public class AnimalAPIDbContext : DbContext
                     
         modelBuilder.Entity<Breed>()
                     .HasKey(brd => brd.BreedId);
-
-        modelBuilder.Entity<Animal>()
-                    .HasOne(a => a.Breed)
-                    .WithMany(b => b.Animals);
-
-        modelBuilder.Entity<Animal>()
-                    .HasOne(a => a.Specie)
-                    .WithMany(s => s.Animals);
         //
 
         // dummy data
