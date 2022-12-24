@@ -2,7 +2,7 @@
 ---
 ## It's not my website design. I am using petsitting-master website template.
 
-#### **I am not going to use template for any real world bussines situation. Only for my final project for Infotech Academy
+#### I am not going to use template for any real world bussines situation. Only for my final project for Infotech Academy
 
 
 #### Hi, my name is Ertan,
