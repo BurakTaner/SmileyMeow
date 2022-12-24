@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VetClinicLibrary.Person;
 using VetClinicLibrary.Person.HumanGenderr;
+using VetClinicLibrary.Person.Titles;
 using VetClinicLibrary.Schooll;
 using VetClinicLibrary.User;
 
@@ -24,6 +25,8 @@ public class Doctor : IDoctor
     public int BalanceId { get ; set ; }
     public Balance Balance { get; set; }
     public School School { get; set; }
+    public int DoctorTitleId { get; set; }
+    public DoctorTitle DoctorTitle { get; set; }
     // public string DistrictId { get ; set ; }
     // public District District { get ; set ; }
 }

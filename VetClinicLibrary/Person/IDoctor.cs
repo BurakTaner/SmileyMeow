@@ -9,4 +9,5 @@ namespace VetClinicLibrary.Person;
 public interface IDoctor : IPerson
 {
     int DoctorId { get; set; }
+    int DoctorTitleId { get; set; }
 }

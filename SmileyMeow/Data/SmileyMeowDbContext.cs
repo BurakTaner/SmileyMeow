@@ -5,6 +5,7 @@ using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.Appointmentt.StatusLevell;
 using VetClinicLibrary.Person;
 using VetClinicLibrary.Person.HumanGenderr;
+using VetClinicLibrary.Person.Titles;
 using VetClinicLibrary.PetnPersonn;
 using VetClinicLibrary.Pett;
 using VetClinicLibrary.Pett.Adopt;
@@ -38,6 +39,7 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<Rolee> Rolees { get; set; }
     public DbSet<Userr> Userrs { get; set; }
     public DbSet<DoctorSchool> DoctorSchools { get; set; }
+    public DbSet<DoctorTitle> DoctorTitles { get; set; }
 
     //add configuration folder later
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -106,7 +108,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Doctor>().HasData(
-            new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66}
+            new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66, DoctorTitleId = 6}
         );
 
         modelBuilder.Entity<PetParent>().HasData(
@@ -133,6 +135,12 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Appointment>().HasData(
             new Appointment { PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30)}
+        );
+
+        modelBuilder.Entity<DoctorTitle>().HasData(
+            new DoctorTitle { DoctorTitleId = 6, TFullForm = "Vetenerian", TShortForm = "Dr."}
+            
+            
         );
     }
 
