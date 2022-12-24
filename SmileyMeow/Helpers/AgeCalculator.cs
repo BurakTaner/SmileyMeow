@@ -8,6 +8,8 @@ namespace SmileyMeow.Helpers;
 public static class AgeCalculator
 {
     public static int CalculateAge(DateTime DOB) {
-        return DateTime.Now.Year - DOB.Year;
+        int age = DateTime.Now.Year - DOB.Year;
+
+        return age == 0 ? 1 : age;
     }
 }
