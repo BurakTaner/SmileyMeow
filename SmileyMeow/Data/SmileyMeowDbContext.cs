@@ -42,6 +42,8 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<Userr> Userrs { get; set; }
     public DbSet<DoctorSchool> DoctorSchools { get; set; }
     public DbSet<DoctorTitle> DoctorTitles { get; set; }
+    public DbSet<DoctorInfo> DoctorInfos { get; set; }
+    public DbSet<Pronoun> Pronouns { get; set; }
 
     //add configuration folder later
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -74,6 +76,15 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Pronoun>()
                         .HasKey(p => p.ProunounId);
+        
+        modelBuilder.Entity<Pronoun>()
+                        .HasMany(p => p.PetParents)
+                        .WithOne(pp => pp.Pronoun);
+        
+        modelBuilder.Entity<Pronoun>()
+                        .HasMany(p => p.Doctors)
+                        .WithOne(d => d.Pronoun);
+
         //
 
         // dummy data
@@ -102,7 +113,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<School>().HasData(
-            new School { SchoolId = 6, SchoolTypeId = 6, Name = "Harvard" }
+            new School { SchoolId = 6, SchoolTypeId = 6, Name = "University of California, Davis" }
         );
 
         modelBuilder.Entity<Userr>().HasData(
@@ -148,7 +159,10 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<DoctorTitle>().HasData(
             new DoctorTitle { DoctorTitleId = 6, TFullForm = "Vetenerian", TShortForm = "DVM"}
             
-            
+        );
+
+        modelBuilder.Entity<DoctorInfo>().HasData(
+            new DoctorInfo { DoctorId = 6, DoctorInformation = "Hi, I am Dr. Patches, a veterinarian with over 10 years of experience in the field. I received my Doctor of Veterinary Medicine degree from the University of California, Davis and have since worked at a variety of clinics, caring for all types of animals and their petparents. My specialty is in small animal medicine, but I am well-versed in treating all kinds of creatures, from cats and dogs to birds and reptiles. I am passionate about helping animals and their owners, and take pride in being able to diagnose and treat a wide range of conditions. In my free time, I enjoy volunteering at local animal shelters and spending time with my own pets, which include a rescue dog and two cats. I believe that effective communication with petparents is crucial in providing the best care for their beloved animals."}
         );
 
         modelBuilder.Entity<Pronoun>().HasData(

@@ -34,7 +34,7 @@
                 "run",
                 "--project",
                 "${workspaceFolder}/SmileyMeow/SmileyMeow.csproj"
-            ],
+            ]   ,
             "problemMatcher": "$msCompile"
         }
     ]

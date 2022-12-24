@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SmileyMeow.Data;
@@ -11,9 +12,11 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    partial class SmileyMeowDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221224171229_Doctor info text model added")]
+    partial class Doctorinfotextmodeladded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,8 +53,8 @@ namespace SmileyMeow.Migrations
                         {
                             PetnPersonId = 6,
                             DoctorId = 6,
-                            AppointmentDate = new DateTime(2023, 1, 23, 22, 53, 27, 814, DateTimeKind.Local).AddTicks(2808),
-                            TimeCreated = new DateTime(2022, 12, 24, 22, 53, 27, 814, DateTimeKind.Local).AddTicks(2804)
+                            AppointmentDate = new DateTime(2023, 1, 23, 20, 12, 28, 704, DateTimeKind.Local).AddTicks(3943),
+                            TimeCreated = new DateTime(2022, 12, 24, 20, 12, 28, 704, DateTimeKind.Local).AddTicks(3940)
                         });
                 });
 
@@ -186,10 +189,6 @@ namespace SmileyMeow.Migrations
                         .HasColumnType("text")
                         .HasColumnName("phonenumber");
 
-                    b.Property<int>("PronounId")
-                        .HasColumnType("integer")
-                        .HasColumnName("pronounid");
-
                     b.Property<int?>("SchoolId")
                         .HasColumnType("integer")
                         .HasColumnName("schoolid");
@@ -214,9 +213,6 @@ namespace SmileyMeow.Migrations
                     b.HasIndex("HumanGenderId")
                         .HasDatabaseName("ix_doctors_humangenderid");
 
-                    b.HasIndex("PronounId")
-                        .HasDatabaseName("ix_doctors_pronounid");
-
                     b.HasIndex("SchoolId")
                         .HasDatabaseName("ix_doctors_schoolid");
 
@@ -236,7 +232,6 @@ namespace SmileyMeow.Migrations
                             HumanGenderId = 66,
                             LastName = "Whisper",
                             PhoneNumber = "05434561275",
-                            PronounId = 6,
                             UserId = 666
                         });
                 });
@@ -336,10 +331,6 @@ namespace SmileyMeow.Migrations
                         .HasColumnType("text")
                         .HasColumnName("phonenumber");
 
-                    b.Property<int>("PronounId")
-                        .HasColumnType("integer")
-                        .HasColumnName("pronounid");
-
                     b.Property<int>("UserId")
                         .HasColumnType("integer")
                         .HasColumnName("userid");
@@ -360,9 +351,6 @@ namespace SmileyMeow.Migrations
                     b.HasIndex("PetAnimalId")
                         .HasDatabaseName("ix_petparents_petanimalid");
 
-                    b.HasIndex("PronounId")
-                        .HasDatabaseName("ix_petparents_pronounid");
-
                     b.HasIndex("UserrId")
                         .HasDatabaseName("ix_petparents_userrid");
 
@@ -378,34 +366,7 @@ namespace SmileyMeow.Migrations
                             HumanGenderId = 6,
                             LastName = "Astora",
                             MiddleName = "Solaire",
-                            PronounId = 6,
                             UserId = 6
-                        });
-                });
-
-            modelBuilder.Entity("VetClinicLibrary.Person.Prounounn.Pronoun", b =>
-                {
-                    b.Property<int>("ProunounId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("prounounid");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProunounId"));
-
-                    b.Property<string>("PName")
-                        .HasColumnType("text")
-                        .HasColumnName("pname");
-
-                    b.HasKey("ProunounId")
-                        .HasName("pk_pronouns");
-
-                    b.ToTable("pronouns", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ProunounId = 6,
-                            PName = "They/Them"
                         });
                 });
 
@@ -589,7 +550,7 @@ namespace SmileyMeow.Migrations
                         {
                             AnimalId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2022, 12, 24, 22, 53, 27, 814, DateTimeKind.Local).AddTicks(2061),
+                            DOB = new DateTime(2022, 12, 24, 20, 12, 28, 704, DateTimeKind.Local).AddTicks(3075),
                             IsAdoptable = true,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -862,13 +823,6 @@ namespace SmileyMeow.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_doctors_humangender_humangenderid");
 
-                    b.HasOne("VetClinicLibrary.Person.Prounounn.Pronoun", "Pronoun")
-                        .WithMany("Doctors")
-                        .HasForeignKey("PronounId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_doctors_pronouns_pronounid");
-
                     b.HasOne("VetClinicLibrary.Schooll.School", "School")
                         .WithMany()
                         .HasForeignKey("SchoolId")
@@ -884,8 +838,6 @@ namespace SmileyMeow.Migrations
                     b.Navigation("DoctorTitle");
 
                     b.Navigation("HumanGender");
-
-                    b.Navigation("Pronoun");
 
                     b.Navigation("School");
 
@@ -925,13 +877,6 @@ namespace SmileyMeow.Migrations
                         .HasForeignKey("PetAnimalId")
                         .HasConstraintName("fk_petparents_pets_pettempid");
 
-                    b.HasOne("VetClinicLibrary.Person.Prounounn.Pronoun", "Pronoun")
-                        .WithMany("PetParents")
-                        .HasForeignKey("PronounId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_petparents_pronouns_pronounid");
-
                     b.HasOne("VetClinicLibrary.User.Userr", "Userr")
                         .WithMany()
                         .HasForeignKey("UserrId")
@@ -940,8 +885,6 @@ namespace SmileyMeow.Migrations
                     b.Navigation("Balance");
 
                     b.Navigation("HumanGender");
-
-                    b.Navigation("Pronoun");
 
                     b.Navigation("Userr");
                 });
@@ -1017,13 +960,6 @@ namespace SmileyMeow.Migrations
             modelBuilder.Entity("VetClinicLibrary.Person.Doctor", b =>
                 {
                     b.Navigation("DoctorInfo");
-                });
-
-            modelBuilder.Entity("VetClinicLibrary.Person.Prounounn.Pronoun", b =>
-                {
-                    b.Navigation("Doctors");
-
-                    b.Navigation("PetParents");
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Person.Titles.DoctorTitle", b =>
