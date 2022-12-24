@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AnimalAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class First : Migration
+    public partial class Iniialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
