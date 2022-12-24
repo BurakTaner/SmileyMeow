@@ -118,14 +118,14 @@ namespace AnimalAPI.Migrations
             modelBuilder.Entity("AnimalAPI.Models.Animall.Animal", b =>
                 {
                     b.HasOne("AnimalAPI.Models.Breedd.Breed", "Breed")
-                        .WithMany("Animals")
+                        .WithMany()
                         .HasForeignKey("BreedId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_animals_breeds_breedid");
 
                     b.HasOne("AnimalAPI.Models.Speciee.Specie", "Specie")
-                        .WithMany("Animals")
+                        .WithMany()
                         .HasForeignKey("SpecieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -134,16 +134,6 @@ namespace AnimalAPI.Migrations
                     b.Navigation("Breed");
 
                     b.Navigation("Specie");
-                });
-
-            modelBuilder.Entity("AnimalAPI.Models.Breedd.Breed", b =>
-                {
-                    b.Navigation("Animals");
-                });
-
-            modelBuilder.Entity("AnimalAPI.Models.Speciee.Specie", b =>
-                {
-                    b.Navigation("Animals");
                 });
 #pragma warning restore 612, 618
         }
