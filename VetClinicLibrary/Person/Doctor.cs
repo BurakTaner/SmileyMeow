@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VetClinicLibrary.Person;
+using VetClinicLibrary.Person.DoctorInfoo;
 using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.Person.Titles;
 using VetClinicLibrary.Schooll;
@@ -27,6 +28,7 @@ public class Doctor : IDoctor
     public School School { get; set; }
     public int DoctorTitleId { get; set; }
     public DoctorTitle DoctorTitle { get; set; }
+    public DoctorInfo DoctorInfo { get; set; }
     // public string DistrictId { get ; set ; }
     // public District District { get ; set ; }
 }
