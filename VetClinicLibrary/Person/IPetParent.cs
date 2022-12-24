@@ -8,5 +8,5 @@ public interface IPetParent : IPerson
 {
     int PetParentId { get; set; }
     int HumanGenderId { get; set; }
-    HumanGender HumanGender { get; set; }
+    
 }

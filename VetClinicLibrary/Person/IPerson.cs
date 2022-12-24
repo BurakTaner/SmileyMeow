@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VetClinicLibrary.Person;
 using VetClinicLibrary.Person.HumanGenderr;
+using VetClinicLibrary.Person.Prounounn;
 using VetClinicLibrary.User;
 namespace VetClinicLibrary.Person;
 
@@ -23,5 +24,8 @@ public interface IPerson
     Userr Userr { get; set; }
     int BalanceId { get; set; }
     Balance Balance { get; set; }
+
+    int PronounId { get; set; }
+    Pronoun Pronoun { get; set; }
 
 }

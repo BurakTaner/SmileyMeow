@@ -10,4 +10,5 @@ public interface IDoctor : IPerson
 {
     int DoctorId { get; set; }
     int DoctorTitleId { get; set; }
+    int HumanGenderId { get; set; }
 }

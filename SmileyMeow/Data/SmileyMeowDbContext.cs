@@ -4,7 +4,9 @@ using VetClinicLibrary.Appointmentt;
 using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.Appointmentt.StatusLevell;
 using VetClinicLibrary.Person;
+using VetClinicLibrary.Person.DoctorInfoo;
 using VetClinicLibrary.Person.HumanGenderr;
+using VetClinicLibrary.Person.Prounounn;
 using VetClinicLibrary.Person.Titles;
 using VetClinicLibrary.PetnPersonn;
 using VetClinicLibrary.Pett;
@@ -66,6 +68,12 @@ public class SmileyMeowDbContext : DbContext
                     .HasKey(docs => new { docs.DoctorId, docs.SchoolId });
 
         modelBuilder.Entity<Userr>().Ignore(p => p.PasswordRepeat);
+
+        modelBuilder.Entity<DoctorInfo>()
+                        .HasKey(di => di.DoctorId);
+
+        modelBuilder.Entity<Pronoun>()
+                        .HasKey(p => p.ProunounId);
         //
 
         // dummy data
@@ -108,11 +116,11 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Doctor>().HasData(
-            new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66, DoctorTitleId = 6}
+            new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66, DoctorTitleId = 6, PronounId = 6}
         );
 
         modelBuilder.Entity<PetParent>().HasData(
-            new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6}
+            new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6,PronounId = 6}
         );
 
         modelBuilder.Entity<HumanGender>().HasData(
@@ -141,6 +149,10 @@ public class SmileyMeowDbContext : DbContext
             new DoctorTitle { DoctorTitleId = 6, TFullForm = "Vetenerian", TShortForm = "DVM"}
             
             
+        );
+
+        modelBuilder.Entity<Pronoun>().HasData(
+            new Pronoun { ProunounId = 6, PName = "They/Them"}
         );
     }
 
