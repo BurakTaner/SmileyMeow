@@ -138,7 +138,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<DoctorTitle>().HasData(
-            new DoctorTitle { DoctorTitleId = 6, TFullForm = "Vetenerian", TShortForm = "Dr."}
+            new DoctorTitle { DoctorTitleId = 6, TFullForm = "Vetenerian", TShortForm = "DVM"}
             
             
         );
