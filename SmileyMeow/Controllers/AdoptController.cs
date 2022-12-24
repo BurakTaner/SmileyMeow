@@ -17,14 +17,14 @@ public class AdoptController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> AdoptList()
+    public async Task<IActionResult> List()
     {
         List<Pet> adoptablePets = await _context.Pets.Where(pet => pet.IsAdoptable == true).ToListAsync();
 
         return View(adoptablePets);
     }
     
-    public async Task<IActionResult> AdoptInfo(int Id) {
+    public async Task<IActionResult> Info(int Id) {
         PetAdoptInfoViewModel petAdoptInfoViewModel = new();
 
         petAdoptInfoViewModel.AdoptablePet = await _context.Pets.Include(p => p.Breed)
