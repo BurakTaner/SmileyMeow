@@ -10,7 +10,6 @@ namespace AnimalAPI.Models.Animall;
 public class Animal : IAnimal
 {
     public int AnimalId { get ; set ; }
-    public string Name { get ; set ; }
     public int SpecieId { get ; set ; }
     public Specie Specie { get; set; }
     public int BreedId { get ; set ; }

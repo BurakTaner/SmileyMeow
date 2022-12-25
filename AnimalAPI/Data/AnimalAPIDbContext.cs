@@ -35,7 +35,7 @@ public class AnimalAPIDbContext : DbContext
         // dummy data
         
         modelBuilder.Entity<Animal>().HasData(
-            new Animal { AnimalId = 6, Name = "Torrent", BreedId = 6, SpecieId = 6 }
+            new Animal { AnimalId = 6, BreedId = 6, SpecieId = 6}
         );
 
         modelBuilder.Entity<Specie>().HasData(
