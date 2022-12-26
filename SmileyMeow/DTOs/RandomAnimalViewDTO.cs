@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace SmileyMeow.DTOs;
 
 public record RandomAnimalViewDTO(
-    string Specie,
-    string Breed,
-    string AnimalInformation
+    string SName,
+    string BName,
+    string AInformation
 );
