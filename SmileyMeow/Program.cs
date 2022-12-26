@@ -1,6 +1,7 @@
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using SmileyMeow.Data;
+using SmileyMeow.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<SmileyMeowDbContext>(
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+builder.Services.AddScoped<IRandomAnimalService, RandomAnimalService>();
 
 var app = builder.Build();
 

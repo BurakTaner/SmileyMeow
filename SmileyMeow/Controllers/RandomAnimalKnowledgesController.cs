@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SmileyMeow.Services;
 
 namespace SmileyMeow.Controllers;
 
@@ -12,10 +13,12 @@ namespace SmileyMeow.Controllers;
 public class RandomAnimalKnowledgesController : Controller
 {
     private readonly ILogger<RandomAnimalKnowledgesController> _logger;
+    private readonly IRandomAnimalService _randomAnimalService;
 
-    public RandomAnimalKnowledgesController(ILogger<RandomAnimalKnowledgesController> logger)
+    public RandomAnimalKnowledgesController(ILogger<RandomAnimalKnowledgesController> logger, IRandomAnimalService randomAnimalService)
     {
         _logger = logger;
+        _randomAnimalService = randomAnimalService;
     }
 
     public IActionResult Index()
