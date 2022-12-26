@@ -17,23 +17,26 @@ public class RandomAnimalService : IRandomAnimalService
         _configuration = configuration;
     }
 
-    public RandomAnimalViewDTO GetAnimalViewDTO()
+    public async Task<RandomAnimalViewDTO> GetAnimalViewDTO()
     {
         Uri address = GetBaseURI();
         HttpClient _client = CreateHTTPClient();
-        RandomAnimalViewDTO animalviewDTO = _client.GetFromJsonAsync<RandomAnimalViewDTO>($"{address}/GetRandomAnimal").Result;
+        Task<RandomAnimalViewDTO> animalviewDTO = _client.GetFromJsonAsync<RandomAnimalViewDTO>($"{address}/GetRandomAnimal");
 
-        return animalviewDTO;
+        RandomAnimalViewDTO result = await animalviewDTO;
+
+        return result;
     }
 
     private HttpClient CreateHTTPClient()
     {
         return _clientFactory.CreateClient();
+
     }
 
     private Uri GetBaseURI()
     {
-        
+
         return new Uri(_configuration.GetSection("RandomAnimalAPI:BaseURI").Value);
     }
 }
