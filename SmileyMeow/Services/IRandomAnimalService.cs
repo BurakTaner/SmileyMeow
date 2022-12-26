@@ -4,5 +4,5 @@ namespace SmileyMeow.Services;
 
 public interface IRandomAnimalService
 {
-    Task<RandomAnimalViewDTO> GetAnimalViewDTO();
+    Task<RandomAnimalResponse> GetAnimalViewDTO();
 }

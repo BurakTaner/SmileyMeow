@@ -1,0 +1,32 @@
+@model RandomAnimalViewDTO
+
+@{
+    ViewData["Title"] = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-3">
+    <div class="row g-0">
+        @* <div class="col-md-4">
+            <img class="card-img card-img-left" style="border-radius:10px;" src="~/Images/pet-@(Model.AdoptablePet.AnimalId).jpg" alt="An adoptable pet's image">
+        </div> *@
+        <div class="col-md-8">
+            <div class="card-body">
+                <h4 class="card-title">@Model.SName</h4>
+                <p class="card-text" name="about">
+                    <label for="about"><strong>Breed:</strong></label>
+                    <br />
+                  @Model.BName
+                </p>
+                <p class="card-text" name="about">
+                    <label for="about"><strong>Information:</strong></label>
+                    <br />
+                  @Model.AnimalInformation
+                </p>
+                
+                <a href="#" class="btn btn-primary d-block px-2 py-3">Apply</a>
+            </div>
+        </div>
+    </div>
+</div>
+

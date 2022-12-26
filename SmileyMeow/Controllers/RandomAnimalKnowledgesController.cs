@@ -5,11 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SmileyMeow.DTOs;
 using SmileyMeow.Services;
 
 namespace SmileyMeow.Controllers;
-
-[Route("[controller]")]
 public class RandomAnimalKnowledgesController : Controller
 {
     private readonly ILogger<RandomAnimalKnowledgesController> _logger;
@@ -21,10 +20,16 @@ public class RandomAnimalKnowledgesController : Controller
         _randomAnimalService = randomAnimalService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        
-        return View();
+        RandomAnimalResponse response =  await _randomAnimalService.GetAnimalViewDTO();
+
+        RandomAnimalViewDTO dto = new(
+            response.Scepie.SName,
+            response.Breed.BName,
+            response.AnimalInfo.AnimalInformation
+        );
+        return View(dto);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

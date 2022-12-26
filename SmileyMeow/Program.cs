@@ -14,8 +14,9 @@ builder.Services.AddDbContext<SmileyMeowDbContext>(
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-builder.Services.AddScoped<IRandomAnimalService, RandomAnimalService>();
+builder.Services.AddTransient<IRandomAnimalService, RandomAnimalService>();
 
+builder.Services.AddHttpClient();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,7 +27,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();

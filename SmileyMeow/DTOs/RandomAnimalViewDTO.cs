@@ -8,5 +8,5 @@ namespace SmileyMeow.DTOs;
 public record RandomAnimalViewDTO(
     string SName,
     string BName,
-    string AInformation
+    string AnimalInformation
 );
