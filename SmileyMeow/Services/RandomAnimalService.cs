@@ -8,26 +8,32 @@ namespace SmileyMeow.Services;
 
 public class RandomAnimalService : IRandomAnimalService
 {
-    private readonly HttpClient _client;
+    private readonly IHttpClientFactory _clientFactory;
     private readonly IConfiguration _configuration;
 
-    public RandomAnimalService(HttpClient client, IConfiguration configuration)
+    public RandomAnimalService(IHttpClientFactory clientFactory, IConfiguration configuration)
     {
-        _client = client;
+        _clientFactory = clientFactory;
         _configuration = configuration;
     }
 
     public RandomAnimalViewDTO GetAnimalViewDTO()
     {
         Uri address = GetBaseURI();
+        HttpClient _client = CreateHTTPClient();
+        RandomAnimalViewDTO animalviewDTO = _client.GetFromJsonAsync<RandomAnimalViewDTO>($"{address}/GetRandomAnimal").Result;
 
-        RandomAnimalViewDTO animalviewDTO = _client.GetFromJsonAsync<RandomAnimalViewDTO>($"{address}/GetRandomAnimal").Result; 
-        
-        return animalviewDTO ;
+        return animalviewDTO;
+    }
+
+    private HttpClient CreateHTTPClient()
+    {
+        return _clientFactory.CreateClient();
     }
 
     private Uri GetBaseURI()
     {
-        return _client.BaseAddress = new Uri(_configuration.GetSection("RandomAnimalAPI:BaseURI").Value);
+        
+        return new Uri(_configuration.GetSection("RandomAnimalAPI:BaseURI").Value);
     }
 }
