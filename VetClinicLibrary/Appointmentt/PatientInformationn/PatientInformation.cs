@@ -11,6 +11,6 @@ public class PatientInformation
     public StatusLevel PeeingStatus { get; set; }
     public int EnergyStatusId { get; set; }
     public StatusLevel EnergyStatus { get; set; }
-    public string Description { get; set; }
+    public string InformationAboutPatient { get; set; }
 
 }
