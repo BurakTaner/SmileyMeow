@@ -175,6 +175,10 @@ public class SmileyMeowDbContext : DbContext
             new AppointmentStatus { AppointmentStatussId = 8, Status = "Canceled Appointment" }            
             
         );
+
+        modelBuilder.Entity<PatientInformation>().HasData(
+            new PatientInformation { PatientInformationId = 6, EatingStatusId = 2, EnergyStatusId = 1, PeeingStatusId = 3, InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes."}
+        );
     }
 
 }

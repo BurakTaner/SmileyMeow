@@ -12,5 +12,6 @@ public class PatientInformation
     public int EnergyStatusId { get; set; }
     public StatusLevel EnergyStatus { get; set; }
     public string InformationAboutPatient { get; set; }
+    public string IlnesssesInThePast { get; set; }
 
 }
