@@ -1,6 +1,6 @@
-using System.Buffers;
 using Microsoft.EntityFrameworkCore;
 using VetClinicLibrary.Appointmentt;
+using VetClinicLibrary.Appointmentt.AppointmentStatuss;
 using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.Appointmentt.StatusLevell;
 using VetClinicLibrary.Person;
@@ -153,7 +153,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Appointment>().HasData(
-            new Appointment { PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30)}
+            new Appointment { PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6}
         );
 
         modelBuilder.Entity<DoctorTitle>().HasData(
@@ -167,6 +167,13 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Pronoun>().HasData(
             new Pronoun { ProunounId = 6, PName = "They/Them"}
+        );
+
+        modelBuilder.Entity<AppointmentStatus>().HasData(
+            new AppointmentStatus { AppointmentStatussId = 6, Status = "Active Appointment" },
+            new AppointmentStatus { AppointmentStatussId = 7, Status = "Expired Appointment" }, 
+            new AppointmentStatus { AppointmentStatussId = 8, Status = "Canceled Appointment" }            
+            
         );
     }
 
