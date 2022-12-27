@@ -25,4 +25,6 @@ public class Pet : IPet
     public PatientInformation Patientİnformation { get; set; }
     public AdoptInfo AdoptionInfo { get; set; }
     public bool IsAdoptable { get; set; }
+    public int PatientInformationId { get; set; }
+    public PatientInformation PatientInformation { get; set; }
 }
