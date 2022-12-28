@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using VetClinicLibrary.Appointmentt.StatusLevell;
+using VetClinicLibrary.Pett;
 
 namespace VetClinicLibrary.Appointmentt.PatientInformationn;
 
@@ -11,6 +13,7 @@ public class PatientInformation
     public StatusLevel PeeingStatus { get; set; }
     public int EnergyStatusId { get; set; }
     public StatusLevel EnergyStatus { get; set; }
-    public string Description { get; set; }
-
+    public string InformationAboutPatient { get; set; }
+    public string IlnesssesInThePast { get; set; }
+    public Pet Pet { get; set; }
 }

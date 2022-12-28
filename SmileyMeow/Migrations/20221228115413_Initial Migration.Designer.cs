@@ -12,8 +12,8 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20221224195329_pronoun relation added")]
-    partial class pronounrelationadded
+    [Migration("20221228115413_Initial Migration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,12 +39,29 @@ namespace SmileyMeow.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("appointmentdate");
 
+                    b.Property<int>("AppointmentStatussId")
+                        .HasColumnType("integer")
+                        .HasColumnName("appointmentstatussid");
+
+                    b.Property<int>("DoctorPreferenceId")
+                        .HasColumnType("integer")
+                        .HasColumnName("doctorpreferenceid");
+
                     b.Property<DateTime>("TimeCreated")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("timecreated");
 
                     b.HasKey("PetnPersonId", "DoctorId")
                         .HasName("pk_appointments");
+
+                    b.HasIndex("AppointmentStatussId")
+                        .HasDatabaseName("ix_appointments_appointmentstatussid");
+
+                    b.HasIndex("DoctorId")
+                        .HasDatabaseName("ix_appointments_doctorid");
+
+                    b.HasIndex("DoctorPreferenceId")
+                        .HasDatabaseName("ix_appointments_doctorpreferenceid");
 
                     b.ToTable("appointments", (string)null);
 
@@ -53,23 +70,54 @@ namespace SmileyMeow.Migrations
                         {
                             PetnPersonId = 6,
                             DoctorId = 6,
-                            AppointmentDate = new DateTime(2023, 1, 23, 22, 53, 27, 814, DateTimeKind.Local).AddTicks(2808),
-                            TimeCreated = new DateTime(2022, 12, 24, 22, 53, 27, 814, DateTimeKind.Local).AddTicks(2804)
+                            AppointmentDate = new DateTime(2023, 1, 27, 14, 54, 12, 240, DateTimeKind.Local).AddTicks(8107),
+                            AppointmentStatussId = 6,
+                            DoctorPreferenceId = 6,
+                            TimeCreated = new DateTime(2022, 12, 28, 14, 54, 12, 240, DateTimeKind.Local).AddTicks(8103)
+                        });
+                });
+
+            modelBuilder.Entity("VetClinicLibrary.Appointmentt.AppointmentStatuss.AppointmentStatus", b =>
+                {
+                    b.Property<int>("AppointmentStatussId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("appointmentstatussid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AppointmentStatussId"));
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text")
+                        .HasColumnName("status");
+
+                    b.HasKey("AppointmentStatussId")
+                        .HasName("pk_appointmentstatus");
+
+                    b.ToTable("appointmentstatus", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            AppointmentStatussId = 6,
+                            Status = "Active Appointment"
+                        },
+                        new
+                        {
+                            AppointmentStatussId = 7,
+                            Status = "Expired Appointment"
+                        },
+                        new
+                        {
+                            AppointmentStatussId = 8,
+                            Status = "Canceled Appointment"
                         });
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Appointmentt.PatientInformationn.PatientInformation", b =>
                 {
                     b.Property<int>("PatientInformationId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("patientinformationid");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PatientInformationId"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
 
                     b.Property<int>("EatingStatusId")
                         .HasColumnType("integer")
@@ -78,6 +126,14 @@ namespace SmileyMeow.Migrations
                     b.Property<int>("EnergyStatusId")
                         .HasColumnType("integer")
                         .HasColumnName("energystatusid");
+
+                    b.Property<string>("IlnesssesInThePast")
+                        .HasColumnType("text")
+                        .HasColumnName("ilnesssesinthepast");
+
+                    b.Property<string>("InformationAboutPatient")
+                        .HasColumnType("text")
+                        .HasColumnName("informationaboutpatient");
 
                     b.Property<int>("PeeingStatusId")
                         .HasColumnType("integer")
@@ -96,6 +152,17 @@ namespace SmileyMeow.Migrations
                         .HasDatabaseName("ix_patientinformations_peeingstatusid");
 
                     b.ToTable("patientinformations", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            PatientInformationId = 6,
+                            EatingStatusId = 2,
+                            EnergyStatusId = 1,
+                            IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes.",
+                            InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.",
+                            PeeingStatusId = 3
+                        });
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Appointmentt.StatusLevell.StatusLevel", b =>
@@ -115,6 +182,23 @@ namespace SmileyMeow.Migrations
                         .HasName("pk_statuslevels");
 
                     b.ToTable("statuslevels", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            StatusLevelId = 1,
+                            Name = "Good"
+                        },
+                        new
+                        {
+                            StatusLevelId = 2,
+                            Name = "Middle"
+                        },
+                        new
+                        {
+                            StatusLevelId = 3,
+                            Name = "Bad"
+                        });
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Person.Balance", b =>
@@ -201,10 +285,6 @@ namespace SmileyMeow.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("userid");
 
-                    b.Property<int?>("UserrId")
-                        .HasColumnType("integer")
-                        .HasColumnName("userrid");
-
                     b.HasKey("DoctorId")
                         .HasName("pk_doctors");
 
@@ -223,8 +303,8 @@ namespace SmileyMeow.Migrations
                     b.HasIndex("SchoolId")
                         .HasDatabaseName("ix_doctors_schoolid");
 
-                    b.HasIndex("UserrId")
-                        .HasDatabaseName("ix_doctors_userrid");
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_doctors_userid");
 
                     b.ToTable("doctors", (string)null);
 
@@ -331,10 +411,6 @@ namespace SmileyMeow.Migrations
                         .HasColumnType("text")
                         .HasColumnName("middlename");
 
-                    b.Property<int?>("PetAnimalId")
-                        .HasColumnType("integer")
-                        .HasColumnName("petanimalid");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text")
                         .HasColumnName("phonenumber");
@@ -347,10 +423,6 @@ namespace SmileyMeow.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("userid");
 
-                    b.Property<int?>("UserrId")
-                        .HasColumnType("integer")
-                        .HasColumnName("userrid");
-
                     b.HasKey("PetParentId")
                         .HasName("pk_petparents");
 
@@ -360,14 +432,11 @@ namespace SmileyMeow.Migrations
                     b.HasIndex("HumanGenderId")
                         .HasDatabaseName("ix_petparents_humangenderid");
 
-                    b.HasIndex("PetAnimalId")
-                        .HasDatabaseName("ix_petparents_petanimalid");
-
                     b.HasIndex("PronounId")
                         .HasDatabaseName("ix_petparents_pronounid");
 
-                    b.HasIndex("UserrId")
-                        .HasDatabaseName("ix_petparents_userrid");
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_petparents_userid");
 
                     b.ToTable("petparents", (string)null);
 
@@ -463,6 +532,12 @@ namespace SmileyMeow.Migrations
                     b.HasKey("PetnPersonId")
                         .HasName("pk_petsnpersons");
 
+                    b.HasIndex("AnimalId")
+                        .HasDatabaseName("ix_petsnpersons_animalid");
+
+                    b.HasIndex("PetParentId")
+                        .HasDatabaseName("ix_petsnpersons_petparentid");
+
                     b.ToTable("petsnpersons", (string)null);
 
                     b.HasData(
@@ -476,18 +551,15 @@ namespace SmileyMeow.Migrations
 
             modelBuilder.Entity("VetClinicLibrary.Pett.Adopt.AdoptInfo", b =>
                 {
-                    b.Property<int>("AnimalId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("AdoptInfoId")
                         .HasColumnType("integer")
-                        .HasColumnName("animalid");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AnimalId"));
+                        .HasColumnName("adoptinfoid");
 
                     b.Property<string>("AdoptText")
                         .HasColumnType("text")
                         .HasColumnName("adopttext");
 
-                    b.HasKey("AnimalId")
+                    b.HasKey("AdoptInfoId")
                         .HasName("pk_adoptinfos");
 
                     b.ToTable("adoptinfos", (string)null);
@@ -495,7 +567,7 @@ namespace SmileyMeow.Migrations
                     b.HasData(
                         new
                         {
-                            AnimalId = 6,
+                            AdoptInfoId = 6,
                             AdoptText = "So cute"
                         });
                 });
@@ -535,9 +607,9 @@ namespace SmileyMeow.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AnimalId"));
 
-                    b.Property<int?>("AdoptionInfoAnimalId")
+                    b.Property<int>("AdoptInfoId")
                         .HasColumnType("integer")
-                        .HasColumnName("adoptioninfoanimalid");
+                        .HasColumnName("adoptinfoid");
 
                     b.Property<int>("BreedId")
                         .HasColumnType("integer")
@@ -555,6 +627,10 @@ namespace SmileyMeow.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
+                    b.Property<int>("PatientInformationId")
+                        .HasColumnType("integer")
+                        .HasColumnName("patientinformationid");
+
                     b.Property<int?>("PatientİnformationPatientInformationId")
                         .HasColumnType("integer")
                         .HasColumnName("patientİnformationpatientinformationid");
@@ -569,9 +645,6 @@ namespace SmileyMeow.Migrations
 
                     b.HasKey("AnimalId")
                         .HasName("pk_pets");
-
-                    b.HasIndex("AdoptionInfoAnimalId")
-                        .HasDatabaseName("ix_pets_adoptioninfoanimalid");
 
                     b.HasIndex("BreedId")
                         .HasDatabaseName("ix_pets_breedid");
@@ -591,10 +664,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AnimalId = 6,
+                            AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2022, 12, 24, 22, 53, 27, 814, DateTimeKind.Local).AddTicks(2061),
+                            DOB = new DateTime(2022, 12, 28, 14, 54, 12, 240, DateTimeKind.Local).AddTicks(7429),
                             IsAdoptable = true,
                             Name = "Sif",
+                            PatientInformationId = 6,
                             PetGenderId = 6,
                             SpecieId = 6
                         });
@@ -812,6 +887,45 @@ namespace SmileyMeow.Migrations
                         });
                 });
 
+            modelBuilder.Entity("VetClinicLibrary.Appointmentt.Appointment", b =>
+                {
+                    b.HasOne("VetClinicLibrary.Appointmentt.AppointmentStatuss.AppointmentStatus", "AppointmentStatus")
+                        .WithMany("Appointments")
+                        .HasForeignKey("AppointmentStatussId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_appointments_appointmentstatus_appointmentstatustempid");
+
+                    b.HasOne("VetClinicLibrary.Person.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_appointments_doctors_doctorid");
+
+                    b.HasOne("VetClinicLibrary.Person.Doctor", "DoctorPreference")
+                        .WithMany()
+                        .HasForeignKey("DoctorPreferenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_appointments_doctors_doctorpreferenceid");
+
+                    b.HasOne("VetClinicLibrary.PetnPersonn.PetnPerson", "PetnPerson")
+                        .WithMany()
+                        .HasForeignKey("PetnPersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_appointments_petsnpersons_petnpersonid");
+
+                    b.Navigation("AppointmentStatus");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("DoctorPreference");
+
+                    b.Navigation("PetnPerson");
+                });
+
             modelBuilder.Entity("VetClinicLibrary.Appointmentt.PatientInformationn.PatientInformation", b =>
                 {
                     b.HasOne("VetClinicLibrary.Appointmentt.StatusLevell.StatusLevel", "EatingStatus")
@@ -828,6 +942,13 @@ namespace SmileyMeow.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_patientinformations_statuslevels_energystatusid");
 
+                    b.HasOne("VetClinicLibrary.Pett.Pet", "Pet")
+                        .WithOne("PatientInformation")
+                        .HasForeignKey("VetClinicLibrary.Appointmentt.PatientInformationn.PatientInformation", "PatientInformationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_patientinformations_pets_patientinformationid");
+
                     b.HasOne("VetClinicLibrary.Appointmentt.StatusLevell.StatusLevel", "PeeingStatus")
                         .WithMany()
                         .HasForeignKey("PeeingStatusId")
@@ -840,6 +961,8 @@ namespace SmileyMeow.Migrations
                     b.Navigation("EnergyStatus");
 
                     b.Navigation("PeeingStatus");
+
+                    b.Navigation("Pet");
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Person.Doctor", b =>
@@ -878,8 +1001,10 @@ namespace SmileyMeow.Migrations
                         .HasConstraintName("fk_doctors_school_schoolid");
 
                     b.HasOne("VetClinicLibrary.User.Userr", "Userr")
-                        .WithMany()
-                        .HasForeignKey("UserrId")
+                        .WithMany("Doctor")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_doctors_userrs_userrid");
 
                     b.Navigation("Balance");
@@ -923,11 +1048,6 @@ namespace SmileyMeow.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_petparents_humangender_humangenderid");
 
-                    b.HasOne("VetClinicLibrary.Pett.Pet", null)
-                        .WithMany("PetParents")
-                        .HasForeignKey("PetAnimalId")
-                        .HasConstraintName("fk_petparents_pets_pettempid");
-
                     b.HasOne("VetClinicLibrary.Person.Prounounn.Pronoun", "Pronoun")
                         .WithMany("PetParents")
                         .HasForeignKey("PronounId")
@@ -936,8 +1056,10 @@ namespace SmileyMeow.Migrations
                         .HasConstraintName("fk_petparents_pronouns_pronounid");
 
                     b.HasOne("VetClinicLibrary.User.Userr", "Userr")
-                        .WithMany()
-                        .HasForeignKey("UserrId")
+                        .WithMany("PetParent")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_petparents_userrs_userrid");
 
                     b.Navigation("Balance");
@@ -949,13 +1071,41 @@ namespace SmileyMeow.Migrations
                     b.Navigation("Userr");
                 });
 
+            modelBuilder.Entity("VetClinicLibrary.PetnPersonn.PetnPerson", b =>
+                {
+                    b.HasOne("VetClinicLibrary.Pett.Pet", "Pet")
+                        .WithMany("PetnPersonn")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_petsnpersons_pets_pettempid1");
+
+                    b.HasOne("VetClinicLibrary.Person.PetParent", "PetParent")
+                        .WithMany("PetnPersonn")
+                        .HasForeignKey("PetParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_petsnpersons_petparents_petparentid");
+
+                    b.Navigation("Pet");
+
+                    b.Navigation("PetParent");
+                });
+
+            modelBuilder.Entity("VetClinicLibrary.Pett.Adopt.AdoptInfo", b =>
+                {
+                    b.HasOne("VetClinicLibrary.Pett.Pet", "Pet")
+                        .WithOne("AdoptionInfo")
+                        .HasForeignKey("VetClinicLibrary.Pett.Adopt.AdoptInfo", "AdoptInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_adoptinfos_pets_adoptinfoid");
+
+                    b.Navigation("Pet");
+                });
+
             modelBuilder.Entity("VetClinicLibrary.Pett.Pet", b =>
                 {
-                    b.HasOne("VetClinicLibrary.Pett.Adopt.AdoptInfo", "AdoptionInfo")
-                        .WithMany("Pet")
-                        .HasForeignKey("AdoptionInfoAnimalId")
-                        .HasConstraintName("fk_pets_adoptinfos_adoptioninfotempid");
-
                     b.HasOne("VetClinicLibrary.Pett.Breedd.Breed", "Breed")
                         .WithMany("Pet")
                         .HasForeignKey("BreedId")
@@ -981,8 +1131,6 @@ namespace SmileyMeow.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_pets_species_specieid");
-
-                    b.Navigation("AdoptionInfo");
 
                     b.Navigation("Breed");
 
@@ -1017,9 +1165,19 @@ namespace SmileyMeow.Migrations
                     b.Navigation("Rolee");
                 });
 
+            modelBuilder.Entity("VetClinicLibrary.Appointmentt.AppointmentStatuss.AppointmentStatus", b =>
+                {
+                    b.Navigation("Appointments");
+                });
+
             modelBuilder.Entity("VetClinicLibrary.Person.Doctor", b =>
                 {
                     b.Navigation("DoctorInfo");
+                });
+
+            modelBuilder.Entity("VetClinicLibrary.Person.PetParent", b =>
+                {
+                    b.Navigation("PetnPersonn");
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Person.Prounounn.Pronoun", b =>
@@ -1034,11 +1192,6 @@ namespace SmileyMeow.Migrations
                     b.Navigation("Doctors");
                 });
 
-            modelBuilder.Entity("VetClinicLibrary.Pett.Adopt.AdoptInfo", b =>
-                {
-                    b.Navigation("Pet");
-                });
-
             modelBuilder.Entity("VetClinicLibrary.Pett.Breedd.Breed", b =>
                 {
                     b.Navigation("Pet");
@@ -1046,7 +1199,11 @@ namespace SmileyMeow.Migrations
 
             modelBuilder.Entity("VetClinicLibrary.Pett.Pet", b =>
                 {
-                    b.Navigation("PetParents");
+                    b.Navigation("AdoptionInfo");
+
+                    b.Navigation("PatientInformation");
+
+                    b.Navigation("PetnPersonn");
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Pett.PetGenderr.PetGender", b =>
@@ -1057,6 +1214,13 @@ namespace SmileyMeow.Migrations
             modelBuilder.Entity("VetClinicLibrary.Pett.Speciee.Specie", b =>
                 {
                     b.Navigation("Pet");
+                });
+
+            modelBuilder.Entity("VetClinicLibrary.User.Userr", b =>
+                {
+                    b.Navigation("Doctor");
+
+                    b.Navigation("PetParent");
                 });
 #pragma warning restore 612, 618
         }

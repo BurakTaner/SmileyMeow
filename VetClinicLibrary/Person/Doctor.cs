@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using VetClinicLibrary.Person;
 using VetClinicLibrary.Person.DoctorInfoo;
 using VetClinicLibrary.Person.HumanGenderr;
+using VetClinicLibrary.Person.Locationn;
 using VetClinicLibrary.Person.Prounounn;
 using VetClinicLibrary.Person.Titles;
 using VetClinicLibrary.Schooll;
@@ -32,6 +33,6 @@ public class Doctor : IDoctor
     public DoctorInfo DoctorInfo { get; set; }
     public int PronounId { get; set; }
     public Pronoun Pronoun { get; set; }
-    // public string DistrictId { get ; set ; }
-    // public District District { get ; set ; }
+    public int AddressId { get; set; }
+    public Address Address { get; set; }
 }
