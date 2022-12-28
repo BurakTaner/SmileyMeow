@@ -32,7 +32,8 @@ public class AdoptController : Controller
         .Include(p => p.Specie)
         .FirstOrDefaultAsync(pet => pet.AnimalId == Id);
 
-        petAdoptInfoViewModel.AdoptablePetInfo = await _context.AdoptInfos.FirstOrDefaultAsync(adoptInfo => adoptInfo.AnimalId == Id);
+        petAdoptInfoViewModel.AdoptablePetInfo = await _context.AdoptInfos
+        .FirstOrDefaultAsync(adoptInfo => adoptInfo.AdoptInfoId == petAdoptInfoViewModel.AdoptablePet.AdoptInfoId);
 
         petAdoptInfoViewModel.PetAge = AgeCalculator.CalculateAge(petAdoptInfoViewModel.AdoptablePet.DOB);
         

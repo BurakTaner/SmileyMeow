@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.Person.Prounounn;
+using VetClinicLibrary.PetnPersonn;
 using VetClinicLibrary.User;
 
 namespace VetClinicLibrary.Person;
@@ -21,6 +23,7 @@ public class PetParent : IPetParent
     public Balance Balance { get; set; }
     public int PronounId { get; set; }
     public Pronoun Pronoun { get; set; }
+    public List<PetnPerson> PetnPersonn { get; set; }
     // public string DistrictId { get ; set ; }
     // public District District { get ; set ; }
 }

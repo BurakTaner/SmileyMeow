@@ -20,11 +20,6 @@ public interface IPerson
     // string DistrictId { get; set; }
     // District District { get; set; }a
     string PhoneNumber { get; set; }
-    int UserId { get; set; }
-    Userr Userr { get; set; }
-    int BalanceId { get; set; }
-    Balance Balance { get; set; }
-
     int PronounId { get; set; }
     Pronoun Pronoun { get; set; }
 

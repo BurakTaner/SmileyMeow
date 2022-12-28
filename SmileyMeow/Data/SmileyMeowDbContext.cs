@@ -51,13 +51,14 @@ public class SmileyMeowDbContext : DbContext
         // temporary 
         modelBuilder.Entity<Pet>()
                     .HasOne(p => p.AdoptionInfo)
-                    .WithMany(a => a.Pet);
+                    .WithOne(a => a.Pet)
+                    .HasForeignKey<AdoptInfo>(a => a.AdoptInfoId);
 
         modelBuilder.Entity<Appointment>()
                     .HasKey(apo => new { apo.PetnPersonId, apo.DoctorId });
 
         modelBuilder.Entity<AdoptInfo>()
-                    .HasKey(ado => ado.AnimalId);
+                    .HasKey(ado => ado.AdoptInfoId);
 
 
         modelBuilder.Entity<Balance>()
@@ -77,19 +78,56 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Pronoun>()
                         .HasKey(p => p.ProunounId);
         
-        modelBuilder.Entity<Pronoun>()
-                        .HasMany(p => p.PetParents)
-                        .WithOne(pp => pp.Pronoun);
+        modelBuilder.Entity<PetParent>()
+                        .HasOne(a => a.Pronoun)
+                        .WithMany(b => b.PetParents)
+                        .HasForeignKey(a => a.PronounId);
         
-        modelBuilder.Entity<Pronoun>()
-                        .HasMany(p => p.Doctors)
-                        .WithOne(d => d.Pronoun);
+        modelBuilder.Entity<Doctor>()
+                        .HasOne(p => p.Pronoun)
+                        .WithMany(d => d.Doctors)
+                        .HasForeignKey(a => a.PronounId);
+        
+        modelBuilder.Entity<PatientInformation>()
+                        .HasKey(a => a.PatientInformationId);
 
-        //
+        modelBuilder.Entity<Pet>()
+                        .HasOne(a => a.PatientInformation)
+                        .WithOne(c => c.Pet)
+                        .HasForeignKey<PatientInformation>(a => a.PatientInformationId);
 
+        modelBuilder.Entity<AppointmentStatus>()
+                        .HasKey(a => a.AppointmentStatussId);
+
+
+        modelBuilder.Entity<Appointment>()
+                        .HasOne(a => a.AppointmentStatus)
+                        .WithMany(b => b.Appointments)
+                        .HasForeignKey(a => a.AppointmentStatussId);
+
+        modelBuilder.Entity<Doctor>()
+                        .HasOne(a => a.Userr)
+                        .WithMany(b => b.Doctor)
+                        .HasForeignKey(a => a.UserId);
+        
+
+        modelBuilder.Entity<PetParent>()
+                        .HasOne(a => a.Userr)
+                        .WithMany(b => b.PetParent)
+                        .HasForeignKey(a => a.UserId);
+        
+        modelBuilder.Entity<PetnPerson>()
+                        .HasOne(a => a.Pet)
+                        .WithMany(b => b.PetnPersonn)
+                        .HasForeignKey(a => a.AnimalId);
+        
+        modelBuilder.Entity<PetnPerson>()
+                        .HasOne(a => a.PetParent)
+                        .WithMany(b => b.PetnPersonn)
+                        .HasForeignKey(a => a.PetParentId);
         // dummy data
         modelBuilder.Entity<Pet>().HasData(
-            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif" }
+            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif", PatientInformationId = 6, AdoptInfoId = 6}
         );
 
         modelBuilder.Entity<PetGender>().HasData(
@@ -105,7 +143,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<AdoptInfo>().HasData(
-            new AdoptInfo { AnimalId = 6, AdoptText = "So cute" }
+            new AdoptInfo { AdoptInfoId = 6, AdoptText = "So cute" }
         );
 
         modelBuilder.Entity<SchoolType>().HasData(
@@ -153,7 +191,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Appointment>().HasData(
-            new Appointment { PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6}
+            new Appointment { PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6, DoctorPreferenceId = 6}
         );
 
         modelBuilder.Entity<DoctorTitle>().HasData(
@@ -178,6 +216,12 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<PatientInformation>().HasData(
             new PatientInformation { PatientInformationId = 6, EatingStatusId = 2, EnergyStatusId = 1, PeeingStatusId = 3, InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes."}
+        );
+
+        modelBuilder.Entity<StatusLevel>().HasData(
+            new StatusLevel { StatusLevelId = 1, Name =  "Good" },
+            new StatusLevel { StatusLevelId = 2, Name =  "Middle" },
+            new StatusLevel { StatusLevelId = 3, Name =  "Bad" }
         );
     }
 
