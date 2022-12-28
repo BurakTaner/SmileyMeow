@@ -182,7 +182,7 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Address>().HasData(
             new Address { AddressId = 6, AddressDetails = "Block 5, after Boo's shop", DistrictId = 34},
             new Address { AddressId = 7, AddressDetails = "Block 6, after Foo's shop", DistrictId = 40},
-            new Address { AddressId = 9, AddressDetails = "Block 6, after Coo's shop", DistrictId = 30}
+            new Address { AddressId = 9, AddressDetails = "Block 6, after Coo's shop", DistrictId = 30},
             new Address { AddressId = 12, AddressDetails = "Block 7, after Too's shop", DistrictId = 30}
         );
 
@@ -201,7 +201,7 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Balance>().HasData(
             new Balance { BalanceId = 6, PersonBalance = Convert.ToDecimal("150.55") },
-            new Balance { BalanceId = 666, PersonBalance = Convert.ToDecimal("90.65") }
+            new Balance { BalanceId = 666, PersonBalance = Convert.ToDecimal("90.65") },
             new Balance { BalanceId = 128, PersonBalance = Convert.ToDecimal("128.25") }
         );
 
@@ -231,7 +231,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<PatientInformation>().HasData(
-            new PatientInformation { PatientInformationId = 6, EatingStatusId = 2, EnergyStatusId = 1, PeeingStatusId = 3, InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes."}
+            new PatientInformation { PatientInformationId = 6, EatingStatusId = 2, EnergyStatusId = 1, PeeingStatusId = 3, InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes."},
             new PatientInformation { PatientInformationId = 9, EatingStatusId = 2, EnergyStatusId = 2, PeeingStatusId = 2, InformationAboutPatient = "Hi there, I'm the owner of a horse named Torrent. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.", IlnesssesInThePast = "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self."}
         );
 
