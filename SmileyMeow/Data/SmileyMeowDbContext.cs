@@ -3,6 +3,7 @@ using VetClinicLibrary.Appointmentt;
 using VetClinicLibrary.Appointmentt.AppointmentStatuss;
 using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.Appointmentt.StatusLevell;
+using VetClinicLibrary.NotUserParentandPet;
 using VetClinicLibrary.Person;
 using VetClinicLibrary.Person.DoctorInfoo;
 using VetClinicLibrary.Person.HumanGenderr;
@@ -132,15 +133,18 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<PetGender>().HasData(
-            new PetGender { PetGenderId = 6, GName = "Female" }
+            new PetGender { PetGenderId = 6, GName = "Female" },
+            new PetGender { PetGenderId = 9, GName = "Male (neutralized)" }
         );
 
         modelBuilder.Entity<Breed>().HasData(
-            new Breed { BreedId = 6, BName = "Ragdoll" }
+            new Breed { BreedId = 6, BName = "Ragdoll" },
+            new Breed { BreedId = 6, BName = "Appaloosa" }
         );
 
         modelBuilder.Entity<Specie>().HasData(
-            new Specie { SpecieId = 6, SName = "Wolf" }
+            new Specie { SpecieId = 6, SName = "Wolf" },
+            new Specie { SpecieId = 6, SName = "Horse" }
         );
 
         modelBuilder.Entity<AdoptInfo>().HasData(
@@ -157,7 +161,8 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Userr>().HasData(
             new Userr { UserrId = 6, Email = "artorias@gmail.com", Password = "sif123456", RoleeId = 6 },
-            new Userr { UserrId = 666, Email = "patches@gmail.com", Password = "patches123456", RoleeId = 666 }
+            new Userr { UserrId = 666, Email = "patches@gmail.com", Password = "patches123456", RoleeId = 666 },
+            new Userr { UserrId = 128, Email = "anastacia@gmail.com", Password = "anastacia123456", RoleeId = 666 }
         );
 
         modelBuilder.Entity<Rolee>().HasData(
@@ -166,16 +171,19 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Doctor>().HasData(
-            new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66, DoctorTitleId = 6, PronounId = 6, AddressId = 7}
+            new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66, DoctorTitleId = 6, PronounId = 6, AddressId = 7},
+            new Doctor { DoctorId = 9, FirstName = "Anastacia", MiddleName = "Ciaran", LastName = "Catarina", BalanceId = 128, DOB = Convert.ToDateTime("1980/6/4"), PhoneNumber = "05341299154", UserId = 128, HumanGenderId = 128, DoctorTitleId = 6, PronounId = 9, AddressId = 12}
         );
 
         modelBuilder.Entity<PetParent>().HasData(
-            new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6, PronounId = 6, AddressId = 6}
+            new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6, PronounId = 6, AddressId = 6, PhoneNumber = "058745683324"}
         );
 
         modelBuilder.Entity<Address>().HasData(
             new Address { AddressId = 6, AddressDetails = "Block 5, after Boo's shop", DistrictId = 34},
-            new Address { AddressId = 7, AddressDetails = "Block 6, after Foo's shop", DistrictId = 40}
+            new Address { AddressId = 7, AddressDetails = "Block 6, after Foo's shop", DistrictId = 40},
+            new Address { AddressId = 9, AddressDetails = "Block 6, after Coo's shop", DistrictId = 30}
+            new Address { AddressId = 12, AddressDetails = "Block 7, after Too's shop", DistrictId = 30}
         );
 
         modelBuilder.Entity<HumanGender>().HasData(
@@ -194,6 +202,7 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Balance>().HasData(
             new Balance { BalanceId = 6, PersonBalance = Convert.ToDecimal("150.55") },
             new Balance { BalanceId = 666, PersonBalance = Convert.ToDecimal("90.65") }
+            new Balance { BalanceId = 128, PersonBalance = Convert.ToDecimal("128.25") }
         );
 
         modelBuilder.Entity<Appointment>().HasData(
@@ -210,7 +219,8 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Pronoun>().HasData(
-            new Pronoun { ProunounId = 6, PName = "They/Them" }
+            new Pronoun { ProunounId = 6, PName = "They/Them" },
+            new Pronoun { ProunounId = 6, PName = "She/Her" }
         );
 
         modelBuilder.Entity<AppointmentStatus>().HasData(
@@ -221,13 +231,31 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<PatientInformation>().HasData(
-            new PatientInformation { PatientInformationId = 6, EatingStatusId = 2, EnergyStatusId = 1, PeeingStatusId = 3, InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes." }
+            new PatientInformation { PatientInformationId = 6, EatingStatusId = 2, EnergyStatusId = 1, PeeingStatusId = 3, InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes."}
+            new PatientInformation { PatientInformationId = 9, EatingStatusId = 2, EnergyStatusId = 2, PeeingStatusId = 2, InformationAboutPatient = "Hi there, I'm the owner of a horse named Torrent. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.", IlnesssesInThePast = "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self."}
         );
 
         modelBuilder.Entity<StatusLevel>().HasData(
             new StatusLevel { StatusLevelId = 1, Name = "Good" },
             new StatusLevel { StatusLevelId = 2, Name = "Middle" },
             new StatusLevel { StatusLevelId = 3, Name = "Bad" }
+        );
+
+
+        modelBuilder.Entity<NotUserParent>().HasData(
+            new NotUserParent { NotUserParentId = 9 ,FirstName = "Gael" , MiddleName = "Oscar", LastName = "Siegward", Email = "GaelSlv@hotmail.com", AddressId = 9, PhoneNumber = "05421238573"}
+        );
+
+        modelBuilder.Entity<NotUserParentsPet>().HasData(
+            new NotUserParentsPet {Name = "Torrent", DOB = Convert.ToDateTime("2011-12-10"), AnimalId = 9, PatientInformationId = 9, BreedId = 9, PetGenderId = 9, SpecieId = 9}
+        );
+
+        modelBuilder.Entity<NotUserParentnPet>().HasData(
+            new NotUserParentnPet { AnimalId = 9, NotUserParenPetId = 9, NotUserParentId = 9}
+        );
+
+        modelBuilder.Entity<NotUserAppointment>().HasData(
+            new NotUserAppointment { NotUserParentnPersonId = 9, DoctorId = 9, DoctorPreferenceId = 6, AppointmentStatussId = 3, AppointmentDate = DateTime.Now.AddDays(-10)}
         );
 
         modelBuilder.Entity<City>().HasData(
