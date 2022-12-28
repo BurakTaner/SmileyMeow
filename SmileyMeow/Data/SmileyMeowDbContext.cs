@@ -57,7 +57,7 @@ public class SmileyMeowDbContext : DbContext
                     .HasForeignKey<AdoptInfo>(a => a.AdoptInfoId);
 
         modelBuilder.Entity<Appointment>()
-                    .HasKey(apo => new { apo.PetnPersonId, apo.DoctorId });
+                    .HasKey(apo => apo.AppointmentId);
 
         modelBuilder.Entity<AdoptInfo>()
                     .HasKey(ado => ado.AdoptInfoId);
@@ -226,7 +226,8 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<AppointmentStatus>().HasData(
             new AppointmentStatus { AppointmentStatussId = 6, Status = "Active Appointment" },
             new AppointmentStatus { AppointmentStatussId = 7, Status = "Expired Appointment" },
-            new AppointmentStatus { AppointmentStatussId = 8, Status = "Canceled Appointment" }
+            new AppointmentStatus { AppointmentStatussId = 8, Status = "Canceled Appointment" },
+            new AppointmentStatus { AppointmentStatussId = 10, Status = "Finished Appointment" }
 
         );
 

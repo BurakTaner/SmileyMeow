@@ -9,6 +9,7 @@ namespace VetClinicLibrary.NotUserParentandPet;
 
 public interface INotUserAppointment
 {
+    public int AppointmentId { get; set; }
     public int NotUserParentnPersonId { get; set; }
     public NotUserParentnPet NotUserParentnPet  { get; set; }
     public int DoctorId { get; set; }

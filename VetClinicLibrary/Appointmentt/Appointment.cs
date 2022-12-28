@@ -11,6 +11,7 @@ namespace VetClinicLibrary.Appointmentt;
 
 public class Appointment : IAppointment
 {
+    public int AppointmentId { get; set; }
     public int PetnPersonId { get; set; }
     public PetnPerson PetnPerson { get; set; }
     public int DoctorId { get; set; }

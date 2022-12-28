@@ -7,6 +7,7 @@ namespace VetClinicLibrary.Appointmentt.StatusLevell;
 
 public interface IAppointment
 {
+    public int AppointmentId { get; set; }
     int PetnPersonId { get; set; }
     PetnPerson PetnPerson { get; set; }
     int DoctorId { get; set; }
