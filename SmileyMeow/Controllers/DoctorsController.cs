@@ -38,7 +38,7 @@ public class DoctorsController : Controller
         .Include(p => p.Pronoun)
         .FirstOrDefaultAsync(d => d.DoctorId == id);
         
-        selectedDoctor.SelectedDoctorInfo = await _context.DoctorInfos.FirstOrDefaultAsync(i => i.DoctorId == id);
+        selectedDoctor.SelectedDoctorInfo = await _context.DoctorInformations.FirstOrDefaultAsync(a => a.DoctorId == id);        
         
         return View(selectedDoctor);
     }

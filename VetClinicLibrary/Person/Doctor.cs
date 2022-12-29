@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VetClinicLibrary.Person;
-using VetClinicLibrary.Person.DoctorInfoo;
+using VetClinicLibrary.Person.DoctorInformationn;
 using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.Person.Locationn;
 using VetClinicLibrary.Person.Prounounn;
@@ -30,7 +30,7 @@ public class Doctor : IDoctor
     public School School { get; set; }
     public int DoctorTitleId { get; set; }
     public DoctorTitle DoctorTitle { get; set; }
-    public DoctorInfo DoctorInfo { get; set; }
+    public DoctorInformation DoctorInformation { get; set; }
     public int PronounId { get; set; }
     public Pronoun Pronoun { get; set; }
     public int AddressId { get; set; }
