@@ -16,6 +16,4 @@ public interface IAppointment
     DateTime AppointmentDate { get; set; }
     int AppointmentStatussId { get; set;  }
     AppointmentStatus AppointmentStatus { get; set;}
-    int DoctorPreferenceId { get; set; }
-    Doctor DoctorPreference { get; set; }
 }

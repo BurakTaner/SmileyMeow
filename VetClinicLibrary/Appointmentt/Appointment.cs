@@ -20,6 +20,4 @@ public class Appointment : IAppointment
     public DateTime AppointmentDate { get; set; }
     public int AppointmentStatussId { get; set; }
     public AppointmentStatus AppointmentStatus { get; set; }
-    public int DoctorPreferenceId { get; set; }
-    public Doctor DoctorPreference { get; set; }
 }
