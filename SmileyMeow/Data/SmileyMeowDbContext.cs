@@ -50,6 +50,7 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<NotUserParent> NotUserParents { get; set; }
     public DbSet<NotUserParentnPet> NotUserParentnPet { get; set; }
     public DbSet<NotUserParentsPet> NotUserParentsPet { get; set; }
+    public DbSet<Address> Addresses { get; set; }
 
     //add configuration directory later
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -136,6 +137,7 @@ public class SmileyMeowDbContext : DbContext
                         .HasOne(a => a.PetParent)
                         .WithMany(b => b.PetnPersonn)
                         .HasForeignKey(a => a.PetParentId);
+        
         modelBuilder.Entity<NotUserAppointment>()
                         .HasOne(a => a.AppointmentStatus)
                         .WithMany(b => b.NotUserAppointment)
@@ -152,10 +154,21 @@ public class SmileyMeowDbContext : DbContext
         
         modelBuilder.Entity<NotUserAppointment>()
                         .HasKey(a => a.AppointmentId);
+        
         modelBuilder.Entity<NotUserParentsPet>()
                         .HasOne(a => a.PatientInformation)
                         .WithOne(b => b.NotUsersParentsPet)
                         .HasForeignKey<NotUserParentsPet>(c => c.PatientInformationId);
+
+        modelBuilder.Entity<NotUserParent>()
+                            .HasOne(a => a.Address)
+                            .WithOne(b => b.NotUserParent)
+                            .HasForeignKey<NotUserParent>(a => a.AddressId);
+
+        modelBuilder.Entity<PetParent>()
+                            .HasOne(a => a.Address)
+                            .WithOne(b => b.PetParent)
+                            .HasForeignKey<PetParent>(a => a.AddressId);
         // dummy data
         modelBuilder.Entity<Pet>().HasData(
             new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif", PatientInformationId = 6, AdoptInfoId = 6 }
