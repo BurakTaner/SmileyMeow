@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VetClinicLibrary.Appointmentt.StatusLevell;
+using VetClinicLibrary.NotUserParentandPet;
 using VetClinicLibrary.Pett;
 
 namespace VetClinicLibrary.Appointmentt.PatientInformationn;
@@ -16,4 +17,6 @@ public class PatientInformation
     public string InformationAboutPatient { get; set; }
     public string IlnesssesInThePast { get; set; }
     public Pet Pet { get; set; }
+    public NotUserParentsPet NotUsersParentsPet { get; set; }
+    
 }

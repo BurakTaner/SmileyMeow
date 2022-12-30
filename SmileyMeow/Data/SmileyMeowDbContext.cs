@@ -5,7 +5,7 @@ using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.Appointmentt.StatusLevell;
 using VetClinicLibrary.NotUserParentandPet;
 using VetClinicLibrary.Person;
-using VetClinicLibrary.Person.DoctorInfoo;
+using VetClinicLibrary.Person.DoctorInformationn;
 using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.Person.Locationn;
 using VetClinicLibrary.Person.Prounounn;
@@ -44,10 +44,14 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<Userr> Userrs { get; set; }
     public DbSet<DoctorSchool> DoctorSchools { get; set; }
     public DbSet<DoctorTitle> DoctorTitles { get; set; }
-    public DbSet<DoctorInfo> DoctorInfos { get; set; }
+    public DbSet<DoctorInformation> DoctorInformations { get; set; }
     public DbSet<Pronoun> Pronouns { get; set; }
+    public DbSet<NotUserAppointment> NotUserAppointments { get; set; }
+    public DbSet<NotUserParent> NotUserParents { get; set; }
+    public DbSet<NotUserParentnPet> NotUserParentnPet { get; set; }
+    public DbSet<NotUserParentsPet> NotUserParentsPet { get; set; }
 
-    //add configuration folder later
+    //add configuration directory later
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // temporary 
@@ -55,6 +59,11 @@ public class SmileyMeowDbContext : DbContext
                     .HasOne(p => p.AdoptionInfo)
                     .WithOne(a => a.Pet)
                     .HasForeignKey<AdoptInfo>(a => a.AdoptInfoId);
+        
+        modelBuilder.Entity<DoctorInformation>()
+                    .HasOne(a => a.Doctor)
+                    .WithOne(b => b.DoctorInformation)
+                    .HasForeignKey<DoctorInformation>(a => a.DoctorId);
 
         modelBuilder.Entity<Appointment>()
                     .HasKey(apo => apo.AppointmentId);
@@ -74,7 +83,7 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Userr>().Ignore(p => p.PasswordRepeat);
 
-        modelBuilder.Entity<DoctorInfo>()
+        modelBuilder.Entity<DoctorInformation>()
                         .HasKey(di => di.DoctorId);
 
         modelBuilder.Entity<Pronoun>()
@@ -96,7 +105,7 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Pet>()
                         .HasOne(a => a.PatientInformation)
                         .WithOne(c => c.Pet)
-                        .HasForeignKey<PatientInformation>(a => a.PatientInformationId);
+                        .HasForeignKey<Pet>(a => a.PatientInformationId);
 
         modelBuilder.Entity<AppointmentStatus>()
                         .HasKey(a => a.AppointmentStatussId);
@@ -127,6 +136,29 @@ public class SmileyMeowDbContext : DbContext
                         .HasOne(a => a.PetParent)
                         .WithMany(b => b.PetnPersonn)
                         .HasForeignKey(a => a.PetParentId);
+        
+        modelBuilder.Entity<NotUserAppointment>()
+                        .HasOne(a => a.AppointmentStatus)
+                        .WithMany(b => b.NotUserAppointment)
+                        .HasForeignKey(c => c.AppointmentStatussId);
+        
+        modelBuilder.Entity<NotUserParent>()
+                        .HasKey(a => a.NotUserParentId);
+        
+        modelBuilder.Entity<NotUserParentsPet>()
+                        .HasKey(a => a.AnimalId);
+        
+        modelBuilder.Entity<NotUserParentnPet>()
+                        .HasKey(a => a.NotUserParenPetId);
+        
+        modelBuilder.Entity<NotUserAppointment>()
+                        .HasKey(a => a.AppointmentId);
+        
+        modelBuilder.Entity<NotUserParentsPet>()
+                        .HasOne(a => a.PatientInformation)
+                        .WithOne(b => b.NotUsersParentsPet)
+                        .HasForeignKey<NotUserParentsPet>(c => c.PatientInformationId);
+        
         // dummy data
         modelBuilder.Entity<Pet>().HasData(
             new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif", PatientInformationId = 6, AdoptInfoId = 6 }
@@ -139,12 +171,12 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Breed>().HasData(
             new Breed { BreedId = 6, BName = "Ragdoll" },
-            new Breed { BreedId = 6, BName = "Appaloosa" }
+            new Breed { BreedId = 9, BName = "Appaloosa" }
         );
 
         modelBuilder.Entity<Specie>().HasData(
             new Specie { SpecieId = 6, SName = "Wolf" },
-            new Specie { SpecieId = 6, SName = "Horse" }
+            new Specie { SpecieId = 9, SName = "Horse" }
         );
 
         modelBuilder.Entity<AdoptInfo>().HasData(
@@ -188,7 +220,8 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<HumanGender>().HasData(
             new HumanGender { HumanGenderId = 6, GName = "Non-Binary" },
-            new HumanGender { HumanGenderId = 66, GName = "Genderfluid" }
+            new HumanGender { HumanGenderId = 66, GName = "Genderfluid" },
+            new HumanGender { HumanGenderId = 128, GName = "Female" }
         );
 
         modelBuilder.Entity<DoctorSchool>().HasData(
@@ -206,7 +239,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Appointment>().HasData(
-            new Appointment { PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6, DoctorPreferenceId = 6 }
+            new Appointment { AppointmentId = 6, PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6, DoctorPreferenceId = 6 }
         );
 
         modelBuilder.Entity<DoctorTitle>().HasData(
@@ -214,13 +247,14 @@ public class SmileyMeowDbContext : DbContext
 
         );
 
-        modelBuilder.Entity<DoctorInfo>().HasData(
-            new DoctorInfo { DoctorId = 6, DoctorInformation = "Hi, I am Dr. Patches, a veterinarian with over 10 years of experience in the field. I received my Doctor of Veterinary Medicine degree from the University of California, Davis and have since worked at a variety of clinics, caring for all types of animals and their petparents. My specialty is in small animal medicine, but I am well-versed in treating all kinds of creatures, from cats and dogs to birds and reptiles. I am passionate about helping animals and their owners, and take pride in being able to diagnose and treat a wide range of conditions. In my free time, I enjoy volunteering at local animal shelters and spending time with my own pets, which include a rescue dog and two cats. I believe that effective communication with petparents is crucial in providing the best care for their beloved animals." }
+        modelBuilder.Entity<DoctorInformation>().HasData(
+            new DoctorInformation { DoctorId = 6, DoctorInformationText = "Hi, I am Dr. Patches, a veterinarian with over 10 years of experience in the field. I received my Doctor of Veterinary Medicine degree from the University of California, Davis and have since worked at a variety of clinics, caring for all types of animals and their petparents. My specialty is in small animal medicine, but I am well-versed in treating all kinds of creatures, from cats and dogs to birds and reptiles. I am passionate about helping animals and their owners, and take pride in being able to diagnose and treat a wide range of conditions. In my free time, I enjoy volunteering at local animal shelters and spending time with my own pets, which include a rescue dog and two cats. I believe that effective communication with petparents is crucial in providing the best care for their beloved animals." },
+            new DoctorInformation { DoctorId = 9, DoctorInformationText = "As a veterinarian, I am constantly learning and growing in my profession. I am passionate about providing the best care possible to my patients, and am dedicated to staying up-to-date on the latest advaances in veterinary medicine. I understand that pets are more than just animals to their parents - they are members of the family, and I treat each one with the same care and respect I would any other family member. I take the time to listen to my clients and understand their concerns, and work with them to develop a personalized treatment plan that meets the needs of both the animal and the parent. One of the things I enjoy most about being a veterinarian is the opportunity to build long-term relationships with my patients and their parents. I love seeing my patients grow and thrive under my care, and take great pride in being able to help them live happy and healthy lives." }
         );
 
         modelBuilder.Entity<Pronoun>().HasData(
             new Pronoun { ProunounId = 6, PName = "They/Them" },
-            new Pronoun { ProunounId = 6, PName = "She/Her" }
+            new Pronoun { ProunounId = 9, PName = "She/Her" }
         );
 
         modelBuilder.Entity<AppointmentStatus>().HasData(
@@ -256,7 +290,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<NotUserAppointment>().HasData(
-            new NotUserAppointment { NotUserParentnPersonId = 9, DoctorId = 9, DoctorPreferenceId = 6, AppointmentStatussId = 3, AppointmentDate = DateTime.Now.AddDays(-10)}
+            new NotUserAppointment { AppointmentId = 6 ,NotUserParentnPersonId = 9, DoctorId = 9, DoctorPreferenceId = 6, AppointmentStatussId = 8, AppointmentDate = DateTime.Now.AddDays(-10)}
         );
 
         modelBuilder.Entity<City>().HasData(
