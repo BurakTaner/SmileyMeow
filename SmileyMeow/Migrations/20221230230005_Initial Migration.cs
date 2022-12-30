@@ -9,13 +9,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SmileyMeow.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialmigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "appointmentstatus",
+                name: "appointmentstatuses",
                 columns: table => new
                 {
                     appointmentstatussid = table.Column<int>(type: "integer", nullable: false)
@@ -24,7 +24,7 @@ namespace SmileyMeow.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_appointmentstatus", x => x.appointmentstatussid);
+                    table.PrimaryKey("pk_appointmentstatuses", x => x.appointmentstatussid);
                 });
 
             migrationBuilder.CreateTable(
@@ -280,7 +280,7 @@ namespace SmileyMeow.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "address",
+                name: "addresses",
                 columns: table => new
                 {
                     addressid = table.Column<int>(type: "integer", nullable: false)
@@ -290,9 +290,9 @@ namespace SmileyMeow.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_address", x => x.addressid);
+                    table.PrimaryKey("pk_addresses", x => x.addressid);
                     table.ForeignKey(
-                        name: "fk_address_district_districtid",
+                        name: "fk_addresses_district_districtid",
                         column: x => x.districtid,
                         principalTable: "district",
                         principalColumn: "districtid",
@@ -414,9 +414,9 @@ namespace SmileyMeow.Migrations
                 {
                     table.PrimaryKey("pk_doctors", x => x.doctorid);
                     table.ForeignKey(
-                        name: "fk_doctors_address_addressid",
+                        name: "fk_doctors_addresses_addressid",
                         column: x => x.addressid,
-                        principalTable: "address",
+                        principalTable: "addresses",
                         principalColumn: "addressid",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -473,9 +473,9 @@ namespace SmileyMeow.Migrations
                 {
                     table.PrimaryKey("pk_notuserparents", x => x.notuserparentid);
                     table.ForeignKey(
-                        name: "fk_notuserparents_address_addressid",
+                        name: "fk_notuserparents_addresses_addressid",
                         column: x => x.addressid,
-                        principalTable: "address",
+                        principalTable: "addresses",
                         principalColumn: "addressid",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -501,9 +501,9 @@ namespace SmileyMeow.Migrations
                 {
                     table.PrimaryKey("pk_petparents", x => x.petparentid);
                     table.ForeignKey(
-                        name: "fk_petparents_address_addressid",
+                        name: "fk_petparents_addresses_addressid",
                         column: x => x.addressid,
-                        principalTable: "address",
+                        principalTable: "addresses",
                         principalColumn: "addressid",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -631,27 +631,20 @@ namespace SmileyMeow.Migrations
                     doctorid = table.Column<int>(type: "integer", nullable: false),
                     timecreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     appointmentdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    appointmentstatussid = table.Column<int>(type: "integer", nullable: false),
-                    doctorpreferenceid = table.Column<int>(type: "integer", nullable: false)
+                    appointmentstatussid = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_notuserappointments", x => x.appointmentid);
                     table.ForeignKey(
-                        name: "fk_notuserappointments_appointmentstatus_appointmentstatustemp~",
+                        name: "fk_notuserappointments_appointmentstatuses_appointmentstatuste~",
                         column: x => x.appointmentstatussid,
-                        principalTable: "appointmentstatus",
+                        principalTable: "appointmentstatuses",
                         principalColumn: "appointmentstatussid",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_notuserappointments_doctors_doctorid",
                         column: x => x.doctorid,
-                        principalTable: "doctors",
-                        principalColumn: "doctorid",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_notuserappointments_doctors_doctorpreferenceid",
-                        column: x => x.doctorpreferenceid,
                         principalTable: "doctors",
                         principalColumn: "doctorid",
                         onDelete: ReferentialAction.Cascade);
@@ -672,27 +665,20 @@ namespace SmileyMeow.Migrations
                     doctorid = table.Column<int>(type: "integer", nullable: false),
                     timecreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     appointmentdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    appointmentstatussid = table.Column<int>(type: "integer", nullable: false),
-                    doctorpreferenceid = table.Column<int>(type: "integer", nullable: false)
+                    appointmentstatussid = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_appointments", x => x.appointmentid);
                     table.ForeignKey(
-                        name: "fk_appointments_appointmentstatus_appointmentstatustempid",
+                        name: "fk_appointments_appointmentstatuses_appointmentstatustempid",
                         column: x => x.appointmentstatussid,
-                        principalTable: "appointmentstatus",
+                        principalTable: "appointmentstatuses",
                         principalColumn: "appointmentstatussid",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_appointments_doctors_doctorid",
                         column: x => x.doctorid,
-                        principalTable: "doctors",
-                        principalColumn: "doctorid",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_appointments_doctors_doctorpreferenceid",
-                        column: x => x.doctorpreferenceid,
                         principalTable: "doctors",
                         principalColumn: "doctorid",
                         onDelete: ReferentialAction.Cascade);
@@ -705,7 +691,7 @@ namespace SmileyMeow.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "appointmentstatus",
+                table: "appointmentstatuses",
                 columns: new[] { "appointmentstatussid", "status" },
                 values: new object[,]
                 {
@@ -1895,7 +1881,7 @@ namespace SmileyMeow.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "address",
+                table: "addresses",
                 columns: new[] { "addressid", "addressdetails", "districtid" },
                 values: new object[,]
                 {
@@ -1913,7 +1899,7 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "pets",
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "patientinformationid", "patientİnformationpatientinformationid", "petgenderid", "specieid" },
-                values: new object[] { 6, 6, 6, new DateTime(2022, 12, 30, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(2302), true, "Sif", 6, null, 6, 6 });
+                values: new object[] { 6, 6, 6, new DateTime(2022, 12, 31, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(500), true, "Sif", 6, null, 6, 6 });
 
             migrationBuilder.InsertData(
                 table: "adoptinfos",
@@ -1950,8 +1936,8 @@ namespace SmileyMeow.Migrations
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
-                columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "doctorpreferenceid", "notuserparentnpersonid", "notuserparentnpetnotuserparenpetid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 20, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(3355), 8, 9, 6, 9, null, new DateTime(2022, 11, 20, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(3343) });
+                columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "notuserparentnpetnotuserparenpetid", "timecreated" },
+                values: new object[] { 6, new DateTime(2022, 12, 21, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(1681), 8, 9, 9, null, new DateTime(2022, 11, 21, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(1667) });
 
             migrationBuilder.InsertData(
                 table: "notuserparentnpet",
@@ -1965,12 +1951,12 @@ namespace SmileyMeow.Migrations
 
             migrationBuilder.InsertData(
                 table: "appointments",
-                columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "doctorpreferenceid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 1, 29, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(3089), 6, 6, 6, 6, new DateTime(2022, 12, 30, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(3086) });
+                columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "petnpersonid", "timecreated" },
+                values: new object[] { 6, new DateTime(2023, 1, 30, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(1404), 6, 6, 6, new DateTime(2022, 12, 31, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(1401) });
 
             migrationBuilder.CreateIndex(
-                name: "ix_address_districtid",
-                table: "address",
+                name: "ix_addresses_districtid",
+                table: "addresses",
                 column: "districtid");
 
             migrationBuilder.CreateIndex(
@@ -1982,11 +1968,6 @@ namespace SmileyMeow.Migrations
                 name: "ix_appointments_doctorid",
                 table: "appointments",
                 column: "doctorid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_appointments_doctorpreferenceid",
-                table: "appointments",
-                column: "doctorpreferenceid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_appointments_petnpersonid",
@@ -2044,11 +2025,6 @@ namespace SmileyMeow.Migrations
                 column: "doctorid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_notuserappointments_doctorpreferenceid",
-                table: "notuserappointments",
-                column: "doctorpreferenceid");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_notuserappointments_notuserparentnpetnotuserparenpetid",
                 table: "notuserappointments",
                 column: "notuserparentnpetnotuserparenpetid");
@@ -2066,7 +2042,8 @@ namespace SmileyMeow.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_notuserparents_addressid",
                 table: "notuserparents",
-                column: "addressid");
+                column: "addressid",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_notuserparentspet_breedid",
@@ -2107,7 +2084,8 @@ namespace SmileyMeow.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_petparents_addressid",
                 table: "petparents",
-                column: "addressid");
+                column: "addressid",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_petparents_balanceid",
@@ -2198,7 +2176,7 @@ namespace SmileyMeow.Migrations
                 name: "petsnpersons");
 
             migrationBuilder.DropTable(
-                name: "appointmentstatus");
+                name: "appointmentstatuses");
 
             migrationBuilder.DropTable(
                 name: "doctors");
@@ -2240,7 +2218,7 @@ namespace SmileyMeow.Migrations
                 name: "schooltype");
 
             migrationBuilder.DropTable(
-                name: "address");
+                name: "addresses");
 
             migrationBuilder.DropTable(
                 name: "breeds");

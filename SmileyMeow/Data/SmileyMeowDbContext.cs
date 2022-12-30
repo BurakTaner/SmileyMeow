@@ -51,6 +51,7 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<NotUserParentnPet> NotUserParentnPet { get; set; }
     public DbSet<NotUserParentsPet> NotUserParentsPet { get; set; }
     public DbSet<Address> Addresses { get; set; }
+    public DbSet<AppointmentStatus> appointmentStatuses { get; set; }
 
     //add configuration directory later
     protected override void OnModelCreating(ModelBuilder modelBuilder)

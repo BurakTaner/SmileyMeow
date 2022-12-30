@@ -12,8 +12,8 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20221230092729_Initial migration")]
-    partial class Initialmigration
+    [Migration("20221230230005_Initial Migration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,10 +46,6 @@ namespace SmileyMeow.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("doctorid");
 
-                    b.Property<int>("DoctorPreferenceId")
-                        .HasColumnType("integer")
-                        .HasColumnName("doctorpreferenceid");
-
                     b.Property<int>("PetnPersonId")
                         .HasColumnType("integer")
                         .HasColumnName("petnpersonid");
@@ -67,9 +63,6 @@ namespace SmileyMeow.Migrations
                     b.HasIndex("DoctorId")
                         .HasDatabaseName("ix_appointments_doctorid");
 
-                    b.HasIndex("DoctorPreferenceId")
-                        .HasDatabaseName("ix_appointments_doctorpreferenceid");
-
                     b.HasIndex("PetnPersonId")
                         .HasDatabaseName("ix_appointments_petnpersonid");
 
@@ -79,12 +72,11 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 1, 29, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(3089),
+                            AppointmentDate = new DateTime(2023, 1, 30, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(1404),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
-                            DoctorPreferenceId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2022, 12, 30, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(3086)
+                            TimeCreated = new DateTime(2022, 12, 31, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(1401)
                         });
                 });
 
@@ -102,9 +94,9 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("status");
 
                     b.HasKey("AppointmentStatussId")
-                        .HasName("pk_appointmentstatus");
+                        .HasName("pk_appointmentstatuses");
 
-                    b.ToTable("appointmentstatus", (string)null);
+                    b.ToTable("appointmentstatuses", (string)null);
 
                     b.HasData(
                         new
@@ -250,10 +242,6 @@ namespace SmileyMeow.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("doctorid");
 
-                    b.Property<int>("DoctorPreferenceId")
-                        .HasColumnType("integer")
-                        .HasColumnName("doctorpreferenceid");
-
                     b.Property<int>("NotUserParentnPersonId")
                         .HasColumnType("integer")
                         .HasColumnName("notuserparentnpersonid");
@@ -275,9 +263,6 @@ namespace SmileyMeow.Migrations
                     b.HasIndex("DoctorId")
                         .HasDatabaseName("ix_notuserappointments_doctorid");
 
-                    b.HasIndex("DoctorPreferenceId")
-                        .HasDatabaseName("ix_notuserappointments_doctorpreferenceid");
-
                     b.HasIndex("NotUserParentnPetNotUserParenPetId")
                         .HasDatabaseName("ix_notuserappointments_notuserparentnpetnotuserparenpetid");
 
@@ -287,12 +272,11 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 20, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(3355),
+                            AppointmentDate = new DateTime(2022, 12, 21, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(1681),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
-                            DoctorPreferenceId = 6,
                             NotUserParentnPersonId = 9,
-                            TimeCreated = new DateTime(2022, 11, 20, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(3343)
+                            TimeCreated = new DateTime(2022, 11, 21, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(1667)
                         });
                 });
 
@@ -333,6 +317,7 @@ namespace SmileyMeow.Migrations
                         .HasName("pk_notuserparents");
 
                     b.HasIndex("AddressId")
+                        .IsUnique()
                         .HasDatabaseName("ix_notuserparents_addressid");
 
                     b.ToTable("notuserparents", (string)null);
@@ -688,12 +673,12 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("districtid");
 
                     b.HasKey("AddressId")
-                        .HasName("pk_address");
+                        .HasName("pk_addresses");
 
                     b.HasIndex("DistrictId")
-                        .HasDatabaseName("ix_address_districtid");
+                        .HasDatabaseName("ix_addresses_districtid");
 
-                    b.ToTable("address", (string)null);
+                    b.ToTable("addresses", (string)null);
 
                     b.HasData(
                         new
@@ -7049,6 +7034,7 @@ namespace SmileyMeow.Migrations
                         .HasName("pk_petparents");
 
                     b.HasIndex("AddressId")
+                        .IsUnique()
                         .HasDatabaseName("ix_petparents_addressid");
 
                     b.HasIndex("BalanceId")
@@ -7307,7 +7293,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2022, 12, 30, 12, 27, 27, 760, DateTimeKind.Local).AddTicks(2302),
+                            DOB = new DateTime(2022, 12, 31, 2, 0, 4, 361, DateTimeKind.Local).AddTicks(500),
                             IsAdoptable = true,
                             Name = "Sif",
                             PatientInformationId = 6,
@@ -7552,7 +7538,7 @@ namespace SmileyMeow.Migrations
                         .HasForeignKey("AppointmentStatussId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_appointments_appointmentstatus_appointmentstatustempid");
+                        .HasConstraintName("fk_appointments_appointmentstatuses_appointmentstatustempid");
 
                     b.HasOne("VetClinicLibrary.Person.Doctor", "Doctor")
                         .WithMany()
@@ -7560,13 +7546,6 @@ namespace SmileyMeow.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_appointments_doctors_doctorid");
-
-                    b.HasOne("VetClinicLibrary.Person.Doctor", "DoctorPreference")
-                        .WithMany()
-                        .HasForeignKey("DoctorPreferenceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_appointments_doctors_doctorpreferenceid");
 
                     b.HasOne("VetClinicLibrary.PetnPersonn.PetnPerson", "PetnPerson")
                         .WithMany()
@@ -7578,8 +7557,6 @@ namespace SmileyMeow.Migrations
                     b.Navigation("AppointmentStatus");
 
                     b.Navigation("Doctor");
-
-                    b.Navigation("DoctorPreference");
 
                     b.Navigation("PetnPerson");
                 });
@@ -7621,7 +7598,7 @@ namespace SmileyMeow.Migrations
                         .HasForeignKey("AppointmentStatussId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_notuserappointments_appointmentstatus_appointmentstatustemp~");
+                        .HasConstraintName("fk_notuserappointments_appointmentstatuses_appointmentstatuste~");
 
                     b.HasOne("VetClinicLibrary.Person.Doctor", "Doctor")
                         .WithMany()
@@ -7629,13 +7606,6 @@ namespace SmileyMeow.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_notuserappointments_doctors_doctorid");
-
-                    b.HasOne("VetClinicLibrary.Person.Doctor", "DoctorPreference")
-                        .WithMany()
-                        .HasForeignKey("DoctorPreferenceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_notuserappointments_doctors_doctorpreferenceid");
 
                     b.HasOne("VetClinicLibrary.NotUserParentandPet.NotUserParentnPet", "NotUserParentnPet")
                         .WithMany()
@@ -7646,19 +7616,17 @@ namespace SmileyMeow.Migrations
 
                     b.Navigation("Doctor");
 
-                    b.Navigation("DoctorPreference");
-
                     b.Navigation("NotUserParentnPet");
                 });
 
             modelBuilder.Entity("VetClinicLibrary.NotUserParentandPet.NotUserParent", b =>
                 {
                     b.HasOne("VetClinicLibrary.Person.Locationn.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
+                        .WithOne("NotUserParent")
+                        .HasForeignKey("VetClinicLibrary.NotUserParentandPet.NotUserParent", "AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_notuserparents_address_addressid");
+                        .HasConstraintName("fk_notuserparents_addresses_addressid");
 
                     b.Navigation("Address");
                 });
@@ -7728,7 +7696,7 @@ namespace SmileyMeow.Migrations
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_doctors_address_addressid");
+                        .HasConstraintName("fk_doctors_addresses_addressid");
 
                     b.HasOne("VetClinicLibrary.Person.Balance", "Balance")
                         .WithMany()
@@ -7804,7 +7772,7 @@ namespace SmileyMeow.Migrations
                         .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_address_district_districtid");
+                        .HasConstraintName("fk_addresses_district_districtid");
 
                     b.Navigation("District");
                 });
@@ -7824,11 +7792,11 @@ namespace SmileyMeow.Migrations
             modelBuilder.Entity("VetClinicLibrary.Person.PetParent", b =>
                 {
                     b.HasOne("VetClinicLibrary.Person.Locationn.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
+                        .WithOne("PetParent")
+                        .HasForeignKey("VetClinicLibrary.Person.PetParent", "AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_petparents_address_addressid");
+                        .HasConstraintName("fk_petparents_addresses_addressid");
 
                     b.HasOne("VetClinicLibrary.Person.Balance", "Balance")
                         .WithMany()
@@ -7994,6 +7962,13 @@ namespace SmileyMeow.Migrations
             modelBuilder.Entity("VetClinicLibrary.Person.Doctor", b =>
                 {
                     b.Navigation("DoctorInformation");
+                });
+
+            modelBuilder.Entity("VetClinicLibrary.Person.Locationn.Address", b =>
+                {
+                    b.Navigation("NotUserParent");
+
+                    b.Navigation("PetParent");
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Person.Locationn.City", b =>
