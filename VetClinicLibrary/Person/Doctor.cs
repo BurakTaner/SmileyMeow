@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VetClinicLibrary.Person;
 using VetClinicLibrary.Person.DoctorInformationn;
 using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.Person.Locationn;
