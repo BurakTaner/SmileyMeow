@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VetClinicLibrary.Appointmentt.AppointmentStatuss;
-using VetClinicLibrary.Appointmentt.StatusLevell;
 using VetClinicLibrary.Person;
-using VetClinicLibrary.PetnPersonn;
 
-namespace VetClinicLibrary.Appointmentt;
+namespace VetClinicLibrary.NotUserParentandPet;
 
-public class Appointment : IAppointment
+public class NotUserAppointment : INotUserAppointment
 {
     public int AppointmentId { get; set; }
-    public int PetnPersonId { get; set; }
-    public PetnPerson PetnPerson { get; set; }
+    public int NotUserParentnPersonId { get; set; }
+    public NotUserParentnPet NotUserParentnPet { get; set; }
     public int DoctorId { get; set; }
     public Doctor Doctor { get; set; }
     public DateTime TimeCreated { get; set; } = DateTime.Now;

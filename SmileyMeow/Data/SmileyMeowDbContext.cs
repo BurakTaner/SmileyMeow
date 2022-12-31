@@ -3,8 +3,9 @@ using VetClinicLibrary.Appointmentt;
 using VetClinicLibrary.Appointmentt.AppointmentStatuss;
 using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.Appointmentt.StatusLevell;
+using VetClinicLibrary.NotUserParentandPet;
 using VetClinicLibrary.Person;
-using VetClinicLibrary.Person.DoctorInfoo;
+using VetClinicLibrary.Person.DoctorInformationn;
 using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.Person.Locationn;
 using VetClinicLibrary.Person.Prounounn;
@@ -43,10 +44,18 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<Userr> Userrs { get; set; }
     public DbSet<DoctorSchool> DoctorSchools { get; set; }
     public DbSet<DoctorTitle> DoctorTitles { get; set; }
-    public DbSet<DoctorInfo> DoctorInfos { get; set; }
+    public DbSet<DoctorInformation> DoctorInformations { get; set; }
     public DbSet<Pronoun> Pronouns { get; set; }
+    public DbSet<NotUserAppointment> NotUserAppointments { get; set; }
+    public DbSet<NotUserParent> NotUserParents { get; set; }
+    public DbSet<NotUserParentnPet> NotUserParentnPet { get; set; }
+    public DbSet<NotUserParentsPet> NotUserParentsPet { get; set; }
+    public DbSet<Address> Addresses { get; set; }
+    public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
+    public DbSet<City> Cities { get; set; }
+    public DbSet<District> Districts  { get; set; }
 
-    //add configuration folder later
+    //add configuration directory later
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // temporary 
@@ -54,9 +63,14 @@ public class SmileyMeowDbContext : DbContext
                     .HasOne(p => p.AdoptionInfo)
                     .WithOne(a => a.Pet)
                     .HasForeignKey<AdoptInfo>(a => a.AdoptInfoId);
+        
+        modelBuilder.Entity<DoctorInformation>()
+                    .HasOne(a => a.Doctor)
+                    .WithOne(b => b.DoctorInformation)
+                    .HasForeignKey<DoctorInformation>(a => a.DoctorId);
 
         modelBuilder.Entity<Appointment>()
-                    .HasKey(apo => new { apo.PetnPersonId, apo.DoctorId });
+                    .HasKey(apo => apo.AppointmentId);
 
         modelBuilder.Entity<AdoptInfo>()
                     .HasKey(ado => ado.AdoptInfoId);
@@ -73,7 +87,7 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Userr>().Ignore(p => p.PasswordRepeat);
 
-        modelBuilder.Entity<DoctorInfo>()
+        modelBuilder.Entity<DoctorInformation>()
                         .HasKey(di => di.DoctorId);
 
         modelBuilder.Entity<Pronoun>()
@@ -95,7 +109,7 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Pet>()
                         .HasOne(a => a.PatientInformation)
                         .WithOne(c => c.Pet)
-                        .HasForeignKey<PatientInformation>(a => a.PatientInformationId);
+                        .HasForeignKey<Pet>(a => a.PatientInformationId);
 
         modelBuilder.Entity<AppointmentStatus>()
                         .HasKey(a => a.AppointmentStatussId);
@@ -126,21 +140,69 @@ public class SmileyMeowDbContext : DbContext
                         .HasOne(a => a.PetParent)
                         .WithMany(b => b.PetnPersonn)
                         .HasForeignKey(a => a.PetParentId);
+        
+        modelBuilder.Entity<NotUserAppointment>()
+                        .HasOne(a => a.AppointmentStatus)
+                        .WithMany(b => b.NotUserAppointment)
+                        .HasForeignKey(c => c.AppointmentStatussId);
+        
+        modelBuilder.Entity<NotUserParent>()
+                        .HasKey(a => a.NotUserParentId);
+        
+        modelBuilder.Entity<NotUserParentsPet>()
+                        .HasKey(a => a.AnimalId);
+        
+        modelBuilder.Entity<NotUserParentnPet>()
+                        .HasKey(a => a.NotUserParenPetId);
+        
+        modelBuilder.Entity<NotUserAppointment>()
+                        .HasKey(a => a.AppointmentId);
+        
+        modelBuilder.Entity<NotUserParentsPet>()
+                        .HasOne(a => a.PatientInformation)
+                        .WithOne(b => b.NotUsersParentsPet)
+                        .HasForeignKey<NotUserParentsPet>(c => c.PatientInformationId);
+
+        modelBuilder.Entity<NotUserParent>()
+                            .HasOne(a => a.Address)
+                            .WithOne(b => b.NotUserParent)
+                            .HasForeignKey<NotUserParent>(a => a.AddressId);
+
+        modelBuilder.Entity<PetParent>()
+                            .HasOne(a => a.Address)
+                            .WithOne(b => b.PetParent)
+                            .HasForeignKey<PetParent>(a => a.AddressId);
+
+        modelBuilder.Entity<City>()
+                        .HasKey(a => a.CityId);
+                        
+
+        modelBuilder.Entity<District>()
+                        .HasKey(a => a.DistrictId);
+
+        modelBuilder.Entity<NotUserAppointment>()
+                        .HasOne(a => a.NotUserParentnPet)
+                        .WithMany(b => b.NotUserAppointments)
+                        .HasForeignKey(a => a.NotUserParentnPersonId);
+
         // dummy data
         modelBuilder.Entity<Pet>().HasData(
             new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif", PatientInformationId = 6, AdoptInfoId = 6 }
         );
 
         modelBuilder.Entity<PetGender>().HasData(
-            new PetGender { PetGenderId = 6, GName = "Female" }
+            new PetGender { PetGenderId = 6, GName = "Female" },
+            new PetGender { PetGenderId = 9, GName = "Male (neutralized)" }
         );
 
         modelBuilder.Entity<Breed>().HasData(
-            new Breed { BreedId = 6, BName = "Ragdoll" }
+            new Breed { BreedId = 6, BName = "Ragdoll" },
+            new Breed { BreedId = 9, BName = "Appaloosa" }
         );
 
         modelBuilder.Entity<Specie>().HasData(
-            new Specie { SpecieId = 6, SName = "Wolf" }
+            new Specie { SpecieId = 6, SName = "Wolf" },
+            new Specie { SpecieId = 9, SName = "Horse" }
         );
 
         modelBuilder.Entity<AdoptInfo>().HasData(
@@ -157,7 +219,8 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Userr>().HasData(
             new Userr { UserrId = 6, Email = "artorias@gmail.com", Password = "sif123456", RoleeId = 6 },
-            new Userr { UserrId = 666, Email = "patches@gmail.com", Password = "patches123456", RoleeId = 666 }
+            new Userr { UserrId = 666, Email = "patches@gmail.com", Password = "patches123456", RoleeId = 666 },
+            new Userr { UserrId = 128, Email = "anastacia@gmail.com", Password = "anastacia123456", RoleeId = 666 }
         );
 
         modelBuilder.Entity<Rolee>().HasData(
@@ -166,21 +229,25 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Doctor>().HasData(
-            new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66, DoctorTitleId = 6, PronounId = 6, AddressId = 7}
+            new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66, DoctorTitleId = 6, PronounId = 6, AddressId = 7},
+            new Doctor { DoctorId = 9, FirstName = "Anastacia", MiddleName = "Ciaran", LastName = "Catarina", BalanceId = 128, DOB = Convert.ToDateTime("1980/6/4"), PhoneNumber = "05341299154", UserId = 128, HumanGenderId = 128, DoctorTitleId = 6, PronounId = 9, AddressId = 12}
         );
 
         modelBuilder.Entity<PetParent>().HasData(
-            new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6, PronounId = 6, AddressId = 6}
+            new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6, PronounId = 6, AddressId = 6, PhoneNumber = "058745683324"}
         );
 
         modelBuilder.Entity<Address>().HasData(
             new Address { AddressId = 6, AddressDetails = "Block 5, after Boo's shop", DistrictId = 34},
-            new Address { AddressId = 7, AddressDetails = "Block 6, after Foo's shop", DistrictId = 40}
+            new Address { AddressId = 7, AddressDetails = "Block 6, after Foo's shop", DistrictId = 40},
+            new Address { AddressId = 9, AddressDetails = "Block 6, after Coo's shop", DistrictId = 30},
+            new Address { AddressId = 12, AddressDetails = "Block 7, after Too's shop", DistrictId = 30}
         );
 
         modelBuilder.Entity<HumanGender>().HasData(
             new HumanGender { HumanGenderId = 6, GName = "Non-Binary" },
-            new HumanGender { HumanGenderId = 66, GName = "Genderfluid" }
+            new HumanGender { HumanGenderId = 66, GName = "Genderfluid" },
+            new HumanGender { HumanGenderId = 128, GName = "Female" }
         );
 
         modelBuilder.Entity<DoctorSchool>().HasData(
@@ -193,11 +260,12 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Balance>().HasData(
             new Balance { BalanceId = 6, PersonBalance = Convert.ToDecimal("150.55") },
-            new Balance { BalanceId = 666, PersonBalance = Convert.ToDecimal("90.65") }
+            new Balance { BalanceId = 666, PersonBalance = Convert.ToDecimal("90.65") },
+            new Balance { BalanceId = 128, PersonBalance = Convert.ToDecimal("128.25") }
         );
 
         modelBuilder.Entity<Appointment>().HasData(
-            new Appointment { PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6, DoctorPreferenceId = 6 }
+            new Appointment { AppointmentId = 6, PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6}
         );
 
         modelBuilder.Entity<DoctorTitle>().HasData(
@@ -205,29 +273,50 @@ public class SmileyMeowDbContext : DbContext
 
         );
 
-        modelBuilder.Entity<DoctorInfo>().HasData(
-            new DoctorInfo { DoctorId = 6, DoctorInformation = "Hi, I am Dr. Patches, a veterinarian with over 10 years of experience in the field. I received my Doctor of Veterinary Medicine degree from the University of California, Davis and have since worked at a variety of clinics, caring for all types of animals and their petparents. My specialty is in small animal medicine, but I am well-versed in treating all kinds of creatures, from cats and dogs to birds and reptiles. I am passionate about helping animals and their owners, and take pride in being able to diagnose and treat a wide range of conditions. In my free time, I enjoy volunteering at local animal shelters and spending time with my own pets, which include a rescue dog and two cats. I believe that effective communication with petparents is crucial in providing the best care for their beloved animals." }
+        modelBuilder.Entity<DoctorInformation>().HasData(
+            new DoctorInformation { DoctorId = 6, DoctorInformationText = "Hi, I am Dr. Patches, a veterinarian with over 10 years of experience in the field. I received my Doctor of Veterinary Medicine degree from the University of California, Davis and have since worked at a variety of clinics, caring for all types of animals and their petparents. My specialty is in small animal medicine, but I am well-versed in treating all kinds of creatures, from cats and dogs to birds and reptiles. I am passionate about helping animals and their owners, and take pride in being able to diagnose and treat a wide range of conditions. In my free time, I enjoy volunteering at local animal shelters and spending time with my own pets, which include a rescue dog and two cats. I believe that effective communication with petparents is crucial in providing the best care for their beloved animals." },
+            new DoctorInformation { DoctorId = 9, DoctorInformationText = "As a veterinarian, I am constantly learning and growing in my profession. I am passionate about providing the best care possible to my patients, and am dedicated to staying up-to-date on the latest advaances in veterinary medicine. I understand that pets are more than just animals to their parents - they are members of the family, and I treat each one with the same care and respect I would any other family member. I take the time to listen to my clients and understand their concerns, and work with them to develop a personalized treatment plan that meets the needs of both the animal and the parent. One of the things I enjoy most about being a veterinarian is the opportunity to build long-term relationships with my patients and their parents. I love seeing my patients grow and thrive under my care, and take great pride in being able to help them live happy and healthy lives." }
         );
 
         modelBuilder.Entity<Pronoun>().HasData(
-            new Pronoun { ProunounId = 6, PName = "They/Them" }
+            new Pronoun { ProunounId = 6, PName = "They/Them" },
+            new Pronoun { ProunounId = 9, PName = "She/Her" }
         );
 
         modelBuilder.Entity<AppointmentStatus>().HasData(
             new AppointmentStatus { AppointmentStatussId = 6, Status = "Active Appointment" },
             new AppointmentStatus { AppointmentStatussId = 7, Status = "Expired Appointment" },
-            new AppointmentStatus { AppointmentStatussId = 8, Status = "Canceled Appointment" }
+            new AppointmentStatus { AppointmentStatussId = 8, Status = "Canceled Appointment" },
+            new AppointmentStatus { AppointmentStatussId = 10, Status = "Finished Appointment" }
 
         );
 
         modelBuilder.Entity<PatientInformation>().HasData(
-            new PatientInformation { PatientInformationId = 6, EatingStatusId = 2, EnergyStatusId = 1, PeeingStatusId = 3, InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes." }
+            new PatientInformation { PatientInformationId = 6, EatingStatusId = 2, EnergyStatusId = 1, PeeingStatusId = 3, InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes."},
+            new PatientInformation { PatientInformationId = 9, EatingStatusId = 2, EnergyStatusId = 2, PeeingStatusId = 2, InformationAboutPatient = "Hi there, I'm the owner of a horse named Torrent. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.", IlnesssesInThePast = "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self."}
         );
 
         modelBuilder.Entity<StatusLevel>().HasData(
             new StatusLevel { StatusLevelId = 1, Name = "Good" },
             new StatusLevel { StatusLevelId = 2, Name = "Middle" },
             new StatusLevel { StatusLevelId = 3, Name = "Bad" }
+        );
+
+
+        modelBuilder.Entity<NotUserParent>().HasData(
+            new NotUserParent { NotUserParentId = 9 ,FirstName = "Gael" , MiddleName = "Oscar", LastName = "Siegward", Email = "GaelSlv@hotmail.com", AddressId = 9, PhoneNumber = "05421238573"}
+        );
+
+        modelBuilder.Entity<NotUserParentsPet>().HasData(
+            new NotUserParentsPet {Name = "Torrent", DOB = Convert.ToDateTime("2011-12-10"), AnimalId = 9, PatientInformationId = 9, BreedId = 9, PetGenderId = 9, SpecieId = 9}
+        );
+
+        modelBuilder.Entity<NotUserParentnPet>().HasData(
+            new NotUserParentnPet { AnimalId = 9, NotUserParenPetId = 9, NotUserParentId = 9}
+        );
+
+        modelBuilder.Entity<NotUserAppointment>().HasData(
+            new NotUserAppointment { AppointmentId = 6 ,NotUserParentnPersonId = 9, DoctorId = 9, AppointmentStatussId = 8, AppointmentDate = DateTime.Now.AddDays(-10), TimeCreated = DateTime.Now.AddDays(-40)}
         );
 
         modelBuilder.Entity<City>().HasData(

@@ -1,0 +1,297 @@
+@model AppointmentViewModel
+
+@{
+  ViewData["Title"] = "TakeAppointment";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="bg-img">
+
+  <div class="appointment-form pb-2 pt-2 ">
+    <div class="formbold-form-wrapper">
+      <form asp-controller="Appointments" asp-action="TakeNotUserAppointment" method="POST" class="no-bordered-form">
+        <ol>
+          <li>
+            <strong class="block-level-info mb-2"> Required (*)</strong>
+          </li>
+          <li>
+            <strong class="block-level-info mb-2"> Not required but advice if you have one(#)</strong>
+          </li>
+          <li>
+            <strong> Email and Phone Number going to be required but both don't have to be fill in </strong>
+          </li>
+        </ol>
+        @* For Parent *@
+
+        <p class="forum-info-p">Parent Information</p>
+        <div class="formbold-mb-5">
+          <label for="firstname" class="formbold-form-label">First Name *</label>
+          <input type="text" name="FirstName" id="firstname" placeholder="Ex: John" class="formbold-form-input"
+            value="@Model.NotUserParent.FirstName" />
+        </div>
+        <div class="formbold-mb-5">
+          <label for="middlename" class="formbold-form-label">Middle Name #</label>
+          <input type="text" name="middlename" id="middlename" placeholder="Ex: Jovi" class="formbold-form-input"
+            value="@Model.NotUserParent.MiddleName" />
+        </div>
+        <div class="formbold-mb-5">
+          <label for="lastname" class="formbold-form-label">Last Name *</label>
+          <input type="text" name="lastname" id="lastname" placeholder="Ex: Doe" class="formbold-form-input"
+            value="@Model.NotUserParent.MiddleName" />
+        </div>
+        <div class="formbold-mb-5">
+          <label for="phone" class="formbold-form-label">Phone Number *</label>
+          <input type="text" name="PhoneNumber" id="phone" placeholder="EX: (+44 200 765 5432)"
+            class="formbold-form-input" value="@Model.NotUserParent.PhoneNumber" />
+        </div>
+        <div class="formbold-mb-5">
+          <label for="email" class="formbold-form-label"> Email Address *</label>
+          <input type="email" name="email" id="email" placeholder="Ex: Johndoe@example.com" class="formbold-form-input"
+            value="@Model.NotUserParent.Email" />
+        </div>
+
+        <strong class="block-level-info mb-2"> Address Information</strong>
+
+        @if (Model.SelectedFormInputDTO.CityId != null)
+        {
+          <label for="select-city-not-null" class="formbold-form-label">Select a city and district...*</label>
+          <select name="CityId" id="select-city-not-null" class="formbold-form-input">
+            @foreach (City city in Model.CityList)
+            {
+              <option selected="@(city.CityId == Model.SelectedFormInputDTO.CityId)" value="@city.CityId">
+                @city.CName
+              </option>
+            }
+          </select>
+
+          @if (Model.Address.DistrictId != null)
+          {
+              <select name="DistrictId" id="select-district-not-null" class="formbold-form-input select-district-not-null mt-2">
+            @foreach (District district in Model.DistrictList)
+            {
+                <option selected="@(district.DistrictId == Model.Address.DistrictId)" value="@district.DistrictId">
+                @district.DName
+                </option>
+            }
+              </select>
+
+          }
+
+          else {
+          // Fetch from node
+          <select name="DistrictId" id="select-district" class="formbold-form-input select-district mt-2">
+          </select>
+          
+          }
+
+        }
+
+        else {
+
+          // Fetch from node
+          <label for="select-city" class="formbold-form-label">Select a city and district...*</label>
+          <select name="CityId" id="select-city" class="formbold-form-input select-city mt-2">
+          </select>
+
+          <select name="DistrictId" id="select-district" class="formbold-form-input select-district mt-2">
+          </select>
+
+        }
+
+
+@* 
+        <label for="select-city" class="formbold-form-label">Select a city and district...*</label>
+        <select name="CityId" id="select-city" class="formbold-form-input">
+          @foreach (City city in Model.CityList)
+          {
+            <option selected="@(city.CityId == Model.SelectedCity)" value="@city.CityId">
+              @city.CName
+            </option>
+          }
+        </select> *@
+        
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-check-label mt-4">Address Details*</label>
+          <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"
+            placeholder="EX: Block 5, Boo's shop...." name="AddressDetails">@Model.Address.AddressDetails</textarea>
+        </div>
+
+        <div class="formbold-mb-5">
+          <label for="doctor-preference" class="formbold-form-label mt-3">Doctor*</label>
+          <select name="DoctorId" id="doctor-preference" class="formbold-form-input">
+            <option value="">Select a doctor...</option>
+            @foreach (Doctor doctor in Model.DoctorList)
+            {
+              <option selected="@(doctor.DoctorId == Model.NotUsersAppointment.DoctorId)" value="@doctor.DoctorId">
+                @($"{doctor.FirstName} {doctor.MiddleName} {doctor.LastName}")</option>
+            }
+          </select>
+        </div>
+        @* For Pet *@
+        <hr>
+        <p class="forum-info-p">Patient Information </p>
+        <div class="flex flex-wrap formbold--mx-3">
+          <div class="w-full sm:w-half formbold-px-3">
+            <div class="formbold-mb-5 w-full">
+              <label for="patientname" class="formbold-form-label">Name *</label>
+              <input type="text" name="Name" id="patientname" class="formbold-form-input"
+                value="@Model.NotUserParentsPet.Name" placeholder="Ex: Sif" />
+            </div>
+          </div>
+          <div class="w-full sm:w-half formbold-px-3">
+            <div class="formbold-mb-5">
+              <label for="DOB" class="formbold-form-label">Date of Birth *</label>
+              <input type="date" name="DOB" id="" class="formbold-form-input"
+                value='@Model.NotUserParentsPet.DOB.Year != 1 ?@Model.NotUserParentsPet.DOB.ToString("yyyy-MM-dd"):""' />
+            </div>
+          </div>
+        </div>
+
+        <label for="genderbox" class="formbold-form-label">Gender *</label>
+        @foreach (PetGender petGender in Model.PetGenderList)
+        {
+          <div class="form-check">
+            <input class="form-check-input" type="radio"
+            checked="@(@petGender.PetGenderId == Model.NotUserParentsPet.PetGenderId)" value="@petGender.PetGenderId"
+            name="PetGenderId" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              @petGender.GName
+            </label>
+          </div>
+        }
+
+        <div class="formbold-mb-5 mt-3">
+          <label for="doctor-preference" class="formbold-form-label">Specie *</label>
+          <select name="SpecieId" id="doctor-preference" class="formbold-form-input">
+            <option value="">Select a specie...</option>
+            @foreach (Specie specie in Model.SpecieList)
+            {
+              <option checked="@(specie.SpecieId == Model.NotUserParentsPet.SpecieId)" value="@specie.SpecieId">
+                @specie.SName</option>
+            }
+          </select>
+        </div>
+
+
+        <div class="formbold-mb-5 mt-3">
+          <label for="doctor-preference" class="formbold-form-label">Breed *</label>
+          <select name="BreedId" id="doctor-preference" class="formbold-form-input">
+            <option value="">Select a breed...</option>
+            @foreach (Breed breed in Model.BreedList)
+            {
+              <option checked="@(breed.BreedId == Model.NotUserParentsPet.BreedId)" value="@breed.BreedId">@breed.BName
+              </option>
+            }
+          </select>
+        </div>
+
+        @* For Detailed Patient Information *@
+        <p class="forum-info-p">Detailed Information About Patient</p>
+        <label for="eating" class="formbold-form-label">Eating Condition *</label>
+        @foreach (StatusLevel eatingStatus in Model.StatusLevelList)
+        {
+          <div class="form-check">
+            <input class="form-check-input" checked="@(eatingStatus.StatusLevelId == Model.PatientInformation.EatingStatusId)"  type="radio" value="@eatingStatus.StatusLevelId" name="EatingStatusId"
+            id="flexCheckDefault eating">
+            <label class="form-check-label" for="flexCheckDefault">
+              @eatingStatus.Name
+            </label>
+          </div>
+        }
+
+
+        <hr>
+
+        <label for="energy" class="formbold-form-label">Energy Condition *</label>
+        @foreach (StatusLevel energyStatus in Model.StatusLevelList)
+        {
+          <div class="form-check">
+            <input class="form-check-input" type="radio" checked="@(energyStatus.StatusLevelId == Model.PatientInformation.EnergyStatusId)" value="@energyStatus.StatusLevelId" name="EnergyStatusId"
+            id="flexCheckDefault energy">
+            <label class="form-check-label" for="flexCheckDefault">
+              @energyStatus.Name
+            </label>
+          </div>
+
+        }
+        <hr>
+
+        <label for="peeing" class="formbold-form-label">Peeing Condition *</label>
+        @foreach (StatusLevel peeingStatus in Model.StatusLevelList)
+        {
+          <div class="form-check">
+            <input class="form-check-input" type="radio" value="@peeingStatus.StatusLevelId" checked="@(peeingStatus.StatusLevelId == Model.PatientInformation.PeeingStatusId)" name="PeeingStatusId"
+            id="flexCheckDefault peeing">
+            <label class="form-check-label" for="flexCheckDefault">
+              @peeingStatus.Name
+            </label>
+          </div>
+
+        }
+
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-check-label mt-4 dark-textarea-label">Extra Information
+            About Patient *</label>
+          <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"
+            placeholder="EX: Sif have mits...."
+            name="InformationAboutPatient">@Model.PatientInformation.InformationAboutPatient</textarea>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-check-label mt-3 dark-textarea-label">If had a
+            known ilness
+            in the past/still * </label>
+          <textarea class="form-control mb-5" id="exampleFormControlTextarea1" rows="3"
+            placeholder="Ex: Sif have a very bad injury..."
+            name="IlnesssesInThePast">@Model.PatientInformation.IlnesssesInThePast</textarea>
+        </div>
+
+        <p class="forum-info-p">Appointments takes 30 minutes. You need to select xx:30 or xx:00 for appointment.
+          ex: 12/12/2022 - 12-30 PM
+        </p>
+        <div class="w-full formbold-px-1 mb-5">
+          <div class="formbold-mb-5">
+            <label for="DOB" class="formbold-form-label">Appointment Date *</label>
+            <input type="datetime-local" name="AppointmentDate" id="" class="formbold-form-input"
+              value='@Model.NotUsersAppointment.AppointmentDate.Year != 1 ?@Model.NotUsersAppointment.AppointmentDate.ToString("yyyy-MM-dd"):""' />
+          </div>
+        </div>
+
+        @* <div class="formbold-mb-5 formbold-pt-3">
+          <label class="formbold-form-label formbold-form-label-2">
+          Address Details
+          </label>
+          <div class="flex flex-wrap formbold--mx-3">
+          <div class="w-full sm:w-half formbold-px-3">
+          <div class="formbold-mb-5">
+          <input type="text" name="area" id="area" placeholder="Enter area" class="formbold-form-input" />
+          </div>
+          </div>
+          <div class="w-full sm:w-half formbold-px-3">
+          <div class="formbold-mb-5">
+          <input type="text" name="city" id="city" placeholder="Enter city" class="formbold-form-input" />
+          </div>
+          </div>
+          <div class="w-full sm:w-half formbold-px-3">
+          <div class="formbold-mb-5">
+          <input type="text" name="state" id="state" placeholder="Enter state" class="formbold-form-input" />
+          </div>
+          </div>
+          <div class="w-full sm:w-half formbold-px-3">
+          <div class="formbold-mb-5">
+          <input type="text" name="post-code" id="post-code" placeholder="Post Code" class="formbold-form-input" />
+          </div>
+          </div>
+          </div>
+          </div> *@
+
+        @* For Pet Information *@
+
+
+
+        <div>
+          <button class="formbold-btn">Make an appointment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  @* <img src="./Images/gallery-2.jpg" class="rounded float-start" alt="..."> *@
+</div>
