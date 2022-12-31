@@ -12,4 +12,5 @@ public class NotUserParentnPet
     public int AnimalId { get; set; }
     public NotUserParent NotUserParent { get; set; }
     public NotUserParentsPet NotUserParentsPet { get; set; }
+    public List<NotUserAppointment> NotUserAppointments { get; set; }
 }

@@ -14,7 +14,7 @@ public class NotUserAppointment : INotUserAppointment
     public NotUserParentnPet NotUserParentnPet { get; set; }
     public int DoctorId { get; set; }
     public Doctor Doctor { get; set; }
-    public DateTime TimeCreated { get; set; } = DateTime.Now.AddDays(-40);
+    public DateTime TimeCreated { get; set; } = DateTime.Now;
     public DateTime AppointmentDate { get; set; }
     public int AppointmentStatussId { get; set; }
     public AppointmentStatus AppointmentStatus { get; set; }

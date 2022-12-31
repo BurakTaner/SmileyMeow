@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" href="~/petsitting-master/css/flaticon.css">
     <link rel="stylesheet" href="~/petsitting-master/css/style.css">
+    <link rel="stylesheet" href="~/css/site.css">
 </head>
 <body>
 
@@ -47,7 +48,7 @@
                     <li class="nav-item"><a asp-controller="" asp-action="" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a asp-controller="Doctors" asp-action="List" class="nav-link">Doctors</a></li>
-                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a asp-controller="Appointments" asp-action="TakeNotUserAppointment" class="nav-link">Appointment</a></li>
                     <li class="nav-item"><a asp-controller="Adopt" asp-action="List" class="nav-link">Adopt</a></li>
                     <li class="nav-item"><a asp-controller="RandomAnimalKnowledges" asp-action="" class="nav-link">Contact</a></li>
                 </ul>
@@ -146,6 +147,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="~/petsitting-master/js/google-map.js"></script>
     <script src="~/petsitting-master/js/main.js"></script>
+    <script src="~/js/site.js"></script>
 
 
 

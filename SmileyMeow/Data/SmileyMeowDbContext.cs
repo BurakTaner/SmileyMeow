@@ -51,7 +51,9 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<NotUserParentnPet> NotUserParentnPet { get; set; }
     public DbSet<NotUserParentsPet> NotUserParentsPet { get; set; }
     public DbSet<Address> Addresses { get; set; }
-    public DbSet<AppointmentStatus> appointmentStatuses { get; set; }
+    public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
+    public DbSet<City> Cities { get; set; }
+    public DbSet<District> Districts  { get; set; }
 
     //add configuration directory later
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -170,6 +172,19 @@ public class SmileyMeowDbContext : DbContext
                             .HasOne(a => a.Address)
                             .WithOne(b => b.PetParent)
                             .HasForeignKey<PetParent>(a => a.AddressId);
+
+        modelBuilder.Entity<City>()
+                        .HasKey(a => a.CityId);
+                        
+
+        modelBuilder.Entity<District>()
+                        .HasKey(a => a.DistrictId);
+
+        modelBuilder.Entity<NotUserAppointment>()
+                        .HasOne(a => a.NotUserParentnPet)
+                        .WithMany(b => b.NotUserAppointments)
+                        .HasForeignKey(a => a.NotUserParentnPersonId);
+
         // dummy data
         modelBuilder.Entity<Pet>().HasData(
             new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif", PatientInformationId = 6, AdoptInfoId = 6 }
@@ -301,7 +316,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<NotUserAppointment>().HasData(
-            new NotUserAppointment { AppointmentId = 6 ,NotUserParentnPersonId = 9, DoctorId = 9, AppointmentStatussId = 8, AppointmentDate = DateTime.Now.AddDays(-10)}
+            new NotUserAppointment { AppointmentId = 6 ,NotUserParentnPersonId = 9, DoctorId = 9, AppointmentStatussId = 8, AppointmentDate = DateTime.Now.AddDays(-10), TimeCreated = DateTime.Now.AddDays(-40)}
         );
 
         modelBuilder.Entity<City>().HasData(

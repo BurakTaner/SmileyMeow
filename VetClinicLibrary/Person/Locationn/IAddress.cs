@@ -9,7 +9,7 @@ namespace VetClinicLibrary.Person.Locationn;
 public interface IAddress
 {
     int AddressId { get; set; }
-    int DistrictId { get; set; }
+    int? DistrictId { get; set; }
     District District { get; set; }
     string AddressDetails { get; set; }
     public PetParent PetParent { get; set; }
