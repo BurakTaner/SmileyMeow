@@ -6,7 +6,7 @@ using SmileyMeow.ViewModels;
 using VetClinicLibrary.Pett;
 
 namespace SmileyMeow.Controllers;
-public class AdoptController : Controller
+public class AdoptController : BasyController
 {
     private readonly ILogger<AdoptController> _logger;
     private readonly SmileyMeowDbContext _context;

@@ -8,7 +8,7 @@ using VetClinicLibrary.NotUserParentandPet;
 using VetClinicLibrary.Person.Locationn;
 
 namespace SmileyMeow.Controllers;
-public class AppointmentsController : Controller
+public class AppointmentsController : BasyController
 {
     private readonly ILogger<AppointmentsController> _logger;
     private readonly SmileyMeowDbContext _context;
