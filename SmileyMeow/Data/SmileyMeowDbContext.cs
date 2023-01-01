@@ -85,7 +85,7 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<DoctorSchool>()
                     .HasKey(docs => new { docs.DoctorId, docs.SchoolId });
 
-        modelBuilder.Entity<Userr>().Ignore(p => p.PasswordRepeat);
+        modelBuilder.Entity<Userr>().Ignore(p => p.ConfirmPasswordd);
 
         modelBuilder.Entity<DoctorInformation>()
                         .HasKey(di => di.DoctorId);
@@ -218,14 +218,14 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Userr>().HasData(
-            new Userr { UserrId = 6, Email = "artorias@gmail.com", Password = "sif123456", RoleeId = 6 },
-            new Userr { UserrId = 666, Email = "patches@gmail.com", Password = "patches123456", RoleeId = 666 },
-            new Userr { UserrId = 128, Email = "anastacia@gmail.com", Password = "anastacia123456", RoleeId = 666 }
+            new Userr { UserrId = 6, Emaill = "artorias@gmail.com", Passwordd = "sif123456", RoleeId = 6 },
+            new Userr { UserrId = 666, Emaill = "patches@gmail.com", Passwordd = "patches123456", RoleeId = 666 },
+            new Userr { UserrId = 128, Emaill = "anastacia@gmail.com", Passwordd = "anastacia123456", RoleeId = 666 }
         );
 
         modelBuilder.Entity<Rolee>().HasData(
-            new Rolee { RoleeId = 6, Name = "PetParent" },
-            new Rolee { RoleeId = 666, Name = "Doctor" }
+            new Rolee { RoleeId = 6, RName = "PetParent" },
+            new Rolee { RoleeId = 666, RName = "Doctor" }
         );
 
         modelBuilder.Entity<Doctor>().HasData(
