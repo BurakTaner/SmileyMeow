@@ -33,10 +33,10 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <input type="checkbox" aria-label="Checkbox for following text input" id="confirmation-box">
+                                    <input type="checkbox" aria-label="Checkbox for following text input" id="confirmation-box" class="confirmation-box">
                                 </div>
                             </div>
-                            <input type="text" class="form-control" aria-label="Text input with checkbox">
+                            <p class="terms-text">agree to <a asp-controller="About" asp-action="TermsAndConditions">terms and conditions</a></p>
                         </div>
                         <div class="pt-1 mb-4">
                             <button class="btn btn-info btn-lg btn-block register-btn" type="submit" id="register-btn" disabled>Register</button>
