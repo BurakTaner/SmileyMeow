@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SmileyMeow.Migrations
 {
     /// <inheritdoc />
-    public partial class IntiailMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -1858,7 +1858,7 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "pets",
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
-                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 2, 15, 8, 2, 427, DateTimeKind.Local).AddTicks(7766), true, "Sif", 6, 6 });
+                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 2, 22, 16, 52, 359, DateTimeKind.Local).AddTicks(4409), true, "Sif", 6, 6 });
 
             migrationBuilder.InsertData(
                 table: "school",
@@ -1932,12 +1932,12 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 1, 15, 8, 2, 427, DateTimeKind.Local).AddTicks(8948), 6, 6, 6, 6, new DateTime(2023, 1, 2, 15, 8, 2, 427, DateTimeKind.Local).AddTicks(8944) });
+                values: new object[] { 6, new DateTime(2023, 2, 1, 22, 16, 52, 359, DateTimeKind.Local).AddTicks(5209), 6, 6, 6, 6, new DateTime(2023, 1, 2, 22, 16, 52, 359, DateTimeKind.Local).AddTicks(5206) });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 23, 15, 8, 2, 427, DateTimeKind.Local).AddTicks(9256), 8, 9, 9, 9, new DateTime(2022, 11, 23, 15, 8, 2, 427, DateTimeKind.Local).AddTicks(9260) });
+                values: new object[] { 6, new DateTime(2022, 12, 23, 22, 16, 52, 359, DateTimeKind.Local).AddTicks(5513), 8, 9, 9, 9, new DateTime(2022, 11, 23, 22, 16, 52, 359, DateTimeKind.Local).AddTicks(5516) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",
