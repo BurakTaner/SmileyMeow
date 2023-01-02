@@ -1,5 +1,6 @@
 using System;
 using VetClinicLibrary.Appointmentt.AppointmentStatuss;
+using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.Person;
 using VetClinicLibrary.PetnPersonn;
 
@@ -16,4 +17,6 @@ public interface IAppointment
     DateTime AppointmentDate { get; set; }
     int AppointmentStatussId { get; set;  }
     AppointmentStatus AppointmentStatus { get; set;}
+    int PatientInformationId { get; set; }
+    PatientInformation PatientInformation { get; set; }
 }

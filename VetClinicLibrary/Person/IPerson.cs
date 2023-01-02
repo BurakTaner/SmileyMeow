@@ -11,10 +11,12 @@ namespace VetClinicLibrary.Person;
 
 public interface IPerson : IBasePerson
 {
-    DateTime DOB { get; set; }
-    int HumanGenderId { get; set; }
+    DateTime? DOB { get; set; }
+    int? HumanGenderId { get; set; }
     HumanGender HumanGender { get; set; }
-    int PronounId { get; set; }
+    int? PronounId { get; set; }
     Pronoun Pronoun { get; set; }
+    public int? AddressId { get; set; }
+    public Address Address { get; set; }
 
 }

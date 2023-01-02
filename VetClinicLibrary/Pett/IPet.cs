@@ -8,7 +8,7 @@ using VetClinicLibrary.Pett.Adopt;
 
 namespace VetVetClinicLibrary.Pett;
 
-public interface IPet : IAnimal, IAdoptable, IHasPatientInformation
+public interface IPet : IAnimal
 {
     public int PetGenderId { get; set; }
     DateTime DOB { get; set; }

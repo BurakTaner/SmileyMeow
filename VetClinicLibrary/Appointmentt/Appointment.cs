@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VetClinicLibrary.Appointmentt.AppointmentStatuss;
+using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.Appointmentt.StatusLevell;
 using VetClinicLibrary.Person;
 using VetClinicLibrary.PetnPersonn;
@@ -20,4 +21,6 @@ public class Appointment : IAppointment
     public DateTime AppointmentDate { get; set; }
     public int AppointmentStatussId { get; set; }
     public AppointmentStatus AppointmentStatus { get; set; }
+    public int PatientInformationId { get; set; }
+    public PatientInformation PatientInformation { get; set; }
 }

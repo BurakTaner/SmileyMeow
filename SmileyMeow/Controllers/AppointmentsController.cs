@@ -57,7 +57,7 @@ public class AppointmentsController : BasyController
                 notUserParent.Address = address;
                 joinTable.NotUserParentsPet = notUserParentsPet;
                 joinTable.NotUserParent = notUserParent;
-                notUserParentsPet.PatientInformation = patientInformation;
+                notUserAppointment.PatientInformation = patientInformation;
                 notUserAppointment.AppointmentStatussId = 6;
                 notUserAppointment.NotUserParentnPet = joinTable;
                 _context.PatientInformations.Add(patientInformation);

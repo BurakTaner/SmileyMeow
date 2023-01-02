@@ -10,7 +10,7 @@ using VetClinicLibrary.Pett.Speciee;
 
 namespace VetClinicLibrary.NotUserParentandPet;
 
-public interface INotUserParentsPet : IAnimal, IHasPatientInformation
+public interface INotUserParentsPet : IAnimal
 {
     public DateTime DOB { get; set; }
     public int PetGenderId { get; set; }

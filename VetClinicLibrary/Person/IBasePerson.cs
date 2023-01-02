@@ -11,7 +11,5 @@ public interface IBasePerson
     string FirstName { get; set; }
     string MiddleName { get; set; }
     string LastName { get; set; }
-    public int AddressId { get; set; }
-    public Address Address { get; set; }
     string PhoneNumber { get; set; }
 }
