@@ -5,7 +5,7 @@
     const selectCityelem = $('#select-city')[0];
     const selectCityNotNull = $('#select-city-not-null');
     const secondSelectNotNull = $('#select-district-not-null')[0];
-
+    const registerBtn = $('#register-btn')[0];
     fetchCities().then(
         cityList => {
             let firstOption = document.createElement('option');
@@ -56,6 +56,14 @@
         });
     });
 
+    $('#confirmation-box').change(function() {
+        if($(this).prop('checked')) {
+            registerBtn.disabled = false;
+        }
+        else {
+            registerBtn.disabled = true;
+        }
+    })
 
 });
 

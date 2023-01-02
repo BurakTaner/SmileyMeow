@@ -110,11 +110,10 @@
 } */
 
 .bg-img {
-    background-image: url('../Images/forum-background.jpg');
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-position:center;
-  
+  background-image: url("../Images/forum-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .bg-img:before {
@@ -132,17 +131,15 @@
 .no-bordered-form {
   width: 70%;
   margin: auto;
-  
 }
 
-.formbold-form-wrapper{
+.formbold-form-wrapper {
   background-color: rgba(10, 160, 17, 0.9);
   border: rgba(10, 10, 200, 1) 5px solid;
 }
 
 .appointment-form * {
   color: black;
-
 }
 .appointment-form label {
   font-size: medium;
@@ -155,7 +152,6 @@
 
 .block-level-info {
   display: block;
-
 }
 
 .dark-textarea-label {
@@ -163,7 +159,67 @@
   color: black;
 }
 
-
-.select-district{
+.select-district {
   display: none;
+}
+
+.collapse,
+navbar-collapse {
+  margin: 0 15px 0 50px;
+}
+
+.mylogo {
+  margin-right: 50px;
+}
+
+.loginout {
+  font-size: 15px;
+  color: rgb(102, 7, 217);
+}
+
+.bg-image-vertical {
+  position: relative;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
+}
+
+@media (min-width: 1025px) {
+  .h-custom-2 {
+    height: 100%;
+  }
+}
+
+.login-txt {
+  color: rgba(95, 10, 232, 0.8);
+  letter-spacing: 1px;
+}
+
+.login-btn, .register-btn {
+  background-color: rgba(95, 10, 232);
+  border-color:rgba(95, 10, 232);;
+}
+.login-btn:hover, .register-btn:hover{
+  background-color: #008000;
+  border-color:#008000;
+}
+
+.register-btn:disabled{
+  background-color: rgb(255, 0, 0);
+  border-color:#F00;
+}
+
+.login-image-right {
+  object-fit: cover;
+  object-position: left;
+}
+.login-form {
+  width: 23rem;
+}
+
+.person-img{
+  width: 100%;
+  min-width: 50%;
+  height: auto;
 }

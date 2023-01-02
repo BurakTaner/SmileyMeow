@@ -12,7 +12,6 @@ public class Userr : IUserr
     public int UserrId { get; set; }
     public string Emaill { get; set; }
     public string Passwordd { get; set; }
-    
     [Compare("Passwordd")]
     public string ConfirmPasswordd { get; set; }
     public int RoleeId { get ; set ; }

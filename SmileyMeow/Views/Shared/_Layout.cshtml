@@ -1,11 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Smiley Meow</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -23,6 +25,7 @@
     <link rel="stylesheet" href="~/petsitting-master/css/style.css">
     <link rel="stylesheet" href="~/css/site.css">
 </head>
+
 <body>
 
     <div class="wrap">
@@ -39,8 +42,10 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" asp-controller="" asp-action="" ><span class="flaticon-pawprint-1 mr-2"></span>Smiley Meow</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand mylogo" asp-controller="" asp-action=""><span class="flaticon-pawprint-1 mr-2"></span>Smiley
+                Meow</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="fa fa-bars"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
@@ -48,11 +53,32 @@
                     <li class="nav-item"><a asp-controller="" asp-action="" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a asp-controller="Doctors" asp-action="List" class="nav-link">Doctors</a></li>
-                    <li class="nav-item"><a asp-controller="Appointments" asp-action="TakeNotUserAppointment" class="nav-link">Appointment</a></li>
+                    <li class="nav-item"><a asp-controller="Appointments" asp-action="TakeNotUserAppointment"
+                            class="nav-link">Appointment</a></li>
                     <li class="nav-item"><a asp-controller="Adopt" asp-action="List" class="nav-link">Adopt</a></li>
-                    <li class="nav-item"><a asp-controller="RandomAnimalKnowledges" asp-action="" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a asp-controller="RandomAnimalKnowledges" asp-action=""
+                            class="nav-link">Contact</a></li>
                 </ul>
+                <div class="dropdown">
+                    <button class="btn btn-first ml-5 loginout" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="~/Images/person-image.png" alt="an anonymous person image" class="person-img">
+                    </button>
+                 @if (Convert.ToInt32(User.FindFirst(a => a.Type == System.Security.Claims.ClaimTypes.Sid)?.Value) != 0)
+            {
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" asp-controller="Account" asp-action="UnderMaintenance">Profile</a>
+                    </div>
+            }
+            else {  
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Login">Login</a>
+                    </div>
+                
+            }
             </div>
+            </div>
+           
         </div>
     </nav>
     <!-- END nav -->
@@ -64,7 +90,9 @@
                     <h2 class="footer-heading">Smiley Meow</h2>
                     <p>Social Media</p>
                     <ul class="ftco-footer-social p-0">
-                        <li class="ftco-animate"><a href="https://twitter.com/Meow2Smiley" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="https://twitter.com/Meow2Smiley" target="_blank"
+                                data-toggle="tooltip" data-placement="top" title="Twitter"><span
+                                    class="fa fa-twitter"></span></a></li>
                     </ul>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
@@ -72,7 +100,8 @@
                     <div class="block-21 mb-4 d-flex">
                         <a class="img mr-4 rounded" style="background-image: url(/Images/gallery-2.jpg);"></a>
                         <div class="text">
-                            <h3 class="heading" style="color:white;">Doctor Michelle Laura saved 2 dog at the same time!</h3>
+                            <h3 class="heading" style="color:white;">Doctor Michelle Laura saved 2 dog at the same time!
+                            </h3>
                             <div class="meta">
                                 <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
                                 <div><a href="#"><span class="icon-chat"></span> 19</a></div>
@@ -82,7 +111,8 @@
                     <div class="block-21 mb-4 d-flex">
                         <a class="img mr-4 rounded" style="background-image: url(/Images/gallery-2.jpg);"></a>
                         <div class="text">
-                            <h3 class="heading" style="color:white;">İgulara finally signed Universal Declaration on Animal Welfare!</h3>
+                            <h3 class="heading" style="color:white;">İgulara finally signed Universal Declaration on
+                                Animal Welfare!</h3>
                             <div class="meta">
                                 <div><a href="#"><span class="icon-calendar"></span> April 7, 2022</a></div>
                                 <div><a href="#"><span class="icon-chat"></span> 19</a></div>
@@ -104,9 +134,12 @@
                     <h2 class="footer-heading">Have a Questions?</h2>
                     <div class="block-23 mb-3">
                         <ul>
-                            <li><span class="icon fa fa-map"></span><span class="text">203 Abary St. Mountain View, San Francisco, California, USA</span></li>
-                            <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 435 1234 672</span></a></li>
-                            <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">smileymeowinf@hotmail.com</span></a></li>
+                            <li><span class="icon fa fa-map"></span><span class="text">203 Abary St. Mountain View, San
+                                    Francisco, California, USA</span></li>
+                            <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 435 1234
+                                        672</span></a></li>
+                            <li><a href="#"><span class="icon fa fa-paper-plane"></span><span
+                                        class="text">smileymeowinf@hotmail.com</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -116,7 +149,10 @@
 
                     <p class="copyright">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib.com</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
@@ -128,7 +164,11 @@
 
 
     <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg></div>
 
 
     <script src="~/petsitting-master/js/jquery.min.js"></script>
@@ -144,7 +184,8 @@
     <script src="~/petsitting-master/js/owl.carousel.min.js"></script>
     <script src="~/petsitting-master/js/jquery.magnific-popup.min.js"></script>
     <script src="~/petsitting-master/js/scrollax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="~/petsitting-master/js/google-map.js"></script>
     <script src="~/petsitting-master/js/main.js"></script>
     <script src="~/js/site.js"></script>
@@ -152,4 +193,5 @@
 
 
 </body>
+
 </html>

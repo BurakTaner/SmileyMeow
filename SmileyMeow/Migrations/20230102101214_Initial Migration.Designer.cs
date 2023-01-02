@@ -12,7 +12,7 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20230102080651_Initial Migration")]
+    [Migration("20230102101214_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -80,12 +80,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 1, 11, 6, 49, 615, DateTimeKind.Local).AddTicks(6479),
+                            AppointmentDate = new DateTime(2023, 2, 1, 13, 12, 12, 698, DateTimeKind.Local).AddTicks(4696),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 2, 11, 6, 49, 615, DateTimeKind.Local).AddTicks(6476)
+                            TimeCreated = new DateTime(2023, 1, 2, 13, 12, 12, 698, DateTimeKind.Local).AddTicks(4692)
                         });
                 });
 
@@ -285,12 +285,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 23, 11, 6, 49, 615, DateTimeKind.Local).AddTicks(6758),
+                            AppointmentDate = new DateTime(2022, 12, 23, 13, 12, 12, 698, DateTimeKind.Local).AddTicks(4967),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 23, 11, 6, 49, 615, DateTimeKind.Local).AddTicks(6762)
+                            TimeCreated = new DateTime(2022, 11, 23, 13, 12, 12, 698, DateTimeKind.Local).AddTicks(4971)
                         });
                 });
 
@@ -7283,7 +7283,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 2, 11, 6, 49, 615, DateTimeKind.Local).AddTicks(5294),
+                            DOB = new DateTime(2023, 1, 2, 13, 12, 12, 698, DateTimeKind.Local).AddTicks(3932),
                             IsAdoptable = true,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7462,7 +7462,7 @@ namespace SmileyMeow.Migrations
                         },
                         new
                         {
-                            RoleeId = 666,
+                            RoleeId = 7,
                             RName = "Doctor"
                         });
                 });
@@ -7509,14 +7509,14 @@ namespace SmileyMeow.Migrations
                             UserrId = 666,
                             Emaill = "patches@gmail.com",
                             Passwordd = "patches123456",
-                            RoleeId = 666
+                            RoleeId = 7
                         },
                         new
                         {
                             UserrId = 128,
                             Emaill = "anastacia@gmail.com",
                             Passwordd = "anastacia123456",
-                            RoleeId = 666
+                            RoleeId = 7
                         });
                 });
 
