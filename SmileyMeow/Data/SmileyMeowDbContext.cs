@@ -226,6 +226,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Rolee>().HasData(
+            new Rolee { RoleeId = 5, RName = "Candidate" },
             new Rolee { RoleeId = 6, RName = "PetParent" },
             new Rolee { RoleeId = 7, RName = "Doctor" }
         );

@@ -8,7 +8,7 @@ namespace SmileyMeow.Helpers
         {
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
             mail.To.Add(toEmail);
-            mail.From = new System.Net.Mail.MailAddress("smileymeowconfirmationhost@hotmail.com");
+            mail.From = new System.Net.Mail.MailAddress("smileymeowconfirmationhost@outlook.com");
             mail.Subject = "SmileyMeow Account Activation";
             mail.SubjectEncoding = System.Text.Encoding.UTF8;
 
@@ -28,7 +28,7 @@ namespace SmileyMeow.Helpers
             client.Host = "smtp.office365.com";
             client.Port = 587;
             client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential("smileymeowconfirmationhost@hotmail.com", "smileymeow123456");
+            client.Credentials = new System.Net.NetworkCredential("smileymeowconfirmationhost@outlook.com", "smileymeow123456");
             client.EnableSsl = true;
             //client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network; 
             

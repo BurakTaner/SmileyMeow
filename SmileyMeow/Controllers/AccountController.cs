@@ -37,7 +37,7 @@ namespace SmileyMeow.Controllers
             {
                 ClaimsIdentity identityy = null;
                 bool isAuthenticated = false;
-                Userr  registeredUser = await _context.Userrs.Include(k => k.Rolee).FirstOrDefaultAsync(m => m.Emaill == userLogin.Emaill && m.Passwordd == userLogin.Passwordd);
+                Userr registeredUser = await _context.Userrs.Include(k => k.Rolee).FirstOrDefaultAsync(m => m.Emaill == userLogin.Emaill && m.Passwordd == userLogin.Passwordd);
 
                 if (registeredUser == null)
                 {
@@ -75,14 +75,15 @@ namespace SmileyMeow.Controllers
                     }
                     else if (registeredUser.Rolee.RName == "PetParent")
                     {
-                        PetParent parent = await _context.PetParents.FirstOrDefaultAsync(a => a.UserId == registeredUser.UserrId);
+                        // when user tries to go into profile, create a profile for they.
+                        // PetParent parent = await _context.PetParents.FirstOrDefaultAsync(a => a.UserId == registeredUser.UserrId);
                         
-                        if (parent is null)
-                        {
-                            PetParent createParent = new();
-                            createParent.Userr = registeredUser;
-                            // _context.PetParents
-                        }
+                        // if (parent is null)
+                        // {
+                        //     PetParent createParent = new();
+                        //     createParent.Userr = registeredUser;
+                        //     // _context.PetParents
+                        // }
 
                         return RedirectToAction("", "");
                     }
@@ -112,7 +113,7 @@ namespace SmileyMeow.Controllers
             string emaill = Criyptoo.Decrypted(kkk);
 
             Userr userr = await _context.Userrs.FirstOrDefaultAsync(a => a.Emaill == emaill);
-            userr.RoleeId = 2;
+            userr.RoleeId = 6;
             _context.Userrs.Update(userr);
             await _context.SaveChangesAsync();
 

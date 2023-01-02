@@ -18,8 +18,8 @@ public class RegisterViewModel
     public string Passwordd { get; set; }
     [Display(Name = "ConfirmPassword"),Compare("Passwordd", ErrorMessage = "Password and {0} needs to be same"), DataType(DataType.Password) ]
     public string ConfirmPasswordd { get; set; }
-    [Display(Name = "Role"), Required(ErrorMessage = "{0} must be filled"), Range(6,7, ErrorMessage = "Out of range")]
-    public int RoleeId { get ; set ; } = 6;
+    [Display(Name = "Role"), Required(ErrorMessage = "{0} must be filled"), Range(5,7, ErrorMessage = "Out of range")]
+    public int RoleeId { get ; set ; } = 5;
     public Rolee Rolee { get ; set ; }
     public List<PetParent> PetParent { get; set; }
     public List<Doctor> Doctor { get; set; }

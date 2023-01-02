@@ -64,7 +64,8 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="~/Images/person-image.png" alt="an anonymous person image" class="person-img">
                     </button>
-                 @if (Convert.ToInt32(User.FindFirst(a => a.Type == System.Security.Claims.ClaimTypes.Sid)?.Value) != 0)
+                 @if (Convert.ToInt32(User.FindFirst(a => a.Type == System.Security.Claims.ClaimTypes.Sid)?.Value) != 0 && 
+                 (User.FindFirst(a => a.Type == System.Security.Claims.ClaimTypes.Role)?.Value) != "Candidate")
             {
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" asp-controller="Account" asp-action="UnderMaintenance">Profile</a>
