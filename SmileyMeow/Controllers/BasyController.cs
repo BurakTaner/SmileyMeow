@@ -14,8 +14,8 @@ public class BasyController : Controller
         
         return View();
     }
-    public int? ReturnLoggedUserId() {
-        int? loggedUserId = Convert.ToInt32(User.FindFirst(a => a.Type == ClaimTypes.Sid)?.Value);
+    public int ReturnLoggedUserId() {
+        int loggedUserId = Convert.ToInt32(User.FindFirst(a => a.Type == ClaimTypes.Sid)?.Value);
         return loggedUserId;
     }
 
