@@ -54,6 +54,7 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<District> Districts  { get; set; }
+    public DbSet<HumanGender> HumanGenders  { get; set; }
 
     //add configuration directory later
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -93,6 +94,11 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Pronoun>()
                         .HasKey(p => p.ProunounId);
 
+        modelBuilder.Entity<PetParent>()
+                        .HasOne(a => a.HumanGender)
+                        .WithMany(b => b.PetParent)
+                        .HasForeignKey(a => a.HumanGenderId);
+                        
         modelBuilder.Entity<PetParent>()
                         .HasOne(a => a.Pronoun)
                         .WithMany(b => b.PetParents)
