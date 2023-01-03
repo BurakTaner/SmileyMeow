@@ -38,7 +38,7 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<PetGender> PetGenders { get; set; }
     public DbSet<Specie> Species { get; set; }
     public DbSet<Pet> Pets { get; set; }
-    public DbSet<School> School { get; set; }
+    public DbSet<School> Schools { get; set; }
     public DbSet<SchoolType> SchoolType { get; set; }
     public DbSet<Rolee> Rolees { get; set; }
     public DbSet<Userr> Userrs { get; set; }
