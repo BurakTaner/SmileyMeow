@@ -106,25 +106,9 @@ public class AppointmentsController : BasyController
         appointmentViewModell.PatientInformation = patientInformation;
         appointmentViewModell.NotUsersAppointment = notUserAppointment;
         appointmentViewModell.DoctorList = await _context.Doctors.Include(a => a.DoctorTitle).ToListAsync();
-        if (selectedFormInputDTO.CityId == 0)
-        {
-            appointmentViewModell.CityList = null;
-        }
-        else
-        {
-            appointmentViewModell.CityList = await _context.Cities.ToListAsync();
-        }
-        appointmentViewModell.SelectedFormInputDTO = selectedFormInputDTO;
-        if (selectedFormInputDTO.CityId != 0)
-        {
-            appointmentViewModell.DistrictList = await _context.Districts.Where(a => a.CityId == selectedFormInputDTO.CityId).ToListAsync();
-
-        }
-        else {
-            appointmentViewModell.DistrictList = null;
-        }
-        // appointmentViewModell.SelectedCity = selectedCity;
-        // appointmentViewModell.District =  _context.Districts.ToListAsync();
+        appointmentViewModell.CityList = (selectedFormInputDTO.CityId == 0 ? null : appointmentViewModell.CityList = await _context.Cities.ToListAsync());
+        appointmentViewModell.SelectedFormInputDTO = selectedFormInputDTO;        
+        appointmentViewModell.DistrictList = await _context.Districts.Where(a => a.CityId == selectedFormInputDTO.CityId).ToListAsync();
         return appointmentViewModell;
     }
     private async Task<AppointmentViewModel> ReturnNotUserAppointmentEmpty()
