@@ -1858,7 +1858,7 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "pets",
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
-                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 3, 18, 36, 21, 763, DateTimeKind.Local).AddTicks(6294), true, "Sif", 6, 6 });
+                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 4, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(1794), true, "Sif", 6, 6 });
 
             migrationBuilder.InsertData(
                 table: "schools",
@@ -1932,12 +1932,12 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 2, 18, 36, 21, 763, DateTimeKind.Local).AddTicks(7101), 6, 6, 6, 6, new DateTime(2023, 1, 3, 18, 36, 21, 763, DateTimeKind.Local).AddTicks(7097) });
+                values: new object[] { 6, new DateTime(2023, 2, 3, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(2657), 6, 6, 6, 6, new DateTime(2023, 1, 4, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(2654) });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 24, 18, 36, 21, 763, DateTimeKind.Local).AddTicks(7418), 8, 9, 9, 9, new DateTime(2022, 11, 24, 18, 36, 21, 763, DateTimeKind.Local).AddTicks(7423) });
+                values: new object[] { 6, new DateTime(2022, 12, 25, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(2955), 8, 9, 9, 9, new DateTime(2022, 11, 25, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(2960) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",

@@ -11,4 +11,5 @@ public class District : IDistrict
     public string DName { get; set; }
     public int CityId { get; set; }
     public City City { get; set; }
+    public List<Address> Addresses { get; set; }
 }

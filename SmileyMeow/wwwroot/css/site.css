@@ -164,7 +164,7 @@
 }
 
 .collapse,
-navbar-collapse {
+.navbar-collapse {
   margin: 0 15px 0 50px;
 }
 
@@ -246,3 +246,4 @@ navbar-collapse {
   font-size: 15px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+

@@ -11,4 +11,5 @@ public interface IDistrict
     public string DName { get; set; }
     int CityId { get; set; }
     public City City { get; set; }
+    public List<Address> Addresses { get; set; }
 }

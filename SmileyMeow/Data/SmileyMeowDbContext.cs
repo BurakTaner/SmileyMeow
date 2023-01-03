@@ -166,6 +166,12 @@ public class SmileyMeowDbContext : DbContext
                             .WithOne(b => b.NotUserParent)
                             .HasForeignKey<NotUserParent>(a => a.AddressId);
 
+        modelBuilder.Entity<Address>()
+                            .HasOne(a => a.District)
+                            .WithMany(b => b.Addresses)
+                            .HasForeignKey(a => a.DistrictId);
+
+        
         modelBuilder.Entity<PetParent>()
                             .HasOne(a => a.Address)
                             .WithOne(b => b.PetParent)
