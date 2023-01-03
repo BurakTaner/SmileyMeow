@@ -24,5 +24,5 @@ public class NotUserAppointmentViewModel
     public List<City> CityList { get; set; }
     public List<District> DistrictList { get; set; }
     public PatientInformation PatientInformation { get; set; }
-    public SelectedFormInputNotUserDTO SelectedFormInputNotUserDTO { get; set; }
+    public SelectedFormInputCityDTO SelectedFormInputCityDTO { get; set; }
 }

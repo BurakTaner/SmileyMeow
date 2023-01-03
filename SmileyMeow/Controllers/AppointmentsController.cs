@@ -76,7 +76,7 @@ public class AppointmentsController : BasyController
      [Bind("Name", "DOB", "PetGenderId", "SpecieId", "BreedId")] NotUserParentsPet notUserParentsPet,
      [Bind("EatingStatusId", "PeeingStatusId", "EnergyStatusId", "InformationAboutPatient", "IlnesssesInThePast")] PatientInformation patientInformation,
      [Bind("DoctorId", "AppointmentDate")] NotUserAppointment notUserAppointment,
-     [Bind("DistrictId", "AddressDetails")] Address address, [Bind("CityId")] SelectedFormInputNotUserDTO selectedFormInputNotUserDTO)
+     [Bind("DistrictId", "AddressDetails")] Address address, [Bind("CityId")] SelectedFormInputCityDTO selectedFormInputNotUserDTO)
     {
         // if (ModelState.IsValid)
 
@@ -159,7 +159,7 @@ public class AppointmentsController : BasyController
         await _context.SaveChangesAsync();
     }
 
-    private async Task<NotUserAppointmentViewModel> MakeNotUserViewModelAgain(NotUserParent notUserParent, NotUserParentsPet notUserParentsPet, PatientInformation patientInformation, NotUserAppointment notUserAppointment, Address address, SelectedFormInputNotUserDTO selectedFormInputNotUserDTO)
+    private async Task<NotUserAppointmentViewModel> MakeNotUserViewModelAgain(NotUserParent notUserParent, NotUserParentsPet notUserParentsPet, PatientInformation patientInformation, NotUserAppointment notUserAppointment, Address address, SelectedFormInputCityDTO selectedFormInputNotUserDTO)
     {
         NotUserAppointmentViewModel appointmentViewModell = new();
 
@@ -174,7 +174,7 @@ public class AppointmentsController : BasyController
         appointmentViewModell.NotUsersAppointment = notUserAppointment;
         appointmentViewModell.DoctorList = await _context.Doctors.Include(a => a.DoctorTitle).ToListAsync();
         appointmentViewModell.CityList = (selectedFormInputNotUserDTO.CityId == 0 ? null : appointmentViewModell.CityList = await _context.Cities.ToListAsync());
-        appointmentViewModell.SelectedFormInputNotUserDTO = selectedFormInputNotUserDTO;
+        appointmentViewModell.SelectedFormInputCityDTO = selectedFormInputNotUserDTO;
         appointmentViewModell.DistrictList = await _context.Districts.Where(a => a.CityId == selectedFormInputNotUserDTO.CityId).ToListAsync();
         return appointmentViewModell;
     }
@@ -195,7 +195,7 @@ public class AppointmentsController : BasyController
         appointmentViewModel.Address = new();
         appointmentViewModel.PatientInformation = new();
         appointmentViewModel.NotUsersAppointment = new();
-        appointmentViewModel.SelectedFormInputNotUserDTO = new();
+        appointmentViewModel.SelectedFormInputCityDTO = new();
 
         return appointmentViewModel;
     }
