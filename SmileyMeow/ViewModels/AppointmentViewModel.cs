@@ -14,7 +14,6 @@ public class AppointmentViewModel
 {
     public NotUserParentsPet NotUserParentsPet { get; set; }
     public NotUserParent NotUserParent { get; set; }
-    public PatientInformation PatientInformation { get; set; }
     public NotUserAppointment NotUsersAppointment { get; set; }
     public Address Address { get; set; }
     public List<Doctor> DoctorList { get; set; }
@@ -24,5 +23,6 @@ public class AppointmentViewModel
     public List<StatusLevel> StatusLevelList { get; set; }
     public List<City> CityList { get; set; }
     public List<District> DistrictList { get; set; }
+    public PatientInformation PatientInformation { get; set; }
     public SelectedFormInputDTO SelectedFormInputDTO { get; set; }
 }
