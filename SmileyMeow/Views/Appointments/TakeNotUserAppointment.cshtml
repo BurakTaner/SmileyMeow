@@ -57,7 +57,7 @@
           <select name="CityId" id="select-city-not-null" class="formbold-form-input">
             @foreach (City city in Model.CityList)
             {
-              <option selected="@(city.CityId == Model.SelectedFormInputNotUserDTO.CityId)" value="@city.CityId">
+              <option selected="@(city.CityId == Model.SelectedFormInputCityDTO.CityId)" value="@city.CityId">
                 @city.CName
               </option>
             }
