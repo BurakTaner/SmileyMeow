@@ -75,7 +75,7 @@
                  (User.FindFirst(a => a.Type == System.Security.Claims.ClaimTypes.Role)?.Value) != "Candidate")
             {
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" asp-controller="Account" asp-action="UnderMaintenance">Profile</a>
+                        <a class="dropdown-item" asp-controller="" asp-action="ProfileSwitcher">Profile</a>
                     </div>
             }
             else {  
