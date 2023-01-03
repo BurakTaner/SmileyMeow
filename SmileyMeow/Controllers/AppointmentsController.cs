@@ -31,7 +31,7 @@ public class AppointmentsController : BasyController
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> TakeUserAppointment([Bind("DoctorId", "AppointmentDate")] Appointment appointment,
-    [Bind("SelectedPet")] SelectedFormInputUserDTO selectedFormInputDTO,
+    [Bind("SelectedPet")] SelectedFormInputUserDTO selectedFormInputNotUserDTO,
     [Bind("EatingStatusId", "PeeingStatusId", "EnergyStatusId", "InformationAboutPatient", "IlnesssesInThePast")] PatientInformation patientInformation)
     {
         int loggedUser = ReturnLoggedUserId();
@@ -41,30 +41,30 @@ public class AppointmentsController : BasyController
             List<Appointment> doctorAppointments = await GetUserAppointments(appointment);
             if (doctorAppointments.Count is 0)
             {
-                await InsertToUserAppointments(appointment, selectedFormInputDTO, patientInformation, loggedUser);
+                await InsertToUserAppointments(appointment, selectedFormInputNotUserDTO, patientInformation, loggedUser);
                 return RedirectToAction("", "");
             }
         }
 
-        UserAppointmentViewModel userAppointmentViewModel = await ReturnUserViewModelAgain(appointment, selectedFormInputDTO, patientInformation, loggedUser);
+        UserAppointmentViewModel userAppointmentViewModel = await MakeUserViewModelAgain(appointment, selectedFormInputNotUserDTO, patientInformation, loggedUser);
         return View(userAppointmentViewModel);
     }
 
-    private async Task<UserAppointmentViewModel> ReturnUserViewModelAgain(Appointment appointment, SelectedFormInputUserDTO selectedFormInputDTO, PatientInformation patientInformation, int loggedUser)
+    private async Task<UserAppointmentViewModel> MakeUserViewModelAgain(Appointment appointment, SelectedFormInputUserDTO selectedFormInputNotUserDTO, PatientInformation patientInformation, int loggedUser)
     {
         UserAppointmentViewModel userAppointmentViewModel = new();
         await AddAlreadyAddedPetsToViewModel(loggedUser, userAppointmentViewModel);
         userAppointmentViewModel.Appointment = appointment;
         userAppointmentViewModel.DoctorList = await _context.Doctors.Include(a => a.DoctorTitle).ToListAsync();
         userAppointmentViewModel.PatientInformation = patientInformation;
-        userAppointmentViewModel.SelectedFormInputUserDTO = selectedFormInputDTO;
+        userAppointmentViewModel.SelectedFormInputUserDTO = selectedFormInputNotUserDTO;
         userAppointmentViewModel.StatusLevelList = await _context.StatusLevels.ToListAsync();
         return userAppointmentViewModel;
     }
 
     public async Task<IActionResult> TakeNotUserAppointment()
     {
-        AppointmentViewModel appointmentViewModel = await ReturnNotUserAppointmentEmpty();
+        NotUserAppointmentViewModel appointmentViewModel = await ReturnNotUserAppointmentEmpty();
         return View(appointmentViewModel);
     }
 
@@ -76,19 +76,19 @@ public class AppointmentsController : BasyController
      [Bind("Name", "DOB", "PetGenderId", "SpecieId", "BreedId")] NotUserParentsPet notUserParentsPet,
      [Bind("EatingStatusId", "PeeingStatusId", "EnergyStatusId", "InformationAboutPatient", "IlnesssesInThePast")] PatientInformation patientInformation,
      [Bind("DoctorId", "AppointmentDate")] NotUserAppointment notUserAppointment,
-     [Bind("DistrictId", "AddressDetails")] Address address, [Bind("CityId")] SelectedFormInputDTO selectedFormInputDTO)
+     [Bind("DistrictId", "AddressDetails")] Address address, [Bind("CityId")] SelectedFormInputNotUserDTO selectedFormInputNotUserDTO)
     {
         // if (ModelState.IsValid)
 
         if (notUserAppointment.AppointmentDate.Minute != 00 && notUserAppointment.AppointmentDate.Minute != 30)
         {
-            AppointmentViewModel appointmentViewModell = await MakeViewModelAgain(
+            NotUserAppointmentViewModel appointmentViewModell = await MakeNotUserViewModelAgain(
             notUserParent, notUserParentsPet, patientInformation,
-            notUserAppointment, address, selectedFormInputDTO);
+            notUserAppointment, address, selectedFormInputNotUserDTO);
 
             return View(appointmentViewModell);
         }
-        // List<NotUserAppointment> doctorAppointments = await GetAppointments(notUserAppointment);
+        // List<NotUserAppointment> doctorAppointments = await GetNotUserAppointments(notUserAppointment);
 
         // if (doctorAppointments.Count == 0)
         // {
@@ -99,17 +99,17 @@ public class AppointmentsController : BasyController
         // foreach (NotUserAppointment selectedDoctorAppointments in doctorAppointments)
         // {
         //     if(selectedDoctorAppointments.AppointmentDate.ToShortTimeString() == notUserAppointment.AppointmentDate.AddMinutes(20).ToShortTimeString()
-        //      || selectedDoctorAppointments.AppointmentDate.AddMinutes(-20).ToShortTimeString() == notUserAppointment.AppointmentDate)
+        //      || selectedDoctorAppointments.AppointmentDate.AddMinutes(-20).ToShortTimeString() == notUserAppointment.AppointmentDate.ToShortTimeString())
         // }
 
 
 
-        AppointmentViewModel appointmentViewModel = await MakeViewModelAgain(notUserParent, notUserParentsPet, patientInformation, notUserAppointment, address, selectedFormInputDTO);
+        NotUserAppointmentViewModel appointmentViewModel = await MakeNotUserViewModelAgain(notUserParent, notUserParentsPet, patientInformation, notUserAppointment, address, selectedFormInputNotUserDTO);
 
         return View(appointmentViewModel);
     }
 
-    private async Task<List<NotUserAppointment>> GetAppointments(NotUserAppointment notUserAppointment)
+    private async Task<List<NotUserAppointment>> GetNotUserAppointments(NotUserAppointment notUserAppointment)
     {
         return await _context.NotUserAppointments
         .Where(a => a.DoctorId == notUserAppointment.DoctorId &&
@@ -146,12 +146,12 @@ public class AppointmentsController : BasyController
         await _context.SaveChangesAsync();
     }
 
-    private async Task InsertToUserAppointments(Appointment appointment, SelectedFormInputUserDTO selectedFormInputDTO, PatientInformation patientInformation, int loggedUser)
+    private async Task InsertToUserAppointments(Appointment appointment, SelectedFormInputUserDTO selectedFormInputNotUserDTO, PatientInformation patientInformation, int loggedUser)
     {
         int loggedUsersParentAccountId = await _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.PetParentId).FirstOrDefaultAsync();
         PetnPerson joinTable = new();
         joinTable.PetParentId = loggedUsersParentAccountId;
-        joinTable.AnimalId = selectedFormInputDTO.SelectedPet;
+        joinTable.AnimalId = selectedFormInputNotUserDTO.SelectedPet;
         appointment.AppointmentStatussId = 6;
         appointment.PatientInformation = patientInformation;
         appointment.PetnPersonId = joinTable.PetParentId;
@@ -159,9 +159,9 @@ public class AppointmentsController : BasyController
         await _context.SaveChangesAsync();
     }
 
-    private async Task<AppointmentViewModel> MakeViewModelAgain(NotUserParent notUserParent, NotUserParentsPet notUserParentsPet, PatientInformation patientInformation, NotUserAppointment notUserAppointment, Address address, SelectedFormInputDTO selectedFormInputDTO)
+    private async Task<NotUserAppointmentViewModel> MakeNotUserViewModelAgain(NotUserParent notUserParent, NotUserParentsPet notUserParentsPet, PatientInformation patientInformation, NotUserAppointment notUserAppointment, Address address, SelectedFormInputNotUserDTO selectedFormInputNotUserDTO)
     {
-        AppointmentViewModel appointmentViewModell = new();
+        NotUserAppointmentViewModel appointmentViewModell = new();
 
         appointmentViewModell.NotUserParent = notUserParent;
         appointmentViewModell.NotUserParentsPet = notUserParentsPet;
@@ -173,14 +173,14 @@ public class AppointmentsController : BasyController
         appointmentViewModell.PatientInformation = patientInformation;
         appointmentViewModell.NotUsersAppointment = notUserAppointment;
         appointmentViewModell.DoctorList = await _context.Doctors.Include(a => a.DoctorTitle).ToListAsync();
-        appointmentViewModell.CityList = (selectedFormInputDTO.CityId == 0 ? null : appointmentViewModell.CityList = await _context.Cities.ToListAsync());
-        appointmentViewModell.SelectedFormInputDTO = selectedFormInputDTO;
-        appointmentViewModell.DistrictList = await _context.Districts.Where(a => a.CityId == selectedFormInputDTO.CityId).ToListAsync();
+        appointmentViewModell.CityList = (selectedFormInputNotUserDTO.CityId == 0 ? null : appointmentViewModell.CityList = await _context.Cities.ToListAsync());
+        appointmentViewModell.SelectedFormInputNotUserDTO = selectedFormInputNotUserDTO;
+        appointmentViewModell.DistrictList = await _context.Districts.Where(a => a.CityId == selectedFormInputNotUserDTO.CityId).ToListAsync();
         return appointmentViewModell;
     }
-    private async Task<AppointmentViewModel> ReturnNotUserAppointmentEmpty()
+    private async Task<NotUserAppointmentViewModel> ReturnNotUserAppointmentEmpty()
     {
-        AppointmentViewModel appointmentViewModel = new();
+        NotUserAppointmentViewModel appointmentViewModel = new();
 
         appointmentViewModel.DoctorList = await _context.Doctors
         .Include(a => a.DoctorTitle)
@@ -195,7 +195,7 @@ public class AppointmentsController : BasyController
         appointmentViewModel.Address = new();
         appointmentViewModel.PatientInformation = new();
         appointmentViewModel.NotUsersAppointment = new();
-        appointmentViewModel.SelectedFormInputDTO = new();
+        appointmentViewModel.SelectedFormInputNotUserDTO = new();
 
         return appointmentViewModel;
     }
