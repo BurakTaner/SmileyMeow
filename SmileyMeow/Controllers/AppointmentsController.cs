@@ -22,9 +22,9 @@ public class AppointmentsController : BasyController
         _logger = logger;
         _context = context;
     }
-    public async Task<IActionResult> TakeUserAppointment()
+    public async Task<IActionResult> TakeUserAppointment(int? selectedPetFromProfile)
     {
-        UserAppointmentViewModel userAppointmentViewModel = await ReturnUserAppointmentEmpty();
+        UserAppointmentViewModel userAppointmentViewModel = await ReturnUserAppointmentEmpty(selectedPetFromProfile);
         return View(userAppointmentViewModel);
     }
 
@@ -199,7 +199,7 @@ public class AppointmentsController : BasyController
 
         return appointmentViewModel;
     }
-    private async Task<UserAppointmentViewModel> ReturnUserAppointmentEmpty()
+    private async Task<UserAppointmentViewModel> ReturnUserAppointmentEmpty(int? selectedPetFromProfile)
     {
         int loggedUser = ReturnLoggedUserId();
 
@@ -211,7 +211,12 @@ public class AppointmentsController : BasyController
         userAppointmentViewModel.StatusLevelList = await _context.StatusLevels.ToListAsync();
         userAppointmentViewModel.PatientInformation = new();
         userAppointmentViewModel.Appointment = new();
+        if (selectedPetFromProfile is not null)
+        {
+            userAppointmentViewModel.SelectedFormInputUserDTO = new();
+            userAppointmentViewModel.SelectedFormInputUserDTO.SelectedPet = (int)selectedPetFromProfile;
 
+        }
         return userAppointmentViewModel;
     }
 

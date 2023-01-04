@@ -35,7 +35,7 @@ public class PetParentController : BasyController
         .Where(a => a.CityId == selectedParentsProfile.PetParent.Address.District.CityId)
         .ToListAsync());
         selectedParentsProfile.selectedFormProfileDTO = new();
-
+        
         return View(selectedParentsProfile);
     }
 
@@ -69,7 +69,15 @@ public class PetParentController : BasyController
         await AddSelectedParentsPetsToViewModel(selectedParentsProfile);
         return View(selectedParentsProfile);
     }
+    // public async Task<IActionResult> Pets() {
 
+    // }
+  
+
+    // End of the views//
+    //--------------------------------------------------------------------------------//
+    // Private methods for views//
+  
     private async Task<Userr> ReturnLoggedParentUserAccount(int loggedUser)
     {
         return await _context.Userrs.FirstOrDefaultAsync(a => a.UserrId == loggedUser);
@@ -80,10 +88,7 @@ public class PetParentController : BasyController
         selectedParentsProfile.HumanGenders = await _context.HumanGenders.ToListAsync();
         selectedParentsProfile.Pronouns = await _context.Pronouns.ToListAsync();
     }
-
-    // End of the views//
-    //--------------------------------------------------------------------------------//
-    // Private methods for views//
+  
     private async Task AddSelectedParentToViewModel(PetParentProfileViewModel selectedParentsProfile)
     {
         selectedParentsProfile.PetParent = await _context.PetParents
