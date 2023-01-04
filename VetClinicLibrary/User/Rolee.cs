@@ -8,5 +8,5 @@ namespace VetClinicLibrary.User;
 public class Rolee : IRolee
 {
     public int RoleeId { get ; set ; }
-    public string Name { get ; set ; }
+    public string RName { get ; set ; }
 }

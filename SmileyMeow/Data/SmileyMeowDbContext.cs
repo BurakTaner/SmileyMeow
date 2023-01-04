@@ -38,7 +38,7 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<PetGender> PetGenders { get; set; }
     public DbSet<Specie> Species { get; set; }
     public DbSet<Pet> Pets { get; set; }
-    public DbSet<School> School { get; set; }
+    public DbSet<School> Schools { get; set; }
     public DbSet<SchoolType> SchoolType { get; set; }
     public DbSet<Rolee> Rolees { get; set; }
     public DbSet<Userr> Userrs { get; set; }
@@ -54,6 +54,7 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<AppointmentStatus> AppointmentStatuses { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<District> Districts  { get; set; }
+    public DbSet<HumanGender> HumanGenders  { get; set; }
 
     //add configuration directory later
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -85,7 +86,7 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<DoctorSchool>()
                     .HasKey(docs => new { docs.DoctorId, docs.SchoolId });
 
-        modelBuilder.Entity<Userr>().Ignore(p => p.PasswordRepeat);
+        modelBuilder.Entity<Userr>().Ignore(p => p.ConfirmPasswordd);
 
         modelBuilder.Entity<DoctorInformation>()
                         .HasKey(di => di.DoctorId);
@@ -93,6 +94,11 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Pronoun>()
                         .HasKey(p => p.ProunounId);
 
+        modelBuilder.Entity<PetParent>()
+                        .HasOne(a => a.HumanGender)
+                        .WithMany(b => b.PetParent)
+                        .HasForeignKey(a => a.HumanGenderId);
+                        
         modelBuilder.Entity<PetParent>()
                         .HasOne(a => a.Pronoun)
                         .WithMany(b => b.PetParents)
@@ -106,10 +112,7 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<PatientInformation>()
                         .HasKey(a => a.PatientInformationId);
 
-        modelBuilder.Entity<Pet>()
-                        .HasOne(a => a.PatientInformation)
-                        .WithOne(c => c.Pet)
-                        .HasForeignKey<Pet>(a => a.PatientInformationId);
+        
 
         modelBuilder.Entity<AppointmentStatus>()
                         .HasKey(a => a.AppointmentStatussId);
@@ -157,17 +160,18 @@ public class SmileyMeowDbContext : DbContext
         
         modelBuilder.Entity<NotUserAppointment>()
                         .HasKey(a => a.AppointmentId);
-        
-        modelBuilder.Entity<NotUserParentsPet>()
-                        .HasOne(a => a.PatientInformation)
-                        .WithOne(b => b.NotUsersParentsPet)
-                        .HasForeignKey<NotUserParentsPet>(c => c.PatientInformationId);
 
         modelBuilder.Entity<NotUserParent>()
                             .HasOne(a => a.Address)
                             .WithOne(b => b.NotUserParent)
                             .HasForeignKey<NotUserParent>(a => a.AddressId);
 
+        modelBuilder.Entity<Address>()
+                            .HasOne(a => a.District)
+                            .WithMany(b => b.Addresses)
+                            .HasForeignKey(a => a.DistrictId);
+
+        
         modelBuilder.Entity<PetParent>()
                             .HasOne(a => a.Address)
                             .WithOne(b => b.PetParent)
@@ -185,9 +189,19 @@ public class SmileyMeowDbContext : DbContext
                         .WithMany(b => b.NotUserAppointments)
                         .HasForeignKey(a => a.NotUserParentnPersonId);
 
+        modelBuilder.Entity<NotUserAppointment>()
+                        .HasOne(a => a.PatientInformation)
+                        .WithOne(b => b.NotUserAppointment)
+                        .HasForeignKey<NotUserAppointment>(a => a.PatientInformationId);
+
+        modelBuilder.Entity<Appointment>()
+                        .HasOne(a => a.PatientInformation)
+                        .WithOne(b => b.Appointment)
+                        .HasForeignKey<Appointment>(a => a.PatientInformationId);
+
         // dummy data
         modelBuilder.Entity<Pet>().HasData(
-            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif", PatientInformationId = 6, AdoptInfoId = 6 }
+            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif", AdoptInfoId = 6 }
         );
 
         modelBuilder.Entity<PetGender>().HasData(
@@ -218,14 +232,15 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Userr>().HasData(
-            new Userr { UserrId = 6, Email = "artorias@gmail.com", Password = "sif123456", RoleeId = 6 },
-            new Userr { UserrId = 666, Email = "patches@gmail.com", Password = "patches123456", RoleeId = 666 },
-            new Userr { UserrId = 128, Email = "anastacia@gmail.com", Password = "anastacia123456", RoleeId = 666 }
+            new Userr { UserrId = 6, Emaill = "artorias@gmail.com", Passwordd = "sif123456", RoleeId = 6 },
+            new Userr { UserrId = 666, Emaill = "patches@gmail.com", Passwordd = "patches123456", RoleeId = 7 },
+            new Userr { UserrId = 128, Emaill = "anastacia@gmail.com", Passwordd = "anastacia123456", RoleeId = 7 }
         );
 
         modelBuilder.Entity<Rolee>().HasData(
-            new Rolee { RoleeId = 6, Name = "PetParent" },
-            new Rolee { RoleeId = 666, Name = "Doctor" }
+            new Rolee { RoleeId = 5, RName = "Candidate" },
+            new Rolee { RoleeId = 6, RName = "PetParent" },
+            new Rolee { RoleeId = 7, RName = "Doctor" }
         );
 
         modelBuilder.Entity<Doctor>().HasData(
@@ -265,7 +280,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Appointment>().HasData(
-            new Appointment { AppointmentId = 6, PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6}
+            new Appointment { AppointmentId = 6, PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6, PatientInformationId = 6}
         );
 
         modelBuilder.Entity<DoctorTitle>().HasData(
@@ -308,7 +323,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<NotUserParentsPet>().HasData(
-            new NotUserParentsPet {Name = "Torrent", DOB = Convert.ToDateTime("2011-12-10"), AnimalId = 9, PatientInformationId = 9, BreedId = 9, PetGenderId = 9, SpecieId = 9}
+            new NotUserParentsPet {Name = "Torrent", DOB = Convert.ToDateTime("2011-12-10"), AnimalId = 9, BreedId = 9, PetGenderId = 9, SpecieId = 9}
         );
 
         modelBuilder.Entity<NotUserParentnPet>().HasData(
@@ -316,7 +331,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<NotUserAppointment>().HasData(
-            new NotUserAppointment { AppointmentId = 6 ,NotUserParentnPersonId = 9, DoctorId = 9, AppointmentStatussId = 8, AppointmentDate = DateTime.Now.AddDays(-10), TimeCreated = DateTime.Now.AddDays(-40)}
+            new NotUserAppointment { AppointmentId = 6 ,NotUserParentnPersonId = 9, DoctorId = 9, AppointmentStatussId = 8, AppointmentDate = DateTime.Now.AddDays(-10), TimeCreated = DateTime.Now.AddDays(-40), PatientInformationId = 9}
         );
 
         modelBuilder.Entity<City>().HasData(

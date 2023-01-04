@@ -5,11 +5,12 @@
     const selectCityelem = $('#select-city')[0];
     const selectCityNotNull = $('#select-city-not-null');
     const secondSelectNotNull = $('#select-district-not-null')[0];
-
+    const registerBtn = $('#register-btn')[0];
+    
     fetchCities().then(
         cityList => {
             let firstOption = document.createElement('option');
-            firstOption.value = null;
+            firstOption.value = 0;
             firstOption.text = "Please select a city...";
             selectCity[0].add(firstOption);
             cityList.forEach(city => {
@@ -27,7 +28,7 @@
         let selectedCity = $(this).val();
         fetchDistricts(selectedCity).then(districtList => {
             let firstOption = document.createElement('option');
-            firstOption.value = null;
+            firstOption.value = 0;
             firstOption.text = "Please select a district...";
             secondSelect.add(firstOption);
             districtList.forEach(district => {
@@ -44,7 +45,7 @@
         let selectedCity = $(this).val();
         fetchDistricts(selectedCity).then(districtList => {
             let firstOption = document.createElement('option');
-            firstOption.value = null;
+            firstOption.value = 0;
             firstOption.text = "Please select a district...";
             secondSelectNotNull.add(firstOption);
             districtList.forEach(district => {
@@ -56,6 +57,15 @@
         });
     });
 
+
+    $('#confirmation-box').change(function() {
+        if($(this).prop('checked')) {
+            registerBtn.disabled = false;
+        }
+        else {
+            registerBtn.disabled = true;
+        }
+    })
 
 });
 

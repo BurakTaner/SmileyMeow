@@ -10,11 +10,10 @@ namespace VetClinicLibrary.User;
 public class Userr : IUserr
 {
     public int UserrId { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    
-    [Compare("Password")]
-    public string PasswordRepeat { get; set; }
+    public string Emaill { get; set; }
+    public string Passwordd { get; set; }
+    [Compare("Passwordd")]
+    public string ConfirmPasswordd { get; set; }
     public int RoleeId { get ; set ; }
     public Rolee Rolee { get ; set ; }
 

@@ -1,3 +1,5 @@
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmileyMeow.Data;
@@ -6,7 +8,7 @@ using VetClinicLibrary.Person;
 using VetClinicLibrary.Schooll;
 
 namespace SmileyMeow.Controllers;
-public class DoctorsController : Controller
+public class DoctorsController : BasyController
 {
     private readonly ILogger<DoctorsController> _logger;
     private readonly SmileyMeowDbContext _context;

@@ -1,4 +1,4 @@
-@model AppointmentViewModel
+@model NotUserAppointmentViewModel
 
 @{
   ViewData["Title"] = "TakeAppointment";
@@ -51,43 +51,34 @@
 
         <strong class="block-level-info mb-2"> Address Information</strong>
 
-        @if (Model.SelectedFormInputDTO.CityId != null)
+        @if (Model.CityList is not null)
         {
           <label for="select-city-not-null" class="formbold-form-label">Select a city and district...*</label>
           <select name="CityId" id="select-city-not-null" class="formbold-form-input">
             @foreach (City city in Model.CityList)
             {
-              <option selected="@(city.CityId == Model.SelectedFormInputDTO.CityId)" value="@city.CityId">
+              <option selected="@(city.CityId == Model.SelectedFormInputCityDTO.CityId)" value="@city.CityId">
                 @city.CName
               </option>
             }
           </select>
-
-          @if (Model.Address.DistrictId != null)
-          {
-              <select name="DistrictId" id="select-district-not-null" class="formbold-form-input select-district-not-null mt-2">
+          <select name="DistrictId" id="select-district-not-null"
+          class="formbold-form-input select-district-not-null mt-2">
+            <option value="0" selected>Select a district...</option>
             @foreach (District district in Model.DistrictList)
             {
-                <option selected="@(district.DistrictId == Model.Address.DistrictId)" value="@district.DistrictId">
+              <option selected="@(district.DistrictId == Model.Address.DistrictId)" value="@district.DistrictId">
                 @district.DName
-                </option>
+              </option>
             }
-              </select>
-
-          }
-
-          else {
-          // Fetch from node
-          <select name="DistrictId" id="select-district" class="formbold-form-input select-district mt-2">
           </select>
-          
-          }
 
         }
 
-        else {
+        else
+        {
 
-          // Fetch from node
+        // Fetch from node
           <label for="select-city" class="formbold-form-label">Select a city and district...*</label>
           <select name="CityId" id="select-city" class="formbold-form-input select-city mt-2">
           </select>
@@ -98,17 +89,17 @@
         }
 
 
-@* 
-        <label for="select-city" class="formbold-form-label">Select a city and district...*</label>
-        <select name="CityId" id="select-city" class="formbold-form-input">
+        @*
+          <label for="select-city" class="formbold-form-label">Select a city and district...*</label>
+          <select name="CityId" id="select-city" class="formbold-form-input">
           @foreach (City city in Model.CityList)
           {
-            <option selected="@(city.CityId == Model.SelectedCity)" value="@city.CityId">
-              @city.CName
-            </option>
+          <option selected="@(city.CityId == Model.SelectedCity)" value="@city.CityId">
+          @city.CName
+          </option>
           }
-        </select> *@
-        
+          </select> *@
+
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-check-label mt-4">Address Details*</label>
           <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"
@@ -141,7 +132,7 @@
             <div class="formbold-mb-5">
               <label for="DOB" class="formbold-form-label">Date of Birth *</label>
               <input type="date" name="DOB" id="" class="formbold-form-input"
-                value='@Model.NotUserParentsPet.DOB.Year != 1 ?@Model.NotUserParentsPet.DOB.ToString("yyyy-MM-dd"):""' />
+                value='@(Model.NotUserParentsPet.DOB.Year != 1 ? Model.NotUserParentsPet.DOB.ToString("yyyy-MM-dd"):"")' />
             </div>
           </div>
         </div>
@@ -190,8 +181,9 @@
         @foreach (StatusLevel eatingStatus in Model.StatusLevelList)
         {
           <div class="form-check">
-            <input class="form-check-input" checked="@(eatingStatus.StatusLevelId == Model.PatientInformation.EatingStatusId)"  type="radio" value="@eatingStatus.StatusLevelId" name="EatingStatusId"
-            id="flexCheckDefault eating">
+            <input class="form-check-input"
+            checked="@(eatingStatus.StatusLevelId == Model.PatientInformation.EatingStatusId)" type="radio"
+            value="@eatingStatus.StatusLevelId" name="EatingStatusId" id="flexCheckDefault eating">
             <label class="form-check-label" for="flexCheckDefault">
               @eatingStatus.Name
             </label>
@@ -205,8 +197,9 @@
         @foreach (StatusLevel energyStatus in Model.StatusLevelList)
         {
           <div class="form-check">
-            <input class="form-check-input" type="radio" checked="@(energyStatus.StatusLevelId == Model.PatientInformation.EnergyStatusId)" value="@energyStatus.StatusLevelId" name="EnergyStatusId"
-            id="flexCheckDefault energy">
+            <input class="form-check-input" type="radio"
+            checked="@(energyStatus.StatusLevelId == Model.PatientInformation.EnergyStatusId)"
+            value="@energyStatus.StatusLevelId" name="EnergyStatusId" id="flexCheckDefault energy">
             <label class="form-check-label" for="flexCheckDefault">
               @energyStatus.Name
             </label>
@@ -219,7 +212,8 @@
         @foreach (StatusLevel peeingStatus in Model.StatusLevelList)
         {
           <div class="form-check">
-            <input class="form-check-input" type="radio" value="@peeingStatus.StatusLevelId" checked="@(peeingStatus.StatusLevelId == Model.PatientInformation.PeeingStatusId)" name="PeeingStatusId"
+            <input class="form-check-input" type="radio" value="@peeingStatus.StatusLevelId"
+            checked="@(peeingStatus.StatusLevelId == Model.PatientInformation.PeeingStatusId)" name="PeeingStatusId"
             id="flexCheckDefault peeing">
             <label class="form-check-label" for="flexCheckDefault">
               @peeingStatus.Name
@@ -251,7 +245,7 @@
           <div class="formbold-mb-5">
             <label for="DOB" class="formbold-form-label">Appointment Date *</label>
             <input type="datetime-local" name="AppointmentDate" id="" class="formbold-form-input"
-              value='@Model.NotUsersAppointment.AppointmentDate.Year != 1 ?@Model.NotUsersAppointment.AppointmentDate.ToString("yyyy-MM-dd"):""' />
+              value='@(Model.NotUsersAppointment.AppointmentDate.Year != 1 ?Model.NotUsersAppointment.AppointmentDate.ToString("yyyy-MM-ddTHH:mm"):"")' />
           </div>
         </div>
 

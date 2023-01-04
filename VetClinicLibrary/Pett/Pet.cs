@@ -22,11 +22,8 @@ public class Pet : IPet
     public Specie Specie { get; set; }
     public int BreedId { get; set; }
     public Breed Breed { get; set; }
-    public PatientInformation Patientİnformation { get; set; }
-    public int AdoptInfoId { get; set; }
-    public AdoptInfo AdoptionInfo { get; set; }
+    public int? AdoptInfoId { get; set; }
     public bool IsAdoptable { get; set; }
-    public int PatientInformationId { get; set; }
-    public PatientInformation PatientInformation { get; set; }
+    public AdoptInfo AdoptionInfo { get; set; }
     public List<PetnPerson> PetnPersonn { get; set; }
 }

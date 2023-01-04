@@ -1,14 +1,18 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmileyMeow.Data;
 using SmileyMeow.DTOs;
 using SmileyMeow.ViewModels;
+using VetClinicLibrary.Appointmentt;
 using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.NotUserParentandPet;
 using VetClinicLibrary.Person.Locationn;
+using VetClinicLibrary.PetnPersonn;
+using VetClinicLibrary.Pett;
 
 namespace SmileyMeow.Controllers;
-public class AppointmentsController : Controller
+public class AppointmentsController : BasyController
 {
     private readonly ILogger<AppointmentsController> _logger;
     private readonly SmileyMeowDbContext _context;
@@ -18,73 +22,147 @@ public class AppointmentsController : Controller
         _logger = logger;
         _context = context;
     }
+    public async Task<IActionResult> TakeUserAppointment(int? selectedPetFromProfile)
+    {
+        UserAppointmentViewModel userAppointmentViewModel = await ReturnUserAppointmentEmpty(selectedPetFromProfile);
+        return View(userAppointmentViewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> TakeUserAppointment([Bind("DoctorId", "AppointmentDate")] Appointment appointment,
+    [Bind("SelectedPet")] SelectedFormInputUserDTO selectedFormInputNotUserDTO,
+    [Bind("EatingStatusId", "PeeingStatusId", "EnergyStatusId", "InformationAboutPatient", "IlnesssesInThePast")] PatientInformation patientInformation)
+    {
+        int loggedUser = ReturnLoggedUserId();
+        // if (ModelState.IsValid)
+        if (appointment.AppointmentDate.Minute == 00 || appointment.AppointmentDate.Minute == 30)
+        {
+            List<Appointment> doctorAppointments = await GetUserAppointments(appointment);
+            if (doctorAppointments.Count is 0)
+            {
+                await InsertToUserAppointments(appointment, selectedFormInputNotUserDTO, patientInformation, loggedUser);
+                return RedirectToAction("", "");
+            }
+        }
+
+        UserAppointmentViewModel userAppointmentViewModel = await MakeUserViewModelAgain(appointment, selectedFormInputNotUserDTO, patientInformation, loggedUser);
+        return View(userAppointmentViewModel);
+    }
+
+    private async Task<UserAppointmentViewModel> MakeUserViewModelAgain(Appointment appointment, SelectedFormInputUserDTO selectedFormInputNotUserDTO, PatientInformation patientInformation, int loggedUser)
+    {
+        UserAppointmentViewModel userAppointmentViewModel = new();
+        await AddAlreadyAddedPetsToViewModel(loggedUser, userAppointmentViewModel);
+        userAppointmentViewModel.Appointment = appointment;
+        userAppointmentViewModel.DoctorList = await _context.Doctors.Include(a => a.DoctorTitle).ToListAsync();
+        userAppointmentViewModel.PatientInformation = patientInformation;
+        userAppointmentViewModel.SelectedFormInputUserDTO = selectedFormInputNotUserDTO;
+        userAppointmentViewModel.StatusLevelList = await _context.StatusLevels.ToListAsync();
+        return userAppointmentViewModel;
+    }
 
     public async Task<IActionResult> TakeNotUserAppointment()
     {
-        AppointmentViewModel appointmentViewModel = await ReturnNotUserAppointmentEmpty();
+        NotUserAppointmentViewModel appointmentViewModel = await ReturnNotUserAppointmentEmpty();
         return View(appointmentViewModel);
     }
 
-    
+
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> TakeNotUserAppointment([Bind("FirstName", "MiddleName", "LastName", "PhoneNumber", "Email")] NotUserParent notUserParent,
      [Bind("Name", "DOB", "PetGenderId", "SpecieId", "BreedId")] NotUserParentsPet notUserParentsPet,
      [Bind("EatingStatusId", "PeeingStatusId", "EnergyStatusId", "InformationAboutPatient", "IlnesssesInThePast")] PatientInformation patientInformation,
      [Bind("DoctorId", "AppointmentDate")] NotUserAppointment notUserAppointment,
-     [Bind("DistrictId", "AddressDetails")] Address address, [Bind("CityId")] SelectedFormInputDTO selectedFormInputDTO)
+     [Bind("DistrictId", "AddressDetails")] Address address, [Bind("CityId")] SelectedFormInputCityDTO selectedFormInputNotUserDTO)
     {
         // if (ModelState.IsValid)
-        
-            if (notUserAppointment.AppointmentDate.Minute != 00 && notUserAppointment.AppointmentDate.Minute != 30)
-            {
-                AppointmentViewModel appointmentViewModell = await MakeViewModelAgain(
-                notUserParent, notUserParentsPet, patientInformation, 
-                notUserAppointment, address, selectedFormInputDTO);
-                return View(appointmentViewModell);
-            }
-            
-            List<NotUserAppointment> doctorAppointments = await _context.NotUserAppointments
-            .Where(a => a.DoctorId == notUserAppointment.DoctorId &&
-            a.AppointmentDate.Year == notUserAppointment.AppointmentDate.Year
-            && a.AppointmentDate.Month == notUserAppointment.AppointmentDate.Month
-            && a.AppointmentDate.Day == notUserAppointment.AppointmentDate.Day)
-            .ToListAsync();
 
-            if (doctorAppointments.Count == 0)
-            {
-                NotUserParentnPet joinTable = new();
-                notUserParent.Address = address;
-                joinTable.NotUserParentsPet = notUserParentsPet;
-                joinTable.NotUserParent = notUserParent;
-                notUserParentsPet.PatientInformation = patientInformation;
-                notUserAppointment.AppointmentStatussId = 6;
-                notUserAppointment.NotUserParentnPet = joinTable;
-                _context.PatientInformations.Add(patientInformation);
-                _context.Addresses.Add(address);
-                _context.NotUserParentsPet.Add(notUserParentsPet);
-                _context.NotUserParents.Add(notUserParent);
-                _context.NotUserParentnPet.Add(joinTable);
-                _context.NotUserAppointments.Add(notUserAppointment);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index","Home");
-            }
+        if (notUserAppointment.AppointmentDate.Minute != 00 && notUserAppointment.AppointmentDate.Minute != 30)
+        {
+            NotUserAppointmentViewModel appointmentViewModell = await MakeNotUserViewModelAgain(
+            notUserParent, notUserParentsPet, patientInformation,
+            notUserAppointment, address, selectedFormInputNotUserDTO);
 
-            // foreach (NotUserAppointment selectedDoctorAppointments in doctorAppointments)
-            // {
-            //     if(selectedDoctorAppointments.AppointmentDate.ToShortTimeString() == notUserAppointment.AppointmentDate.AddMinutes(20).ToShortTimeString()
-            //      || selectedDoctorAppointments.AppointmentDate.AddMinutes(-20).ToShortTimeString() == notUserAppointment.AppointmentDate)
-            // }
+            return View(appointmentViewModell);
+        }
+        // List<NotUserAppointment> doctorAppointments = await GetNotUserAppointments(notUserAppointment);
+
+        // if (doctorAppointments.Count == 0)
+        // {
+        //     await InsertToNotUserAppointments(notUserParent, notUserParentsPet, patientInformation, notUserAppointment, address);
+        //     return RedirectToAction("Index", "Home");
+        // }
+
+        // foreach (NotUserAppointment selectedDoctorAppointments in doctorAppointments)
+        // {
+        //     if(selectedDoctorAppointments.AppointmentDate.ToShortTimeString() == notUserAppointment.AppointmentDate.AddMinutes(20).ToShortTimeString()
+        //      || selectedDoctorAppointments.AppointmentDate.AddMinutes(-20).ToShortTimeString() == notUserAppointment.AppointmentDate.ToShortTimeString())
+        // }
 
 
 
-        AppointmentViewModel appointmentViewModel = await MakeViewModelAgain(notUserParent, notUserParentsPet, patientInformation, notUserAppointment, address, selectedFormInputDTO);
+        NotUserAppointmentViewModel appointmentViewModel = await MakeNotUserViewModelAgain(notUserParent, notUserParentsPet, patientInformation, notUserAppointment, address, selectedFormInputNotUserDTO);
+
         return View(appointmentViewModel);
     }
 
-    private async Task<AppointmentViewModel> MakeViewModelAgain(NotUserParent notUserParent, NotUserParentsPet notUserParentsPet, PatientInformation patientInformation, NotUserAppointment notUserAppointment, Address address, SelectedFormInputDTO selectedFormInputDTO )
+    private async Task<List<NotUserAppointment>> GetNotUserAppointments(NotUserAppointment notUserAppointment)
     {
-        AppointmentViewModel appointmentViewModell = new();
+        return await _context.NotUserAppointments
+        .Where(a => a.DoctorId == notUserAppointment.DoctorId &&
+        a.AppointmentDate.Year == notUserAppointment.AppointmentDate.Year
+        && a.AppointmentDate.Month == notUserAppointment.AppointmentDate.Month
+        && a.AppointmentDate.Day == notUserAppointment.AppointmentDate.Day)
+        .ToListAsync();
+    }
+    private async Task<List<Appointment>> GetUserAppointments(Appointment appointment)
+    {
+        return await _context.Appointments
+        .Where(a => a.DoctorId == appointment.DoctorId &&
+        a.AppointmentDate.Year == appointment.AppointmentDate.Year
+        && a.AppointmentDate.Month == appointment.AppointmentDate.Month
+        && a.AppointmentDate.Day == appointment.AppointmentDate.Day)
+        .ToListAsync();
+    }
+
+    private async Task InsertToNotUserAppointments(NotUserParent notUserParent, NotUserParentsPet notUserParentsPet, PatientInformation patientInformation, NotUserAppointment notUserAppointment, Address address)
+    {
+        NotUserParentnPet joinTable = new();
+        notUserParent.Address = address;
+        joinTable.NotUserParentsPet = notUserParentsPet;
+        joinTable.NotUserParent = notUserParent;
+        notUserAppointment.PatientInformation = patientInformation;
+        notUserAppointment.AppointmentStatussId = 6;
+        notUserAppointment.NotUserParentnPet = joinTable;
+        _context.PatientInformations.Add(patientInformation);
+        _context.Addresses.Add(address);
+        _context.NotUserParentsPet.Add(notUserParentsPet);
+        _context.NotUserParents.Add(notUserParent);
+        _context.NotUserParentnPet.Add(joinTable);
+        _context.NotUserAppointments.Add(notUserAppointment);
+        await _context.SaveChangesAsync();
+    }
+
+    private async Task InsertToUserAppointments(Appointment appointment, SelectedFormInputUserDTO selectedFormInputNotUserDTO, PatientInformation patientInformation, int loggedUser)
+    {
+        int loggedUsersParentAccountId = await _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.PetParentId).FirstOrDefaultAsync();
+        PetnPerson joinTable = new();
+        joinTable.PetParentId = loggedUsersParentAccountId;
+        joinTable.AnimalId = selectedFormInputNotUserDTO.SelectedPet;
+        appointment.AppointmentStatussId = 6;
+        appointment.PatientInformation = patientInformation;
+        appointment.PetnPersonId = joinTable.PetParentId;
+        _context.Appointments.Add(appointment);
+        await _context.SaveChangesAsync();
+    }
+
+    private async Task<NotUserAppointmentViewModel> MakeNotUserViewModelAgain(NotUserParent notUserParent, NotUserParentsPet notUserParentsPet, PatientInformation patientInformation, NotUserAppointment notUserAppointment, Address address, SelectedFormInputCityDTO selectedFormInputNotUserDTO)
+    {
+        NotUserAppointmentViewModel appointmentViewModell = new();
+
         appointmentViewModell.NotUserParent = notUserParent;
         appointmentViewModell.NotUserParentsPet = notUserParentsPet;
         appointmentViewModell.PetGenderList = await _context.PetGenders.ToListAsync();
@@ -95,39 +173,63 @@ public class AppointmentsController : Controller
         appointmentViewModell.PatientInformation = patientInformation;
         appointmentViewModell.NotUsersAppointment = notUserAppointment;
         appointmentViewModell.DoctorList = await _context.Doctors.Include(a => a.DoctorTitle).ToListAsync();
-        appointmentViewModell.CityList = await _context.Cities.ToListAsync();
-        appointmentViewModell.SelectedFormInputDTO = selectedFormInputDTO;
-        appointmentViewModell.DistrictList = await _context.Districts.ToListAsync();
-        // appointmentViewModell.SelectedCity = selectedCity;
-        // appointmentViewModell.District =  _context.Districts.ToListAsync();
+        appointmentViewModell.CityList = (selectedFormInputNotUserDTO.CityId == 0 ? null : appointmentViewModell.CityList = await _context.Cities.ToListAsync());
+        appointmentViewModell.SelectedFormInputCityDTO = selectedFormInputNotUserDTO;
+        appointmentViewModell.DistrictList = await _context.Districts.Where(a => a.CityId == selectedFormInputNotUserDTO.CityId).ToListAsync();
         return appointmentViewModell;
     }
-    private async Task<AppointmentViewModel> ReturnNotUserAppointmentEmpty()
+    private async Task<NotUserAppointmentViewModel> ReturnNotUserAppointmentEmpty()
     {
-        AppointmentViewModel appointmentViewModel = new();
+        NotUserAppointmentViewModel appointmentViewModel = new();
 
         appointmentViewModel.DoctorList = await _context.Doctors
         .Include(a => a.DoctorTitle)
         .ToListAsync();
 
-        appointmentViewModel.NotUserParent = new NotUserParent();
-        appointmentViewModel.NotUserParentsPet = new NotUserParentsPet();
+        appointmentViewModel.NotUserParent = new();
+        appointmentViewModel.NotUserParentsPet = new();
         appointmentViewModel.PetGenderList = await _context.PetGenders.ToListAsync();
         appointmentViewModel.SpecieList = await _context.Species.ToListAsync();
         appointmentViewModel.BreedList = await _context.Breeds.ToListAsync();
         appointmentViewModel.StatusLevelList = await _context.StatusLevels.ToListAsync();
         appointmentViewModel.Address = new();
-        appointmentViewModel.PatientInformation = new PatientInformation();
-        appointmentViewModel.NotUsersAppointment = new NotUserAppointment();
-        appointmentViewModel.CityList = await _context.Cities.ToListAsync();
-        appointmentViewModel.SelectedFormInputDTO = new SelectedFormInputDTO();
+        appointmentViewModel.PatientInformation = new();
+        appointmentViewModel.NotUsersAppointment = new();
+        appointmentViewModel.SelectedFormInputCityDTO = new();
+
         return appointmentViewModel;
     }
+    private async Task<UserAppointmentViewModel> ReturnUserAppointmentEmpty(int? selectedPetFromProfile)
+    {
+        int loggedUser = ReturnLoggedUserId();
 
+        UserAppointmentViewModel userAppointmentViewModel = new();
 
-    // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    // public IActionResult Error()
-    // {
-    //     return View("Error!");
-    // }
+        await AddAlreadyAddedPetsToViewModel(loggedUser, userAppointmentViewModel);
+
+        userAppointmentViewModel.DoctorList = await _context.Doctors.Include(a => a.DoctorTitle).ToListAsync();
+        userAppointmentViewModel.StatusLevelList = await _context.StatusLevels.ToListAsync();
+        userAppointmentViewModel.PatientInformation = new();
+        userAppointmentViewModel.Appointment = new();
+        if (selectedPetFromProfile is not null)
+        {
+            userAppointmentViewModel.SelectedFormInputUserDTO = new();
+            userAppointmentViewModel.SelectedFormInputUserDTO.SelectedPet = (int)selectedPetFromProfile;
+
+        }
+        return userAppointmentViewModel;
+    }
+
+    private async Task AddAlreadyAddedPetsToViewModel(int loggedUser, UserAppointmentViewModel userAppointmentViewModel)
+    {
+        List<int> alreadyAddedPetsIds = await _context.PetsnPersons.
+        Where(a => a.PetParent.UserId == loggedUser).
+        Select(a => a.AnimalId).ToListAsync();
+        userAppointmentViewModel.AlreadyAddedPets = new();
+        foreach (int Id in alreadyAddedPetsIds)
+        {
+            Pet addedPet = await _context.Pets.FirstOrDefaultAsync(a => a.AnimalId == Id);
+            userAppointmentViewModel.AlreadyAddedPets.Add(addedPet);
+        }
+    }
 }

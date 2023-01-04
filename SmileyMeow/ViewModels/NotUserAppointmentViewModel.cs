@@ -10,11 +10,10 @@ using VetClinicLibrary.Pett.Speciee;
 
 namespace SmileyMeow.ViewModels;
 
-public class AppointmentViewModel
+public class NotUserAppointmentViewModel
 {
     public NotUserParentsPet NotUserParentsPet { get; set; }
     public NotUserParent NotUserParent { get; set; }
-    public PatientInformation PatientInformation { get; set; }
     public NotUserAppointment NotUsersAppointment { get; set; }
     public Address Address { get; set; }
     public List<Doctor> DoctorList { get; set; }
@@ -24,5 +23,6 @@ public class AppointmentViewModel
     public List<StatusLevel> StatusLevelList { get; set; }
     public List<City> CityList { get; set; }
     public List<District> DistrictList { get; set; }
-    public SelectedFormInputDTO SelectedFormInputDTO { get; set; }
+    public PatientInformation PatientInformation { get; set; }
+    public SelectedFormInputCityDTO SelectedFormInputCityDTO { get; set; }
 }

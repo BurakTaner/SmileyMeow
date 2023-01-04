@@ -16,7 +16,7 @@ public class PatientInformation
     public StatusLevel EnergyStatus { get; set; }
     public string InformationAboutPatient { get; set; }
     public string IlnesssesInThePast { get; set; }
-    public Pet Pet { get; set; }
-    public NotUserParentsPet NotUsersParentsPet { get; set; }
+    public NotUserAppointment NotUserAppointment { get; set; }
+    public Appointment Appointment { get; set; }
     
 }

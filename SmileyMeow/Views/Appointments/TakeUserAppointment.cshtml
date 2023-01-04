@@ -1,0 +1,128 @@
+@model UserAppointmentViewModel
+
+@{
+  ViewData["Title"] = "TakeAppointment";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="bg-img">
+
+  <div class="appointment-form pb-2 pt-2 ">
+    <div class="formbold-form-wrapper">
+      <form asp-controller="Appointments" asp-action="TakeUserAppointment" method="POST" class="no-bordered-form">
+        <ol>
+          <li>
+            <strong class="block-level-info mb-2"> Required (*)</strong>
+          </li>
+        </ol>
+
+        <div class="formbold-mb-5">
+          <label for="doctor-preference" class="formbold-form-label mt-3">Doctor *</label>
+          <select name="DoctorId" id="doctor-preference" class="formbold-form-input">
+            <option selected value="0">Select a doctor...</option>
+            @foreach (Doctor doctor in Model.DoctorList)
+            {
+              <option selected="@(doctor.DoctorId == Model.Appointment.DoctorId)" value="@doctor.DoctorId">
+                @($"{doctor.FirstName} {doctor.MiddleName} {doctor.LastName}")</option>
+            }
+          </select>
+        </div>
+
+        @* For Pet *@
+
+        <label for="if-already-had-information" class="d-block">Select a pet for appointment *</label>
+          <select name="SelectedPet" id="added-pets-select">
+            <option selected value="0">Select a pet...</option>
+            @foreach (Pet pet in Model.AlreadyAddedPets)
+            {
+              <option value="@pet.AnimalId" selected="@pet.AnimalId == Model.SelectedFormInputUserDTO.SelectedPet">
+                @pet.Name</option>
+            }
+          </select>
+        
+
+        <hr>
+        
+        @* For Detailed Patient Information *@
+        <p class="forum-info-p">Detailed Information About Patient *</p>
+        <label for="eating" class="formbold-form-label">Eating Condition *</label>
+        @foreach (StatusLevel eatingStatus in Model.StatusLevelList)
+        {
+          <div class="form-check">
+            <input class="form-check-input"
+            checked="@(eatingStatus.StatusLevelId == Model.PatientInformation.EatingStatusId)" type="radio"
+            value="@eatingStatus.StatusLevelId" name="EatingStatusId" id="flexCheckDefault eating">
+            <label class="form-check-label" for="flexCheckDefault">
+              @eatingStatus.Name
+            </label>
+          </div>
+        }
+
+
+        <hr>
+
+        <label for="energy" class="formbold-form-label">Energy Condition *</label>
+        @foreach (StatusLevel energyStatus in Model.StatusLevelList)
+        {
+          <div class="form-check">
+            <input class="form-check-input" type="radio"
+            checked="@(energyStatus.StatusLevelId == Model.PatientInformation.EnergyStatusId)"
+            value="@energyStatus.StatusLevelId" name="EnergyStatusId" id="flexCheckDefault energy">
+            <label class="form-check-label" for="flexCheckDefault">
+              @energyStatus.Name
+            </label>
+          </div>
+
+        }
+        <hr>
+
+        <label for="peeing" class="formbold-form-label">Peeing Condition *</label>
+        @foreach (StatusLevel peeingStatus in Model.StatusLevelList)
+        {
+          <div class="form-check">
+            <input class="form-check-input" type="radio" value="@peeingStatus.StatusLevelId"
+            checked="@(peeingStatus.StatusLevelId == Model.PatientInformation.PeeingStatusId)" name="PeeingStatusId"
+            id="flexCheckDefault peeing">
+            <label class="form-check-label" for="flexCheckDefault">
+              @peeingStatus.Name
+            </label>
+          </div>
+
+        }
+
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-check-label mt-4 dark-textarea-label">Extra Information
+            About Patient *</label>
+          <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"
+            placeholder="EX: Sif have mits...."
+            name="InformationAboutPatient">@Model.PatientInformation.InformationAboutPatient</textarea>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-check-label mt-3 dark-textarea-label">If had a
+            known ilness
+            in the past/still * </label>
+          <textarea class="form-control mb-5" id="exampleFormControlTextarea1" rows="3"
+            placeholder="Ex: Sif have a very bad injury..."
+            name="IlnesssesInThePast">@Model.PatientInformation.IlnesssesInThePast</textarea>
+        </div>
+
+        <p class="forum-info-p">Appointments takes 30 minutes. You need to select xx:30 or xx:00 for appointment.
+          ex: 12/12/2022 - 12-30 PM *
+        </p>
+        <div class="w-full formbold-px-1 mb-5">
+          <div class="formbold-mb-5">
+            <label for="DOB" class="formbold-form-label">Appointment Date *</label>
+            <input type="datetime-local" name="AppointmentDate" id="" class="formbold-form-input"
+              value='@(Model.Appointment.AppointmentDate.Year != 1 ?Model.Appointment.AppointmentDate.ToString("yyyy-MM-ddTHH:mm"):"")' />
+          </div>
+        </div>
+
+        @* For Pet Information *@
+
+        <div>
+          <button class="formbold-btn">Make an appointment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  @* <img src="./Images/gallery-2.jpg" class="rounded float-start" alt="..."> *@
+</div>

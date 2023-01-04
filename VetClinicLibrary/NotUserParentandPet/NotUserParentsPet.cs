@@ -20,6 +20,4 @@ public class NotUserParentsPet : INotUserParentsPet
     public Specie Specie { get; set; }
     public int BreedId { get; set; }
     public Breed Breed { get; set; }
-    public int PatientInformationId { get; set; }
-    public PatientInformation PatientInformation { get; set; }
 }

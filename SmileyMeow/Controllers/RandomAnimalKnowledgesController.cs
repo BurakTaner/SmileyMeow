@@ -9,7 +9,7 @@ using SmileyMeow.DTOs;
 using SmileyMeow.Services;
 
 namespace SmileyMeow.Controllers;
-public class RandomAnimalKnowledgesController : Controller
+public class RandomAnimalKnowledgesController : BasyController
 {
     private readonly ILogger<RandomAnimalKnowledgesController> _logger;
     private readonly IRandomAnimalService _randomAnimalService;
