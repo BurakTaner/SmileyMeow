@@ -8,7 +8,7 @@ Write-Host "ANIMALAPI is listening on https://localhost:7180/swagger/index.html 
 Write-Host "SMILEYMEOW is listening on "  " if you want to test it" -ForegroundColor yellow -BackgroundColor black
 
 
-Write-Host "LOCATIONSAPI is listening on https://localhost:3000 if you want to test it" -ForegroundColor green -BackgroundColor black
+Write-Host "LOCATIONSAPI is listening on http://localhost:3000 if you want to test it" -ForegroundColor green -BackgroundColor black
 
 Write-host "Endpoints are for nodejs is:" -ForegroundColor green -BackgroundColor black
 Write-host "/insertdistricts" -ForegroundColor green -BackgroundColor black
