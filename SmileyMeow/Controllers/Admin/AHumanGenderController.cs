@@ -35,11 +35,13 @@ public class AHumanGenderController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("GName")] HumanGender humanGender) {
-        // if(ModelState.IsValid) {
-        // }
+        if(ModelState.IsValid) {
         _context.Add(humanGender);
         await Save();
         return RedirectToAction("","AHumanGender");
+        }
+        
+        return View(humanGender);
     }
     public async Task<IActionResult> Info(int id)
     {
