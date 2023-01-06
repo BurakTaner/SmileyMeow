@@ -16,6 +16,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="~/adminpages/assets/images/favicon.png">
     <!-- Custom CSS -->
     <link href="~/adminpages/dist/css/style.min.css" rel="stylesheet">
+    <link href="~/css/adminpages/adminpages.css" rel="stylesheet">
     <link href="~/adminpages/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -248,10 +249,10 @@
 
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
-                                    class="hide-menu">Forms </span></a>
+                                    class="hide-menu">Human</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i
-                                            class="mdi mdi-note-outline"></i><span class="hide-menu"> Form Basic
+                                <li class="sidebar-item"><a asp-controller="AHumanGender" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-outline"></i><span class="hide-menu">Gender
                                         </span></a></li>
                                 <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i
                                             class="mdi mdi-note-plus"></i><span class="hide-menu"> Form Wizard
@@ -354,6 +355,7 @@
     <script src="~/adminpages/assets/libs/flot/jquery.flot.crosshair.js"></script>
     <script src="~/adminpages/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
     <script src="~/adminpages/dist/js/pages/chart/chart-page-init.js"></script>
+    <script src="~/js/adminpages.js"></script>
 
 </body>
 
