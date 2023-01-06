@@ -1,0 +1,28 @@
+@model Pronoun
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card">
+ <div class="card-body">
+            <h4 class="card-title">Pronoun Info</h4>
+            <div class="form-group row">
+                <label for="pronounid" class="col-sm-3 text-end control-label col-form-label">Id</label>
+                <div class="col-sm-9">
+                    <p class="form-control" id="pronounid" name="ProunounId">@Model.ProunounId</p>
+                </div>
+
+                <label for="pname" class="col-sm-3 text-end control-label col-form-label">PName</label>
+                <div class="col-sm-9">
+                    <p class="form-control" id="pname" name="PName">@Model.PName</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body sbmt-area">
+                <a class="btn btn-primary" asp-controller="APronoun" asp-action="Update" asp-route-id="@Model.ProunounId">Update</a>
+                <a asp-controller="APronoun" asp-action="Delete" asp-route-id="@Model.ProunounId" class="btn btn-primary">Delete</a>
+                <a asp-controller="APronoun" asp-action="" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+        </div>
