@@ -77,12 +77,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 5, 22, 26, 3, 628, DateTimeKind.Local).AddTicks(7302),
+                            AppointmentDate = new DateTime(2023, 2, 6, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8199),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 6, 22, 26, 3, 628, DateTimeKind.Local).AddTicks(7299)
+                            TimeCreated = new DateTime(2023, 1, 7, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8196)
                         });
                 });
 
@@ -282,12 +282,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 27, 22, 26, 3, 628, DateTimeKind.Local).AddTicks(7639),
+                            AppointmentDate = new DateTime(2022, 12, 28, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8530),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 27, 22, 26, 3, 628, DateTimeKind.Local).AddTicks(7644)
+                            TimeCreated = new DateTime(2022, 11, 28, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8534)
                         });
                 });
 
@@ -7084,7 +7084,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProunounId"));
 
                     b.Property<string>("PName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("pname");
 
                     b.HasKey("ProunounId")
@@ -7284,7 +7286,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 6, 22, 26, 3, 628, DateTimeKind.Local).AddTicks(6354),
+                            DOB = new DateTime(2023, 1, 7, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(6919),
                             IsAdoptable = true,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7363,20 +7365,20 @@ namespace SmileyMeow.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SchoolTypeId"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("STName")
                         .HasColumnType("text")
-                        .HasColumnName("name");
+                        .HasColumnName("stname");
 
                     b.HasKey("SchoolTypeId")
-                        .HasName("pk_schooltype");
+                        .HasName("pk_schooltypes");
 
-                    b.ToTable("schooltype", (string)null);
+                    b.ToTable("schooltypes", (string)null);
 
                     b.HasData(
                         new
                         {
                             SchoolTypeId = 6,
-                            Name = "University"
+                            STName = "University"
                         });
                 });
 
@@ -7893,7 +7895,7 @@ namespace SmileyMeow.Migrations
                         .HasForeignKey("SchoolTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_schools_schooltype_schooltypeid");
+                        .HasConstraintName("fk_schools_schooltypes_schooltypeid");
 
                     b.Navigation("SchoolType");
                 });

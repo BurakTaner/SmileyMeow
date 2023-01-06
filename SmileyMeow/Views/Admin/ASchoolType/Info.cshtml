@@ -1,0 +1,28 @@
+@model SchoolType
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card">
+ <div class="card-body">
+            <h4 class="card-title">School Type Info</h4>
+            <div class="form-group row">
+                <label for="schooltypeid" class="col-sm-3 text-end control-label col-form-label">Id</label>
+                <div class="col-sm-9">
+                    <p class="form-control" id="schooltypeid" name="SchoolTypeId">@Model.SchoolTypeId</p>
+                </div>
+
+                <label for="stname" class="col-sm-3 text-end control-label col-form-label">STName</label>
+                <div class="col-sm-9">
+                    <p class="form-control" id="stname" name="STName">@Model.STName</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body sbmt-area">
+                <a class="btn btn-primary" asp-controller="ASchoolType" asp-action="Update" asp-route-id="@Model.SchoolTypeId">Update</a>
+                <a asp-controller="ASchoolType" asp-action="Delete" asp-route-id="@Model.SchoolTypeId" class="btn btn-primary">Delete</a>
+                <a asp-controller="ASchoolType" asp-action="" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+        </div>
