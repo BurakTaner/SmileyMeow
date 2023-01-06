@@ -8,5 +8,5 @@ namespace VetClinicLibrary.SchoolTypee;
 public interface ISchoolType
 {
     int SchoolTypeId { get; set; }
-    string Name { get; set; }
+    string STName { get; set; }
 }
