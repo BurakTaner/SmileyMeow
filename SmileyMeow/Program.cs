@@ -8,7 +8,11 @@ using SmileyMeow.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorOptions(
+    page => {
+        page.ViewLocationFormats.Add("/Views/Admin/{1}/{0}.cshtml");
+    }
+);
 
 builder.Services.AddDbContext<SmileyMeowDbContext>(
         pgsql => pgsql.UseNpgsql(builder.Configuration.GetConnectionString("SmileyPSQLConnection"))
@@ -22,7 +26,8 @@ builder.Services.AddTransient<IRandomAnimalService, RandomAnimalService>();
 builder.Services.AddHttpClient();
 
 builder.Services.Configure<CookieTempDataProviderOptions>(
-    opt => {
+    opt =>
+    {
         opt.Cookie.IsEssential = true;
         opt.Cookie.HttpOnly = true;
         opt.Cookie.Name = "AuthCookie";
@@ -30,7 +35,8 @@ builder.Services.Configure<CookieTempDataProviderOptions>(
 );
 
 builder.Services.Configure<CookiePolicyOptions>(
-    opt => {
+    opt =>
+    {
         opt.CheckConsentNeeded = context => true;
         opt.MinimumSameSitePolicy = SameSiteMode.None;
     }
