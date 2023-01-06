@@ -16,3 +16,8 @@
     font-size: 20px;
     color: rgb(200, 56, 12)
 }
+/* City */
+.dis-city-select{
+    width: 100%; 
+    height:36px;
+}
