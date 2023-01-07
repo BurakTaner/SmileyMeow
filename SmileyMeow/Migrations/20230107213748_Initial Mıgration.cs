@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SmileyMeow.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialMıgration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,7 +46,7 @@ namespace SmileyMeow.Migrations
                 {
                     breedid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    bname = table.Column<string>(type: "text", nullable: true)
+                    bname = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1858,7 +1858,7 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "pets",
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
-                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 7, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(2371), true, "Sif", 6, 6 });
+                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 8, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(496), true, "Sif", 6, 6 });
 
             migrationBuilder.InsertData(
                 table: "schools",
@@ -1932,12 +1932,12 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 6, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3100), 6, 6, 6, 6, new DateTime(2023, 1, 7, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3097) });
+                values: new object[] { 6, new DateTime(2023, 2, 7, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1502), 6, 6, 6, 6, new DateTime(2023, 1, 8, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1499) });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 28, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3414), 8, 9, 9, 9, new DateTime(2022, 11, 28, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3419) });
+                values: new object[] { 6, new DateTime(2022, 12, 29, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1804), 8, 9, 9, 9, new DateTime(2022, 11, 29, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1808) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",

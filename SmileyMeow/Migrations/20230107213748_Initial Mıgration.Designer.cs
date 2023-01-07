@@ -12,8 +12,8 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20230107112801_Initial Migration")]
-    partial class InitialMigration
+    [Migration("20230107213748_Initial Mıgration")]
+    partial class InitialMıgration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,12 +80,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 6, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3100),
+                            AppointmentDate = new DateTime(2023, 2, 7, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1502),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 7, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3097)
+                            TimeCreated = new DateTime(2023, 1, 8, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1499)
                         });
                 });
 
@@ -285,12 +285,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 28, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3414),
+                            AppointmentDate = new DateTime(2022, 12, 29, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1804),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 28, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3419)
+                            TimeCreated = new DateTime(2022, 11, 29, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1808)
                         });
                 });
 
@@ -7211,7 +7211,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BreedId"));
 
                     b.Property<string>("BName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)")
                         .HasColumnName("bname");
 
                     b.HasKey("BreedId")
@@ -7289,7 +7291,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 7, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(2371),
+                            DOB = new DateTime(2023, 1, 8, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(496),
                             IsAdoptable = true,
                             Name = "Sif",
                             PetGenderId = 6,
