@@ -1,4 +1,7 @@
-﻿$(document).ready(function() {
+﻿import { fetchCities } from "../modules/fetch.js";
+import { fetchDistricts } from "../modules/fetch.js";
+
+$(document).ready(function() {
     const secondSelect = $('#select-district')[0];
     const districtSelectLabel = $('#select-district-label');
     const selectCity = $('#select-city');
@@ -68,17 +71,3 @@
     })
 
 });
-
-
-// NodeJs Fetch
-const fetchDistricts = async (selectedCity) =>  {
-    const districtList = fetch(`http://localhost:3000/getdistrict/${selectedCity}`);
-    const districtJSON = (await districtList).json();
-    return await districtJSON;
-};
-
-const fetchCities = async () =>  {
-    const cityList = fetch(`http://localhost:3000/getallcities`);
-    const cityJSON = (await cityList).json();
-    return await cityJSON;
-};

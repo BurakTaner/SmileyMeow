@@ -1,4 +1,6 @@
-$(document).ready(function () {
+import { fetchCities } from "../modules/fetch.js";
+
+$(function () {
   fetchCities().then((cities) => {
     var firstOption = document.createElement("option");
     firstOption.text = "Select a city...";
@@ -14,12 +16,5 @@ $(document).ready(function () {
     });
   });
 
-  // $('#dis-city-select').change(function (e) {
-  // });
-});
 
-const fetchCities = async () => {
-  const cityList = fetch(`http://localhost:3000/getallcities`);
-  const cityJSON = (await cityList).json();
-  return await cityJSON;
-};
+});
