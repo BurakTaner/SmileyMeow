@@ -17,6 +17,8 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        <th>CityId</th>
+                        <th>CityName</th>
                         <th class="last-clmn">Options</th>
                     </tr>
                 </thead>
@@ -27,6 +29,8 @@
                         <tr>
                             <td>@district.DistrictId</td>
                             <td>@district.DName</td>
+                            <td>@district.CityId</td>
+                            <td>@district.City.CName</td>
                             <td><a asp-controller="ADistrict" asp-action="Delete"
                                 asp-route-id="@district.DistrictId" class="icn-mr">
                                     <i class="fas fa-trash"></i>

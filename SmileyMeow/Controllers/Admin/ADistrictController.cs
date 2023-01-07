@@ -26,7 +26,10 @@ public class ADistrictController : Controller
 
     public async Task<IActionResult> Index()
     {
-        List<District> districtList = await _context.Districts.OrderByDescending(a => a.DistrictId).ToListAsync();
+        List<District> districtList = await _context.Districts
+        .Include(a => a.City)
+        .OrderByDescending(a => a.DistrictId)
+        .ToListAsync();
         return View(districtList);
     }
     public async Task<IActionResult> Create()
