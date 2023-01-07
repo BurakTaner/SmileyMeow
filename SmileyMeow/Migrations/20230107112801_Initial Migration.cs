@@ -150,7 +150,7 @@ namespace SmileyMeow.Migrations
                 {
                     schooltypeid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    stname = table.Column<string>(type: "text", nullable: true)
+                    stname = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,7 +230,7 @@ namespace SmileyMeow.Migrations
                 {
                     schoolid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "text", nullable: true),
+                    sname = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
                     schooltypeid = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -1858,11 +1858,11 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "pets",
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
-                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 7, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(6919), true, "Sif", 6, 6 });
+                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 7, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(2371), true, "Sif", 6, 6 });
 
             migrationBuilder.InsertData(
                 table: "schools",
-                columns: new[] { "schoolid", "name", "schooltypeid" },
+                columns: new[] { "schoolid", "sname", "schooltypeid" },
                 values: new object[] { 6, "University of California, Davis", 6 });
 
             migrationBuilder.InsertData(
@@ -1932,12 +1932,12 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 6, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8199), 6, 6, 6, 6, new DateTime(2023, 1, 7, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8196) });
+                values: new object[] { 6, new DateTime(2023, 2, 6, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3100), 6, 6, 6, 6, new DateTime(2023, 1, 7, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3097) });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 28, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8530), 8, 9, 9, 9, new DateTime(2022, 11, 28, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8534) });
+                values: new object[] { 6, new DateTime(2022, 12, 28, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3414), 8, 9, 9, 9, new DateTime(2022, 11, 28, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3419) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",

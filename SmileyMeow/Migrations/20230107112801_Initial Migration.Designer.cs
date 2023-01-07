@@ -12,7 +12,7 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20230106213337_Initial Migration")]
+    [Migration("20230107112801_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -80,12 +80,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 6, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8199),
+                            AppointmentDate = new DateTime(2023, 2, 6, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3100),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 7, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8196)
+                            TimeCreated = new DateTime(2023, 1, 7, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3097)
                         });
                 });
 
@@ -285,12 +285,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 28, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8530),
+                            AppointmentDate = new DateTime(2022, 12, 28, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3414),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 28, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(8534)
+                            TimeCreated = new DateTime(2022, 11, 28, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(3419)
                         });
                 });
 
@@ -7289,7 +7289,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 7, 0, 33, 35, 397, DateTimeKind.Local).AddTicks(6919),
+                            DOB = new DateTime(2023, 1, 7, 14, 28, 0, 228, DateTimeKind.Local).AddTicks(2371),
                             IsAdoptable = true,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7369,7 +7369,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SchoolTypeId"));
 
                     b.Property<string>("STName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
                         .HasColumnName("stname");
 
                     b.HasKey("SchoolTypeId")
@@ -7417,9 +7419,11 @@ namespace SmileyMeow.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SchoolId"));
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                    b.Property<string>("SName")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)")
+                        .HasColumnName("sname");
 
                     b.Property<int>("SchoolTypeId")
                         .HasColumnType("integer")
@@ -7437,7 +7441,7 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             SchoolId = 6,
-                            Name = "University of California, Davis",
+                            SName = "University of California, Davis",
                             SchoolTypeId = 6
                         });
                 });
