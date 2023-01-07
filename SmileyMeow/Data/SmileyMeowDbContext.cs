@@ -228,7 +228,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<School>().HasData(
-            new School { SchoolId = 6, SchoolTypeId = 6, Name = "University of California, Davis" }
+            new School { SchoolId = 6, SchoolTypeId = 6, SName = "University of California, Davis" }
         );
 
         modelBuilder.Entity<Userr>().HasData(
