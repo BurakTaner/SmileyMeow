@@ -1,4 +1,4 @@
-import { templateForm } from "../modules/formgeneral.js";
+import { templateForm } from "../../modules/formgeneral.js";
 
 $(function () {
   const idElem = $('#breedid');
