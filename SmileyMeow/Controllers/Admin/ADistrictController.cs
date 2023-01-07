@@ -26,12 +26,12 @@ public class ADistrictController : Controller
 
     public async Task<IActionResult> Index()
     {
-        List<District> districtList = await _context.Districts
-        .Include(a => a.City)
-        .OrderByDescending(a => a.DistrictId)
-        .ToListAsync();
+        List<District> districtList = await ReturnAllDistrictsFromDb();
         return View(districtList);
     }
+
+
+
     public async Task<IActionResult> Create()
     {
         DistrictViewModel districtViewModel = new();
@@ -41,13 +41,13 @@ public class ADistrictController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("DName","CityId")] District district)
+    public async Task<IActionResult> Create([Bind("DName", "CityId")] District district)
     {
         if (ModelState.IsValid)
         {
             _context.Add(district);
             await Save();
-            return RedirectToAction("", "ADistrict"); 
+            return RedirectToAction("", "ADistrict");
         }
 
         DistrictViewModel districtViewModel = await ReturnDistrictViewModelAgain(district);
@@ -60,7 +60,8 @@ public class ADistrictController : Controller
         return View(district);
     }
 
-    public async Task<IActionResult> Delete(int id) {
+    public async Task<IActionResult> Delete(int id)
+    {
         District district = await FindDistrict(id);
         return View(district);
     }
@@ -75,24 +76,27 @@ public class ADistrictController : Controller
         return RedirectToAction("", "ADistrict");
     }
 
-    public async Task<IActionResult> Update(int id) {
+    public async Task<IActionResult> Update(int id)
+    {
         District district = await FindDistrict(id);
         DistrictViewModel districtViewModel = new();
         districtViewModel.District = district;
         districtViewModel.CityList = await _context.Cities.ToListAsync();
         return View(districtViewModel);
-        
+
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Update(int id,[Bind("DName","CityId")]District district) {
-        
-        if(ModelState.IsValid) {
+    public async Task<IActionResult> Update(int id, [Bind("DName", "CityId")] District district)
+    {
+
+        if (ModelState.IsValid)
+        {
             district.DistrictId = id;
             _context.Update(district);
             await Save();
-            return RedirectToAction("","ADistrict");
+            return RedirectToAction("", "ADistrict");
         }
 
         return View(district);
@@ -106,7 +110,7 @@ public class ADistrictController : Controller
 
     private async Task<District> FindDistrict(int id)
     {
-        return await _context.Districts.FirstOrDefaultAsync(a => a.DistrictId == id);
+        return await _context.Districts.Include(a => a.City).FirstOrDefaultAsync(a => a.DistrictId == id);
     }
 
     private async Task<DistrictViewModel> ReturnDistrictViewModelAgain(District district)
@@ -119,5 +123,13 @@ public class ADistrictController : Controller
     private async Task ReturnDistrictViewModel(DistrictViewModel districtViewModel)
     {
         districtViewModel.District = new();
+    }
+
+    private async Task<List<District>> ReturnAllDistrictsFromDb()
+    {
+        return await _context.Districts
+                .Include(a => a.City)
+                .OrderByDescending(a => a.DistrictId)
+                .ToListAsync();
     }
 }
