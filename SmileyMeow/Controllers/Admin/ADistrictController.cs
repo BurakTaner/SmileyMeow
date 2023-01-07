@@ -30,12 +30,10 @@ public class ADistrictController : Controller
         return View(districtList);
     }
 
-
-
     public async Task<IActionResult> Create()
     {
         DistrictViewModel districtViewModel = new();
-        await ReturnDistrictViewModel(districtViewModel);
+        districtViewModel.District = new();
         return View(districtViewModel);
     }
 
@@ -56,7 +54,7 @@ public class ADistrictController : Controller
 
     public async Task<IActionResult> Info(int id)
     {
-        District district = await FindDistrict(id);
+        District district = await _context.Districts.Include(a => a.City).FirstOrDefaultAsync(a => a.DistrictId == id);
         return View(district);
     }
 
@@ -110,7 +108,7 @@ public class ADistrictController : Controller
 
     private async Task<District> FindDistrict(int id)
     {
-        return await _context.Districts.Include(a => a.City).FirstOrDefaultAsync(a => a.DistrictId == id);
+        return await _context.Districts.FirstOrDefaultAsync(a => a.DistrictId == id);
     }
 
     private async Task<DistrictViewModel> ReturnDistrictViewModelAgain(District district)
@@ -120,11 +118,6 @@ public class ADistrictController : Controller
         districtViewModel.CityList = (district.CityId == 0 ? null : await _context.Cities.ToListAsync());
         return districtViewModel;
     }
-    private async Task ReturnDistrictViewModel(DistrictViewModel districtViewModel)
-    {
-        districtViewModel.District = new();
-    }
-
     private async Task<List<District>> ReturnAllDistrictsFromDb()
     {
         return await _context.Districts
