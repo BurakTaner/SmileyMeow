@@ -217,7 +217,7 @@
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings me-1 ms-1"></i>
                                     Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Logout"><i
                                         class="fa fa-power-off me-1 ms-1"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="ps-4 p-10"><a href="javascript:void(0)"
@@ -243,9 +243,9 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="pt-4">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="AdminHome" asp-action=""
-                                 aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
-                                    class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                asp-controller="AHome" asp-action="" aria-expanded="false"><i
+                                    class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
@@ -253,22 +253,110 @@
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
-                                    class="hide-menu">Person</span></a>
+                                    class="hide-menu">General</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a asp-controller="AHumanGender" asp-action="" class="sidebar-link"><i
-                                            class="mdi mdi-note-outline"></i><span class="hide-menu">Gender
+                                <li class="sidebar-item"><a asp-controller="ACity" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> City
                                         </span></a></li>
-                                <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i
-                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Form Wizard
+                                        <li class="sidebar-item"><a asp-controller="ADistrict" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> District
                                         </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="AHumanGender" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Human Gender
+                                        </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="APronoun" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Pronoun
+                                        </span></a></li>
+
+                            </ul>
+                                
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Doctor</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+
+                                        </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="ADoctorInformation" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Doctor Information
+                                        </span></a></li>
+
+                                        </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="ASchool" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> School
+                                        </span></a></li>
+
+                                        </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="ASchoolType" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> School Type
+                                        </span></a></li>
+
+                                        </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="ADoctorTitle" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Doctor Title
+                                        </span></a></li>
+                                        
                             </ul>
                         </li>
-                                <li class="sidebar-item"><a href="form-wizard.html" class="sidebar-link"><i
-                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Form Wizard
-                                        </span></a></li>
+                        
                             </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Pet</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">General</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="ABreed" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Breed
+                                        </span></a></li>
+
+                                        </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="ASpecie" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Specie
+                                        </span></a></li>
+
+                                        </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="APetGender" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Pet Gender
+                                        </span></a></li>
+
+                            </ul>
+                        </li>                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Adopt</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="APetAdoption" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Pet Adoption
+                                        </span></a></li>
+
+                                        </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="AAdoptInfo" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Adopt Information
+                                        </span></a></li>
+
+                            </ul>
+                        </li>
+                            
+                            </ul>
+                                                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">User</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                </span></a></li>
+                                        <li class="sidebar-item"><a asp-controller="ARolee" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Rolee
+                                        </span></a></li>
+
+                            </ul>
+                        </li>
                         </li>
 
+@* 
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
                                 href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span
                                     class="hide-menu">Authentication </span></a>
@@ -298,7 +386,7 @@
                                             class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Error 500
                                         </span></a></li>
                             </ul>
-                        </li>
+                        </li> *@
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
