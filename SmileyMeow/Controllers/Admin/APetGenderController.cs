@@ -7,7 +7,7 @@ using VetClinicLibrary.Pett.PetGenderr;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class APetGenderController : Controller
+public class APetGenderController : ABaseController
 {
     private readonly ILogger<APetGenderController> _logger;
     private readonly SmileyMeowDbContext _context;

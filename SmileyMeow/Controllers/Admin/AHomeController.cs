@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SmileyMeow.Controllers.Admin;
 
 namespace SmileyMeow.Controllers.AdminControllers;
 
-public class AHomeController : Controller
+public class AHomeController : ABaseController
 {
     private readonly ILogger<AHomeController> _logger;
 

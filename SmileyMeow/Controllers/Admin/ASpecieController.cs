@@ -6,7 +6,7 @@ using VetClinicLibrary.Pett.Speciee;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class ASpecieController : Controller
+public class ASpecieController : ABaseController
 {
     private readonly ILogger<ASpecieController> _logger;
     private readonly SmileyMeowDbContext _context;

@@ -11,7 +11,7 @@ using VetClinicLibrary.Person.Locationn;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class ACityController : Controller
+public class ACityController : ABaseController
 {
     private readonly ILogger<ACityController> _logger;
     private readonly SmileyMeowDbContext _context;

@@ -6,7 +6,7 @@ using VetClinicLibrary.Pett.Breedd;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class ABreedController : Controller
+public class ABreedController : ABaseController
 {
     private readonly ILogger<ABreedController> _logger;
     private readonly SmileyMeowDbContext _context;

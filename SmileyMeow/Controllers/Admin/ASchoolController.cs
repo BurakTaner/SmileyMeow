@@ -7,7 +7,7 @@ using VetClinicLibrary.Schooll;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class ASchoolController : Controller
+public class ASchoolController : ABaseController
 {
     private readonly ILogger<ASchoolController> _logger;
     private readonly SmileyMeowDbContext _context;

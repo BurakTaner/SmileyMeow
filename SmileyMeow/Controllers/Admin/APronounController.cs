@@ -14,7 +14,7 @@ using VetClinicLibrary.Person.Prounounn;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class APronounController : Controller
+public class APronounController : ABaseController
 {
     private readonly ILogger<APronounController> _logger;
     private readonly SmileyMeowDbContext _context;

@@ -13,7 +13,7 @@ using VetClinicLibrary.Person.Locationn;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class ADistrictController : Controller
+public class ADistrictController : ABaseController
 {
     private readonly ILogger<ADistrictController> _logger;
     private readonly SmileyMeowDbContext _context;

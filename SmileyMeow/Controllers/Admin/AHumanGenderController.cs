@@ -11,7 +11,7 @@ using VetClinicLibrary.Person.HumanGenderr;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class AHumanGenderController : Controller
+public class AHumanGenderController : ABaseController
 {
     private readonly ILogger<AHumanGenderController> _logger;
     private readonly SmileyMeowDbContext _context;

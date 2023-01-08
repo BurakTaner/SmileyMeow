@@ -6,7 +6,7 @@ using VetClinicLibrary.Person.DoctorInformationn;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class ADoctorInformationController : Controller
+public class ADoctorInformationController : ABaseController
 {
     private readonly ILogger<ADoctorInformationController> _logger;
     private readonly SmileyMeowDbContext _context;
