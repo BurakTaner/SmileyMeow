@@ -77,12 +77,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 7, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3249),
+                            AppointmentDate = new DateTime(2023, 2, 7, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7668),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 8, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3246)
+                            TimeCreated = new DateTime(2023, 1, 8, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7664)
                         });
                 });
 
@@ -282,12 +282,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 29, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3626),
+                            AppointmentDate = new DateTime(2022, 12, 29, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7948),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 29, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3631)
+                            TimeCreated = new DateTime(2022, 11, 29, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7952)
                         });
                 });
 
@@ -7188,7 +7188,9 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("adoptinfoid");
 
                     b.Property<string>("AdoptText")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(9999)
+                        .HasColumnType("character varying(9999)")
                         .HasColumnName("adopttext");
 
                     b.HasKey("AdoptInfoId")
@@ -7263,7 +7265,9 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("isadoptable");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("name");
 
                     b.Property<int>("PetGenderId")
@@ -7294,7 +7298,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 8, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(2276),
+                            DOB = new DateTime(2023, 1, 8, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(6924),
                             IsAdoptable = true,
                             Name = "Sif",
                             PetGenderId = 6,

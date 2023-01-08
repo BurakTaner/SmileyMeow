@@ -220,7 +220,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<AdoptInfo>().HasData(
-            new AdoptInfo { AdoptInfoId = 6, AdoptText = "So cute" }
+            new AdoptInfo { AdoptInfoId = 6, AdoptText = "So cuteeeeeeeeeeeeeee" }
         );
 
         modelBuilder.Entity<SchoolType>().HasData(
