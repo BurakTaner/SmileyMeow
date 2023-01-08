@@ -12,8 +12,8 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20230107213748_Initial Mıgration")]
-    partial class InitialMıgration
+    [Migration("20230108004232_Initial Migration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,12 +80,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 7, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1502),
+                            AppointmentDate = new DateTime(2023, 2, 7, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1402),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 8, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1499)
+                            TimeCreated = new DateTime(2023, 1, 8, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1398)
                         });
                 });
 
@@ -285,12 +285,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 29, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1804),
+                            AppointmentDate = new DateTime(2022, 12, 29, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1696),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 29, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(1808)
+                            TimeCreated = new DateTime(2022, 11, 29, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1700)
                         });
                 });
 
@@ -7120,11 +7120,15 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DoctorTitleId"));
 
                     b.Property<string>("TFullForm")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("character varying(24)")
                         .HasColumnName("tfullform");
 
                     b.Property<string>("TShortForm")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)")
                         .HasColumnName("tshortform");
 
                     b.HasKey("DoctorTitleId")
@@ -7291,7 +7295,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 8, 0, 37, 47, 239, DateTimeKind.Local).AddTicks(496),
+                            DOB = new DateTime(2023, 1, 8, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(638),
                             IsAdoptable = true,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7309,7 +7313,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PetGenderId"));
 
                     b.Property<string>("GName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(26)
+                        .HasColumnType("character varying(26)")
                         .HasColumnName("gname");
 
                     b.HasKey("PetGenderId")
@@ -7340,7 +7346,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SpecieId"));
 
                     b.Property<string>("SName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .HasColumnType("character varying(35)")
                         .HasColumnName("sname");
 
                     b.HasKey("SpecieId")
@@ -7458,7 +7466,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoleeId"));
 
                     b.Property<string>("RName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
                         .HasColumnName("rname");
 
                     b.HasKey("RoleeId")
