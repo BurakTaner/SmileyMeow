@@ -9,12 +9,12 @@ using VetClinicLibrary.Pett.Breedd;
 
 namespace SmileyMeow.Controllers.Admin;
 
-public class APetAdoptController : ABaseController
+public class APetAdoptionController : ABaseController
 {
-    private readonly ILogger<APetAdoptController> _logger;
+    private readonly ILogger<APetAdoptionController> _logger;
     private readonly SmileyMeowDbContext _context;
 
-    public APetAdoptController(ILogger<APetAdoptController> logger, SmileyMeowDbContext context)
+    public APetAdoptionController(ILogger<APetAdoptionController> logger, SmileyMeowDbContext context)
     {
         _logger = logger;
         _context = context;
