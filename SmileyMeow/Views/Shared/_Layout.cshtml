@@ -53,7 +53,7 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a asp-controller="" asp-action="" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a asp-controller="" asp-action="UnderMaintenance" class="nav-link">About</a></li>
                     <li class="nav-item"><a asp-controller="Doctors" asp-action="List" class="nav-link">Doctors</a></li>
                     @if (User.FindFirst(a => a.Type == ClaimTypes.Role)?.Value.ToString() == "PetParent")
                     {
@@ -66,7 +66,7 @@
                     }
                     <li class="nav-item"><a asp-controller="Adopt" asp-action="List" class="nav-link">Adopt</a></li>
                     <li class="nav-item"><a asp-controller="RandomAnimalKnowledges" asp-action=""
-                            class="nav-link">Contact</a></li>
+                            class="nav-link">Random Animalpedia</a></li>
                 </ul>
                 <div class="dropdown">
                     <button class="btn btn-first ml-5 loginout" type="button" id="dropdownMenuButton"
@@ -115,9 +115,9 @@
                 <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
                     <h2 class="footer-heading">Latest News</h2>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="img mr-4 rounded" style="background-image: url(/Images/gallery-2.jpg);"></a>
+                        <a class="img mr-4 rounded" asp-controller="" asp-action="UnderMaintenance" style="background-image: url(/Images/drmichellenew.jpg);"></a>
                         <div class="text">
-                            <h3 class="heading" style="color:white;">Doctor Michelle Laura saved 2 dog at the same time!
+                            <h3 class="heading" style="color:white;">Doctor Michelle Laura saved 50 animal in a one day!
                             </h3>
                             <div class="meta">
                                 <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
@@ -126,9 +126,9 @@
                         </div>
                     </div>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="img mr-4 rounded" style="background-image: url(/Images/gallery-2.jpg);"></a>
+                        <a class="img mr-4 rounded" asp-action="" asp-action="UnderMaintenance" style="background-image: url(/Images/signnew.jpg);"></a>
                         <div class="text">
-                            <h3 class="heading" style="color:white;">İgulara finally signed Universal Declaration on
+                            <h3 class="heading" style="color:white;">Fooland finally signed Universal Declaration on
                                 Animal Welfare!</h3>
                             <div class="meta">
                                 <div><a href="#"><span class="icon-calendar"></span> April 7, 2022</a></div>
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+                @* <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
                     <h2 class="footer-heading">Quick Links</h2>
                     <ul class="list-unstyled">
                         <li><a href="#" class="py-2 d-block">Home</a></li>
@@ -146,7 +146,7 @@
                         <li><a href="#" class="py-2 d-block">Services</a></li>
                         <li><a href="#" class="py-2 d-block">Contact</a></li>
                     </ul>
-                </div>
+                </div> *@
                 <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
                     <h2 class="footer-heading">Have a Questions?</h2>
                     <div class="block-23 mb-3">
