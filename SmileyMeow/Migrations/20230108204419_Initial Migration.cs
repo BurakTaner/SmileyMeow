@@ -15,6 +15,19 @@ namespace SmileyMeow.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "adoptinfos",
+                columns: table => new
+                {
+                    adoptinfoid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    adopttext = table.Column<string>(type: "character varying(9999)", maxLength: 9999, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_adoptinfos", x => x.adoptinfoid);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "appointmentstatuses",
                 columns: table => new
                 {
@@ -297,6 +310,11 @@ namespace SmileyMeow.Migrations
                 {
                     table.PrimaryKey("pk_pets", x => x.animalid);
                     table.ForeignKey(
+                        name: "fk_pets_adoptinfos_adoptinfoid",
+                        column: x => x.adoptinfoid,
+                        principalTable: "adoptinfos",
+                        principalColumn: "adoptinfoid");
+                    table.ForeignKey(
                         name: "fk_pets_breeds_breedid",
                         column: x => x.breedid,
                         principalTable: "breeds",
@@ -368,24 +386,6 @@ namespace SmileyMeow.Migrations
                         column: x => x.districtid,
                         principalTable: "districts",
                         principalColumn: "districtid");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "adoptinfos",
-                columns: table => new
-                {
-                    adoptinfoid = table.Column<int>(type: "integer", nullable: false),
-                    adopttext = table.Column<string>(type: "character varying(9999)", maxLength: 9999, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_adoptinfos", x => x.adoptinfoid);
-                    table.ForeignKey(
-                        name: "fk_adoptinfos_pets_adoptinfoid",
-                        column: x => x.adoptinfoid,
-                        principalTable: "pets",
-                        principalColumn: "animalid",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -672,6 +672,15 @@ namespace SmileyMeow.Migrations
                         principalTable: "petsnpersons",
                         principalColumn: "petnpersonid",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "adoptinfos",
+                columns: new[] { "adoptinfoid", "adopttext" },
+                values: new object[,]
+                {
+                    { 6, "So cuteeeeeeeeeeeeeee" },
+                    { 7, "So cuteeeeeeeeeeeeeee2" }
                 });
 
             migrationBuilder.InsertData(
@@ -1860,7 +1869,11 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "pets",
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
-                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 8, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(6924), true, "Sif", 6, 6 });
+                values: new object[,]
+                {
+                    { 6, 6, 6, new DateTime(2023, 1, 8, 23, 44, 17, 703, DateTimeKind.Local).AddTicks(9903), false, "Sif", 6, 6 },
+                    { 9, 7, 6, new DateTime(2023, 1, 8, 23, 44, 17, 703, DateTimeKind.Local).AddTicks(9960), true, "Shelob", 6, 6 }
+                });
 
             migrationBuilder.InsertData(
                 table: "schools",
@@ -1889,11 +1902,6 @@ namespace SmileyMeow.Migrations
                     { 9, "Block 6, after Coo's shop", 30 },
                     { 12, "Block 7, after Too's shop", 30 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "adoptinfos",
-                columns: new[] { "adoptinfoid", "adopttext" },
-                values: new object[] { 6, "So cute" });
 
             migrationBuilder.InsertData(
                 table: "doctors",
@@ -1936,12 +1944,12 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 7, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7668), 6, 6, 6, 6, new DateTime(2023, 1, 8, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7664) });
+                values: new object[] { 6, new DateTime(2023, 2, 7, 23, 44, 17, 704, DateTimeKind.Local).AddTicks(1308), 6, 6, 6, 6, new DateTime(2023, 1, 8, 23, 44, 17, 704, DateTimeKind.Local).AddTicks(1305) });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 29, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7948), 8, 9, 9, 9, new DateTime(2022, 11, 29, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7952) });
+                values: new object[] { 6, new DateTime(2022, 12, 29, 23, 44, 17, 704, DateTimeKind.Local).AddTicks(1696), 8, 9, 9, 9, new DateTime(2022, 11, 29, 23, 44, 17, 704, DateTimeKind.Local).AddTicks(1700) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",
@@ -2103,6 +2111,12 @@ namespace SmileyMeow.Migrations
                 column: "userid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_pets_adoptinfoid",
+                table: "pets",
+                column: "adoptinfoid",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "ix_pets_breedid",
                 table: "pets",
                 column: "breedid");
@@ -2141,9 +2155,6 @@ namespace SmileyMeow.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "adoptinfos");
-
             migrationBuilder.DropTable(
                 name: "appointments");
 
@@ -2203,6 +2214,9 @@ namespace SmileyMeow.Migrations
 
             migrationBuilder.DropTable(
                 name: "userrs");
+
+            migrationBuilder.DropTable(
+                name: "adoptinfos");
 
             migrationBuilder.DropTable(
                 name: "schooltypes");

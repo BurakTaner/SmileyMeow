@@ -12,7 +12,7 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20230108165916_Initial Migration")]
+    [Migration("20230108204419_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -80,12 +80,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 7, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7668),
+                            AppointmentDate = new DateTime(2023, 2, 7, 23, 44, 17, 704, DateTimeKind.Local).AddTicks(1308),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 8, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7664)
+                            TimeCreated = new DateTime(2023, 1, 8, 23, 44, 17, 704, DateTimeKind.Local).AddTicks(1305)
                         });
                 });
 
@@ -285,12 +285,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 29, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7948),
+                            AppointmentDate = new DateTime(2022, 12, 29, 23, 44, 17, 704, DateTimeKind.Local).AddTicks(1696),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 29, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(7952)
+                            TimeCreated = new DateTime(2022, 11, 29, 23, 44, 17, 704, DateTimeKind.Local).AddTicks(1700)
                         });
                 });
 
@@ -7187,8 +7187,11 @@ namespace SmileyMeow.Migrations
             modelBuilder.Entity("VetClinicLibrary.Pett.Adopt.AdoptInfo", b =>
                 {
                     b.Property<int>("AdoptInfoId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("adoptinfoid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AdoptInfoId"));
 
                     b.Property<string>("AdoptText")
                         .IsRequired()
@@ -7205,7 +7208,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AdoptInfoId = 6,
-                            AdoptText = "So cute"
+                            AdoptText = "So cuteeeeeeeeeeeeeee"
+                        },
+                        new
+                        {
+                            AdoptInfoId = 7,
+                            AdoptText = "So cuteeeeeeeeeeeeeee2"
                         });
                 });
 
@@ -7284,6 +7292,10 @@ namespace SmileyMeow.Migrations
                     b.HasKey("AnimalId")
                         .HasName("pk_pets");
 
+                    b.HasIndex("AdoptInfoId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_pets_adoptinfoid");
+
                     b.HasIndex("BreedId")
                         .HasDatabaseName("ix_pets_breedid");
 
@@ -7301,9 +7313,20 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 8, 19, 59, 15, 322, DateTimeKind.Local).AddTicks(6924),
-                            IsAdoptable = true,
+                            DOB = new DateTime(2023, 1, 8, 23, 44, 17, 703, DateTimeKind.Local).AddTicks(9903),
+                            IsAdoptable = false,
                             Name = "Sif",
+                            PetGenderId = 6,
+                            SpecieId = 6
+                        },
+                        new
+                        {
+                            AnimalId = 9,
+                            AdoptInfoId = 7,
+                            BreedId = 6,
+                            DOB = new DateTime(2023, 1, 8, 23, 44, 17, 703, DateTimeKind.Local).AddTicks(9960),
+                            IsAdoptable = true,
+                            Name = "Shelob",
                             PetGenderId = 6,
                             SpecieId = 6
                         });
@@ -7895,20 +7918,13 @@ namespace SmileyMeow.Migrations
                     b.Navigation("PetParent");
                 });
 
-            modelBuilder.Entity("VetClinicLibrary.Pett.Adopt.AdoptInfo", b =>
-                {
-                    b.HasOne("VetClinicLibrary.Pett.Pet", "Pet")
-                        .WithOne("AdoptionInfo")
-                        .HasForeignKey("VetClinicLibrary.Pett.Adopt.AdoptInfo", "AdoptInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_adoptinfos_pets_adoptinfoid");
-
-                    b.Navigation("Pet");
-                });
-
             modelBuilder.Entity("VetClinicLibrary.Pett.Pet", b =>
                 {
+                    b.HasOne("VetClinicLibrary.Pett.Adopt.AdoptInfo", "AdoptionInfo")
+                        .WithOne("Pet")
+                        .HasForeignKey("VetClinicLibrary.Pett.Pet", "AdoptInfoId")
+                        .HasConstraintName("fk_pets_adoptinfos_adoptinfoid");
+
                     b.HasOne("VetClinicLibrary.Pett.Breedd.Breed", "Breed")
                         .WithMany("Pet")
                         .HasForeignKey("BreedId")
@@ -7929,6 +7945,8 @@ namespace SmileyMeow.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_pets_species_specieid");
+
+                    b.Navigation("AdoptionInfo");
 
                     b.Navigation("Breed");
 
@@ -8029,6 +8047,11 @@ namespace SmileyMeow.Migrations
                     b.Navigation("Doctors");
                 });
 
+            modelBuilder.Entity("VetClinicLibrary.Pett.Adopt.AdoptInfo", b =>
+                {
+                    b.Navigation("Pet");
+                });
+
             modelBuilder.Entity("VetClinicLibrary.Pett.Breedd.Breed", b =>
                 {
                     b.Navigation("Pet");
@@ -8036,8 +8059,6 @@ namespace SmileyMeow.Migrations
 
             modelBuilder.Entity("VetClinicLibrary.Pett.Pet", b =>
                 {
-                    b.Navigation("AdoptionInfo");
-
                     b.Navigation("PetnPersonn");
                 });
 

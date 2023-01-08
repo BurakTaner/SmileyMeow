@@ -15,7 +15,7 @@ namespace VetClinicLibrary.Pett;
 public class Pet : IPet
 {
     public int AnimalId { get; set; }
-    [Required(ErrorMessage = "{0} can't be empty"), Display(Name = "Name"), StringLength(20, MinimumLength = 5, ErrorMessage = "{0} must be between {2} - {1}")]
+    [Required(ErrorMessage = "{0} can't be empty"), Display(Name = "Name"), StringLength(20, MinimumLength = 3, ErrorMessage = "{0} must be between {2} - {1}")]
     public string Name { get; set; }
     [Required(ErrorMessage = "{0} must be filled."), Display(Name = "Date of birth")]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]

@@ -52,6 +52,7 @@ public class PetController : BasyController
         PetnPerson petnPerson = new();
         int petParentId = _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.PetParentId).FirstOrDefault();
         Pet createPet = pet;
+        createPet.IsAdoptable = false;
         pet.IsAdoptable = false;
         _context.Pets.Add(pet);
         petnPerson.Pet = pet;

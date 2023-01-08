@@ -62,8 +62,7 @@ public class SmileyMeowDbContext : DbContext
         // temporary 
         modelBuilder.Entity<Pet>()
                     .HasOne(p => p.AdoptionInfo)
-                    .WithOne(a => a.Pet)
-                    .HasForeignKey<AdoptInfo>(a => a.AdoptInfoId);
+                    .WithOne(a => a.Pet);
         
         modelBuilder.Entity<DoctorInformation>()
                     .HasOne(a => a.Doctor)
@@ -201,7 +200,8 @@ public class SmileyMeowDbContext : DbContext
 
         // dummy data
         modelBuilder.Entity<Pet>().HasData(
-            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif", AdoptInfoId = 6 }
+            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = false, SpecieId = 6, Name = "Sif", AdoptInfoId = 6 },
+            new Pet { AnimalId = 9, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Shelob", AdoptInfoId = 7 }
         );
 
         modelBuilder.Entity<PetGender>().HasData(
@@ -220,7 +220,8 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<AdoptInfo>().HasData(
-            new AdoptInfo { AdoptInfoId = 6, AdoptText = "So cuteeeeeeeeeeeeeee" }
+            new AdoptInfo { AdoptInfoId = 6, AdoptText = "So cuteeeeeeeeeeeeeee" },
+            new AdoptInfo { AdoptInfoId = 7, AdoptText = "So cuteeeeeeeeeeeeeee2" }
         );
 
         modelBuilder.Entity<SchoolType>().HasData(
