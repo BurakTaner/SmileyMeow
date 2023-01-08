@@ -1,0 +1,52 @@
+@model UserRoleeChangeViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <form method="post" id="changerolee-form" asp-controller="ARolee" asp-action="ChangeRolee" asp-route-id="@Model.Userr.UserrId">
+        <div class="card-body">
+            <h4 class="card-title" id="crud-title"></h4>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group row" id="form-group">
+                <label for="userrid" id="idlabel"
+                    class="col-sm-3 text-end control-label col-form-label idlab">Id</label>
+                <div class="col-sm-9">
+                    <input class="form-control idput" id="userrid" name="UserrId" value="@Model.Userr.UserrId" disabled>
+                </div>
+
+                <label for="role-select" class="col-sm-3 text-end control-label col-form-label">Rolee</label>
+                <div class="col-sm-9">
+                    <select class="select form-select shadow-none" id="role-select" name="roleeId" disabled>
+                        @foreach (Rolee rolee in Model.RoleeList)
+                        {
+                            <option value="@rolee.RoleeId" selected="@(Model.Userr.RoleeId == rolee.RoleeId)">
+                                @rolee.RName</option>
+                        }
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body sbmt-area">
+                <section class="updt-role" id="updt-role">
+                    <button type="button" class="btn btn-primary" id="updt-btn">Update</button>
+                <a asp-controller="ARolee" asp-action="RoleesOfUsers" class="btn btn-primary cnl-btn">Cancel</a>
+                </section>
+            </div>
+            <hr class="cnfrm-sec">
+            <section class="cnfrm-area" id="cnfrm-area">
+                <div class="card-body sbmt-area">
+                    <strong class="confirm-txt">Are you really wants to <span id="cnfrm-spn"></span></strong>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-primary" id="cancl-frm">Close</button>
+                </div>
+            </section>
+        </div>
+    </form>
+
+</div>
+
+<script src="~/js/adminpages/forms/changeroleeform.js" type="module"></script>

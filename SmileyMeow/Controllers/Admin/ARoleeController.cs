@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmileyMeow.Data;
+using SmileyMeow.ViewModels;
 using VetClinicLibrary.Pett.PetGenderr;
 using VetClinicLibrary.Pett.Speciee;
 using VetClinicLibrary.User;
@@ -79,7 +80,36 @@ public class ARoleeController : ABaseController
         }
         return View("CRUD", rolee);
     }
+    public async Task<IActionResult> RoleesOfUsers() {
+        List<Userr> userrs = await _context.Userrs
+        .Include(a => a.Rolee)
+        .ToListAsync();
+        
+        return View(userrs);
+    }
 
+    public async Task<IActionResult> ChangeRolee(int id) {
+        UserRoleeChangeViewModel userRoleeChangeViewModel = new();
+        userRoleeChangeViewModel.Userr = await _context.Userrs.FirstOrDefaultAsync(a => a.UserrId == id);
+        if (userRoleeChangeViewModel.Userr is null)
+        {
+            return NotFound();
+        }
+        userRoleeChangeViewModel.RoleeList = await _context.Rolees.ToListAsync();
+        return View(userRoleeChangeViewModel);
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ChangeRolee(int id, int roleeId ) {
+        if(ModelState.IsValid) {
+            Userr userr = await _context.Userrs.FirstOrDefaultAsync(a => a.UserrId == id);
+            userr.RoleeId = roleeId;
+            _context.Update(userr);
+            await Save();
+            return RedirectToAction("RoleesOfUsers","ARolee");
+        }
+        return View();
+    }
     //-----------------------------------------------------------------------------------------//
     private async Task<Rolee> FindRolee(int id)
     {
