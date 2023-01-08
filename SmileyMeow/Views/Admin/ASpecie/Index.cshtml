@@ -1,0 +1,43 @@
+@model List<Specie>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+
+    <div class="card-body">
+        <a asp-controller="ASpecie" asp-action="Create" class="btn btn-primary crt-btn-m5">
+            Create
+        </a>
+
+        <h5 class="card-title">Species</h5>
+        <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>SName</th>
+                        <th class="last-clmn">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Specie specie in Model)
+                    {
+
+                        <tr>
+                            <td>@specie.SpecieId</td>
+                            <td>@specie.SName</td>
+                            <td>
+                                <a asp-controller="ASpecie" asp-action="CRUD" asp-route-id="@specie.SpecieId" class="icn-mr">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
