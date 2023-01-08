@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmileyMeow.Data;
@@ -19,7 +20,7 @@ public class PetParentController : BasyController
         _logger = logger;
         _context = context;
     }
-
+    [Authorize(Roles = "PetParent")]
     public async Task<IActionResult> Profile()
     {
         int loggedUser = ReturnLoggedUserId();
