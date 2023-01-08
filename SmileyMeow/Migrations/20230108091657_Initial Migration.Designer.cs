@@ -12,7 +12,7 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20230108004232_Initial Migration")]
+    [Migration("20230108091657_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -80,12 +80,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 7, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1402),
+                            AppointmentDate = new DateTime(2023, 2, 7, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3249),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 8, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1398)
+                            TimeCreated = new DateTime(2023, 1, 8, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3246)
                         });
                 });
 
@@ -285,12 +285,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 29, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1696),
+                            AppointmentDate = new DateTime(2022, 12, 29, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3626),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 29, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1700)
+                            TimeCreated = new DateTime(2022, 11, 29, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3631)
                         });
                 });
 
@@ -603,7 +603,9 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("doctorid");
 
                     b.Property<string>("DoctorInformationText")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(99999)
+                        .HasColumnType("character varying(99999)")
                         .HasColumnName("doctorinformationtext");
 
                     b.HasKey("DoctorId")
@@ -7295,7 +7297,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 8, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(638),
+                            DOB = new DateTime(2023, 1, 8, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(2276),
                             IsAdoptable = true,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7491,6 +7493,16 @@ namespace SmileyMeow.Migrations
                         {
                             RoleeId = 7,
                             RName = "Doctor"
+                        },
+                        new
+                        {
+                            RoleeId = 8,
+                            RName = "Admin"
+                        },
+                        new
+                        {
+                            RoleeId = 9,
+                            RName = "Supervisor"
                         });
                 });
 
@@ -7544,6 +7556,20 @@ namespace SmileyMeow.Migrations
                             Emaill = "anastacia@gmail.com",
                             Passwordd = "anastacia123456",
                             RoleeId = 7
+                        },
+                        new
+                        {
+                            UserrId = 129,
+                            Emaill = "admin@gmail.com",
+                            Passwordd = "admin123456",
+                            RoleeId = 8
+                        },
+                        new
+                        {
+                            UserrId = 130,
+                            Emaill = "supervisor@gmail.com",
+                            Passwordd = "supervisor123456",
+                            RoleeId = 9
                         });
                 });
 

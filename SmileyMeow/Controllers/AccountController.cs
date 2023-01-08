@@ -89,12 +89,12 @@ namespace SmileyMeow.Controllers
                     }
                     else if (registeredUser.Rolee.RName == "Admin")
                     {
-                        return Redirect("~/AdminHomepage/Index");
+                        return Redirect("~/AHome/");
                     }
 
                     else if (registeredUser.Rolee.RName == "Supervisor")
                     {
-                        return Redirect("~/AdminHomePage/Index");
+                        return Redirect("~/AhOME/");
                     }
 
                     else

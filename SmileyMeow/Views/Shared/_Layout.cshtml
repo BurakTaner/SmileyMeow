@@ -77,6 +77,15 @@
             {
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" asp-controller="" asp-action="ProfileSwitcher">Profile</a>
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+                    </div>
+            }
+            else if(Convert.ToInt32(User.FindFirst(a => a.Type == ClaimTypes.Sid)?.Value) == 8 || 
+            Convert.ToInt32(User.FindFirst(a => a.Type == ClaimTypes.Sid)?.Value) == 9) {
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" asp-controller="" asp-action="ProfileSwitcher">Profile</a>
+                        <a class="dropdown-item" asp-controller="AHome" asp-action="">Admin Homepage</a>
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
                     </div>
             }
             else {  

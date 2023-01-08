@@ -525,7 +525,7 @@ namespace SmileyMeow.Migrations
                 columns: table => new
                 {
                     doctorid = table.Column<int>(type: "integer", nullable: false),
-                    doctorinformationtext = table.Column<string>(type: "text", nullable: true)
+                    doctorinformationtext = table.Column<string>(type: "character varying(99999)", maxLength: 99999, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -837,7 +837,9 @@ namespace SmileyMeow.Migrations
                 {
                     { 5, "Candidate" },
                     { 6, "PetParent" },
-                    { 7, "Doctor" }
+                    { 7, "Doctor" },
+                    { 8, "Admin" },
+                    { 9, "Supervisor" }
                 });
 
             migrationBuilder.InsertData(
@@ -1858,7 +1860,7 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "pets",
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
-                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 8, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(638), true, "Sif", 6, 6 });
+                values: new object[] { 6, 6, 6, new DateTime(2023, 1, 8, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(2276), true, "Sif", 6, 6 });
 
             migrationBuilder.InsertData(
                 table: "schools",
@@ -1872,6 +1874,8 @@ namespace SmileyMeow.Migrations
                 {
                     { 6, "artorias@gmail.com", "sif123456", 6 },
                     { 128, "anastacia@gmail.com", "anastacia123456", 7 },
+                    { 129, "admin@gmail.com", "admin123456", 8 },
+                    { 130, "supervisor@gmail.com", "supervisor123456", 9 },
                     { 666, "patches@gmail.com", "patches123456", 7 }
                 });
 
@@ -1932,12 +1936,12 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 7, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1402), 6, 6, 6, 6, new DateTime(2023, 1, 8, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1398) });
+                values: new object[] { 6, new DateTime(2023, 2, 7, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3249), 6, 6, 6, 6, new DateTime(2023, 1, 8, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3246) });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 29, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1696), 8, 9, 9, 9, new DateTime(2022, 11, 29, 3, 42, 30, 627, DateTimeKind.Local).AddTicks(1700) });
+                values: new object[] { 6, new DateTime(2022, 12, 29, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3626), 8, 9, 9, 9, new DateTime(2022, 11, 29, 12, 16, 55, 994, DateTimeKind.Local).AddTicks(3631) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",

@@ -234,13 +234,17 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Userr>().HasData(
             new Userr { UserrId = 6, Emaill = "artorias@gmail.com", Passwordd = "sif123456", RoleeId = 6 },
             new Userr { UserrId = 666, Emaill = "patches@gmail.com", Passwordd = "patches123456", RoleeId = 7 },
-            new Userr { UserrId = 128, Emaill = "anastacia@gmail.com", Passwordd = "anastacia123456", RoleeId = 7 }
+            new Userr { UserrId = 128, Emaill = "anastacia@gmail.com", Passwordd = "anastacia123456", RoleeId = 7 },
+            new Userr { UserrId = 129, Emaill = "admin@gmail.com", Passwordd = "admin123456", RoleeId = 8 },
+            new Userr { UserrId = 130, Emaill = "supervisor@gmail.com", Passwordd = "supervisor123456", RoleeId = 9 }
         );
 
         modelBuilder.Entity<Rolee>().HasData(
             new Rolee { RoleeId = 5, RName = "Candidate" },
             new Rolee { RoleeId = 6, RName = "PetParent" },
-            new Rolee { RoleeId = 7, RName = "Doctor" }
+            new Rolee { RoleeId = 7, RName = "Doctor" },
+            new Rolee { RoleeId = 8, RName = "Admin" },
+            new Rolee { RoleeId = 9, RName = "Supervisor" }
         );
 
         modelBuilder.Entity<Doctor>().HasData(

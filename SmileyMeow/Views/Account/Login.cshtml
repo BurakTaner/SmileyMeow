@@ -13,6 +13,7 @@
                 <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
                     <form class="login-form" asp-controller="Account" asp-action="Login" method="post">
+                        <div asp-validation-summary="All" class="txt-danger"></div>
                         <div class="form-outline mb-4">
                             <label class="form-label" for="form2Example18">Email address</label>
                             <input type="email" id="form2Example18" class="form-control form-control-lg" name="Emaill"
