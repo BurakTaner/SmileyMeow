@@ -1,0 +1,43 @@
+@model List<DoctorInformation>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+
+    <div class="card-body">
+        <a asp-controller="ADoctorInformation" asp-action="Create" class="btn btn-primary crt-btn-m5">
+            Create
+        </a>
+
+        <h5 class="card-title">Doctor Information</h5>
+        <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Information</th>
+                        <th class="last-clmn">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DoctorInformation doctorInformation in Model)
+                    {
+
+                        <tr>
+                            <td>@doctorInformation.DoctorId</td>
+                            <td>@doctorInformation.DoctorInformationText</td>
+                            <td>
+                                <a asp-controller="ADoctorInformation" asp-action="CRUD" asp-route-id="@doctorInformation.DoctorId" class="icn-mr">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
