@@ -1,0 +1,35 @@
+@model SchoolViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <form class="form-horizontal" asp-controller="ASchool" asp-action="Update" method="post" asp-route-id="@Model.School.SchoolId">
+        <div class="card-body">
+            <h4 class="card-title">Update School</h4>
+            <div class="form-group row">
+                <label for="sname" class="col-sm-3 text-end control-label col-form-label">SName</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="sname" name="SName" value="@Model.School.SName">
+                </div>
+                    <label for="schooltypeid" class="col-sm-3 text-end control-label col-form-label">School Type</label>
+                    <div class="col-sm-9">
+                        <select class="select form-select shadow-none" id="schooltypeid" name="SchoolTypeId">
+                            @foreach (SchoolType schoolType in Model.SchoolTypeList)
+                            {
+                                <option value="@schoolType.SchoolTypeId" selected="@(Model.School.SchoolTypeId == schoolType.SchoolTypeId)">
+                                    @schoolType.STName</option>
+                            }
+                        </select>
+                    </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body sbmt-area">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a type="submit" asp-controller="ASchool" asp-action="" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

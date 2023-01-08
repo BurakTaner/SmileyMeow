@@ -1,0 +1,93 @@
+@model PetAddViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="add-pet-page">
+    <section class="vh-100" style="background-color: #f4f5f7;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-6 mb-4 mb-lg-0">
+                    <a asp-controller="PetParent" asp-action="Profile">
+                        <i class="fa-solid fa-arrow-left fa-3x left-arw"></i>
+                    </a>
+                    <div class="card mb-3" style="border-radius: .5rem;">
+                        <form asp-controller="Pet" asp-action="Add" method="post">
+                            <div class="row g-0">
+                                <div class="col-md-4 gradient-custom text-center text-white"
+                                    style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                    <img src="~/Images/cutecat.jpg" alt="A pet image" class="img-fluid my-5 img-m" />
+                                    <h5>Name</h5>
+                                    <input type="text" name="Name" id="name" value="@Model.Pet.Name"
+                                        class="w-100 p-1 mh-100 nm-h">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body p-4">
+                                        <h6 class="mt-2">Add Pet</h6>
+                                        <hr class="mt-0 mb-4">
+                                        <div class="row pt-1">
+                                            <div class="col-6 mb-3">
+                                                <h6 class="dob-lab">DOB</h6>
+                                                <input type="date" name="DOB" id="" class="text-muted mw-50">
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <div class="formbold-mb-5">
+                                                    <label for="doctor-preference"
+                                                        class="formbold-form-label mt-3 pt-gndr-select-lb">Pet
+                                                        Gender</label>
+                                                    <select name="PetGenderId" id="doctor-preference"
+                                                        class="formbold-form-input gndr-slct">
+                                                        <option value="0" selected="">None</option>
+                                                        @foreach (PetGender petGender in Model.PetGenderList)
+                                                        {
+                                                            <option value="@petGender.PetGenderId"
+                                                            selected="@(Model.Pet.PetGenderId == petGender.PetGenderId)">
+                                                                @petGender.GName</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="mt-0 mb-4">
+                                        <div class="row pt-1">
+                                            <div class="col-6 mb-3">
+                                                <div class="formbold-mb-5">
+                                                    <label for="doctor-preference"
+                                                        class="formbold-form-label mt-3 pt-gndr-select-lb">Specie</label>
+                                                    <select name="SpecieId" id="doctor-preference"
+                                                        class="formbold-form-input gndr-slct">
+                                                        <option selected="" value="0">None</option>
+                                                        @foreach (Specie specie in Model.SpecieList)
+                                                        {
+                                                            <option selected="@(Model.Pet.SpecieId == specie.SpecieId)"
+                                                            value="@specie.SpecieId">@specie.SName</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <div class="formbold-mb-5">
+                                                    <label for="doctor-preference"
+                                                        class="formbold-form-label mt-3 pt-gndr-select-lb">Breed</label>
+                                                    <select name="BreedId" id="doctor-preference"
+                                                        class="formbold-form-input gndr-slct">
+                                                        <option selected="" value="0">None</option>
+                                                        @foreach (Breed breed in Model.BreedList)
+                                                        {
+                                                            <option selected="@(Model.Pet.BreedId == breed
+                                                        .BreedId)" value="@breed.BreedId">@breed.BreedId</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="formbold-btn">Add Pet</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

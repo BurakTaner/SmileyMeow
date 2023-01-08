@@ -1,0 +1,36 @@
+@model District
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card">
+ <div class="card-body">
+            <h4 class="card-title">District Info</h4>
+            <div class="form-group row">
+                <label for="genderid" class="col-sm-3 text-end control-label col-form-label">Id</label>
+                <div class="col-sm-9">
+                    <p class="form-control" id="districtid" name="DistrictId">@Model.DistrictId</p>
+                </div>
+                
+                <label for="fname" class="col-sm-3 text-end control-label col-form-label">DName</label>
+                <div class="col-sm-9">
+                    <p class="form-control" id="dname" name="DName">@Model.DName</p>
+                </div>
+                <label for="fname" class="col-sm-3 text-end control-label col-form-label">CityId</label>
+                <div class="col-sm-9">
+                    <p class="form-control" id="dname" name="DName">@Model.CityId</p>
+                </div>
+                <label for="fname" class="col-sm-3 text-end control-label col-form-label">DName</label>
+                <div class="col-sm-9">
+                    <p class="form-control" id="dname" name="DName">@Model.City.CName</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body sbmt-area">
+                <a class="btn btn-primary" asp-controller="ADistrict" asp-action="Update" asp-route-id="@Model.DistrictId">Update</a>
+                <a asp-controller="ADistrict" asp-action="Delete" asp-route-id="@Model.DistrictId" class="btn btn-primary">Delete</a>
+                <a asp-controller="ADistrict" asp-action="" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+        </div>

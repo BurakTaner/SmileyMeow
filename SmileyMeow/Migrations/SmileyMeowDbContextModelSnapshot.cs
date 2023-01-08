@@ -77,12 +77,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 3, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(2657),
+                            AppointmentDate = new DateTime(2023, 2, 8, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(2069),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 4, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(2654)
+                            TimeCreated = new DateTime(2023, 1, 9, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(2066)
                         });
                 });
 
@@ -282,12 +282,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 25, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(2955),
+                            AppointmentDate = new DateTime(2022, 12, 30, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(2389),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 25, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(2960)
+                            TimeCreated = new DateTime(2022, 11, 30, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(2393)
                         });
                 });
 
@@ -600,7 +600,9 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("doctorid");
 
                     b.Property<string>("DoctorInformationText")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(99999)
+                        .HasColumnType("character varying(99999)")
                         .HasColumnName("doctorinformationtext");
 
                     b.HasKey("DoctorId")
@@ -631,7 +633,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("HumanGenderId"));
 
                     b.Property<string>("GName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
                         .HasColumnName("gname");
 
                     b.HasKey("HumanGenderId")
@@ -719,7 +723,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CityId"));
 
                     b.Property<string>("CName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
                         .HasColumnName("cname");
 
                     b.HasKey("CityId")
@@ -7080,7 +7086,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProunounId"));
 
                     b.Property<string>("PName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("pname");
 
                     b.HasKey("ProunounId")
@@ -7111,11 +7119,15 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DoctorTitleId"));
 
                     b.Property<string>("TFullForm")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("character varying(24)")
                         .HasColumnName("tfullform");
 
                     b.Property<string>("TShortForm")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)")
                         .HasColumnName("tshortform");
 
                     b.HasKey("DoctorTitleId")
@@ -7172,11 +7184,16 @@ namespace SmileyMeow.Migrations
             modelBuilder.Entity("VetClinicLibrary.Pett.Adopt.AdoptInfo", b =>
                 {
                     b.Property<int>("AdoptInfoId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("adoptinfoid");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AdoptInfoId"));
+
                     b.Property<string>("AdoptText")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(9999)
+                        .HasColumnType("character varying(9999)")
                         .HasColumnName("adopttext");
 
                     b.HasKey("AdoptInfoId")
@@ -7188,7 +7205,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AdoptInfoId = 6,
-                            AdoptText = "So cute"
+                            AdoptText = "So cuteeeeeeeeeeeeeee"
+                        },
+                        new
+                        {
+                            AdoptInfoId = 7,
+                            AdoptText = "So cuteeeeeeeeeeeeeee2"
                         });
                 });
 
@@ -7202,7 +7224,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BreedId"));
 
                     b.Property<string>("BName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)")
                         .HasColumnName("bname");
 
                     b.HasKey("BreedId")
@@ -7249,7 +7273,9 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("isadoptable");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("name");
 
                     b.Property<int>("PetGenderId")
@@ -7262,6 +7288,10 @@ namespace SmileyMeow.Migrations
 
                     b.HasKey("AnimalId")
                         .HasName("pk_pets");
+
+                    b.HasIndex("AdoptInfoId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_pets_adoptinfoid");
 
                     b.HasIndex("BreedId")
                         .HasDatabaseName("ix_pets_breedid");
@@ -7280,9 +7310,20 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 4, 2, 15, 1, 239, DateTimeKind.Local).AddTicks(1794),
-                            IsAdoptable = true,
+                            DOB = new DateTime(2023, 1, 9, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(768),
+                            IsAdoptable = false,
                             Name = "Sif",
+                            PetGenderId = 6,
+                            SpecieId = 6
+                        },
+                        new
+                        {
+                            AnimalId = 9,
+                            AdoptInfoId = 7,
+                            BreedId = 6,
+                            DOB = new DateTime(2023, 1, 9, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(805),
+                            IsAdoptable = true,
+                            Name = "Shelob",
                             PetGenderId = 6,
                             SpecieId = 6
                         });
@@ -7298,7 +7339,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PetGenderId"));
 
                     b.Property<string>("GName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(26)
+                        .HasColumnType("character varying(26)")
                         .HasColumnName("gname");
 
                     b.HasKey("PetGenderId")
@@ -7329,7 +7372,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SpecieId"));
 
                     b.Property<string>("SName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .HasColumnType("character varying(35)")
                         .HasColumnName("sname");
 
                     b.HasKey("SpecieId")
@@ -7359,20 +7404,22 @@ namespace SmileyMeow.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SchoolTypeId"));
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                    b.Property<string>("STName")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("stname");
 
                     b.HasKey("SchoolTypeId")
-                        .HasName("pk_schooltype");
+                        .HasName("pk_schooltypes");
 
-                    b.ToTable("schooltype", (string)null);
+                    b.ToTable("schooltypes", (string)null);
 
                     b.HasData(
                         new
                         {
                             SchoolTypeId = 6,
-                            Name = "University"
+                            STName = "University"
                         });
                 });
 
@@ -7408,9 +7455,11 @@ namespace SmileyMeow.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SchoolId"));
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                    b.Property<string>("SName")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)")
+                        .HasColumnName("sname");
 
                     b.Property<int>("SchoolTypeId")
                         .HasColumnType("integer")
@@ -7428,7 +7477,7 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             SchoolId = 6,
-                            Name = "University of California, Davis",
+                            SName = "University of California, Davis",
                             SchoolTypeId = 6
                         });
                 });
@@ -7443,7 +7492,9 @@ namespace SmileyMeow.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoleeId"));
 
                     b.Property<string>("RName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
                         .HasColumnName("rname");
 
                     b.HasKey("RoleeId")
@@ -7466,6 +7517,16 @@ namespace SmileyMeow.Migrations
                         {
                             RoleeId = 7,
                             RName = "Doctor"
+                        },
+                        new
+                        {
+                            RoleeId = 8,
+                            RName = "Admin"
+                        },
+                        new
+                        {
+                            RoleeId = 9,
+                            RName = "Supervisor"
                         });
                 });
 
@@ -7519,6 +7580,20 @@ namespace SmileyMeow.Migrations
                             Emaill = "anastacia@gmail.com",
                             Passwordd = "anastacia123456",
                             RoleeId = 7
+                        },
+                        new
+                        {
+                            UserrId = 129,
+                            Emaill = "admin@gmail.com",
+                            Passwordd = "admin123456",
+                            RoleeId = 8
+                        },
+                        new
+                        {
+                            UserrId = 130,
+                            Emaill = "supervisor@gmail.com",
+                            Passwordd = "supervisor123456",
+                            RoleeId = 9
                         });
                 });
 
@@ -7840,20 +7915,13 @@ namespace SmileyMeow.Migrations
                     b.Navigation("PetParent");
                 });
 
-            modelBuilder.Entity("VetClinicLibrary.Pett.Adopt.AdoptInfo", b =>
-                {
-                    b.HasOne("VetClinicLibrary.Pett.Pet", "Pet")
-                        .WithOne("AdoptionInfo")
-                        .HasForeignKey("VetClinicLibrary.Pett.Adopt.AdoptInfo", "AdoptInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_adoptinfos_pets_adoptinfoid");
-
-                    b.Navigation("Pet");
-                });
-
             modelBuilder.Entity("VetClinicLibrary.Pett.Pet", b =>
                 {
+                    b.HasOne("VetClinicLibrary.Pett.Adopt.AdoptInfo", "AdoptionInfo")
+                        .WithOne("Pet")
+                        .HasForeignKey("VetClinicLibrary.Pett.Pet", "AdoptInfoId")
+                        .HasConstraintName("fk_pets_adoptinfos_adoptinfoid");
+
                     b.HasOne("VetClinicLibrary.Pett.Breedd.Breed", "Breed")
                         .WithMany("Pet")
                         .HasForeignKey("BreedId")
@@ -7875,6 +7943,8 @@ namespace SmileyMeow.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_pets_species_specieid");
 
+                    b.Navigation("AdoptionInfo");
+
                     b.Navigation("Breed");
 
                     b.Navigation("PetGender");
@@ -7889,7 +7959,7 @@ namespace SmileyMeow.Migrations
                         .HasForeignKey("SchoolTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_schools_schooltype_schooltypeid");
+                        .HasConstraintName("fk_schools_schooltypes_schooltypeid");
 
                     b.Navigation("SchoolType");
                 });
@@ -7974,6 +8044,11 @@ namespace SmileyMeow.Migrations
                     b.Navigation("Doctors");
                 });
 
+            modelBuilder.Entity("VetClinicLibrary.Pett.Adopt.AdoptInfo", b =>
+                {
+                    b.Navigation("Pet");
+                });
+
             modelBuilder.Entity("VetClinicLibrary.Pett.Breedd.Breed", b =>
                 {
                     b.Navigation("Pet");
@@ -7981,8 +8056,6 @@ namespace SmileyMeow.Migrations
 
             modelBuilder.Entity("VetClinicLibrary.Pett.Pet", b =>
                 {
-                    b.Navigation("AdoptionInfo");
-
                     b.Navigation("PetnPersonn");
                 });
 

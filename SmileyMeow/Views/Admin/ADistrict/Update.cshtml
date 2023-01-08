@@ -1,0 +1,35 @@
+@model DistrictViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <form class="form-horizontal" asp-controller="ADistrict" asp-action="Update" method="post" asp-route-id="@Model.District.DistrictId">
+        <div class="card-body">
+            <h4 class="card-title">Update District</h4>
+            <div class="form-group row">
+                <label for="fname" class="col-sm-3 text-end control-label col-form-label">DName</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="dname" name="DName" value="@Model.District.DName">
+                </div>
+                    <label for="gname" class="col-sm-3 text-end control-label col-form-label">City</label>
+                    <div class="col-sm-9">
+                        <select class="select form-select shadow-none" id="dis-city-select" name="CityId">
+                            @foreach (City city in Model.CityList)
+                            {
+                                <option value="@city.CityId" selected="@(Model.District.CityId == city.CityId)">
+                                    @city.CName</option>
+                            }
+                        </select>
+                    </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body sbmt-area">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a type="submit" asp-controller="ADistrict" asp-action="" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

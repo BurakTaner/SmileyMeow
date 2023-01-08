@@ -1,0 +1,51 @@
+@model List<Pet>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <a asp-controller="APetAdopt" asp-action="Create" class="btn btn-primary crt-btn-m5">
+            Create
+        </a>
+
+        <h5 class="card-title">Adoptable Pets</h5>
+        <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Pet Gender</th>
+                        <th>Specie</th>
+                        <th>Breed</th>
+                        <th>Adopt Text</th>
+                        <th class="last-clmn">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Pet pet in Model)
+                    {
+
+                        <tr>
+                            <td>@pet.AnimalId</td>
+                            <td>@pet.Name</td>
+                            <td>@pet.PetGender.GName</td>
+                            <td>@pet.Specie.SName</td>
+                            <td>@pet.Breed.BName</td>
+                            <td>@pet.AdoptionInfo.AdoptText</td>
+                            <td>
+                                <a asp-controller="APetAdopt" asp-action="CRUD" asp-route-id="@pet.AnimalId"
+                                class="icn-mr">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>  

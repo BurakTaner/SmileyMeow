@@ -1,0 +1,46 @@
+
+/* Gender*/
+.last-clmn{
+    width: 5%;
+}
+.icn-mr{
+    margin-right: 5px;
+}
+.sbmt-area{
+    padding-left: 40%;
+}
+.crt-btn-m5{
+    margin-bottom: 15px;
+}
+.sure-txt{
+    font-size: 20px;
+    color: rgb(200, 56, 12)
+}
+/* City */
+.dis-city-select{
+    width: 100%; 
+    height:36px;
+}
+
+/* General */
+
+.icn-mr{
+    margin-left: 40%;
+}
+.confirm-txt{
+    display: block;
+    color: blue;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.cnfrm-sec{
+    height: 10px;
+    color: darkblue;
+}
+.crt-btn, .ud-sec{
+    display:none;
+}
+
+.cnfrm-area{
+    display: none;
+}

@@ -1,0 +1,25 @@
+@model City
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <form class="form-horizontal" asp-controller="ACity" asp-action="Update" method="post" asp-route-id="@Model.CityId">
+        <div class="card-body">
+            <h4 class="card-title">Update City</h4>
+            <div class="form-group row">
+                <label for="fname" class="col-sm-3 text-end control-label col-form-label">CName</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="cname" name="CName" value="@Model.CName">
+                </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body sbmt-area">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a type="submit" asp-controller="ACity" asp-action="" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

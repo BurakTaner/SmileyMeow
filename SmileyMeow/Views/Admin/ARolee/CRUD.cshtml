@@ -1,0 +1,57 @@
+@model Rolee
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <form method="post" id="rolee-form">
+        <div class="card-body">
+            <h4 class="card-title" id="crud-title"></h4>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group row" id="form-group">
+                @if (Model.RoleeId == 0)
+                {
+                    <label for="rname" class="col-sm-3 text-end control-label col-form-label">RName</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" id="rname" name="RName" value="@Model.RName">
+                    </div>
+                }
+                
+                else {
+                    <label for="roleeid" id="idlabel"
+                    class="col-sm-3 text-end control-label col-form-label idlab">Id</label>
+                <div class="col-sm-9">
+                    <input class="form-control idput" id="roleeid" name="RoleeId" value="@Model.RoleeId" disabled>
+                </div>
+
+                <label for="rname" class="col-sm-3 text-end control-label col-form-label">RName</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="rname" name="RName" value="@Model.RName" disabled>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body sbmt-area">
+                <button type="button" class="btn btn-primary crt-btn" id="crt-btn">Create</button>
+                <section class="ud-sec" id="ud-sec">
+                    <button type="button" class="btn btn-primary" id="updt-btn">Update</button>
+                    <button type="button" class="btn btn-primary" id="dlt-btn">Delete</button>
+                </section>
+                <a asp-controller="ARolee" asp-action="" class="btn btn-primary cnl-btn">Cancel</a>
+            </div>
+            <hr class="cnfrm-sec">
+            <section class="cnfrm-area" id="cnfrm-area">
+                <div class="card-body sbmt-area">
+                    <strong class="confirm-txt">Are you really wants to <span id="cnfrm-spn"></span></strong>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-primary" id="cancl-frm">Close</button>
+                </div>
+            </section>
+        </div>
+    </form>
+
+</div>
+
+<script src="~/js/adminpages/forms/roleeform.js" type="module"></script>

@@ -39,7 +39,7 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<Specie> Species { get; set; }
     public DbSet<Pet> Pets { get; set; }
     public DbSet<School> Schools { get; set; }
-    public DbSet<SchoolType> SchoolType { get; set; }
+    public DbSet<SchoolType> SchoolTypes { get; set; }
     public DbSet<Rolee> Rolees { get; set; }
     public DbSet<Userr> Userrs { get; set; }
     public DbSet<DoctorSchool> DoctorSchools { get; set; }
@@ -62,8 +62,7 @@ public class SmileyMeowDbContext : DbContext
         // temporary 
         modelBuilder.Entity<Pet>()
                     .HasOne(p => p.AdoptionInfo)
-                    .WithOne(a => a.Pet)
-                    .HasForeignKey<AdoptInfo>(a => a.AdoptInfoId);
+                    .WithOne(a => a.Pet);
         
         modelBuilder.Entity<DoctorInformation>()
                     .HasOne(a => a.Doctor)
@@ -201,7 +200,8 @@ public class SmileyMeowDbContext : DbContext
 
         // dummy data
         modelBuilder.Entity<Pet>().HasData(
-            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Sif", AdoptInfoId = 6 }
+            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = false, SpecieId = 6, Name = "Sif", AdoptInfoId = 6 },
+            new Pet { AnimalId = 9, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Shelob", AdoptInfoId = 7 }
         );
 
         modelBuilder.Entity<PetGender>().HasData(
@@ -220,27 +220,32 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<AdoptInfo>().HasData(
-            new AdoptInfo { AdoptInfoId = 6, AdoptText = "So cute" }
+            new AdoptInfo { AdoptInfoId = 6, AdoptText = "So cuteeeeeeeeeeeeeee" },
+            new AdoptInfo { AdoptInfoId = 7, AdoptText = "So cuteeeeeeeeeeeeeee2" }
         );
 
         modelBuilder.Entity<SchoolType>().HasData(
-            new SchoolType { SchoolTypeId = 6, Name = "University" }
+            new SchoolType { SchoolTypeId = 6, STName = "University" }
         );
 
         modelBuilder.Entity<School>().HasData(
-            new School { SchoolId = 6, SchoolTypeId = 6, Name = "University of California, Davis" }
+            new School { SchoolId = 6, SchoolTypeId = 6, SName = "University of California, Davis" }
         );
 
         modelBuilder.Entity<Userr>().HasData(
             new Userr { UserrId = 6, Emaill = "artorias@gmail.com", Passwordd = "sif123456", RoleeId = 6 },
             new Userr { UserrId = 666, Emaill = "patches@gmail.com", Passwordd = "patches123456", RoleeId = 7 },
-            new Userr { UserrId = 128, Emaill = "anastacia@gmail.com", Passwordd = "anastacia123456", RoleeId = 7 }
+            new Userr { UserrId = 128, Emaill = "anastacia@gmail.com", Passwordd = "anastacia123456", RoleeId = 7 },
+            new Userr { UserrId = 129, Emaill = "admin@gmail.com", Passwordd = "admin123456", RoleeId = 8 },
+            new Userr { UserrId = 130, Emaill = "supervisor@gmail.com", Passwordd = "supervisor123456", RoleeId = 9 }
         );
 
         modelBuilder.Entity<Rolee>().HasData(
             new Rolee { RoleeId = 5, RName = "Candidate" },
             new Rolee { RoleeId = 6, RName = "PetParent" },
-            new Rolee { RoleeId = 7, RName = "Doctor" }
+            new Rolee { RoleeId = 7, RName = "Doctor" },
+            new Rolee { RoleeId = 8, RName = "Admin" },
+            new Rolee { RoleeId = 9, RName = "Supervisor" }
         );
 
         modelBuilder.Entity<Doctor>().HasData(
