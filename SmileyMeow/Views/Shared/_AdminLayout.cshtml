@@ -11,7 +11,7 @@
     <meta name="description"
         content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Matrix Admin Lite Free Versions Template by WrapPixel</title>
+    <title>Smileymeow Admin Homepage</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="~/adminpages/assets/images/favicon.png">
     <!-- Custom CSS -->
@@ -51,21 +51,21 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" asp-controller="AHome" asp-action="">
                         <!-- Logo icon -->
                         <b class="logo-icon ps-2">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="~/adminpages/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                            <img src="~/Images/logo.png" alt="homepage" class="light-logo smly-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span class="logo-text">
+                        @* <span class="logo-text">
                             <!-- dark Logo text -->
                             <img src="~/adminpages/assets/images/logo-text.png" alt="homepage" class="light-logo" />
 
-                        </span>
+                        </span> *@
                         <!-- Logo icon -->
                         <!-- <b class="logo-icon"> -->
                         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -213,6 +213,8 @@
                                     My Balance</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email me-1 ms-1"></i>
                                     Inbox</a>
+                                <a class="dropdown-item" asp-controller="" asp-action=""><i class="fa-solid fa-house"></i>
+                                    Got to homepage</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings me-1 ms-1"></i>
                                     Account Setting</a>
@@ -332,6 +334,10 @@
                                 </span></a></li>
                                         <li class="sidebar-item"><a asp-controller="APetAdoption" asp-action="" class="sidebar-link"><i
                                             class="mdi mdi-note-plus"></i><span class="hide-menu"> Pet Adoption
+                                        </span></a></li>
+                                        
+                                        <li class="sidebar-item"><a asp-controller="APetAdoptRequests" asp-action="" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> Adoption Requests
                                         </span></a></li>
 
                                         </span></a></li>
@@ -454,6 +460,7 @@
     <script src="~/adminpages/dist/js/pages/chart/chart-page-init.js"></script>
     <script src="~/js/adminpages/cityandistrictfetch.js" type="module"></script>
     <script src="~/js/modules/formgeneral.js" type="module"></script>
+    <script src="https://kit.fontawesome.com/91e746a27a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
