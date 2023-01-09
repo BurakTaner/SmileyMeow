@@ -49,6 +49,16 @@ namespace AnimalAPI.Migrations
                         {
                             AnimalInfoId = 7,
                             AnimalInformation = "The Maine Coon is a large domesticated cat breed. It is one of the oldest natural breeds in North America. The breed originated in the U.S. state of Maine, where it is the official state cat.The breed was popular in cat shows in the late 19th century, but its existence became threatened when long-haired breeds from overseas were introduced in the early 20th century. The Maine Coon has since made a comeback and is now the third most popular pedigreed cat breed in the world."
+                        },
+                        new
+                        {
+                            AnimalInfoId = 8,
+                            AnimalInformation = "The axolotl (/ˈæksəlɒtəl/; from Classical Nahuatl: āxōlōtl [aːˈʃoːloːtɬ] (listen)), Ambystoma mexicanum,[3] is a paedomorphic salamander closely related to the tiger salamander.[3][4][5] Axolotls are unusual among amphibians in that they reach adulthood without undergoing metamorphosis. Instead of taking to the land, adults remain aquatic and gilled. The species was originally found in several lakes underlying what is now Mexico City, such as Lake Xochimilco and Lake Chalco.[1] These lakes were drained by Spanish settlers after the conquest of the Aztec Empire, leading to the destruction of much of the axolotl’s natural habitat."
+                        },
+                        new
+                        {
+                            AnimalInfoId = 9,
+                            AnimalInformation = "The American Rabbit is a breed of rabbit, recognized by the American Rabbit Breeders Association (ARBA) in 1917. By the ARBA standard, American rabbits have a mandolin body shape.[1] It has also been noted for a good 'sweet' temperament and good mothering abilities.[2] As with all domestic rabbits, the American breed is of the species Oryctolagus cuniculus, the European wild rabbit. The American Rabbit was originally accepted into the ARBA as a 'Blue' rabbit, and historically has been characterized as having the deepest, darkest fur of all blue or grey rabbits. The color at its best is 'uniform rich, dark slate-blue, free from white hairs, sandy or rust color"
                         });
                 });
 
@@ -101,6 +111,20 @@ namespace AnimalAPI.Migrations
                             AnimalInfoId = 7,
                             BreedId = 7,
                             SpecieId = 7
+                        },
+                        new
+                        {
+                            AnimalId = 8,
+                            AnimalInfoId = 8,
+                            BreedId = 8,
+                            SpecieId = 8
+                        },
+                        new
+                        {
+                            AnimalId = 9,
+                            AnimalInfoId = 9,
+                            BreedId = 9,
+                            SpecieId = 9
                         });
                 });
 
@@ -132,6 +156,16 @@ namespace AnimalAPI.Migrations
                         {
                             BreedId = 7,
                             BName = "Maine Coon"
+                        },
+                        new
+                        {
+                            BreedId = 8,
+                            BName = "American Rabbit"
+                        },
+                        new
+                        {
+                            BreedId = 9,
+                            BName = "Axolot"
                         });
                 });
 
@@ -163,6 +197,16 @@ namespace AnimalAPI.Migrations
                         {
                             SpecieId = 7,
                             SName = "Cat"
+                        },
+                        new
+                        {
+                            SpecieId = 8,
+                            SName = "Rabbit"
+                        },
+                        new
+                        {
+                            SpecieId = 9,
+                            SName = "Slamander"
                         });
                 });
 
