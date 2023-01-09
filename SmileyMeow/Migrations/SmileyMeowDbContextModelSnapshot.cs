@@ -77,12 +77,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 8, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(2069),
+                            AppointmentDate = new DateTime(2023, 2, 8, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1755),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 9, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(2066)
+                            TimeCreated = new DateTime(2023, 1, 9, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1754)
                         });
                 });
 
@@ -282,12 +282,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 30, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(2389),
+                            AppointmentDate = new DateTime(2022, 12, 30, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1907),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 30, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(2393)
+                            TimeCreated = new DateTime(2022, 11, 30, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1909)
                         });
                 });
 
@@ -7310,7 +7310,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 9, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(768),
+                            DOB = new DateTime(2023, 1, 9, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1134),
                             IsAdoptable = false,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7321,7 +7321,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 9,
                             AdoptInfoId = 7,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 9, 1, 18, 6, 302, DateTimeKind.Local).AddTicks(805),
+                            DOB = new DateTime(2023, 1, 9, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1161),
                             IsAdoptable = true,
                             Name = "Shelob",
                             PetGenderId = 6,
