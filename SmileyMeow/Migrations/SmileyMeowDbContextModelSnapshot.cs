@@ -114,12 +114,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 8, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4630),
+                            AppointmentDate = new DateTime(2023, 2, 9, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(238),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4629)
+                            TimeCreated = new DateTime(2023, 1, 10, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(234)
                         });
                 });
 
@@ -182,11 +182,15 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("energystatusid");
 
                     b.Property<string>("IlnesssesInThePast")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(9999)
+                        .HasColumnType("character varying(9999)")
                         .HasColumnName("ilnesssesinthepast");
 
                     b.Property<string>("InformationAboutPatient")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(9999)
+                        .HasColumnType("character varying(9999)")
                         .HasColumnName("informationaboutpatient");
 
                     b.Property<int>("PeeingStatusId")
@@ -319,12 +323,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 30, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4841),
+                            AppointmentDate = new DateTime(2022, 12, 31, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(531),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 30, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4843)
+                            TimeCreated = new DateTime(2022, 12, 1, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(534)
                         });
                 });
 
@@ -342,15 +346,21 @@ namespace SmileyMeow.Migrations
                         .HasColumnName("addressid");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(26)
+                        .HasColumnType("character varying(26)")
                         .HasColumnName("email");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
                         .HasColumnName("firstname");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)")
                         .HasColumnName("lastname");
 
                     b.Property<string>("MiddleName")
@@ -619,7 +629,7 @@ namespace SmileyMeow.Migrations
                             AddressId = 12,
                             BalanceId = 128,
                             DOB = new DateTime(1980, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorTitleId = 6,
+                            DoctorTitleId = 7,
                             FirstName = "Anastacia",
                             HumanGenderId = 128,
                             LastName = "Catarina",
@@ -7157,8 +7167,8 @@ namespace SmileyMeow.Migrations
 
                     b.Property<string>("TFullForm")
                         .IsRequired()
-                        .HasMaxLength(24)
-                        .HasColumnType("character varying(24)")
+                        .HasMaxLength(35)
+                        .HasColumnType("character varying(35)")
                         .HasColumnName("tfullform");
 
                     b.Property<string>("TShortForm")
@@ -7176,8 +7186,14 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             DoctorTitleId = 6,
-                            TFullForm = "Vetenerian",
+                            TFullForm = "Doctor of Veterinary Medicine",
                             TShortForm = "DVM"
+                        },
+                        new
+                        {
+                            DoctorTitleId = 7,
+                            TFullForm = "Bachelor of Veterinary Science",
+                            TShortForm = "BVSC"
                         });
                 });
 
@@ -7241,13 +7257,18 @@ namespace SmileyMeow.Migrations
                     b.HasData(
                         new
                         {
-                            AdoptInfoId = 6,
-                            AdoptText = "So cuteeeeeeeeeeeeeee"
+                            AdoptInfoId = 7,
+                            AdoptText = "Meet Shelob, a 2-year-old quarter horse. Shelob is a friendly and gentle mare who gets along well with other horses. She is not currently being used for riding, but has a great personality and would make a great companion for another horse or as a pasture pet. Shelob is an easy keeper and does well on a diet of hay and grain. If you're looking for a friendly and easy-going horse to join your herd, consider adopting Shelob."
                         },
                         new
                         {
-                            AdoptInfoId = 7,
-                            AdoptText = "So cuteeeeeeeeeeeeeee2"
+                            AdoptInfoId = 8,
+                            AdoptText = "Meet Alvina, a 3-year-old domestic short-hair cat. Alvina is a sweet and affectionate feline who loves nothing more than cuddles and attention from her humans. She is litter trained and has been spayed. Alvina gets along well with other cats and would do best in a home without dogs. She has a playful personality and loves chasing toys around the house. Alvina is up to date on all of her vaccinations and is in good health. If you're looking for a new feline companion, consider adopting Alvina!"
+                        },
+                        new
+                        {
+                            AdoptInfoId = 9,
+                            AdoptText = "Meet Tarumaru, a 1-year-old lab mix. Tarumaru is a playful and energetic pup who loves chasing toys and going for walks. He is crate trained and is working on learning basic obedience commands. Tarumaru gets along well with other dogs and would do well in a home with or without children. He has a friendly and outgoing personality and would make a great addition to any family. Tarumaru is in good health and has been well cared for by his previous owner. If you're looking for a fun and active canine companion, consider adopting Tarumaru!"
                         });
                 });
 
@@ -7281,6 +7302,16 @@ namespace SmileyMeow.Migrations
                         {
                             BreedId = 9,
                             BName = "Appaloosa"
+                        },
+                        new
+                        {
+                            BreedId = 11,
+                            BName = "İoran"
+                        },
+                        new
+                        {
+                            BreedId = 12,
+                            BName = "Olara"
                         });
                 });
 
@@ -7345,9 +7376,8 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AnimalId = 6,
-                            AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(3944),
+                            DOB = new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9406),
                             IsAdoptable = false,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7357,12 +7387,34 @@ namespace SmileyMeow.Migrations
                         {
                             AnimalId = 9,
                             AdoptInfoId = 7,
-                            BreedId = 6,
-                            DOB = new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(3970),
+                            BreedId = 9,
+                            DOB = new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9433),
                             IsAdoptable = true,
                             Name = "Shelob",
-                            PetGenderId = 6,
-                            SpecieId = 6
+                            PetGenderId = 9,
+                            SpecieId = 9
+                        },
+                        new
+                        {
+                            AnimalId = 10,
+                            AdoptInfoId = 8,
+                            BreedId = 11,
+                            DOB = new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9440),
+                            IsAdoptable = false,
+                            Name = "Alvina",
+                            PetGenderId = 9,
+                            SpecieId = 10
+                        },
+                        new
+                        {
+                            AnimalId = 12,
+                            AdoptInfoId = 9,
+                            BreedId = 12,
+                            DOB = new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9444),
+                            IsAdoptable = true,
+                            Name = "Tarumaru",
+                            PetGenderId = 10,
+                            SpecieId = 11
                         });
                 });
 
@@ -7396,6 +7448,11 @@ namespace SmileyMeow.Migrations
                         {
                             PetGenderId = 9,
                             GName = "Male (neutralized)"
+                        },
+                        new
+                        {
+                            PetGenderId = 10,
+                            GName = "Male"
                         });
                 });
 
@@ -7429,6 +7486,16 @@ namespace SmileyMeow.Migrations
                         {
                             SpecieId = 9,
                             SName = "Horse"
+                        },
+                        new
+                        {
+                            SpecieId = 10,
+                            SName = "Cat"
+                        },
+                        new
+                        {
+                            SpecieId = 11,
+                            SName = "Dog"
                         });
                 });
 
@@ -7515,6 +7582,12 @@ namespace SmileyMeow.Migrations
                         {
                             SchoolId = 6,
                             SName = "University of California, Davis",
+                            SchoolTypeId = 6
+                        },
+                        new
+                        {
+                            SchoolId = 7,
+                            SName = "University of Veterinary Medicine, Vienna",
                             SchoolTypeId = 6
                         });
                 });

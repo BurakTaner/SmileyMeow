@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SmileyMeow.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialMigratio : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -97,7 +97,7 @@ namespace SmileyMeow.Migrations
                 {
                     doctortitleid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    tfullform = table.Column<string>(type: "character varying(24)", maxLength: 24, nullable: false),
+                    tfullform = table.Column<string>(type: "character varying(35)", maxLength: 35, nullable: false),
                     tshortform = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false)
                 },
                 constraints: table =>
@@ -343,8 +343,8 @@ namespace SmileyMeow.Migrations
                     eatingstatusid = table.Column<int>(type: "integer", nullable: false),
                     peeingstatusid = table.Column<int>(type: "integer", nullable: false),
                     energystatusid = table.Column<int>(type: "integer", nullable: false),
-                    informationaboutpatient = table.Column<string>(type: "text", nullable: true),
-                    ilnesssesinthepast = table.Column<string>(type: "text", nullable: true)
+                    informationaboutpatient = table.Column<string>(type: "character varying(9999)", maxLength: 9999, nullable: false),
+                    ilnesssesinthepast = table.Column<string>(type: "character varying(9999)", maxLength: 9999, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -454,11 +454,11 @@ namespace SmileyMeow.Migrations
                 {
                     notuserparentid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    firstname = table.Column<string>(type: "text", nullable: true),
+                    firstname = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     middlename = table.Column<string>(type: "text", nullable: true),
-                    lastname = table.Column<string>(type: "text", nullable: true),
+                    lastname = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
                     phonenumber = table.Column<string>(type: "text", nullable: true),
-                    email = table.Column<string>(type: "text", nullable: true),
+                    email = table.Column<string>(type: "character varying(26)", maxLength: 26, nullable: false),
                     addressid = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -707,8 +707,9 @@ namespace SmileyMeow.Migrations
                 columns: new[] { "adoptinfoid", "adopttext" },
                 values: new object[,]
                 {
-                    { 6, "So cuteeeeeeeeeeeeeee" },
-                    { 7, "So cuteeeeeeeeeeeeeee2" }
+                    { 7, "Meet Shelob, a 2-year-old quarter horse. Shelob is a friendly and gentle mare who gets along well with other horses. She is not currently being used for riding, but has a great personality and would make a great companion for another horse or as a pasture pet. Shelob is an easy keeper and does well on a diet of hay and grain. If you're looking for a friendly and easy-going horse to join your herd, consider adopting Shelob." },
+                    { 8, "Meet Alvina, a 3-year-old domestic short-hair cat. Alvina is a sweet and affectionate feline who loves nothing more than cuddles and attention from her humans. She is litter trained and has been spayed. Alvina gets along well with other cats and would do best in a home without dogs. She has a playful personality and loves chasing toys around the house. Alvina is up to date on all of her vaccinations and is in good health. If you're looking for a new feline companion, consider adopting Alvina!" },
+                    { 9, "Meet Tarumaru, a 1-year-old lab mix. Tarumaru is a playful and energetic pup who loves chasing toys and going for walks. He is crate trained and is working on learning basic obedience commands. Tarumaru gets along well with other dogs and would do well in a home with or without children. He has a friendly and outgoing personality and would make a great addition to any family. Tarumaru is in good health and has been well cared for by his previous owner. If you're looking for a fun and active canine companion, consider adopting Tarumaru!" }
                 });
 
             migrationBuilder.InsertData(
@@ -738,7 +739,9 @@ namespace SmileyMeow.Migrations
                 values: new object[,]
                 {
                     { 6, "Ragdoll" },
-                    { 9, "Appaloosa" }
+                    { 9, "Appaloosa" },
+                    { 11, "İoran" },
+                    { 12, "Olara" }
                 });
 
             migrationBuilder.InsertData(
@@ -837,7 +840,11 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "doctortitles",
                 columns: new[] { "doctortitleid", "tfullform", "tshortform" },
-                values: new object[] { 6, "Vetenerian", "DVM" });
+                values: new object[,]
+                {
+                    { 6, "Doctor of Veterinary Medicine", "DVM" },
+                    { 7, "Bachelor of Veterinary Science", "BVSC" }
+                });
 
             migrationBuilder.InsertData(
                 table: "humangenders",
@@ -855,7 +862,8 @@ namespace SmileyMeow.Migrations
                 values: new object[,]
                 {
                     { 6, "Female" },
-                    { 9, "Male (neutralized)" }
+                    { 9, "Male (neutralized)" },
+                    { 10, "Male" }
                 });
 
             migrationBuilder.InsertData(
@@ -890,7 +898,9 @@ namespace SmileyMeow.Migrations
                 values: new object[,]
                 {
                     { 6, "Wolf" },
-                    { 9, "Horse" }
+                    { 9, "Horse" },
+                    { 10, "Cat" },
+                    { 11, "Dog" }
                 });
 
             migrationBuilder.InsertData(
@@ -1899,14 +1909,20 @@ namespace SmileyMeow.Migrations
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
                 values: new object[,]
                 {
-                    { 6, 6, 6, new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(3944), false, "Sif", 6, 6 },
-                    { 9, 7, 6, new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(3970), true, "Shelob", 6, 6 }
+                    { 6, null, 6, new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9406), false, "Sif", 6, 6 },
+                    { 9, 7, 9, new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9433), true, "Shelob", 9, 9 },
+                    { 10, 8, 11, new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9440), false, "Alvina", 9, 10 },
+                    { 12, 9, 12, new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9444), true, "Tarumaru", 10, 11 }
                 });
 
             migrationBuilder.InsertData(
                 table: "schools",
                 columns: new[] { "schoolid", "sname", "schooltypeid" },
-                values: new object[] { 6, "University of California, Davis", 6 });
+                values: new object[,]
+                {
+                    { 6, "University of California, Davis", 6 },
+                    { 7, "University of Veterinary Medicine, Vienna", 6 }
+                });
 
             migrationBuilder.InsertData(
                 table: "userrs",
@@ -1937,7 +1953,7 @@ namespace SmileyMeow.Migrations
                 values: new object[,]
                 {
                     { 6, 7, 666, new DateTime(1978, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Patches", 66, "Whisper", null, "05434561275", 6, null, 666 },
-                    { 9, 12, 128, new DateTime(1980, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Anastacia", 128, "Catarina", "Ciaran", "05341299154", 9, null, 128 }
+                    { 9, 12, 128, new DateTime(1980, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, "Anastacia", 128, "Catarina", "Ciaran", "05341299154", 9, null, 128 }
                 });
 
             migrationBuilder.InsertData(
@@ -1972,12 +1988,12 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 8, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4630), 6, 6, 6, 6, new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4629) });
+                values: new object[] { 6, new DateTime(2023, 2, 9, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(238), 6, 6, 6, 6, new DateTime(2023, 1, 10, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(234) });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 30, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4841), 8, 9, 9, 9, new DateTime(2022, 11, 30, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4843) });
+                values: new object[] { 6, new DateTime(2022, 12, 31, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(531), 8, 9, 9, 9, new DateTime(2022, 12, 1, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(534) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",

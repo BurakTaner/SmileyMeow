@@ -215,28 +215,36 @@ public class SmileyMeowDbContext : DbContext
 
         // dummy data
         modelBuilder.Entity<Pet>().HasData(
-            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = false, SpecieId = 6, Name = "Sif", AdoptInfoId = 6 },
-            new Pet { AnimalId = 9, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 6, Name = "Shelob", AdoptInfoId = 7 }
+            new Pet { AnimalId = 6, PetGenderId = 6, BreedId = 6, DOB = DateTime.Now, IsAdoptable = false, SpecieId = 6, Name = "Sif", AdoptInfoId = null },
+            new Pet { AnimalId = 9, PetGenderId = 9, BreedId = 9, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 9, Name = "Shelob", AdoptInfoId = 7 },
+            new Pet { AnimalId = 10, PetGenderId = 9, BreedId = 11, DOB = DateTime.Now, IsAdoptable = false, SpecieId = 10, Name = "Alvina", AdoptInfoId = 8 },
+            new Pet { AnimalId = 12, PetGenderId = 10, BreedId = 12, DOB = DateTime.Now, IsAdoptable = true, SpecieId = 11, Name = "Tarumaru", AdoptInfoId = 9 }
         );
 
         modelBuilder.Entity<PetGender>().HasData(
             new PetGender { PetGenderId = 6, GName = "Female" },
-            new PetGender { PetGenderId = 9, GName = "Male (neutralized)" }
+            new PetGender { PetGenderId = 9, GName = "Male (neutralized)" },
+            new PetGender { PetGenderId = 10, GName = "Male" }
         );
 
         modelBuilder.Entity<Breed>().HasData(
             new Breed { BreedId = 6, BName = "Ragdoll" },
-            new Breed { BreedId = 9, BName = "Appaloosa" }
+            new Breed { BreedId = 9, BName = "Appaloosa" },
+            new Breed { BreedId = 11, BName = "İoran" },
+            new Breed { BreedId = 12, BName = "Olara" }
         );
 
         modelBuilder.Entity<Specie>().HasData(
             new Specie { SpecieId = 6, SName = "Wolf" },
-            new Specie { SpecieId = 9, SName = "Horse" }
+            new Specie { SpecieId = 9, SName = "Horse" },
+            new Specie { SpecieId = 10, SName = "Cat" },
+            new Specie { SpecieId = 11, SName = "Dog" }
         );
 
         modelBuilder.Entity<AdoptInfo>().HasData(
-            new AdoptInfo { AdoptInfoId = 6, AdoptText = "So cuteeeeeeeeeeeeeee" },
-            new AdoptInfo { AdoptInfoId = 7, AdoptText = "So cuteeeeeeeeeeeeeee2" }
+            new AdoptInfo { AdoptInfoId = 7, AdoptText = "Meet Shelob, a 2-year-old quarter horse. Shelob is a friendly and gentle mare who gets along well with other horses. She is not currently being used for riding, but has a great personality and would make a great companion for another horse or as a pasture pet. Shelob is an easy keeper and does well on a diet of hay and grain. If you're looking for a friendly and easy-going horse to join your herd, consider adopting Shelob." },
+            new AdoptInfo { AdoptInfoId = 8, AdoptText = "Meet Alvina, a 3-year-old domestic short-hair cat. Alvina is a sweet and affectionate feline who loves nothing more than cuddles and attention from her humans. She is litter trained and has been spayed. Alvina gets along well with other cats and would do best in a home without dogs. She has a playful personality and loves chasing toys around the house. Alvina is up to date on all of her vaccinations and is in good health. If you're looking for a new feline companion, consider adopting Alvina!" },
+            new AdoptInfo { AdoptInfoId = 9, AdoptText = "Meet Tarumaru, a 1-year-old lab mix. Tarumaru is a playful and energetic pup who loves chasing toys and going for walks. He is crate trained and is working on learning basic obedience commands. Tarumaru gets along well with other dogs and would do well in a home with or without children. He has a friendly and outgoing personality and would make a great addition to any family. Tarumaru is in good health and has been well cared for by his previous owner. If you're looking for a fun and active canine companion, consider adopting Tarumaru!" }
         );
 
         modelBuilder.Entity<SchoolType>().HasData(
@@ -244,7 +252,8 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<School>().HasData(
-            new School { SchoolId = 6, SchoolTypeId = 6, SName = "University of California, Davis" }
+            new School { SchoolId = 6, SchoolTypeId = 6, SName = "University of California, Davis" },
+            new School { SchoolId = 7, SchoolTypeId = 6, SName = "University of Veterinary Medicine, Vienna" }
         );
 
         modelBuilder.Entity<Userr>().HasData(
@@ -265,7 +274,7 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Doctor>().HasData(
             new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66, DoctorTitleId = 6, PronounId = 6, AddressId = 7},
-            new Doctor { DoctorId = 9, FirstName = "Anastacia", MiddleName = "Ciaran", LastName = "Catarina", BalanceId = 128, DOB = Convert.ToDateTime("1980/6/4"), PhoneNumber = "05341299154", UserId = 128, HumanGenderId = 128, DoctorTitleId = 6, PronounId = 9, AddressId = 12}
+            new Doctor { DoctorId = 9, FirstName = "Anastacia", MiddleName = "Ciaran", LastName = "Catarina", BalanceId = 128, DOB = Convert.ToDateTime("1980/6/4"), PhoneNumber = "05341299154", UserId = 128, HumanGenderId = 128, DoctorTitleId = 7, PronounId = 9, AddressId = 12}
         );
 
         modelBuilder.Entity<PetParent>().HasData(
@@ -304,7 +313,8 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<DoctorTitle>().HasData(
-            new DoctorTitle { DoctorTitleId = 6, TFullForm = "Vetenerian", TShortForm = "DVM" }
+            new DoctorTitle { DoctorTitleId = 6, TFullForm = "Doctor of Veterinary Medicine", TShortForm = "DVM" },
+            new DoctorTitle { DoctorTitleId = 7, TFullForm = "Bachelor of Veterinary Science", TShortForm = "BVSC" }
 
         );
 
