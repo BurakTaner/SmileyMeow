@@ -12,6 +12,8 @@
         </div>
         <div class="col-md-8">
             <div class="card-body">
+                <form asp-controller="Adopt" asp-action="AdoptPet" method="post" asp-route-id="@Model.AdoptablePet.AnimalId">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                 <h4 class="card-title">@Model.AdoptablePet.Name</h4>
                 <p class="card-text" name="about">
                     <label for="about"><strong>Specie:</strong></label>
@@ -42,7 +44,12 @@
                     <label for="Age"><strong>Age:</strong></label>
                 @Model.PetAge    
                 </p>
-                <a asp-controller="Adopt" asp-action="UnderMaintenance" class="btn btn-primary d-block px-2 py-3">Adopt</a>
+                @if (Convert.ToInt32(User.FindFirst(a => a.Type == ClaimTypes.Sid)?.Value) != 0)
+                {
+                <textarea class="card-text" name="AdoptionText">@Model.AdoptionText</textarea>
+                <button type="submit" class="btn btn-primary d-block px-2 py-3">Adopt</button>
+                }
+                </form>
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using VetClinicLibrary.AdoptionPet;
 using VetClinicLibrary.Person.HumanGenderr;
 using VetClinicLibrary.Person.Locationn;
 using VetClinicLibrary.Person.Prounounn;
@@ -27,4 +28,5 @@ public class PetParent : IPetParent
     public List<PetnPerson> PetnPersonn { get; set; }
     public int? AddressId { get; set; }
     public Address Address { get; set; }
+    public List<AdoptionJoinTable> AdoptionJoinTable { get; set; }
 }

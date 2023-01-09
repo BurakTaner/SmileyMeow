@@ -565,6 +565,34 @@ namespace SmileyMeow.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "adoptionjointables",
+                columns: table => new
+                {
+                    adoptjointableid = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    animalid = table.Column<int>(type: "integer", nullable: false),
+                    petparentid = table.Column<int>(type: "integer", nullable: false),
+                    petparentrequesttext = table.Column<string>(type: "text", nullable: true),
+                    isconfirmed = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_adoptionjointables", x => x.adoptjointableid);
+                    table.ForeignKey(
+                        name: "fk_adoptionjointables_petparents_petparentid",
+                        column: x => x.petparentid,
+                        principalTable: "petparents",
+                        principalColumn: "petparentid",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_adoptionjointables_pets_pettempid1",
+                        column: x => x.animalid,
+                        principalTable: "pets",
+                        principalColumn: "animalid",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "petsnpersons",
                 columns: table => new
                 {
@@ -583,7 +611,7 @@ namespace SmileyMeow.Migrations
                         principalColumn: "petparentid",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_petsnpersons_pets_pettempid1",
+                        name: "fk_petsnpersons_pets_pettempid2",
                         column: x => x.animalid,
                         principalTable: "pets",
                         principalColumn: "animalid",
@@ -1871,8 +1899,8 @@ namespace SmileyMeow.Migrations
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
                 values: new object[,]
                 {
-                    { 6, 6, 6, new DateTime(2023, 1, 9, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1134), false, "Sif", 6, 6 },
-                    { 9, 7, 6, new DateTime(2023, 1, 9, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1161), true, "Shelob", 6, 6 }
+                    { 6, 6, 6, new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(3944), false, "Sif", 6, 6 },
+                    { 9, 7, 6, new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(3970), true, "Shelob", 6, 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -1944,17 +1972,27 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 8, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1755), 6, 6, 6, 6, new DateTime(2023, 1, 9, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1754) });
+                values: new object[] { 6, new DateTime(2023, 2, 8, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4630), 6, 6, 6, 6, new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4629) });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 30, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1907), 8, 9, 9, 9, new DateTime(2022, 11, 30, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1909) });
+                values: new object[] { 6, new DateTime(2022, 12, 30, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4841), 8, 9, 9, 9, new DateTime(2022, 11, 30, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4843) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",
                 table: "addresses",
                 column: "districtid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_adoptionjointables_animalid",
+                table: "adoptionjointables",
+                column: "animalid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_adoptionjointables_petparentid",
+                table: "adoptionjointables",
+                column: "petparentid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_appointments_appointmentstatussid",
@@ -2155,6 +2193,9 @@ namespace SmileyMeow.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "adoptionjointables");
+
             migrationBuilder.DropTable(
                 name: "appointments");
 

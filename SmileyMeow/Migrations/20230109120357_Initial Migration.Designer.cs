@@ -12,7 +12,7 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20230109030744_Initial Migration")]
+    [Migration("20230109120357_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -24,6 +24,43 @@ namespace SmileyMeow.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("VetClinicLibrary.AdoptionPet.AdoptionJoinTable", b =>
+                {
+                    b.Property<int>("AdoptJoinTableId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("adoptjointableid");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AdoptJoinTableId"));
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("integer")
+                        .HasColumnName("animalid");
+
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isconfirmed");
+
+                    b.Property<int>("PetParentId")
+                        .HasColumnType("integer")
+                        .HasColumnName("petparentid");
+
+                    b.Property<string>("PetParentRequestText")
+                        .HasColumnType("text")
+                        .HasColumnName("petparentrequesttext");
+
+                    b.HasKey("AdoptJoinTableId")
+                        .HasName("pk_adoptionjointables");
+
+                    b.HasIndex("AnimalId")
+                        .HasDatabaseName("ix_adoptionjointables_animalid");
+
+                    b.HasIndex("PetParentId")
+                        .HasDatabaseName("ix_adoptionjointables_petparentid");
+
+                    b.ToTable("adoptionjointables", (string)null);
+                });
 
             modelBuilder.Entity("VetClinicLibrary.Appointmentt.Appointment", b =>
                 {
@@ -80,12 +117,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 8, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1755),
+                            AppointmentDate = new DateTime(2023, 2, 8, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4630),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 9, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1754)
+                            TimeCreated = new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4629)
                         });
                 });
 
@@ -285,12 +322,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 30, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1907),
+                            AppointmentDate = new DateTime(2022, 12, 30, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4841),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 11, 30, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1909)
+                            TimeCreated = new DateTime(2022, 11, 30, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(4843)
                         });
                 });
 
@@ -7313,7 +7350,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 6,
                             AdoptInfoId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 9, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1134),
+                            DOB = new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(3944),
                             IsAdoptable = false,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7324,7 +7361,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 9,
                             AdoptInfoId = 7,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 9, 6, 7, 44, 483, DateTimeKind.Local).AddTicks(1161),
+                            DOB = new DateTime(2023, 1, 9, 15, 3, 56, 537, DateTimeKind.Local).AddTicks(3970),
                             IsAdoptable = true,
                             Name = "Shelob",
                             PetGenderId = 6,
@@ -7598,6 +7635,27 @@ namespace SmileyMeow.Migrations
                             Passwordd = "supervisor123456",
                             RoleeId = 9
                         });
+                });
+
+            modelBuilder.Entity("VetClinicLibrary.AdoptionPet.AdoptionJoinTable", b =>
+                {
+                    b.HasOne("VetClinicLibrary.Pett.Pet", "Pet")
+                        .WithMany("AdoptionJoinTable")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_adoptionjointables_pets_pettempid1");
+
+                    b.HasOne("VetClinicLibrary.Person.PetParent", "PetParent")
+                        .WithMany("AdoptionJoinTable")
+                        .HasForeignKey("PetParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_adoptionjointables_petparents_petparentid");
+
+                    b.Navigation("Pet");
+
+                    b.Navigation("PetParent");
                 });
 
             modelBuilder.Entity("VetClinicLibrary.Appointmentt.Appointment", b =>
@@ -7904,7 +7962,7 @@ namespace SmileyMeow.Migrations
                         .HasForeignKey("AnimalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_petsnpersons_pets_pettempid1");
+                        .HasConstraintName("fk_petsnpersons_pets_pettempid2");
 
                     b.HasOne("VetClinicLibrary.Person.PetParent", "PetParent")
                         .WithMany("PetnPersonn")
@@ -8032,6 +8090,8 @@ namespace SmileyMeow.Migrations
 
             modelBuilder.Entity("VetClinicLibrary.Person.PetParent", b =>
                 {
+                    b.Navigation("AdoptionJoinTable");
+
                     b.Navigation("PetnPersonn");
                 });
 
@@ -8059,6 +8119,8 @@ namespace SmileyMeow.Migrations
 
             modelBuilder.Entity("VetClinicLibrary.Pett.Pet", b =>
                 {
+                    b.Navigation("AdoptionJoinTable");
+
                     b.Navigation("PetnPersonn");
                 });
 

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using VetClinicLibrary.PetnPersonn;
 using System.ComponentModel.DataAnnotations;
+using VetClinicLibrary.AdoptionPet;
 
 namespace VetClinicLibrary.Pett;
 
@@ -34,4 +35,5 @@ public class Pet : IPet
     public bool IsAdoptable { get; set; }
     public AdoptInfo AdoptionInfo { get; set; }
     public List<PetnPerson> PetnPersonn { get; set; }
+    public List<AdoptionJoinTable> AdoptionJoinTable { get; set; }
 }

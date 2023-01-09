@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using VetClinicLibrary.AdoptionPet;
 using VetClinicLibrary.Appointmentt;
 using VetClinicLibrary.Appointmentt.AppointmentStatuss;
 using VetClinicLibrary.Appointmentt.PatientInformationn;
@@ -55,11 +56,25 @@ public class SmileyMeowDbContext : DbContext
     public DbSet<City> Cities { get; set; }
     public DbSet<District> Districts  { get; set; }
     public DbSet<HumanGender> HumanGenders  { get; set; }
+    public DbSet<AdoptionJoinTable> AdoptionJoinTables { get; set; }
 
     //add configuration directory later
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // temporary 
+        modelBuilder.Entity<AdoptionJoinTable>()
+                        .HasKey(a => a.AdoptJoinTableId);
+                        
+        modelBuilder.Entity<AdoptionJoinTable>()
+                    .HasOne(a => a.Pet)
+                    .WithMany(b => b.AdoptionJoinTable)
+                    .HasForeignKey(a => a.AnimalId);
+        
+        modelBuilder.Entity<AdoptionJoinTable>()
+                    .HasOne(a => a.PetParent)
+                    .WithMany(b => b.AdoptionJoinTable)
+                    .HasForeignKey(a => a.PetParentId);
+        
         modelBuilder.Entity<Pet>()
                     .HasOne(p => p.AdoptionInfo)
                     .WithOne(a => a.Pet);

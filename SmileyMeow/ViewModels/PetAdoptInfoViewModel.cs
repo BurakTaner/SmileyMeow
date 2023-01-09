@@ -12,4 +12,5 @@ public class PetAdoptInfoViewModel
     public Pet AdoptablePet { get; set; }
     public AdoptInfo AdoptablePetInfo { get; set; }
     public int PetAge { get; set; }
+    public string AdoptionText { get; set; } = "";
 }

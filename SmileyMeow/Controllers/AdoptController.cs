@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmileyMeow.Data;
+using SmileyMeow.DTOs;
 using SmileyMeow.Helpers;
 using SmileyMeow.ViewModels;
+using VetClinicLibrary.AdoptionPet;
 using VetClinicLibrary.Pett;
 
 namespace SmileyMeow.Controllers;
@@ -38,6 +40,68 @@ public class AdoptController : BasyController
         petAdoptInfoViewModel.PetAge = AgeCalculator.CalculateAge(petAdoptInfoViewModel.AdoptablePet.DOB);
         
         return View(petAdoptInfoViewModel);
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AdoptPet(int id, [Bind("AdoptionText")] AdoptionTextDTO  adoptionTextDTO) {
+        if (ModelState.IsValid)
+        {
+
+        Pet pet = _context.Pets.FirstOrDefault(a => a.AnimalId == id);
+        
+        if (pet is null)
+        {
+            return NotFound();
+        }
+        AdoptionJoinTable adoptionJoinTableTest = _context.AdoptionJoinTables.FirstOrDefault(a => a.PetParentId == ReturnLoggedUserId() && a.AnimalId == id);
+        if (adoptionJoinTableTest is null)
+        {
+            
+        AdoptionJoinTable adoptionJoinTable = new();
+        adoptionJoinTable.AnimalId = id;
+        adoptionJoinTable.PetParentId = ReturnLoggedUserId();
+        adoptionJoinTable.PetParentRequestText = adoptionTextDTO.AdoptionText;
+        _context.AdoptionJoinTables.Add(adoptionJoinTable);
+        await _context.SaveChangesAsync();
+        return View("AdoptApplyResult");
+        }
+        
+        if (adoptionJoinTableTest is not null)
+        {
+        ModelState.AddModelError("","You already apply to this pet for adoption");
+        PetAdoptInfoViewModel alreadyAppliedViewModel = new();
+
+        alreadyAppliedViewModel.AdoptablePet = await _context.Pets.Include(p => p.Breed)
+        .Include(p => p.PetGender)
+        .Include(p => p.Specie)
+        .FirstOrDefaultAsync(pet => pet.AnimalId == id);
+
+        alreadyAppliedViewModel.AdoptablePetInfo = await _context.AdoptInfos
+        .FirstOrDefaultAsync(adoptInfo => adoptInfo.AdoptInfoId == alreadyAppliedViewModel.AdoptablePet.AdoptInfoId);
+
+        alreadyAppliedViewModel.PetAge = AgeCalculator.CalculateAge(alreadyAppliedViewModel.AdoptablePet.DOB);
+
+        return View("Info",alreadyAppliedViewModel);
+        }
+
+        PetAdoptInfoViewModel petAdoptInfoViewModel = new();
+        }
+        PetAdoptInfoViewModel petAdoptInfoViewModelAgain = new();
+        petAdoptInfoViewModelAgain.AdoptablePet = await _context.Pets.Include(p => p.Breed)
+        .Include(p => p.PetGender)
+        .Include(p => p.Specie)
+        .FirstOrDefaultAsync(pet => pet.AnimalId == id);
+
+        petAdoptInfoViewModelAgain.AdoptablePetInfo = await _context.AdoptInfos
+        .FirstOrDefaultAsync(adoptInfo => adoptInfo.AdoptInfoId == petAdoptInfoViewModelAgain.AdoptablePet.AdoptInfoId);
+        petAdoptInfoViewModelAgain.AdoptionText = adoptionTextDTO.AdoptionText;
+        petAdoptInfoViewModelAgain.PetAge = AgeCalculator.CalculateAge(petAdoptInfoViewModelAgain.AdoptablePet.DOB);
+        return View("Info",petAdoptInfoViewModelAgain);
+        
+    }
+
+    public IActionResult AdoptApplyResult() {
+        return View();
     }
 
 //     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
