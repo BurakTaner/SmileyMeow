@@ -8,50 +8,55 @@
 <div class="card mb-3">
     <div class="row g-0">
         <div class="col-md-4">
-            <img class="card-img card-img-left" style="border-radius:10px;" src="~/Images/pet-@(Model.AdoptablePet.AnimalId).jpg" alt="An adoptable pet's image">
+            <img class="card-img card-img-left" style="border-radius:10px;"
+                src="~/Images/pet-@(Model.AdoptablePet.AnimalId).jpg" alt="An adoptable pet's image">
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <form asp-controller="Adopt" asp-action="AdoptPet" method="post" asp-route-id="@Model.AdoptablePet.AnimalId">
+                <form asp-controller="Adopt" asp-action="AdoptPet" method="post"
+                    asp-route-id="@Model.AdoptablePet.AnimalId">
                     <div asp-validation-summary="All" class="text-danger"></div>
-                <h4 class="card-title">@Model.AdoptablePet.Name</h4>
-                <p class="card-text" name="about">
-                    <label for="about"><strong>Specie:</strong></label>
-                    <br />
-                  @Model.AdoptablePet.Specie.SName
-                </p>
-                <p class="card-text" name="about">
-                <p class="card-text" name="about">
-                    <label for="about"><strong>Breed:</strong></label>
-                    <br />
-                  @Model.AdoptablePet.Breed.BName
-                </p>
-                <p class="card-text" name="about">
-                    <label for="about"><strong>Gender:</strong></label>
-                    <br />
-                  @Model.AdoptablePet.PetGender.GName
-                </p>
-                <p class="card-text" name="about">
-                    <label for="about"><strong>About:</strong></label>
-                    <br />
-                  @Model.AdoptablePetInfo.AdoptText
-                </p>
-                <p class="card-text" name="DOB">
-                    <label for="DOB"><strong>Date of Birth:</strong></label>
-                    @Model.AdoptablePet.DOB.ToShortDateString();    
+                    <h4 class="card-title">@Model.AdoptablePet.Name</h4>
+                    <p class="card-text" name="about">
+                        <label for="about"><strong>Specie:</strong></label>
+                        <br />
+                        @Model.AdoptablePet.Specie.SName
                     </p>
-                <p class="card-text" name="Age">
-                    <label for="Age"><strong>Age:</strong></label>
-                @Model.PetAge    
-                </p>
-                @if (Convert.ToInt32(User.FindFirst(a => a.Type == ClaimTypes.Sid)?.Value) != 0)
-                {
-                <textarea class="card-text" name="AdoptionText">@Model.AdoptionText</textarea>
-                <button type="submit" class="btn btn-primary d-block px-2 py-3">Adopt</button>
-                }
+                    <p class="card-text" name="about">
+                    <p class="card-text" name="about">
+                        <label for="about"><strong>Breed:</strong></label>
+                        <br />
+                        @Model.AdoptablePet.Breed.BName
+                    </p>
+                    <p class="card-text" name="about">
+                        <label for="about"><strong>Gender:</strong></label>
+                        <br />
+                        @Model.AdoptablePet.PetGender.GName
+                    </p>
+                    <p class="card-text" name="about">
+                        <label for="about"><strong>About:</strong></label>
+                        <br />
+                        @Model.AdoptablePetInfo.AdoptText
+                    </p>
+                    <p class="card-text" name="DOB">
+                        <label for="DOB"><strong>Date of Birth:</strong></label>
+                        @Model.AdoptablePet.DOB.ToShortDateString();
+                    </p>
+                    <p class="card-text" name="Age">
+                        <label for="Age"><strong>Age:</strong></label>
+                        @Model.PetAge
+                    </p>
+                    @if (Convert.ToInt32(User.FindFirst(a => a.Type == ClaimTypes.Sid)?.Value) != 0)
+                        {
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label"
+                            name="AdoptionText">@Model.AdoptionText</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary d-block px-2 py-3">Adopt</button>
+                        }
                 </form>
             </div>
         </div>
     </div>
 </div>
-

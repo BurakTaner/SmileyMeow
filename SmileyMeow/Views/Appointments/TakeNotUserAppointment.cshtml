@@ -9,6 +9,7 @@
   <div class="appointment-form pb-2 pt-2 ">
     <div class="formbold-form-wrapper">
       <form asp-controller="Appointments" asp-action="TakeNotUserAppointment" method="POST" class="no-bordered-form">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <ol>
           <li>
             <strong class="block-level-info mb-2"> Required (*)</strong>
@@ -151,12 +152,12 @@
         }
 
         <div class="formbold-mb-5 mt-3">
-          <label for="doctor-preference" class="formbold-form-label">Specie *</label>
-          <select name="SpecieId" id="doctor-preference" class="formbold-form-input">
+          <label for="specie-select" class="formbold-form-label">Specie *</label>
+          <select name="SpecieId" id="specie-select" class="formbold-form-input">
             <option value="">Select a specie...</option>
             @foreach (Specie specie in Model.SpecieList)
             {
-              <option checked="@(specie.SpecieId == Model.NotUserParentsPet.SpecieId)" value="@specie.SpecieId">
+              <option selected="@(specie.SpecieId == Model.NotUserParentsPet.SpecieId)" value="@specie.SpecieId">
                 @specie.SName</option>
             }
           </select>
@@ -164,12 +165,12 @@
 
 
         <div class="formbold-mb-5 mt-3">
-          <label for="doctor-preference" class="formbold-form-label">Breed *</label>
-          <select name="BreedId" id="doctor-preference" class="formbold-form-input">
+          <label for="breed-select" class="formbold-form-label">Breed *</label>
+          <select name="BreedId" id="breed-select" class="formbold-form-input">
             <option value="">Select a breed...</option>
             @foreach (Breed breed in Model.BreedList)
             {
-              <option checked="@(breed.BreedId == Model.NotUserParentsPet.BreedId)" value="@breed.BreedId">@breed.BName
+              <option selected="@(breed.BreedId == Model.NotUserParentsPet.BreedId)" value="@breed.BreedId">@breed.BName
               </option>
             }
           </select>

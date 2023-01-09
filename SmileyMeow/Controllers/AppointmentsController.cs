@@ -42,7 +42,7 @@ public class AppointmentsController : BasyController
             if (doctorAppointments.Count is 0)
             {
                 await InsertToUserAppointments(appointment, selectedFormInputNotUserDTO, patientInformation, loggedUser);
-                return RedirectToAction("", "");
+                return RedirectToAction("AppointmentsResult", "Appointments");
             }
         }
 
@@ -78,7 +78,7 @@ public class AppointmentsController : BasyController
      [Bind("DoctorId", "AppointmentDate")] NotUserAppointment notUserAppointment,
      [Bind("DistrictId", "AddressDetails")] Address address, [Bind("CityId")] SelectedFormInputCityDTO selectedFormInputNotUserDTO)
     {
-        // if (ModelState.IsValid)
+        if (ModelState.IsValid){
 
         if (notUserAppointment.AppointmentDate.Minute != 00 && notUserAppointment.AppointmentDate.Minute != 30)
         {
@@ -88,13 +88,14 @@ public class AppointmentsController : BasyController
 
             return View(appointmentViewModell);
         }
-        // List<NotUserAppointment> doctorAppointments = await GetNotUserAppointments(notUserAppointment);
+        List<NotUserAppointment> doctorAppointments = await GetNotUserAppointments(notUserAppointment);
 
-        // if (doctorAppointments.Count == 0)
-        // {
-        //     await InsertToNotUserAppointments(notUserParent, notUserParentsPet, patientInformation, notUserAppointment, address);
-        //     return RedirectToAction("Index", "Home");
-        // }
+        if (doctorAppointments.Count == 0)
+        {
+            await InsertToNotUserAppointments(notUserParent, notUserParentsPet, patientInformation, notUserAppointment, address);
+            return RedirectToAction("AppointmentsResult", "Appointments");
+        }
+        }
 
         // foreach (NotUserAppointment selectedDoctorAppointments in doctorAppointments)
         // {
@@ -107,6 +108,9 @@ public class AppointmentsController : BasyController
         NotUserAppointmentViewModel appointmentViewModel = await MakeNotUserViewModelAgain(notUserParent, notUserParentsPet, patientInformation, notUserAppointment, address, selectedFormInputNotUserDTO);
 
         return View(appointmentViewModel);
+    }
+    public IActionResult AppointmentsResult() {
+        return View();
     }
 
     private async Task<List<NotUserAppointment>> GetNotUserAppointments(NotUserAppointment notUserAppointment)
