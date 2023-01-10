@@ -31,15 +31,19 @@
                 </div>
 
                 <form asp-controller="Appointments" asp-action="TakeUserAppointment" method="get">
-                    <div asp-validation-summary="All" class="text-danger"></div>
+                    
                     <div class="col-md-6 pet-select-div">
                         <label class="small mb-1 pet-lab ml-5" for="pets-select">Pets</label>
                         <select name="selectedPetFromProfile" id="pets-select"
                             class="formbold-form-input pets-select ml-5">
-                            @foreach (Pet pet in Model.PetsOfSelectedParent)
+                            <option value="0">Select a pet...</option>
+                            @if (Model.PetsOfSelectedParent is not null)
+                            {
+                                @foreach (Pet pet in Model.PetsOfSelectedParent)
                             {
                                 <option value="@pet.AnimalId">
                                     @pet.Name</option>
+                            }
                             }
                         </select>
                         <p class="info-pet-txt">Select a pet and make an appointment</p>
@@ -60,6 +64,7 @@
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
+                <div asp-validation-summary="All" class="text-danger"></div>
                     <form asp-controller="PetParent" asp-action="Profile" method="post">
                         <!-- Form Group (username)-->
                         <div class="mb-3">
@@ -91,7 +96,7 @@
                                     value='@(Model.PetParent.DOB?.ToString("yyyy-MM-dd"))'>
                             </div>
                             <!-- Form Group (location)-->
-                            @if (Model.PetParent.Address is not null)
+                            @if (Model.PetParent.Address is not null && Model.PetParent.Address.DistrictId is not null && Model.PetParent.Address.DistrictId is not 0)
                             {
                                 <div class="col-md-6 ">
                                     <label class="small mb-1 gndr-lab" for="select-city">
@@ -117,6 +122,13 @@
                                         }
                                     </select>
                                 </div>
+
+                                <div class="mb-3">
+                                <label class="small mb-1 add-lab" for="inputEmailAddress">Address Details</label>
+                                <textarea class="form-control add-detail" name="AddressDetails" id="inputEmailAddress"
+                                    type="email" cols="40">@Model.PetParent.Address.AddressDetails</textarea>
+
+                            </div>
                             }
 
                             @*
@@ -142,18 +154,19 @@
                                     </select>
                                 </div>
 
+                                <div class="mb-3">
+                                <label class="small mb-1 add-lab" for="inputEmailAddress">Address Details</label>
+                                <textarea class="form-control add-detail" name="AddressDetails" id="inputEmailAddress"
+                                    type="email" cols="40"></textarea>
+
+                            </div>
                             }
 
                             @* <select name="DistrictId" id="select-district"
                                 class="formbold-form-input select-district mt-2">
                                 </select>
                             *@
-                            <div class="mb-3">
-                                <label class="small mb-1 add-lab" for="inputEmailAddress">Address Details</label>
-                                <textarea class="form-control add-detail" name="AddressDetails" id="inputEmailAddress"
-                                    type="email" cols="40">@Model.PetParent.Address.AddressDetails</textarea>
-
-                            </div>
+                            
                             <div class="formbold-mb-5 mt-3">
 
                             </div>
@@ -161,6 +174,7 @@
                                 <label class="small mb-1 gndr-lab" for="inputLocation">Gender</label>
                                 <select name="HumanGenderId" id="doctor-preference"
                                     class="formbold-form-input gndr-select">
+                                    <option selected value="">Select a gender...</option>
                                     @foreach (HumanGender humangender in Model.HumanGenders)
                                     {
                                         <option value="@humangender.HumanGenderId"
@@ -173,6 +187,7 @@
                             <div class="col-md-6 p-0">
                                 <label class="small mb-1 pron-lab" for="inputLocation">Pronoun</label>
                                 <select name="PronounId" id="doctor-preference" class="formbold-form-input pron-select">
+                                    <option selected value="">Select a pronoun...</option>
                                     @foreach (Pronoun pronoun in Model.Pronouns)
                                     {
                                         <option value="@pronoun.ProunounId"

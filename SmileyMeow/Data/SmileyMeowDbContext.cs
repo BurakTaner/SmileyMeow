@@ -257,6 +257,7 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<Userr>().HasData(
+            new Userr { UserrId = 5, Emaill = "newparent@gmail.com", Passwordd = "candy123456", RoleeId = 6 },
             new Userr { UserrId = 6, Emaill = "artorias@gmail.com", Passwordd = "sif123456", RoleeId = 6 },
             new Userr { UserrId = 666, Emaill = "patches@gmail.com", Passwordd = "patches123456", RoleeId = 7 },
             new Userr { UserrId = 128, Emaill = "anastacia@gmail.com", Passwordd = "anastacia123456", RoleeId = 7 },

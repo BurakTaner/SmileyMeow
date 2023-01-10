@@ -26,13 +26,13 @@ public class PetParentController : BasyController
         int loggedUser = ReturnLoggedUserId();
 
         PetParentProfileViewModel selectedParentsProfile = new();
-
-        await AddSelectedParentToViewModel(selectedParentsProfile);
+        
+        selectedParentsProfile.PetParent = await AddSelectedParentToViewModel(selectedParentsProfile);
 
         await AddSelectedParentsPetsToViewModel(selectedParentsProfile);
         await AddGenderAndPronounsToViewModel(selectedParentsProfile);
-        selectedParentsProfile.CityList = (selectedParentsProfile.PetParent.Address is null ? null : await _context.Cities.ToListAsync());
-        selectedParentsProfile.DistrictList = (selectedParentsProfile.PetParent.Address is null ? null : await _context.Districts
+        selectedParentsProfile.CityList = (selectedParentsProfile.PetParent.Address is null || selectedParentsProfile.PetParent.Address.DistrictId is null ? null : await _context.Cities.ToListAsync());
+        selectedParentsProfile.DistrictList = (selectedParentsProfile.PetParent.Address is null || selectedParentsProfile.PetParent.Address.DistrictId is null ? null : await _context.Districts
         .Where(a => a.CityId == selectedParentsProfile.PetParent.Address.District.CityId)
         .ToListAsync());
         selectedParentsProfile.selectedFormProfileDTO = new();
@@ -90,30 +90,41 @@ public class PetParentController : BasyController
         selectedParentsProfile.Pronouns = await _context.Pronouns.ToListAsync();
     }
   
-    private async Task AddSelectedParentToViewModel(PetParentProfileViewModel selectedParentsProfile)
+    private async Task<PetParent> AddSelectedParentToViewModel(PetParentProfileViewModel selectedParentsProfile)
     {
-        selectedParentsProfile.PetParent = await _context.PetParents
+        PetParent petParent = await _context.PetParents
         .Include(a => a.Address)
         .Include(a => a.Address.District)
         .Include(a => a.Balance)
         .Include(a => a.HumanGender)
         .Include(a => a.Pronoun)
         .Include(a => a.Userr)
-        .FirstOrDefaultAsync();
+        .FirstOrDefaultAsync(a => a.UserId == ReturnLoggedUserId());
+        if (petParent is null)
+        {
+            PetParent parent = new();
+            parent.Userr = await _context.Userrs.FirstOrDefaultAsync(a => a.UserrId == ReturnLoggedUserId());
+            return parent;
+        }
+        return petParent;
     }
 
     private async Task AddSelectedParentsPetsToViewModel(PetParentProfileViewModel selectedParentsProfile)
     {
+        if(selectedParentsProfile.PetParent.PetParentId != 0) {
         List<int> selectedParentsPets = await _context.PetsnPersons
         .Where(a => a.PetParentId == selectedParentsProfile.PetParent.PetParentId)
         .Select(a => a.AnimalId).ToListAsync();
+	
+	        selectedParentsProfile.PetsOfSelectedParent = new();
+	        foreach (int animalId in selectedParentsPets)
+	        {
+	            selectedParentsProfile.PetsOfSelectedParent
+	            .Add(await _context.Pets
+	            .FirstOrDefaultAsync(a => a.AnimalId == animalId));
+            }
 
-        selectedParentsProfile.PetsOfSelectedParent = new();
-        foreach (int animalId in selectedParentsPets)
-        {
-            selectedParentsProfile.PetsOfSelectedParent
-            .Add(await _context.Pets
-            .FirstOrDefaultAsync(a => a.AnimalId == animalId));
         }
+        selectedParentsProfile.PetsOfSelectedParent = null;
     }
 }

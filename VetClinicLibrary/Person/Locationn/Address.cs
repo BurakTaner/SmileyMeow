@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace VetClinicLibrary.Person.Locationn;
 public class Address : IAddress
 {
     public int AddressId { get; set; }
+    [Range(1,999,ErrorMessage = "Out of range")]
     public int? DistrictId { get; set; }
     public District District { get; set; }
     public string AddressDetails { get; set; }
