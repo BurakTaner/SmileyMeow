@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SmileyMeow.Data;
 using SmileyMeow.DTOs;
 using SmileyMeow.ViewModels;
+using VetClinicLibrary.Appointmentt;
 using VetClinicLibrary.Person;
 using VetClinicLibrary.Person.Locationn;
 using VetClinicLibrary.User;
@@ -57,7 +58,7 @@ public class PetParentController : BasyController
             Userr loggedParent = await ReturnLoggedParentUserAccount(loggedUser);
             loggedParent.Emaill = selectedFormProfileDTO.Emaill;
             _context.Userrs.Update(loggedParent);
-            await _context.SaveChangesAsync();
+            await Save();
             return RedirectToAction("Profile", "PetParent");
         }
 
@@ -70,15 +71,37 @@ public class PetParentController : BasyController
         await AddSelectedParentsPetsToViewModel(selectedParentsProfile);
         return View(selectedParentsProfile);
     }
-    // public async Task<IActionResult> Pets() {
 
-    // }
-  
+
+    public async Task<IActionResult> AppointmentList()
+    {
+        List<Appointment> allAppointmentsForLoggedUser = await ReturnAllAppointmentsForUser();
+        return View(allAppointmentsForLoggedUser);
+    }
+
+
+    public async Task<IActionResult> CancelAppointment(int id) {
+        Appointment appointment = await _context.Appointments.FirstOrDefaultAsync(a => a.AppointmentId == id);
+        _context.Remove(appointment);
+        await Save();
+        List<Appointment> allAppointmentsForLoggedUser = await ReturnAllAppointmentsForUser();
+        return View("AppointmentList",allAppointmentsForLoggedUser);
+                
+    }
 
     // End of the views//
     //--------------------------------------------------------------------------------//
     // Private methods for views//
-  
+
+
+    private async Task<List<Appointment>> ReturnAllAppointmentsForUser()
+    {
+        int loggedUserPetParentId = await _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.UserId).FirstOrDefaultAsync();
+        List<Appointment> allAppointmentsForLoggedUser = await _context.Appointments.Where(a => a.PetnPersonId == loggedUserPetParentId).Include(a => a.PetnPerson.Pet).Include(a => a.Doctor).ThenInclude(a => a.DoctorTitle).Include(a => a.AppointmentStatus).ToListAsync();
+        return allAppointmentsForLoggedUser;
+    }
+
+
     private async Task<Userr> ReturnLoggedParentUserAccount(int loggedUser)
     {
         return await _context.Userrs.FirstOrDefaultAsync(a => a.UserrId == loggedUser);
@@ -126,5 +149,11 @@ public class PetParentController : BasyController
 
         }
         selectedParentsProfile.PetsOfSelectedParent = null;
+    }
+
+
+    private async Task Save()
+    {
+        await _context.SaveChangesAsync();
     }
 }
