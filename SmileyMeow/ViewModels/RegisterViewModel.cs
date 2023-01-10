@@ -16,7 +16,7 @@ public class RegisterViewModel
     public string Emaill { get; set; }
     [Display(Name = "Password"), Required(ErrorMessage = "{0} must be filled"), StringLength(30, MinimumLength = 6, ErrorMessage = "{0} needs to be between {1} - {2}")]
     public string Passwordd { get; set; }
-    [Display(Name = "ConfirmPassword"),Compare("Passwordd", ErrorMessage = "Password and {0} needs to be same"), DataType(DataType.Password) ]
+    [Display(Name = "Confirm Password"),Compare("Passwordd", ErrorMessage = "Password and {0} needs to be same"), DataType(DataType.Password) ]
     public string ConfirmPasswordd { get; set; }
     [Display(Name = "Role"), Required(ErrorMessage = "{0} must be filled"), Range(5,7, ErrorMessage = "Out of range")]
     public int RoleeId { get ; set ; } = 5;
