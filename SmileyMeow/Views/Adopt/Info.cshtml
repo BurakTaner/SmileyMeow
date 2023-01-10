@@ -48,6 +48,7 @@
                     </p>
                     @if (Convert.ToInt32(User.FindFirst(a => a.Type == ClaimTypes.Sid)?.Value) != 0)
                         {
+                        <label for="DOB"><strong>Information about the person wants to adopt it</strong></label>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"
                             name="AdoptionText">@Model.AdoptionText</label>
