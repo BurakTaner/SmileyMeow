@@ -261,7 +261,10 @@ public class SmileyMeowDbContext : DbContext
             new Userr { UserrId = 666, Emaill = "patches@gmail.com", Passwordd = "patches123456", RoleeId = 7 },
             new Userr { UserrId = 128, Emaill = "anastacia@gmail.com", Passwordd = "anastacia123456", RoleeId = 7 },
             new Userr { UserrId = 129, Emaill = "admin@gmail.com", Passwordd = "admin123456", RoleeId = 8 },
-            new Userr { UserrId = 130, Emaill = "supervisor@gmail.com", Passwordd = "supervisor123456", RoleeId = 9 }
+            new Userr { UserrId = 130, Emaill = "supervisor@gmail.com", Passwordd = "supervisor123456", RoleeId = 9 },
+            new Userr { UserrId = 131, Emaill = "gandalf@gmail.com", Passwordd = "ring123456", RoleeId = 7 },
+            new Userr { UserrId = 132, Emaill = "jerrythefunny@gmail.com", Passwordd = "airplanejokes123456", RoleeId = 7 },
+            new Userr { UserrId = 133, Emaill = "witchwithroses@gmail.com", Passwordd = "rose123456", RoleeId = 7 }
         );
 
         modelBuilder.Entity<Rolee>().HasData(
@@ -274,7 +277,10 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Doctor>().HasData(
             new Doctor { DoctorId = 6, FirstName = "Patches", MiddleName = null, LastName = "Whisper", BalanceId = 666, DOB = Convert.ToDateTime("1978/12/10"), PhoneNumber = "05434561275", UserId = 666, HumanGenderId = 66, DoctorTitleId = 6, PronounId = 6, AddressId = 7},
-            new Doctor { DoctorId = 9, FirstName = "Anastacia", MiddleName = "Ciaran", LastName = "Catarina", BalanceId = 128, DOB = Convert.ToDateTime("1980/6/4"), PhoneNumber = "05341299154", UserId = 128, HumanGenderId = 128, DoctorTitleId = 7, PronounId = 9, AddressId = 12}
+            new Doctor { DoctorId = 9, FirstName = "Anastacia", MiddleName = "Ciaran", LastName = "Catarina", BalanceId = 128, DOB = Convert.ToDateTime("1980/6/4"), PhoneNumber = "05341299154", UserId = 128, HumanGenderId = 128, DoctorTitleId = 7, PronounId = 9, AddressId = 12},
+            new Doctor { DoctorId = 10, FirstName = "Gandalf", MiddleName = null, LastName = "Grey", BalanceId = 129, DOB = Convert.ToDateTime("1954/7/27"), PhoneNumber = "05341299761", UserId = 131, HumanGenderId = 129, DoctorTitleId = 7, PronounId = 10, AddressId = 20},
+            new Doctor { DoctorId = 11, FirstName = "Jerry", MiddleName = "Jeff", LastName = "Hierfeld", BalanceId = 130, DOB = Convert.ToDateTime("1976/4/16"), PhoneNumber = "05341291258", UserId = 132, HumanGenderId = 129, DoctorTitleId = 6, PronounId = 10, AddressId = 21},
+            new Doctor { DoctorId = 12, FirstName = "Bayonetta", MiddleName = null, LastName = "Jeanne", BalanceId = 131, DOB = Convert.ToDateTime("1888/6/4"), PhoneNumber = "05341281924", UserId = 133, HumanGenderId = 130, DoctorTitleId = 7, PronounId = 6, AddressId = 22}
         );
 
         modelBuilder.Entity<PetParent>().HasData(
@@ -285,13 +291,25 @@ public class SmileyMeowDbContext : DbContext
             new Address { AddressId = 6, AddressDetails = "Block 5, after Boo's shop", DistrictId = 34},
             new Address { AddressId = 7, AddressDetails = "Block 6, after Foo's shop", DistrictId = 40},
             new Address { AddressId = 9, AddressDetails = "Block 6, after Coo's shop", DistrictId = 30},
-            new Address { AddressId = 12, AddressDetails = "Block 7, after Too's shop", DistrictId = 30}
+            new Address { AddressId = 12, AddressDetails = "Block 7, after Too's shop", DistrictId = 30},
+            new Address { AddressId = 20, AddressDetails = "Block 7, after the coffe shop", DistrictId = 60},
+            new Address { AddressId = 21, AddressDetails = "Block 7, after toy shop", DistrictId = 70},
+            new Address { AddressId = 22, AddressDetails = "Block 7, after bank", DistrictId = 95}
         );
 
         modelBuilder.Entity<HumanGender>().HasData(
             new HumanGender { HumanGenderId = 6, GName = "Non-Binary" },
             new HumanGender { HumanGenderId = 66, GName = "Genderfluid" },
-            new HumanGender { HumanGenderId = 128, GName = "Female" }
+            new HumanGender { HumanGenderId = 128, GName = "Female" },
+            new HumanGender { HumanGenderId = 129, GName = "Male" },
+            new HumanGender { HumanGenderId = 130, GName = "Bigender" }
+        );
+
+
+        modelBuilder.Entity<Pronoun>().HasData(
+            new Pronoun { ProunounId = 6, PName = "They/Them" },
+            new Pronoun { ProunounId = 9, PName = "She/Her" },
+            new Pronoun { ProunounId = 10, PName = "He/Him" }
         );
 
         modelBuilder.Entity<DoctorSchool>().HasData(
@@ -305,7 +323,10 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Balance>().HasData(
             new Balance { BalanceId = 6, PersonBalance = Convert.ToDecimal("150.55") },
             new Balance { BalanceId = 666, PersonBalance = Convert.ToDecimal("90.65") },
-            new Balance { BalanceId = 128, PersonBalance = Convert.ToDecimal("128.25") }
+            new Balance { BalanceId = 128, PersonBalance = Convert.ToDecimal("128.25") },
+            new Balance { BalanceId = 129, PersonBalance = Convert.ToDecimal("540.12") },
+            new Balance { BalanceId = 130, PersonBalance = Convert.ToDecimal("358.24") },
+            new Balance { BalanceId = 131, PersonBalance = Convert.ToDecimal("179.50") }
         );
 
         modelBuilder.Entity<Appointment>().HasData(
@@ -320,13 +341,12 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<DoctorInformation>().HasData(
             new DoctorInformation { DoctorId = 6, DoctorInformationText = "Hi, I am Dr. Patches, a veterinarian with over 10 years of experience in the field. I received my Doctor of Veterinary Medicine degree from the University of California, Davis and have since worked at a variety of clinics, caring for all types of animals and their petparents. My specialty is in small animal medicine, but I am well-versed in treating all kinds of creatures, from cats and dogs to birds and reptiles. I am passionate about helping animals and their owners, and take pride in being able to diagnose and treat a wide range of conditions. In my free time, I enjoy volunteering at local animal shelters and spending time with my own pets, which include a rescue dog and two cats. I believe that effective communication with petparents is crucial in providing the best care for their beloved animals." },
-            new DoctorInformation { DoctorId = 9, DoctorInformationText = "As a veterinarian, I am constantly learning and growing in my profession. I am passionate about providing the best care possible to my patients, and am dedicated to staying up-to-date on the latest advaances in veterinary medicine. I understand that pets are more than just animals to their parents - they are members of the family, and I treat each one with the same care and respect I would any other family member. I take the time to listen to my clients and understand their concerns, and work with them to develop a personalized treatment plan that meets the needs of both the animal and the parent. One of the things I enjoy most about being a veterinarian is the opportunity to build long-term relationships with my patients and their parents. I love seeing my patients grow and thrive under my care, and take great pride in being able to help them live happy and healthy lives." }
+            new DoctorInformation { DoctorId = 9, DoctorInformationText = "As a veterinarian, I am constantly learning and growing in my profession. I am passionate about providing the best care possible to my patients, and am dedicated to staying up-to-date on the latest advaances in veterinary medicine. I understand that pets are more than just animals to their parents - they are members of the family, and I treat each one with the same care and respect I would any other family member. I take the time to listen to my clients and understand their concerns, and work with them to develop a personalized treatment plan that meets the needs of both the animal and the parent. One of the things I enjoy most about being a veterinarian is the opportunity to build long-term relationships with my patients and their parents. I love seeing my patients grow and thrive under my care, and take great pride in being able to help them live happy and healthy lives." },
+            new DoctorInformation { DoctorId = 10, DoctorInformationText = "Hello, my name is Dr.Gandalf and I am a veterinarian at SmileyMeow Clinic. With over a decade of experience in the field, I am dedicated to providing the best medical care for all types of animals.My areas of expertise include routine check-ups and vaccinations, as well as emergency and critical care. I have a particular interest in soft tissue surgery and have performed many successful procedures.At SmileyMeow Clinic, we understand that visiting the veterinarian can be stressful for both pets and their owners, which is why we strive to create a comfortable and compassionate environment for all our patients.As a veterinarian at SmileyMeow Clinic, I take pride in being able to help and heal animals, and I am honored to be part of such a dedicated team. I am confident that your pet will receive the best care under my guidance." },
+            new DoctorInformation { DoctorId = 11, DoctorInformationText = "Hello, my name is Dr. Jerry and I am a veterinarian at SmileyMeow Clinic. With over 15 years of experience in the field, I am dedicated to providing the best medical care for all types of animals.My areas of expertise include emergency and critical care, as well as surgery, particularly orthopedic surgery. I have extensive experience in dealing with injuries and conditions that affect the bones, joints and muscles, and I have a high success rate in complicated procedures.At SmileyMeow Clinic, we understand that each pet is unique and requires a personalized approach. That's why we take the time to get to know our patients and their specific needs.I pride myself on being calm and level-headed, even in high-stress situations, which makes me a favorite among both pets and their owners. I understand that having a pet is not only a huge responsibility but also a joy, and I am here to help with all the medical needs of your pet.I am excited to be part of the dedicated team at SmileyMeow Clinic and I am confident that your pet will receive the best care under my guidance." },
+            new DoctorInformation { DoctorId = 12, DoctorInformationText = "Hi there! My name is Dr. Bayonetta and I am a veterinarian at SmileyMeow Clinic. With over 12 years of experience in the field, I am dedicated to providing the best medical care for all types of animals, with a special focus on preventative care, nutrition and alternative therapies.I believe in taking a holistic approach to pet care, which includes the use of natural supplements, acupuncture, and homeopathy in addition to traditional veterinary medicine. My goal is to promote overall health and wellness in pets, rather than just treating symptoms.At SmileyMeow Clinic, we understand that each pet is unique and requires a personalized approach. That's why I take the time to get to know my patients and their specific needs.I pride myself on being kind, compassionate, and understanding. I believe that a positive attitude and good communication with the owners are important to ensure the best possible outcome for the pets.I am excited to be part of the dedicated team at SmileyMeow Clinic and I am confident that your pet will receive the best care under my guidance." }
         );
 
-        modelBuilder.Entity<Pronoun>().HasData(
-            new Pronoun { ProunounId = 6, PName = "They/Them" },
-            new Pronoun { ProunounId = 9, PName = "She/Her" }
-        );
 
         modelBuilder.Entity<AppointmentStatus>().HasData(
             new AppointmentStatus { AppointmentStatussId = 6, Status = "Active Appointment" },

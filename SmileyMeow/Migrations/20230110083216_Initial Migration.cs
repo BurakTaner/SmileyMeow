@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SmileyMeow.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigratio : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -730,6 +730,9 @@ namespace SmileyMeow.Migrations
                 {
                     { 6, 150.55m },
                     { 128, 128.25m },
+                    { 129, 540.12m },
+                    { 130, 358.24m },
+                    { 131, 179.50m },
                     { 666, 90.65m }
                 });
 
@@ -853,7 +856,9 @@ namespace SmileyMeow.Migrations
                 {
                     { 6, "Non-Binary" },
                     { 66, "Genderfluid" },
-                    { 128, "Female" }
+                    { 128, "Female" },
+                    { 129, "Male" },
+                    { 130, "Bigender" }
                 });
 
             migrationBuilder.InsertData(
@@ -872,7 +877,8 @@ namespace SmileyMeow.Migrations
                 values: new object[,]
                 {
                     { 6, "They/Them" },
-                    { 9, "She/Her" }
+                    { 9, "She/Her" },
+                    { 10, "He/Him" }
                 });
 
             migrationBuilder.InsertData(
@@ -1909,10 +1915,10 @@ namespace SmileyMeow.Migrations
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
                 values: new object[,]
                 {
-                    { 6, null, 6, new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9406), false, "Sif", 6, 6 },
-                    { 9, 7, 9, new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9433), true, "Shelob", 9, 9 },
-                    { 10, 8, 11, new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9440), false, "Alvina", 9, 10 },
-                    { 12, 9, 12, new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9444), true, "Tarumaru", 10, 11 }
+                    { 6, null, 6, new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(7177), false, "Sif", 6, 6 },
+                    { 9, 7, 9, new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(7206), true, "Shelob", 9, 9 },
+                    { 10, 8, 11, new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(7212), false, "Alvina", 9, 10 },
+                    { 12, 9, 12, new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(7217), true, "Tarumaru", 10, 11 }
                 });
 
             migrationBuilder.InsertData(
@@ -1933,6 +1939,9 @@ namespace SmileyMeow.Migrations
                     { 128, "anastacia@gmail.com", "anastacia123456", 7 },
                     { 129, "admin@gmail.com", "admin123456", 8 },
                     { 130, "supervisor@gmail.com", "supervisor123456", 9 },
+                    { 131, "gandalf@gmail.com", "ring123456", 7 },
+                    { 132, "jerrythefunny@gmail.com", "airplanejokes123456", 7 },
+                    { 133, "witchwithroses@gmail.com", "rose123456", 7 },
                     { 666, "patches@gmail.com", "patches123456", 7 }
                 });
 
@@ -1944,7 +1953,10 @@ namespace SmileyMeow.Migrations
                     { 6, "Block 5, after Boo's shop", 34 },
                     { 7, "Block 6, after Foo's shop", 40 },
                     { 9, "Block 6, after Coo's shop", 30 },
-                    { 12, "Block 7, after Too's shop", 30 }
+                    { 12, "Block 7, after Too's shop", 30 },
+                    { 20, "Block 7, after the coffe shop", 60 },
+                    { 21, "Block 7, after toy shop", 70 },
+                    { 22, "Block 7, after bank", 95 }
                 });
 
             migrationBuilder.InsertData(
@@ -1953,7 +1965,10 @@ namespace SmileyMeow.Migrations
                 values: new object[,]
                 {
                     { 6, 7, 666, new DateTime(1978, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Patches", 66, "Whisper", null, "05434561275", 6, null, 666 },
-                    { 9, 12, 128, new DateTime(1980, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, "Anastacia", 128, "Catarina", "Ciaran", "05341299154", 9, null, 128 }
+                    { 9, 12, 128, new DateTime(1980, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, "Anastacia", 128, "Catarina", "Ciaran", "05341299154", 9, null, 128 },
+                    { 10, 20, 129, new DateTime(1954, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, "Gandalf", 129, "Grey", null, "05341299761", 10, null, 131 },
+                    { 11, 21, 130, new DateTime(1976, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, "Jerry", 129, "Hierfeld", "Jeff", "05341291258", 10, null, 132 },
+                    { 12, 22, 131, new DateTime(1888, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, "Bayonetta", 130, "Jeanne", null, "05341281924", 6, null, 133 }
                 });
 
             migrationBuilder.InsertData(
@@ -1972,7 +1987,10 @@ namespace SmileyMeow.Migrations
                 values: new object[,]
                 {
                     { 6, "Hi, I am Dr. Patches, a veterinarian with over 10 years of experience in the field. I received my Doctor of Veterinary Medicine degree from the University of California, Davis and have since worked at a variety of clinics, caring for all types of animals and their petparents. My specialty is in small animal medicine, but I am well-versed in treating all kinds of creatures, from cats and dogs to birds and reptiles. I am passionate about helping animals and their owners, and take pride in being able to diagnose and treat a wide range of conditions. In my free time, I enjoy volunteering at local animal shelters and spending time with my own pets, which include a rescue dog and two cats. I believe that effective communication with petparents is crucial in providing the best care for their beloved animals." },
-                    { 9, "As a veterinarian, I am constantly learning and growing in my profession. I am passionate about providing the best care possible to my patients, and am dedicated to staying up-to-date on the latest advaances in veterinary medicine. I understand that pets are more than just animals to their parents - they are members of the family, and I treat each one with the same care and respect I would any other family member. I take the time to listen to my clients and understand their concerns, and work with them to develop a personalized treatment plan that meets the needs of both the animal and the parent. One of the things I enjoy most about being a veterinarian is the opportunity to build long-term relationships with my patients and their parents. I love seeing my patients grow and thrive under my care, and take great pride in being able to help them live happy and healthy lives." }
+                    { 9, "As a veterinarian, I am constantly learning and growing in my profession. I am passionate about providing the best care possible to my patients, and am dedicated to staying up-to-date on the latest advaances in veterinary medicine. I understand that pets are more than just animals to their parents - they are members of the family, and I treat each one with the same care and respect I would any other family member. I take the time to listen to my clients and understand their concerns, and work with them to develop a personalized treatment plan that meets the needs of both the animal and the parent. One of the things I enjoy most about being a veterinarian is the opportunity to build long-term relationships with my patients and their parents. I love seeing my patients grow and thrive under my care, and take great pride in being able to help them live happy and healthy lives." },
+                    { 10, "Hello, my name is Dr.Gandalf and I am a veterinarian at SmileyMeow Clinic. With over a decade of experience in the field, I am dedicated to providing the best medical care for all types of animals.My areas of expertise include routine check-ups and vaccinations, as well as emergency and critical care. I have a particular interest in soft tissue surgery and have performed many successful procedures.At SmileyMeow Clinic, we understand that visiting the veterinarian can be stressful for both pets and their owners, which is why we strive to create a comfortable and compassionate environment for all our patients.As a veterinarian at SmileyMeow Clinic, I take pride in being able to help and heal animals, and I am honored to be part of such a dedicated team. I am confident that your pet will receive the best care under my guidance." },
+                    { 11, "Hello, my name is Dr. Jerry and I am a veterinarian at SmileyMeow Clinic. With over 15 years of experience in the field, I am dedicated to providing the best medical care for all types of animals.My areas of expertise include emergency and critical care, as well as surgery, particularly orthopedic surgery. I have extensive experience in dealing with injuries and conditions that affect the bones, joints and muscles, and I have a high success rate in complicated procedures.At SmileyMeow Clinic, we understand that each pet is unique and requires a personalized approach. That's why we take the time to get to know our patients and their specific needs.I pride myself on being calm and level-headed, even in high-stress situations, which makes me a favorite among both pets and their owners. I understand that having a pet is not only a huge responsibility but also a joy, and I am here to help with all the medical needs of your pet.I am excited to be part of the dedicated team at SmileyMeow Clinic and I am confident that your pet will receive the best care under my guidance." },
+                    { 12, "Hi there! My name is Dr. Bayonetta and I am a veterinarian at SmileyMeow Clinic. With over 12 years of experience in the field, I am dedicated to providing the best medical care for all types of animals, with a special focus on preventative care, nutrition and alternative therapies.I believe in taking a holistic approach to pet care, which includes the use of natural supplements, acupuncture, and homeopathy in addition to traditional veterinary medicine. My goal is to promote overall health and wellness in pets, rather than just treating symptoms.At SmileyMeow Clinic, we understand that each pet is unique and requires a personalized approach. That's why I take the time to get to know my patients and their specific needs.I pride myself on being kind, compassionate, and understanding. I believe that a positive attitude and good communication with the owners are important to ensure the best possible outcome for the pets.I am excited to be part of the dedicated team at SmileyMeow Clinic and I am confident that your pet will receive the best care under my guidance." }
                 });
 
             migrationBuilder.InsertData(
@@ -1988,12 +2006,12 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 9, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(238), 6, 6, 6, 6, new DateTime(2023, 1, 10, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(234) });
+                values: new object[] { 6, new DateTime(2023, 2, 9, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(8049), 6, 6, 6, 6, new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(8046) });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 31, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(531), 8, 9, 9, 9, new DateTime(2022, 12, 1, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(534) });
+                values: new object[] { 6, new DateTime(2022, 12, 31, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(8291), 8, 9, 9, 9, new DateTime(2022, 12, 1, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(8295) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",

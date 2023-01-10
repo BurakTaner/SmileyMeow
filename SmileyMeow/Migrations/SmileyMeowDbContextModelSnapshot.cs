@@ -114,12 +114,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 9, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(238),
+                            AppointmentDate = new DateTime(2023, 2, 9, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(8049),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 10, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(234)
+                            TimeCreated = new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(8046)
                         });
                 });
 
@@ -323,12 +323,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 31, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(531),
+                            AppointmentDate = new DateTime(2022, 12, 31, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(8291),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 12, 1, 0, 51, 14, 868, DateTimeKind.Local).AddTicks(534)
+                            TimeCreated = new DateTime(2022, 12, 1, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(8295)
                         });
                 });
 
@@ -522,6 +522,21 @@ namespace SmileyMeow.Migrations
                         {
                             BalanceId = 128,
                             PersonBalance = 128.25m
+                        },
+                        new
+                        {
+                            BalanceId = 129,
+                            PersonBalance = 540.12m
+                        },
+                        new
+                        {
+                            BalanceId = 130,
+                            PersonBalance = 358.24m
+                        },
+                        new
+                        {
+                            BalanceId = 131,
+                            PersonBalance = 179.50m
                         });
                 });
 
@@ -637,6 +652,49 @@ namespace SmileyMeow.Migrations
                             PhoneNumber = "05341299154",
                             PronounId = 9,
                             UserId = 128
+                        },
+                        new
+                        {
+                            DoctorId = 10,
+                            AddressId = 20,
+                            BalanceId = 129,
+                            DOB = new DateTime(1954, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorTitleId = 7,
+                            FirstName = "Gandalf",
+                            HumanGenderId = 129,
+                            LastName = "Grey",
+                            PhoneNumber = "05341299761",
+                            PronounId = 10,
+                            UserId = 131
+                        },
+                        new
+                        {
+                            DoctorId = 11,
+                            AddressId = 21,
+                            BalanceId = 130,
+                            DOB = new DateTime(1976, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorTitleId = 6,
+                            FirstName = "Jerry",
+                            HumanGenderId = 129,
+                            LastName = "Hierfeld",
+                            MiddleName = "Jeff",
+                            PhoneNumber = "05341291258",
+                            PronounId = 10,
+                            UserId = 132
+                        },
+                        new
+                        {
+                            DoctorId = 12,
+                            AddressId = 22,
+                            BalanceId = 131,
+                            DOB = new DateTime(1888, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorTitleId = 7,
+                            FirstName = "Bayonetta",
+                            HumanGenderId = 130,
+                            LastName = "Jeanne",
+                            PhoneNumber = "05341281924",
+                            PronounId = 6,
+                            UserId = 133
                         });
                 });
 
@@ -667,6 +725,21 @@ namespace SmileyMeow.Migrations
                         {
                             DoctorId = 9,
                             DoctorInformationText = "As a veterinarian, I am constantly learning and growing in my profession. I am passionate about providing the best care possible to my patients, and am dedicated to staying up-to-date on the latest advaances in veterinary medicine. I understand that pets are more than just animals to their parents - they are members of the family, and I treat each one with the same care and respect I would any other family member. I take the time to listen to my clients and understand their concerns, and work with them to develop a personalized treatment plan that meets the needs of both the animal and the parent. One of the things I enjoy most about being a veterinarian is the opportunity to build long-term relationships with my patients and their parents. I love seeing my patients grow and thrive under my care, and take great pride in being able to help them live happy and healthy lives."
+                        },
+                        new
+                        {
+                            DoctorId = 10,
+                            DoctorInformationText = "Hello, my name is Dr.Gandalf and I am a veterinarian at SmileyMeow Clinic. With over a decade of experience in the field, I am dedicated to providing the best medical care for all types of animals.My areas of expertise include routine check-ups and vaccinations, as well as emergency and critical care. I have a particular interest in soft tissue surgery and have performed many successful procedures.At SmileyMeow Clinic, we understand that visiting the veterinarian can be stressful for both pets and their owners, which is why we strive to create a comfortable and compassionate environment for all our patients.As a veterinarian at SmileyMeow Clinic, I take pride in being able to help and heal animals, and I am honored to be part of such a dedicated team. I am confident that your pet will receive the best care under my guidance."
+                        },
+                        new
+                        {
+                            DoctorId = 11,
+                            DoctorInformationText = "Hello, my name is Dr. Jerry and I am a veterinarian at SmileyMeow Clinic. With over 15 years of experience in the field, I am dedicated to providing the best medical care for all types of animals.My areas of expertise include emergency and critical care, as well as surgery, particularly orthopedic surgery. I have extensive experience in dealing with injuries and conditions that affect the bones, joints and muscles, and I have a high success rate in complicated procedures.At SmileyMeow Clinic, we understand that each pet is unique and requires a personalized approach. That's why we take the time to get to know our patients and their specific needs.I pride myself on being calm and level-headed, even in high-stress situations, which makes me a favorite among both pets and their owners. I understand that having a pet is not only a huge responsibility but also a joy, and I am here to help with all the medical needs of your pet.I am excited to be part of the dedicated team at SmileyMeow Clinic and I am confident that your pet will receive the best care under my guidance."
+                        },
+                        new
+                        {
+                            DoctorId = 12,
+                            DoctorInformationText = "Hi there! My name is Dr. Bayonetta and I am a veterinarian at SmileyMeow Clinic. With over 12 years of experience in the field, I am dedicated to providing the best medical care for all types of animals, with a special focus on preventative care, nutrition and alternative therapies.I believe in taking a holistic approach to pet care, which includes the use of natural supplements, acupuncture, and homeopathy in addition to traditional veterinary medicine. My goal is to promote overall health and wellness in pets, rather than just treating symptoms.At SmileyMeow Clinic, we understand that each pet is unique and requires a personalized approach. That's why I take the time to get to know my patients and their specific needs.I pride myself on being kind, compassionate, and understanding. I believe that a positive attitude and good communication with the owners are important to ensure the best possible outcome for the pets.I am excited to be part of the dedicated team at SmileyMeow Clinic and I am confident that your pet will receive the best care under my guidance."
                         });
                 });
 
@@ -705,6 +778,16 @@ namespace SmileyMeow.Migrations
                         {
                             HumanGenderId = 128,
                             GName = "Female"
+                        },
+                        new
+                        {
+                            HumanGenderId = 129,
+                            GName = "Male"
+                        },
+                        new
+                        {
+                            HumanGenderId = 130,
+                            GName = "Bigender"
                         });
                 });
 
@@ -757,6 +840,24 @@ namespace SmileyMeow.Migrations
                             AddressId = 12,
                             AddressDetails = "Block 7, after Too's shop",
                             DistrictId = 30
+                        },
+                        new
+                        {
+                            AddressId = 20,
+                            AddressDetails = "Block 7, after the coffe shop",
+                            DistrictId = 60
+                        },
+                        new
+                        {
+                            AddressId = 21,
+                            AddressDetails = "Block 7, after toy shop",
+                            DistrictId = 70
+                        },
+                        new
+                        {
+                            AddressId = 22,
+                            AddressDetails = "Block 7, after bank",
+                            DistrictId = 95
                         });
                 });
 
@@ -7153,6 +7254,11 @@ namespace SmileyMeow.Migrations
                         {
                             ProunounId = 9,
                             PName = "She/Her"
+                        },
+                        new
+                        {
+                            ProunounId = 10,
+                            PName = "He/Him"
                         });
                 });
 
@@ -7377,7 +7483,7 @@ namespace SmileyMeow.Migrations
                         {
                             AnimalId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9406),
+                            DOB = new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(7177),
                             IsAdoptable = false,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7388,7 +7494,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 9,
                             AdoptInfoId = 7,
                             BreedId = 9,
-                            DOB = new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9433),
+                            DOB = new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(7206),
                             IsAdoptable = true,
                             Name = "Shelob",
                             PetGenderId = 9,
@@ -7399,7 +7505,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 10,
                             AdoptInfoId = 8,
                             BreedId = 11,
-                            DOB = new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9440),
+                            DOB = new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(7212),
                             IsAdoptable = false,
                             Name = "Alvina",
                             PetGenderId = 9,
@@ -7410,7 +7516,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 12,
                             AdoptInfoId = 9,
                             BreedId = 12,
-                            DOB = new DateTime(2023, 1, 10, 0, 51, 14, 867, DateTimeKind.Local).AddTicks(9444),
+                            DOB = new DateTime(2023, 1, 10, 11, 32, 15, 151, DateTimeKind.Local).AddTicks(7217),
                             IsAdoptable = true,
                             Name = "Tarumaru",
                             PetGenderId = 10,
@@ -7704,6 +7810,27 @@ namespace SmileyMeow.Migrations
                             Emaill = "supervisor@gmail.com",
                             Passwordd = "supervisor123456",
                             RoleeId = 9
+                        },
+                        new
+                        {
+                            UserrId = 131,
+                            Emaill = "gandalf@gmail.com",
+                            Passwordd = "ring123456",
+                            RoleeId = 7
+                        },
+                        new
+                        {
+                            UserrId = 132,
+                            Emaill = "jerrythefunny@gmail.com",
+                            Passwordd = "airplanejokes123456",
+                            RoleeId = 7
+                        },
+                        new
+                        {
+                            UserrId = 133,
+                            Emaill = "witchwithroses@gmail.com",
+                            Passwordd = "rose123456",
+                            RoleeId = 7
                         });
                 });
 
