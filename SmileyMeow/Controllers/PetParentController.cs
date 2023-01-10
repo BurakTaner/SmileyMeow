@@ -47,8 +47,8 @@ public class PetParentController : BasyController
     int pid)
     {
         int loggedUser = ReturnLoggedUserId();
-        // if (ModelState.IsValid)
-        // {
+        if (ModelState.IsValid)
+        {
             petParent.Address = address;
             _context.Addresses.Update(address);
             petParent.UserId = loggedUser;
@@ -59,7 +59,7 @@ public class PetParentController : BasyController
             _context.Userrs.Update(loggedParent);
             await _context.SaveChangesAsync();
             return RedirectToAction("Profile", "PetParent");
-        // }
+        }
 
         PetParentProfileViewModel selectedParentsProfile = new();
 
