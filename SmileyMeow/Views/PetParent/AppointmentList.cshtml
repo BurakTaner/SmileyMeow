@@ -1,0 +1,47 @@
+@model List<Appointment>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section text-info">You can see all of your appointments here</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center mb-4">Appointments Table</h4>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr>
+                                <a asp-controller="PetParent" asp-action="Profile">
+                        <i class="fa-solid fa-arrow-left fa-3x left-arw"></i>
+                    </a>
+                                <th>Patient</th>
+                                <th>Doctor</th>
+                                <th>Appointment Date</th>
+                                <th>Status</th>
+                                <th>Cancel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Appointment appointment in Model)
+                            {
+                                <tr>
+                                    <td>@appointment.PetnPerson.Pet.Name</td>
+                                    <td>@($"{appointment.Doctor.FirstName} {appointment.Doctor.MiddleName} {appointment.Doctor.LastName} {appointment.Doctor.DoctorTitle.TShortForm}")</td>
+                                    <td>@appointment.AppointmentDate</td>
+                                    <td>@appointment.AppointmentStatus.Status</td>
+                                    <td><a asp-controller="PetParent" asp-action="CancelAppointment" asp-route-id="@appointment.AppointmentId" class="btn btn-primary">Cancel Appointment</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
