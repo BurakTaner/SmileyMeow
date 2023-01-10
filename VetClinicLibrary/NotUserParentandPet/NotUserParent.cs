@@ -13,7 +13,7 @@ public class NotUserParent : INotUserParent
     [Required(ErrorMessage = "{0} can't be empty"),Display(Name = "Firstname"), StringLength(20 ,MinimumLength = 3 , ErrorMessage = "{0} must be between {2} - {1}")]
     public string FirstName { get; set; }
     public string MiddleName { get; set; }
-    [Required(ErrorMessage = "{0} can't be empty"),Display(Name = "LAstname"), StringLength(60 ,MinimumLength = 3 , ErrorMessage = "{0} must be between {2} - {1}")]
+    [Required(ErrorMessage = "{0} can't be empty"),Display(Name = "Lastname"), StringLength(60 ,MinimumLength = 3 , ErrorMessage = "{0} must be between {2} - {1}")]
     public string LastName { get; set; }
     public string PhoneNumber { get; set; }
     [Required(ErrorMessage = "{0} can't be empty"),Display(Name = "Email"), StringLength(26 ,MinimumLength = 11 , ErrorMessage = "{0} must be between {2} - {1}")]
