@@ -23,7 +23,7 @@
         </ol>
         @* For Parent *@
 
-        <p class="forum-info-p">Parent Information</p>
+        <strong class="block-level-info mb-2 mt-2 add-inf"> Parent Information</strong>
         <div class="formbold-mb-5">
           <label for="firstname" class="formbold-form-label">First Name *</label>
           <input type="text" name="FirstName" id="firstname" placeholder="Ex: John" class="formbold-form-input"
@@ -50,7 +50,7 @@
             value="@Model.NotUserParent.Email" />
         </div>
 
-        <strong class="block-level-info mb-2"> Address Information</strong>
+        <strong class="block-level-info mb-3 add-inf"> Address Information</strong>
 
         @if (Model.CityList is not null)
         {
@@ -120,7 +120,7 @@
         </div>
         @* For Pet *@
         <hr>
-        <p class="forum-info-p">Patient Information </p>
+        <strong class="block-level-info add-inf mb-2"> Patient Information</strong>
         <div class="flex flex-wrap formbold--mx-3">
           <div class="w-full sm:w-half formbold-px-3">
             <div class="formbold-mb-5 w-full">
@@ -177,7 +177,7 @@
         </div>
 
         @* For Detailed Patient Information *@
-        <p class="forum-info-p">Detailed Information About Patient</p>
+        <strong class="block-level-info mb-3 mt-2 add-inf"> Detailed Information About Patient</strong>
         <label for="eating" class="formbold-form-label">Eating Condition *</label>
         @foreach (StatusLevel eatingStatus in Model.StatusLevelList)
         {
@@ -239,9 +239,7 @@
             name="IlnesssesInThePast">@Model.PatientInformation.IlnesssesInThePast</textarea>
         </div>
 
-        <p class="forum-info-p">Appointments takes 30 minutes. You need to select xx:30 or xx:00 for appointment.
-          ex: 12/12/2022 - 12-30 PM
-        </p>
+        <strong class="block-level-info mb-3 mt-2 add-inf"> Appointments takes 30 minutes. You need to select xx:30 or xx:00 for appointment. ex: 12/12/2022 - 12-30 PM</strong>
         <div class="w-full formbold-px-1 mb-5">
           <div class="formbold-mb-5">
             <label for="DOB" class="formbold-form-label">Appointment Date *</label>
