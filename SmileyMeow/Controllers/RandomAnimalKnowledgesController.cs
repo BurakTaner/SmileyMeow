@@ -25,6 +25,7 @@ public class RandomAnimalKnowledgesController : BasyController
         RandomAnimalResponse response =  await _randomAnimalService.GetAnimalViewDTO();
 
         RandomAnimalViewDTO dto = new(
+            response.AnimalId,
             response.Scepie.SName,
             response.Breed.BName,
             response.AnimalInfo.AnimalInformation
