@@ -1,14 +1,14 @@
 @model DoctorInfoViewModel
 
 @{
-    ViewData["Title"] = "Info";
+   ViewData["Title"] = "Info";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="card mb-3">
     <div class="row g-0">
         <div class="col-md-4">
-            <img class="card-img card-img-left" style="border-radius:10px;" src="~/Images/staff-@(Model.SelectedDoctor.DoctorId).jpg" alt="A vetenerian's image">
+            <img class="card-img card-img-left" style="border-radius:10px;" src="~/Images/doctor-@(Model.SelectedDoctor.DoctorId).jpg" alt="A vetenerian's image">
         </div>
         <div class="col-md-8">
             <div class="card-body">
