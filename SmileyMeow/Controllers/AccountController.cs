@@ -75,15 +75,6 @@ namespace SmileyMeow.Controllers
                     }
                     else if (registeredUser.Rolee.RName == "PetParent")
                     {
-                        // when user tries to go into profile, create a profile for they.
-                        // PetParent parent = await _context.PetParents.FirstOrDefaultAsync(a => a.UserId == registeredUser.UserrId);
-                        
-                        // if (parent is null)
-                        // {
-                        //     PetParent createParent = new();
-                        //     createParent.Userr = registeredUser;
-                        //     // _context.PetParents
-                        // }
 
                         return RedirectToAction("", "");
                     }
@@ -94,12 +85,12 @@ namespace SmileyMeow.Controllers
 
                     else if (registeredUser.Rolee.RName == "Supervisor")
                     {
-                        return Redirect("~/AhOME/");
+                        return Redirect("~/AHome/");
                     }
 
                     else
                     {
-                        return Redirect("~/Home/Index");
+                        return Redirect("~/Home/");
                     }
 
                 }
