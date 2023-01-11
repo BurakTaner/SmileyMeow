@@ -12,8 +12,8 @@ using SmileyMeow.Data;
 namespace SmileyMeow.Migrations
 {
     [DbContext(typeof(SmileyMeowDbContext))]
-    [Migration("20230110200601_Initial Migration")]
-    partial class InitialMigration
+    [Migration("20230111193512_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,12 +117,22 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2023, 2, 9, 23, 6, 0, 128, DateTimeKind.Local).AddTicks(79),
+                            AppointmentDate = new DateTime(2023, 1, 11, 22, 40, 11, 107, DateTimeKind.Local).AddTicks(4719),
                             AppointmentStatussId = 6,
                             DoctorId = 6,
                             PatientInformationId = 6,
                             PetnPersonId = 6,
-                            TimeCreated = new DateTime(2023, 1, 10, 23, 6, 0, 128, DateTimeKind.Local).AddTicks(75)
+                            TimeCreated = new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(4716)
+                        },
+                        new
+                        {
+                            AppointmentId = 7,
+                            AppointmentDate = new DateTime(2023, 1, 11, 22, 43, 11, 107, DateTimeKind.Local).AddTicks(4735),
+                            AppointmentStatussId = 6,
+                            DoctorId = 6,
+                            PatientInformationId = 7,
+                            PetnPersonId = 7,
+                            TimeCreated = new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(4732)
                         });
                 });
 
@@ -232,6 +242,15 @@ namespace SmileyMeow.Migrations
                             IlnesssesInThePast = "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self.",
                             InformationAboutPatient = "Hi there, I'm the owner of a horse named Torrent. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.",
                             PeeingStatusId = 2
+                        },
+                        new
+                        {
+                            PatientInformationId = 7,
+                            EatingStatusId = 3,
+                            EnergyStatusId = 1,
+                            IlnesssesInThePast = "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self.",
+                            InformationAboutPatient = "Hi there, I'm the owner of a cat named Alvania. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.",
+                            PeeingStatusId = 1
                         });
                 });
 
@@ -326,12 +345,12 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             AppointmentId = 6,
-                            AppointmentDate = new DateTime(2022, 12, 31, 23, 6, 0, 128, DateTimeKind.Local).AddTicks(341),
+                            AppointmentDate = new DateTime(2023, 1, 1, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(4995),
                             AppointmentStatussId = 8,
                             DoctorId = 9,
                             NotUserParentnPersonId = 9,
                             PatientInformationId = 9,
-                            TimeCreated = new DateTime(2022, 12, 1, 23, 6, 0, 128, DateTimeKind.Local).AddTicks(345)
+                            TimeCreated = new DateTime(2022, 12, 2, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(4999)
                         });
                 });
 
@@ -539,6 +558,11 @@ namespace SmileyMeow.Migrations
                         new
                         {
                             BalanceId = 131,
+                            PersonBalance = 179.50m
+                        },
+                        new
+                        {
+                            BalanceId = 132,
                             PersonBalance = 179.50m
                         });
                 });
@@ -861,6 +885,12 @@ namespace SmileyMeow.Migrations
                             AddressId = 22,
                             AddressDetails = "Block 7, after bank",
                             DistrictId = 95
+                        },
+                        new
+                        {
+                            AddressId = 23,
+                            AddressDetails = "Block 8, after the coffe shop",
+                            DistrictId = 100
                         });
                 });
 
@@ -7224,6 +7254,19 @@ namespace SmileyMeow.Migrations
                             PhoneNumber = "058745683324",
                             PronounId = 6,
                             UserId = 6
+                        },
+                        new
+                        {
+                            PetParentId = 7,
+                            AddressId = 23,
+                            BalanceId = 132,
+                            DOB = new DateTime(1999, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Siegward",
+                            HumanGenderId = 6,
+                            LastName = "Catarina",
+                            PhoneNumber = "058745683366",
+                            PronounId = 6,
+                            UserId = 6
                         });
                 });
 
@@ -7340,6 +7383,12 @@ namespace SmileyMeow.Migrations
                             PetnPersonId = 6,
                             AnimalId = 6,
                             PetParentId = 6
+                        },
+                        new
+                        {
+                            PetnPersonId = 7,
+                            AnimalId = 10,
+                            PetParentId = 7
                         });
                 });
 
@@ -7486,7 +7535,7 @@ namespace SmileyMeow.Migrations
                         {
                             AnimalId = 6,
                             BreedId = 6,
-                            DOB = new DateTime(2023, 1, 10, 23, 6, 0, 127, DateTimeKind.Local).AddTicks(9082),
+                            DOB = new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(3654),
                             IsAdoptable = false,
                             Name = "Sif",
                             PetGenderId = 6,
@@ -7497,7 +7546,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 9,
                             AdoptInfoId = 7,
                             BreedId = 9,
-                            DOB = new DateTime(2023, 1, 10, 23, 6, 0, 127, DateTimeKind.Local).AddTicks(9111),
+                            DOB = new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(3681),
                             IsAdoptable = true,
                             Name = "Shelob",
                             PetGenderId = 9,
@@ -7508,7 +7557,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 10,
                             AdoptInfoId = 8,
                             BreedId = 11,
-                            DOB = new DateTime(2023, 1, 10, 23, 6, 0, 127, DateTimeKind.Local).AddTicks(9115),
+                            DOB = new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(3686),
                             IsAdoptable = false,
                             Name = "Alvina",
                             PetGenderId = 9,
@@ -7519,7 +7568,7 @@ namespace SmileyMeow.Migrations
                             AnimalId = 12,
                             AdoptInfoId = 9,
                             BreedId = 12,
-                            DOB = new DateTime(2023, 1, 10, 23, 6, 0, 127, DateTimeKind.Local).AddTicks(9120),
+                            DOB = new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(3690),
                             IsAdoptable = true,
                             Name = "Tarumaru",
                             PetGenderId = 10,

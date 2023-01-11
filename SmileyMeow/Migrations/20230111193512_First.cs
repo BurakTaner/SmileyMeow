@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SmileyMeow.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class First : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -733,6 +733,7 @@ namespace SmileyMeow.Migrations
                     { 129, 540.12m },
                     { 130, 358.24m },
                     { 131, 179.50m },
+                    { 132, 179.50m },
                     { 666, 90.65m }
                 });
 
@@ -1907,6 +1908,7 @@ namespace SmileyMeow.Migrations
                 values: new object[,]
                 {
                     { 6, 2, 1, "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes.", "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", 3 },
+                    { 7, 3, 1, "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self.", "Hi there, I'm the owner of a cat named Alvania. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.", 1 },
                     { 9, 2, 2, "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self.", "Hi there, I'm the owner of a horse named Torrent. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.", 2 }
                 });
 
@@ -1915,10 +1917,10 @@ namespace SmileyMeow.Migrations
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
                 values: new object[,]
                 {
-                    { 6, null, 6, new DateTime(2023, 1, 10, 23, 6, 0, 127, DateTimeKind.Local).AddTicks(9082), false, "Sif", 6, 6 },
-                    { 9, 7, 9, new DateTime(2023, 1, 10, 23, 6, 0, 127, DateTimeKind.Local).AddTicks(9111), true, "Shelob", 9, 9 },
-                    { 10, 8, 11, new DateTime(2023, 1, 10, 23, 6, 0, 127, DateTimeKind.Local).AddTicks(9115), false, "Alvina", 9, 10 },
-                    { 12, 9, 12, new DateTime(2023, 1, 10, 23, 6, 0, 127, DateTimeKind.Local).AddTicks(9120), true, "Tarumaru", 10, 11 }
+                    { 6, null, 6, new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(3654), false, "Sif", 6, 6 },
+                    { 9, 7, 9, new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(3681), true, "Shelob", 9, 9 },
+                    { 10, 8, 11, new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(3686), false, "Alvina", 9, 10 },
+                    { 12, 9, 12, new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(3690), true, "Tarumaru", 10, 11 }
                 });
 
             migrationBuilder.InsertData(
@@ -1957,7 +1959,8 @@ namespace SmileyMeow.Migrations
                     { 12, "Block 7, after Too's shop", 30 },
                     { 20, "Block 7, after the coffe shop", 60 },
                     { 21, "Block 7, after toy shop", 70 },
-                    { 22, "Block 7, after bank", 95 }
+                    { 22, "Block 7, after bank", 95 },
+                    { 23, "Block 8, after the coffe shop", 100 }
                 });
 
             migrationBuilder.InsertData(
@@ -1980,7 +1983,11 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "petparents",
                 columns: new[] { "petparentid", "addressid", "balanceid", "dob", "firstname", "humangenderid", "lastname", "middlename", "phonenumber", "pronounid", "userid" },
-                values: new object[] { 6, 6, 6, new DateTime(1999, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artorias", 6, "Astora", "Solaire", "058745683324", 6, 6 });
+                values: new object[,]
+                {
+                    { 6, 6, 6, new DateTime(1999, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artorias", 6, "Astora", "Solaire", "058745683324", 6, 6 },
+                    { 7, 23, 132, new DateTime(1999, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Siegward", 6, "Catarina", null, "058745683366", 6, 6 }
+                });
 
             migrationBuilder.InsertData(
                 table: "doctorinformations",
@@ -2002,17 +2009,25 @@ namespace SmileyMeow.Migrations
             migrationBuilder.InsertData(
                 table: "petsnpersons",
                 columns: new[] { "petnpersonid", "animalid", "petparentid" },
-                values: new object[] { 6, 6, 6 });
+                values: new object[,]
+                {
+                    { 6, 6, 6 },
+                    { 7, 10, 7 }
+                });
 
             migrationBuilder.InsertData(
                 table: "appointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 2, 9, 23, 6, 0, 128, DateTimeKind.Local).AddTicks(79), 6, 6, 6, 6, new DateTime(2023, 1, 10, 23, 6, 0, 128, DateTimeKind.Local).AddTicks(75) });
+                values: new object[,]
+                {
+                    { 6, new DateTime(2023, 1, 11, 22, 40, 11, 107, DateTimeKind.Local).AddTicks(4719), 6, 6, 6, 6, new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(4716) },
+                    { 7, new DateTime(2023, 1, 11, 22, 43, 11, 107, DateTimeKind.Local).AddTicks(4735), 6, 6, 7, 7, new DateTime(2023, 1, 11, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(4732) }
+                });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2022, 12, 31, 23, 6, 0, 128, DateTimeKind.Local).AddTicks(341), 8, 9, 9, 9, new DateTime(2022, 12, 1, 23, 6, 0, 128, DateTimeKind.Local).AddTicks(345) });
+                values: new object[] { 6, new DateTime(2023, 1, 1, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(4995), 8, 9, 9, 9, new DateTime(2022, 12, 2, 22, 35, 11, 107, DateTimeKind.Local).AddTicks(4999) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",

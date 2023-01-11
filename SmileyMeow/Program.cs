@@ -1,4 +1,6 @@
-using System.Data.Common;
+using System;
+using Hangfire;
+using Hangfire.Storage.SQLite;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorOptions(
-    page => {
+    page =>
+    {
         page.ViewLocationFormats.Add("/Views/Admin/{1}/{0}.cshtml");
     }
 );
@@ -18,6 +21,18 @@ builder.Services.AddDbContext<SmileyMeowDbContext>(
         pgsql => pgsql.UseNpgsql(builder.Configuration.GetConnectionString("SmileyPSQLConnection"))
         .UseLowerCaseNamingConvention()
 );
+// Hangfire//
+builder.Services.AddHangfire(opt =>
+        opt.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UseSQLiteStorage(builder.Configuration.GetConnectionString("HangfireConnection")
+        ));
+
+builder.Services.AddHangfireServer();
+builder.Services.AddScoped<IWriteToFileService,WriteToFileService>();
+builder.Services.AddScoped<IUpdateAppointmentService,UpdateAppointmentService>();
+//
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -67,6 +82,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
+app.UseHangfireDashboard();
+BackgroundJob.Enqueue(() => Console.WriteLine("Hangfire service started"));
+RecurringJob.AddOrUpdate<IUpdateAppointmentService>(
+    "updateappointments",
+    x => x.GetAppointmentsFromDb(),
+    "*/2 * * * *"
+);
 app.UseRouting();
 
 app.UseCookiePolicy();

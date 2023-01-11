@@ -285,7 +285,8 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<PetParent>().HasData(
-            new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6, PronounId = 6, AddressId = 6, PhoneNumber = "058745683324"}
+            new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6, PronounId = 6, AddressId = 6, PhoneNumber = "058745683324"},
+            new PetParent { UserId = 6, FirstName = "Siegward", MiddleName = null, LastName = "Catarina", BalanceId = 132, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 7, HumanGenderId = 6, PronounId = 6, AddressId = 23, PhoneNumber = "058745683366"}
         );
 
         modelBuilder.Entity<Address>().HasData(
@@ -295,7 +296,8 @@ public class SmileyMeowDbContext : DbContext
             new Address { AddressId = 12, AddressDetails = "Block 7, after Too's shop", DistrictId = 30},
             new Address { AddressId = 20, AddressDetails = "Block 7, after the coffe shop", DistrictId = 60},
             new Address { AddressId = 21, AddressDetails = "Block 7, after toy shop", DistrictId = 70},
-            new Address { AddressId = 22, AddressDetails = "Block 7, after bank", DistrictId = 95}
+            new Address { AddressId = 22, AddressDetails = "Block 7, after bank", DistrictId = 95},
+            new Address { AddressId = 23, AddressDetails = "Block 8, after the coffe shop", DistrictId = 100}
         );
 
         modelBuilder.Entity<HumanGender>().HasData(
@@ -318,7 +320,8 @@ public class SmileyMeowDbContext : DbContext
         );
 
         modelBuilder.Entity<PetnPerson>().HasData(
-            new PetnPerson { AnimalId = 6, PetParentId = 6, PetnPersonId = 6 }
+            new PetnPerson { AnimalId = 6, PetParentId = 6, PetnPersonId = 6 },
+            new PetnPerson { AnimalId = 10, PetParentId = 7, PetnPersonId = 7 }
         );
 
         modelBuilder.Entity<Balance>().HasData(
@@ -327,11 +330,13 @@ public class SmileyMeowDbContext : DbContext
             new Balance { BalanceId = 128, PersonBalance = Convert.ToDecimal("128.25") },
             new Balance { BalanceId = 129, PersonBalance = Convert.ToDecimal("540.12") },
             new Balance { BalanceId = 130, PersonBalance = Convert.ToDecimal("358.24") },
-            new Balance { BalanceId = 131, PersonBalance = Convert.ToDecimal("179.50") }
+            new Balance { BalanceId = 131, PersonBalance = Convert.ToDecimal("179.50") },
+            new Balance { BalanceId = 132, PersonBalance = Convert.ToDecimal("179.50") }
         );
 
         modelBuilder.Entity<Appointment>().HasData(
-            new Appointment { AppointmentId = 6, PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddDays(30), AppointmentStatussId = 6, PatientInformationId = 6}
+            new Appointment { AppointmentId = 6, PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddMinutes(5), AppointmentStatussId = 6, PatientInformationId = 6},
+            new Appointment { AppointmentId = 7, PetnPersonId = 7, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddMinutes(8), AppointmentStatussId = 6, PatientInformationId = 7}
         );
 
         modelBuilder.Entity<DoctorTitle>().HasData(
@@ -359,7 +364,8 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<PatientInformation>().HasData(
             new PatientInformation { PatientInformationId = 6, EatingStatusId = 2, EnergyStatusId = 1, PeeingStatusId = 3, InformationAboutPatient = "My wolf Sif has been eating fine and her energy levels are good, but she has been having trouble with her peeing. She's been going more frequently and sometimes it seems like it's painful for her. I'm really concerned because she's usually such a healthy wolf.", IlnesssesInThePast = "Sif is a 3-year-old wolf who had a case of mange a year ago, which was treated with medicated baths and topical ointments. She also developed an ear infection a few months ago, which was treated with antibiotics and ear drops. In the past, Sif has also had some minor digestive issues that we've been able to resolve with diet and supplement changes."},
-            new PatientInformation { PatientInformationId = 9, EatingStatusId = 2, EnergyStatusId = 2, PeeingStatusId = 2, InformationAboutPatient = "Hi there, I'm the owner of a horse named Torrent. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.", IlnesssesInThePast = "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self."}
+            new PatientInformation { PatientInformationId = 9, EatingStatusId = 2, EnergyStatusId = 2, PeeingStatusId = 2, InformationAboutPatient = "Hi there, I'm the owner of a horse named Torrent. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.", IlnesssesInThePast = "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self."},
+            new PatientInformation { PatientInformationId = 7, EatingStatusId = 3, EnergyStatusId = 1, PeeingStatusId = 1, InformationAboutPatient = "Hi there, I'm the owner of a cat named Alvania. He's been feeling a bit under the weather lately and has had some difficulty breathing and a persistent cough. I'm really worried about him and would like to get him checked out by a veterinarian as soon as possible.Could you please let me know if you have any availability to see Torrent in the next few days? I'm very concerned about his health and want to make sure he gets the care he needs.Thank you for your attention to this matter. I appreciate any help you can provide in getting Torrent back to good health.", IlnesssesInThePast = "orrent is a chestnut brown horse with a strong and majestic presence. However, a few months ago, he fell ill and experienced difficulty breathing and a persistent cough. The vet diagnosed him with a respiratory infection and prescribed medication and rest. Thankfully, Torrent made a full recovery and is now back to his old self."}
         );
 
         modelBuilder.Entity<StatusLevel>().HasData(
