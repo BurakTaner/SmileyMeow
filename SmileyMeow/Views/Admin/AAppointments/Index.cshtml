@@ -1,0 +1,46 @@
+@model List<Appointment>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+
+        <h5 class="card-title">Appointment Informations</h5>
+        <div class="table-responsive">
+            <table id="zero_config" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Parent Name</th>
+                        <th>Patient Name</th>
+                        <th>Doctor Name</th>
+                        <th>Appointment Date</th>
+                        <th>Status</th>
+                        <th class="last-clmn">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Appointment appointment in Model)
+                    {
+
+                        <tr>
+                            <td>@appointment.AppointmentId</td>
+                            <td>@($"{appointment.PetnPerson.PetParent.FirstName} {appointment.PetnPerson.PetParent.MiddleName} {appointment.PetnPerson.PetParent.LastName}")</td>
+                            <td>@appointment.PetnPerson.Pet.Name</td>
+                            <td>@($"{appointment.Doctor.FirstName} {appointment.Doctor.MiddleName} {appointment.Doctor.LastName} {appointment.Doctor.DoctorTitle.TShortForm}")</td>
+                            <td>@appointment.AppointmentDate</td>
+                            <td>@appointment.AppointmentStatus.Status</td>
+                            <td>
+                                <a asp-controller="AAppointments" asp-action="Info" asp-route-id="@appointment.AppointmentId" class="icn-mr">
+                                    <i class="fas fa-info"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>

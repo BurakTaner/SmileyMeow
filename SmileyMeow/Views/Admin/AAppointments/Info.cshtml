@@ -1,0 +1,53 @@
+@model AppointmentsViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <form class="form-horizontal" asp-controller="AAppointments" asp-action="Update" method="post"
+        asp-route-id="@Model.Appointment.AppointmentId">
+        <div class="card-body">
+            <h4 class="card-title">Update Appointment Status</h4>
+            <div class="form-group row">
+                <label for="appointmentid" class="col-sm-3 text-end control-label col-form-label">Id</label>
+                <div class="col-sm-9">
+                    <p type="text" class="form-control" id="appointmentid" name="AppointmentId"
+                        >@Model.Appointment.AppointmentId"</p>
+                </div>
+                <label for="parentname" class="col-sm-3 text-end control-label col-form-label">ParentName</label>
+                <div class="col-sm-9">
+                    <p type="text" class="form-control" id="parentname" name="parentname"
+                        >@($"{Model.Appointment.PetnPerson.PetParent.FirstName}{Model.Appointment.PetnPerson.PetParent.MiddleName}{Model.Appointment.PetnPerson.PetParent.LastName}")</p>
+                </div>
+                <label for="name" class="col-sm-3 text-end control-label col-form-label">Patient Name</label>
+                <div class="col-sm-9">
+                    <p type="text" class="form-control" id="name" name="Name"
+                        >@Model.Appointment.PetnPerson.Pet.Name</p>
+                </div>
+                <label for="doctorname" class="col-sm-3 text-end control-label col-form-label">Doctor Name</label>
+                <div class="col-sm-9">
+                    <p type="text" class="form-control" id="doctorname" name="doctorname"
+                        >@($"{Model.Appointment.Doctor.FirstName}{Model.Appointment.Doctor.MiddleName}{Model.Appointment.Doctor.LastName}")</p>
+                </div>
+                <label for="appointmentstatus" class="col-sm-3 text-end control-label col-form-label">City</label>
+                <div class="col-sm-9">
+                    <select class="select form-select shadow-none" id="dis-city-select" name="AppointmentStatusId">
+                        @foreach (AppointmentStatus appointmentStatus in Model.AppointmentStatusList)
+                        {
+                            <option value="@appointmentStatus.AppointmentStatussId"
+                            selected="@(Model.Appointment.AppointmentId == appointmentStatus.AppointmentStatussId)">
+                                @appointmentStatus.Status</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body sbmt-area">
+                <button type="submit" class="btn btn-primary">Update Status</button>
+                <a type="submit" asp-controller="AAppointments" asp-action="" class="btn btn-primary">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
