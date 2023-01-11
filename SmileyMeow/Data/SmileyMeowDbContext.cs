@@ -353,7 +353,7 @@ public class SmileyMeowDbContext : DbContext
             new AppointmentStatus { AppointmentStatussId = 6, Status = "Active Appointment" },
             new AppointmentStatus { AppointmentStatussId = 7, Status = "Expired Appointment" },
             new AppointmentStatus { AppointmentStatussId = 8, Status = "Canceled Appointment" },
-            new AppointmentStatus { AppointmentStatussId = 10, Status = "Finished Appointment" }
+            new AppointmentStatus { AppointmentStatussId = 9, Status = "Finished Appointment" }
 
         );
 
