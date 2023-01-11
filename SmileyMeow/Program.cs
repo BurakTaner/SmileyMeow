@@ -30,7 +30,7 @@ builder.Services.AddHangfire(opt =>
         ));
 
 builder.Services.AddHangfireServer();
-builder.Services.AddScoped<IWriteToFileService,WriteToFileService>();
+// builder.Services.AddScoped<IWriteToFileService,WriteToFileService>();
 builder.Services.AddScoped<IUpdateAppointmentService,UpdateAppointmentService>();
 //
 

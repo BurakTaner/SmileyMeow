@@ -3,19 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using SmileyMeow.Data;
 using VetClinicLibrary.Appointmentt;
 using System.IO;
-using SmileyMeow.Models;
 
 namespace SmileyMeow.Services;
 
 public class UpdateAppointmentService :IUpdateAppointmentService
 {
     private readonly SmileyMeowDbContext _context;
-    private readonly IWriteToFileService _writetojsonfile;
+    // private readonly IWriteToFileService _writetojsonfile;
 
-    public UpdateAppointmentService(SmileyMeowDbContext context, IWriteToFileService writetojsonfile)
+    public UpdateAppointmentService(SmileyMeowDbContext context)
     {
         _context = context;
-        _writetojsonfile = writetojsonfile;
     }
 
     public async Task GetAppointmentsFromDb()
