@@ -73,7 +73,7 @@ public class AdoptController : BasyController
                 return View("CreateAProfileInformation");
             }
             else {
-                return View("UnderMaintenance","Appointments");
+                return View("UnderMaintenance");
             }
         }
         return View("AdoptApplyResult");

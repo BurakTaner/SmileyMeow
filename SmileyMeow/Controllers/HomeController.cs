@@ -36,7 +36,7 @@ public class HomeController : BasyController
             return RedirectToAction("Profile",$"{loggedUserRole}");
         }
         else {
-            return RedirectToAction("UnderMaintenance","");
+            return View("UnderMaintenance");
         }
         
     }

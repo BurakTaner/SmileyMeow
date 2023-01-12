@@ -1917,10 +1917,10 @@ namespace SmileyMeow.Migrations
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
                 values: new object[,]
                 {
-                    { 6, null, 6, new DateTime(2023, 1, 12, 16, 25, 39, 856, DateTimeKind.Local).AddTicks(9029), false, "Sif", 6, 6 },
-                    { 9, 7, 9, new DateTime(2023, 1, 12, 16, 25, 39, 856, DateTimeKind.Local).AddTicks(9063), true, "Shelob", 9, 9 },
-                    { 10, 8, 11, new DateTime(2023, 1, 12, 16, 25, 39, 856, DateTimeKind.Local).AddTicks(9070), false, "Alvina", 9, 10 },
-                    { 12, 9, 12, new DateTime(2023, 1, 12, 16, 25, 39, 856, DateTimeKind.Local).AddTicks(9074), true, "Tarumaru", 10, 11 }
+                    { 6, null, 6, new DateTime(2023, 1, 12, 18, 31, 51, 525, DateTimeKind.Local).AddTicks(4758), false, "Sif", 6, 6 },
+                    { 9, 7, 9, new DateTime(2023, 1, 12, 18, 31, 51, 525, DateTimeKind.Local).AddTicks(4795), true, "Shelob", 9, 9 },
+                    { 10, 8, 11, new DateTime(2023, 1, 12, 18, 31, 51, 525, DateTimeKind.Local).AddTicks(4800), false, "Alvina", 9, 10 },
+                    { 12, 9, 12, new DateTime(2023, 1, 12, 18, 31, 51, 525, DateTimeKind.Local).AddTicks(4804), true, "Tarumaru", 10, 11 }
                 });
 
             migrationBuilder.InsertData(
@@ -2021,14 +2021,14 @@ namespace SmileyMeow.Migrations
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
                 values: new object[,]
                 {
-                    { 6, new DateTime(2023, 1, 12, 16, 30, 39, 856, DateTimeKind.Local).AddTicks(9988), 6, 6, 6, 6, new DateTime(2023, 1, 12, 16, 25, 39, 856, DateTimeKind.Local).AddTicks(9984) },
-                    { 7, new DateTime(2023, 1, 12, 16, 45, 39, 857, DateTimeKind.Local).AddTicks(4), 6, 6, 7, 7, new DateTime(2023, 1, 12, 16, 25, 39, 857, DateTimeKind.Local).AddTicks(1) }
+                    { 6, new DateTime(2023, 1, 12, 18, 36, 51, 525, DateTimeKind.Local).AddTicks(5999), 6, 6, 6, 6, new DateTime(2023, 1, 12, 18, 31, 51, 525, DateTimeKind.Local).AddTicks(5996) },
+                    { 7, new DateTime(2023, 1, 12, 18, 51, 51, 525, DateTimeKind.Local).AddTicks(6014), 6, 6, 7, 7, new DateTime(2023, 1, 12, 18, 31, 51, 525, DateTimeKind.Local).AddTicks(6011) }
                 });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 1, 2, 16, 25, 39, 857, DateTimeKind.Local).AddTicks(272), 8, 9, 9, 9, new DateTime(2022, 12, 3, 16, 25, 39, 857, DateTimeKind.Local).AddTicks(276) });
+                values: new object[] { 6, new DateTime(2023, 1, 2, 18, 31, 51, 525, DateTimeKind.Local).AddTicks(6355), 8, 9, 9, 9, new DateTime(2022, 12, 3, 18, 31, 51, 525, DateTimeKind.Local).AddTicks(6359) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",
