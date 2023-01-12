@@ -1,0 +1,48 @@
+@model List<Pet>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section text-info">You can see all of your childs here</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center mb-4">Pet Table</h4>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead class="thead-primary">
+                            <tr>
+                                <a asp-controller="PetParent" asp-action="Profile">
+                        <i class="fa-solid fa-arrow-left fa-3x left-arw"></i>
+                    </a>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Specie</th>
+                                <th>Breed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Pet pet in Model)
+                            {
+                                <tr>
+                                    <td>@pet.Name</td>
+                                    <td>@pet.PetGender.GName</td>
+                                    <td>@pet.Specie.SName</td>
+                                    <td>@pet.Breed.BName</td>
+                                    <form asp-controller="PetParent" asp-action="DeletePet" asp-route-id="@pet.AnimalId" method="post">
+                                    <td><button type="submit" class="btn btn-primary">Delete Pet</button></td>
+                                    </form>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

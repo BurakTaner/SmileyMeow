@@ -7,6 +7,7 @@ using SmileyMeow.ViewModels;
 using VetClinicLibrary.Appointmentt;
 using VetClinicLibrary.Person;
 using VetClinicLibrary.Person.Locationn;
+using VetClinicLibrary.Pett;
 using VetClinicLibrary.User;
 
 namespace SmileyMeow.Controllers;
@@ -79,7 +80,16 @@ public class PetParentController : BasyController
         return View(allAppointmentsForLoggedUser);
     }
 
-
+    public IActionResult ListParentsPets() {
+        int parentId =   _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.PetParentId).FirstOrDefault();
+        List<int> parentsPetsId =  _context.PetsnPersons.Where(a => a.PetParentId == parentId).Select(a => a.AnimalId).ToList();
+        List<Pet> parentsPets = new();
+        foreach (int animalId in parentsPetsId)
+        {
+            parentsPets.Add(_context.Pets.Include(a => a.PetGender).Include(a => a.Breed).Include(a => a.Specie).FirstOrDefault(a => a.AnimalId == animalId));
+        }
+        return View(parentsPets);
+    }
     public async Task<IActionResult> CancelAppointment(int id) {
         Appointment appointment = await _context.Appointments.FirstOrDefaultAsync(a => a.AppointmentId == id);
         _context.Remove(appointment);
@@ -87,6 +97,15 @@ public class PetParentController : BasyController
         List<Appointment> allAppointmentsForLoggedUser = await ReturnAllAppointmentsForUser();
         return View("AppointmentList",allAppointmentsForLoggedUser);
                 
+    }
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeletePet(int id) {
+        Pet pet = _context.Pets.FirstOrDefault(a => a.AnimalId == id);
+        _context.Remove(pet);
+        await _context.SaveChangesAsync();
+        return RedirectToAction("ListParentsPets","PetParent");
     }
 
     // End of the views//
