@@ -53,7 +53,7 @@ public class AdoptController : BasyController
         {
             return NotFound();
         }
-        AdoptionJoinTable adoptionJoinTableTest = _context.AdoptionJoinTables.FirstOrDefault(a => a.PetParentId == ReturnLoggedUserId() && a.AnimalId == id);
+        AdoptionJoinTable adoptionJoinTableTest = _context.AdoptionJoinTables.FirstOrDefault(a => a.PetParent.UserId == ReturnLoggedUserId() && a.AnimalId == id);
         if (adoptionJoinTableTest is null)
         {
             
