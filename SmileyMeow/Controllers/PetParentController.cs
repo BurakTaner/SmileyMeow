@@ -167,7 +167,10 @@ public class PetParentController : BasyController
             }
 
         }
+        else {
+
         selectedParentsProfile.PetsOfSelectedParent = null;
+        }
     }
 
 
