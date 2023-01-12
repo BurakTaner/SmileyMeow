@@ -28,9 +28,9 @@
         </div>
 
         @* For Pet *@
-
-        <label for="if-already-had-information" class="d-block">Select a pet for appointment *</label>
-          <select name="SelectedPet" id="added-pets-select">
+        <div class="formbold-mb-5">
+          <label for="if-already-had-pet" class="formbold-form-label mt-3">Select a patient for appointment *</label>
+          <select name="SelectedPet" id="if-already-had-pet" class="formbold-form-input">
             <option selected="0" value="0">Select a pet...</option>
             @foreach (Pet pet in Model.AlreadyAddedPets)
             {
@@ -38,7 +38,7 @@
                 @pet.Name</option>
             }
           </select>
-        
+        </div>
 
         <hr>
         
