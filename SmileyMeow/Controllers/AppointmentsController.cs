@@ -220,14 +220,13 @@ public class AppointmentsController : BasyController
         userAppointmentViewModel.StatusLevelList = await _context.StatusLevels.ToListAsync();
         userAppointmentViewModel.PatientInformation = new();
         userAppointmentViewModel.Appointment = new();
+        userAppointmentViewModel.SelectedFormInputUserDTO = new();
         if (selectedPetFromProfile is not null)
         {
             userAppointmentViewModel.SelectedFormInputUserDTO.SelectedPet = (int)selectedPetFromProfile;
 
         }
-        else {
-        userAppointmentViewModel.SelectedFormInputUserDTO = new();
-        }
+        
         return userAppointmentViewModel;
     }
 
