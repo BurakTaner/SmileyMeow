@@ -336,7 +336,7 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<Appointment>().HasData(
             new Appointment { AppointmentId = 6, PetnPersonId = 6, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddMinutes(5), AppointmentStatussId = 6, PatientInformationId = 6},
-            new Appointment { AppointmentId = 7, PetnPersonId = 7, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddMinutes(8), AppointmentStatussId = 6, PatientInformationId = 7}
+            new Appointment { AppointmentId = 7, PetnPersonId = 7, DoctorId = 6, TimeCreated = DateTime.Now, AppointmentDate = DateTime.Now.AddMinutes(20), AppointmentStatussId = 6, PatientInformationId = 7}
         );
 
         modelBuilder.Entity<DoctorTitle>().HasData(
