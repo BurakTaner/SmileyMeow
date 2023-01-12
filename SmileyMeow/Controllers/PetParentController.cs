@@ -115,11 +115,9 @@ public class PetParentController : BasyController
 
     private async Task<List<Appointment>> ReturnAllAppointmentsForUser()
     {
-        int loggedUserPetParentId = await _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.UserId).FirstOrDefaultAsync();
-        List<Appointment> allAppointmentsForLoggedUser = await _context.Appointments.Where(a => a.PetnPersonId == loggedUserPetParentId).Include(a => a.PetnPerson.Pet).Include(a => a.Doctor).ThenInclude(a => a.DoctorTitle).Include(a => a.AppointmentStatus).ToListAsync();
+        List<Appointment> allAppointmentsForLoggedUser = await ReturnAllAppointmentsForParent();
         return allAppointmentsForLoggedUser;
     }
-
 
     private async Task<Userr> ReturnLoggedParentUserAccount(int loggedUser)
     {
@@ -173,6 +171,21 @@ public class PetParentController : BasyController
         }
     }
 
+    private async Task<List<Appointment>> ReturnAllAppointmentsForParent()
+    {
+        int loggedUserPetParentId = await _context.PetParents
+        .Where(a => a.UserId == ReturnLoggedUserId())
+        .Select(a => a.PetParentId)
+        .FirstOrDefaultAsync();
+        List<Appointment> allAppointmentsForLoggedUser = await _context.Appointments
+        .Where(a => a.PetnPerson.PetParentId == loggedUserPetParentId)
+        .Include(a => a.PetnPerson.Pet)
+        .Include(a => a.Doctor)
+        .ThenInclude(a => a.DoctorTitle)
+        .Include(a => a.AppointmentStatus)
+        .ToListAsync();
+        return allAppointmentsForLoggedUser;
+    }
 
     private async Task Save()
     {

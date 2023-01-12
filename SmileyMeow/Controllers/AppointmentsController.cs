@@ -7,6 +7,7 @@ using SmileyMeow.ViewModels;
 using VetClinicLibrary.Appointmentt;
 using VetClinicLibrary.Appointmentt.PatientInformationn;
 using VetClinicLibrary.NotUserParentandPet;
+using VetClinicLibrary.Person;
 using VetClinicLibrary.Person.Locationn;
 using VetClinicLibrary.PetnPersonn;
 using VetClinicLibrary.Pett;
@@ -157,10 +158,8 @@ public class AppointmentsController : BasyController
 
     private async Task InsertToUserAppointments(Appointment appointment, SelectedFormInputUserDTO selectedFormInputNotUserDTO, PatientInformation patientInformation, int loggedUser)
     {
-        int loggedUsersParentAccountId = await _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.PetParentId).FirstOrDefaultAsync();
-        PetnPerson joinTable = new();
-        joinTable.PetParentId = loggedUsersParentAccountId;
-        joinTable.AnimalId = selectedFormInputNotUserDTO.SelectedPet;
+        int loggedUsersParentId = await _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.PetParentId).FirstOrDefaultAsync();
+        PetnPerson joinTable = await _context.PetsnPersons.Where(a => a.PetParentId == loggedUsersParentId && a.AnimalId == selectedFormInputNotUserDTO.SelectedPet).FirstOrDefaultAsync();
         appointment.AppointmentStatussId = 6;
         appointment.PatientInformation = patientInformation;
         appointment.PetnPerson= joinTable;
