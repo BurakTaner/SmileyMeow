@@ -59,10 +59,23 @@ public class AdoptController : BasyController
             
         AdoptionJoinTable adoptionJoinTable = new();
         adoptionJoinTable.AnimalId = id;
-        adoptionJoinTable.PetParentId = ReturnLoggedUserId();
+        adoptionJoinTable.PetParentId = _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.PetParentId).FirstOrDefault();
         adoptionJoinTable.PetParentRequestText = adoptionTextDTO.AdoptionText;
         _context.AdoptionJoinTables.Add(adoptionJoinTable);
-        await _context.SaveChangesAsync();
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            if (e is DbUpdateException)
+            {
+                return View("CreateAProfileInformation");
+            }
+            else {
+                return View("UnderMaintenance","Appointments");
+            }
+        }
         return View("AdoptApplyResult");
         }
         

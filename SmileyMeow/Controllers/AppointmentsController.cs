@@ -24,6 +24,11 @@ public class AppointmentsController : BasyController
     }
     public async Task<IActionResult> TakeUserAppointment(int? selectedPetFromProfile)
     {
+        int? loggedUserParentId = _context.PetParents.Where(a => a.UserId == ReturnLoggedUserId()).Select(a => a.PetParentId).FirstOrDefault();
+        if (loggedUserParentId is null or 0)
+        {
+            return View("CreateAProfileInformation");
+        }
         UserAppointmentViewModel userAppointmentViewModel = await ReturnUserAppointmentEmpty(selectedPetFromProfile);
         return View(userAppointmentViewModel);
     }
