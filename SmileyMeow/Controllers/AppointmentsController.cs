@@ -163,7 +163,7 @@ public class AppointmentsController : BasyController
         joinTable.AnimalId = selectedFormInputNotUserDTO.SelectedPet;
         appointment.AppointmentStatussId = 6;
         appointment.PatientInformation = patientInformation;
-        appointment.PetnPersonId = joinTable.PetParentId;
+        appointment.PetnPerson= joinTable;
         _context.Appointments.Add(appointment);
         await _context.SaveChangesAsync();
     }
