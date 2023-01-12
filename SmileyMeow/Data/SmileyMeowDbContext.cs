@@ -259,6 +259,7 @@ public class SmileyMeowDbContext : DbContext
         modelBuilder.Entity<Userr>().HasData(
             new Userr { UserrId = 5, Emaill = "newparent@gmail.com", Passwordd = "candy123456", RoleeId = 6 },
             new Userr { UserrId = 6, Emaill = "artorias@gmail.com", Passwordd = "sif123456", RoleeId = 6 },
+            new Userr { UserrId = 7, Emaill = "catarina@gmail.com", Passwordd = "onion123456", RoleeId = 6 },
             new Userr { UserrId = 666, Emaill = "patches@gmail.com", Passwordd = "patches123456", RoleeId = 7 },
             new Userr { UserrId = 128, Emaill = "anastacia@gmail.com", Passwordd = "anastacia123456", RoleeId = 7 },
             new Userr { UserrId = 129, Emaill = "admin@gmail.com", Passwordd = "admin123456", RoleeId = 8 },
@@ -286,7 +287,7 @@ public class SmileyMeowDbContext : DbContext
 
         modelBuilder.Entity<PetParent>().HasData(
             new PetParent { UserId = 6, FirstName = "Artorias", MiddleName = "Solaire", LastName = "Astora", BalanceId = 6, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 6, HumanGenderId = 6, PronounId = 6, AddressId = 6, PhoneNumber = "058745683324"},
-            new PetParent { UserId = 6, FirstName = "Siegward", MiddleName = null, LastName = "Catarina", BalanceId = 132, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 7, HumanGenderId = 6, PronounId = 6, AddressId = 23, PhoneNumber = "058745683366"}
+            new PetParent { UserId = 7, FirstName = "Siegward", MiddleName = null, LastName = "Catarina", BalanceId = 132, DOB = Convert.ToDateTime("1999/6/8"), PetParentId = 7, HumanGenderId = 6, PronounId = 6, AddressId = 23, PhoneNumber = "058745683366"}
         );
 
         modelBuilder.Entity<Address>().HasData(

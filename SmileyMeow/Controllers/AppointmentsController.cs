@@ -217,9 +217,11 @@ public class AppointmentsController : BasyController
         userAppointmentViewModel.Appointment = new();
         if (selectedPetFromProfile is not null)
         {
-            userAppointmentViewModel.SelectedFormInputUserDTO = new();
             userAppointmentViewModel.SelectedFormInputUserDTO.SelectedPet = (int)selectedPetFromProfile;
 
+        }
+        else {
+        userAppointmentViewModel.SelectedFormInputUserDTO = new();
         }
         return userAppointmentViewModel;
     }

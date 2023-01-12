@@ -9,6 +9,6 @@ namespace SmileyMeow.DTOs;
 
 public class SelectedFormInputUserDTO
 {
-    public int SelectedPet { get; set; }
+    public int SelectedPet { get; set; } = 0;
     public Pet Pet { get; set; }
 }
