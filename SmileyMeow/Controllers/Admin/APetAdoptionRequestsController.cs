@@ -54,6 +54,7 @@ namespace SmileyMeow.Controllers.Admin
             return View(adoptionJoinTable);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeclineRequest(int id) {
             AdoptionJoinTable adoptionJoinTable = _context.AdoptionJoinTables.FirstOrDefault(a => a.AdoptJoinTableId == id);
             _context.Remove(adoptionJoinTable);
