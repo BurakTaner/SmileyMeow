@@ -18,7 +18,7 @@
                 <label for="parentname" class="col-sm-3 text-end control-label col-form-label">ParentName</label>
                 <div class="col-sm-9">
                     <p type="text" class="form-control" id="parentname" name="parentname"
-                        >@($"{Model.Appointment.PetnPerson.PetParent.FirstName}{Model.Appointment.PetnPerson.PetParent.MiddleName}{Model.Appointment.PetnPerson.PetParent.LastName}")</p>
+                        >@($"{Model.Appointment.PetnPerson.PetParent.FirstName} {Model.Appointment.PetnPerson.PetParent.MiddleName} {Model.Appointment.PetnPerson.PetParent.LastName}")</p>
                 </div>
                 <label for="name" class="col-sm-3 text-end control-label col-form-label">Patient Name</label>
                 <div class="col-sm-9">
@@ -28,7 +28,7 @@
                 <label for="doctorname" class="col-sm-3 text-end control-label col-form-label">Doctor Name</label>
                 <div class="col-sm-9">
                     <p type="text" class="form-control" id="doctorname" name="doctorname"
-                        >@($"{Model.Appointment.Doctor.FirstName}{Model.Appointment.Doctor.MiddleName}{Model.Appointment.Doctor.LastName}")</p>
+                        >@($"{Model.Appointment.Doctor.FirstName} {Model.Appointment.Doctor.MiddleName} {Model.Appointment.Doctor.LastName}")</p>
                 </div>
                 <label for="appointmentstatus" class="col-sm-3 text-end control-label col-form-label">City</label>
                 <div class="col-sm-9">
