@@ -20,4 +20,5 @@ public class NotUserParentsPet : INotUserParentsPet
     public Specie Specie { get; set; }
     public int BreedId { get; set; }
     public Breed Breed { get; set; }
+    public List<NotUserParentnPet> NotUserParentnPet { get; set; }
 }

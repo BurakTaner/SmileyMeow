@@ -163,6 +163,16 @@ public class SmileyMeowDbContext : DbContext
                         .WithMany(b => b.NotUserAppointment)
                         .HasForeignKey(c => c.AppointmentStatussId);
         
+        modelBuilder.Entity<NotUserParentnPet>()
+                            .HasOne(a => a.NotUserParent)
+                            .WithMany(a => a.NotUsersParentsPets)
+                            .HasForeignKey(a => a.NotUserParentId);
+        
+        modelBuilder.Entity<NotUserParentnPet>()
+                            .HasOne(a => a.NotUserParentsPet)
+                            .WithMany(a => a.NotUserParentnPet)
+                            .HasForeignKey(a => a.AnimalId);
+        
         modelBuilder.Entity<NotUserParent>()
                         .HasKey(a => a.NotUserParentId);
         
