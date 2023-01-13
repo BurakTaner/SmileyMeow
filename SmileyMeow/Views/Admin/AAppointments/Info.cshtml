@@ -13,7 +13,7 @@
                 <label for="appointmentid" class="col-sm-3 text-end control-label col-form-label">Id</label>
                 <div class="col-sm-9">
                     <p type="text" class="form-control" id="appointmentid" name="AppointmentId"
-                        >@Model.Appointment.AppointmentId"</p>
+                        >@Model.Appointment.AppointmentId</p>
                 </div>
                 <label for="parentname" class="col-sm-3 text-end control-label col-form-label">ParentName</label>
                 <div class="col-sm-9">
@@ -36,7 +36,7 @@
                         @foreach (AppointmentStatus appointmentStatus in Model.AppointmentStatusList)
                         {
                             <option value="@appointmentStatus.AppointmentStatussId"
-                            selected="@(Model.Appointment.AppointmentId == appointmentStatus.AppointmentStatussId)">
+                            selected="@(Model.Appointment.AppointmentStatussId == appointmentStatus.AppointmentStatussId)">
                                 @appointmentStatus.Status</option>
                         }
                     </select>

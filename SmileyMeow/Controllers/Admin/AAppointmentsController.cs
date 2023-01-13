@@ -40,7 +40,7 @@ public class AAppointmentsController : Controller
     public async Task<IActionResult> Update(int id, [Bind("AppointmentStatusId")] AppointmentUpdateDTO appointmentUpdateDTO) {
 
         if(ModelState.IsValid) {
-            Appointment appointment = await _context.Appointments.FirstOrDefaultAsync();
+            Appointment appointment = await _context.Appointments.FirstOrDefaultAsync(a => a.AppointmentId == id);
             appointment.AppointmentStatussId = appointmentUpdateDTO.AppointmentStatusId;
             _context.Update(appointment);
             await _context.SaveChangesAsync();
