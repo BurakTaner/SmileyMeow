@@ -30,7 +30,7 @@
                     <p type="text" class="form-control" id="doctorname" name="doctorname"
                         >@($"{Model.NotUserAppointment.Doctor.FirstName} {Model.NotUserAppointment.Doctor.MiddleName} {Model.NotUserAppointment.Doctor.LastName}")</p>
                 </div>
-                <label for="appointmentstatus" class="col-sm-3 text-end control-label col-form-label">City</label>
+                <label for="appointmentstatus" class="col-sm-3 text-end control-label col-form-label">Status</label>
                 <div class="col-sm-9">
                     <select class="select form-select shadow-none" id="dis-city-select" name="AppointmentStatusId">
                         @foreach (AppointmentStatus appointmentStatus in Model.AppointmentStatusList)
