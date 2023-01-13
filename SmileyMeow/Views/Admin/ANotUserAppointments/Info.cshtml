@@ -32,7 +32,7 @@
                 </div>
                 <label for="appointmentstatus" class="col-sm-3 text-end control-label col-form-label">Status</label>
                 <div class="col-sm-9">
-                    <select class="select form-select shadow-none" id="dis-city-select" name="AppointmentStatusId">
+                    <select class="select form-select shadow-none" id="appointmentstatus" name="AppointmentStatusId">
                         @foreach (AppointmentStatus appointmentStatus in Model.AppointmentStatusList)
                         {
                             <option value="@appointmentStatus.AppointmentStatussId"
