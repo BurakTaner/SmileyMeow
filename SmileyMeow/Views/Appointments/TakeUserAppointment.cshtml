@@ -9,6 +9,7 @@
   <div class="appointment-form pb-2 pt-2 ">
     <div class="formbold-form-wrapper">
       <form asp-controller="Appointments" asp-action="TakeUserAppointment" method="POST" class="no-bordered-form">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <ol>
           <li>
             <strong class="block-level-info mb-2"> Required (*)</strong>
