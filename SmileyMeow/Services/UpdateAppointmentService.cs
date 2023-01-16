@@ -24,22 +24,19 @@ public class UpdateAppointmentService :IUpdateAppointmentService
         .Include(a => a.PetnPerson)
         .ThenInclude(a => a.PetParent)
         .Include(a => a.AppointmentStatus)
+        .Where(a => a.AppointmentStatussId == 6)
         .ToListAsync();
         foreach (Appointment appointment in allAppointments)
         {
             // List<UpdatedAppointment> updatedAppointments = new();
             if (appointment.AppointmentDate < DateTime.Now)
             {
-                if(appointment.AppointmentStatussId == 6)
-                {
                     appointment.AppointmentStatussId = 7;
                     _context.Update(appointment);
                     // UpdatedAppointment updatedAppointment = CreateDTO(appointment);
                     await _context.SaveChangesAsync();
                     BackgroundJob.Enqueue(() => Console.WriteLine("An appointment updated!"));
                     // updatedAppointments.Add(updatedAppointment);
-
-                }
                 // _writetojsonfile.ReadAndWriteToFile(updatedAppointments);
             }
         }
