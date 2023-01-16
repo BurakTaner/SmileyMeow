@@ -545,8 +545,7 @@ namespace SmileyMeow.Migrations
                     notuserparenpetid = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     notuserparentid = table.Column<int>(type: "integer", nullable: false),
-                    animalid = table.Column<int>(type: "integer", nullable: false),
-                    notuserparentspetanimalid = table.Column<int>(type: "integer", nullable: true)
+                    animalid = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -559,9 +558,10 @@ namespace SmileyMeow.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_notuserparentnpet_notuserparentspet_notuserparentspettempid",
-                        column: x => x.notuserparentspetanimalid,
+                        column: x => x.animalid,
                         principalTable: "notuserparentspet",
-                        principalColumn: "animalid");
+                        principalColumn: "animalid",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -1917,10 +1917,10 @@ namespace SmileyMeow.Migrations
                 columns: new[] { "animalid", "adoptinfoid", "breedid", "dob", "isadoptable", "name", "petgenderid", "specieid" },
                 values: new object[,]
                 {
-                    { 6, null, 6, new DateTime(2023, 1, 12, 19, 5, 22, 264, DateTimeKind.Local).AddTicks(3657), false, "Sif", 6, 6 },
-                    { 9, 7, 9, new DateTime(2023, 1, 12, 19, 5, 22, 264, DateTimeKind.Local).AddTicks(3690), true, "Shelob", 9, 9 },
-                    { 10, 8, 11, new DateTime(2023, 1, 12, 19, 5, 22, 264, DateTimeKind.Local).AddTicks(3697), false, "Alvina", 9, 10 },
-                    { 12, 9, 12, new DateTime(2023, 1, 12, 19, 5, 22, 264, DateTimeKind.Local).AddTicks(3701), true, "Tarumaru", 10, 11 }
+                    { 6, null, 6, new DateTime(2023, 1, 16, 20, 3, 37, 409, DateTimeKind.Local).AddTicks(9652), false, "Sif", 6, 6 },
+                    { 9, 7, 9, new DateTime(2023, 1, 16, 20, 3, 37, 409, DateTimeKind.Local).AddTicks(9683), true, "Shelob", 9, 9 },
+                    { 10, 8, 11, new DateTime(2023, 1, 16, 20, 3, 37, 409, DateTimeKind.Local).AddTicks(9690), false, "Alvina", 9, 10 },
+                    { 12, 9, 12, new DateTime(2023, 1, 16, 20, 3, 37, 409, DateTimeKind.Local).AddTicks(9695), true, "Tarumaru", 10, 11 }
                 });
 
             migrationBuilder.InsertData(
@@ -2004,8 +2004,8 @@ namespace SmileyMeow.Migrations
 
             migrationBuilder.InsertData(
                 table: "notuserparentnpet",
-                columns: new[] { "notuserparenpetid", "animalid", "notuserparentid", "notuserparentspetanimalid" },
-                values: new object[] { 9, 9, 9, null });
+                columns: new[] { "notuserparenpetid", "animalid", "notuserparentid" },
+                values: new object[] { 9, 9, 9 });
 
             migrationBuilder.InsertData(
                 table: "petsnpersons",
@@ -2021,14 +2021,14 @@ namespace SmileyMeow.Migrations
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "patientinformationid", "petnpersonid", "timecreated" },
                 values: new object[,]
                 {
-                    { 6, new DateTime(2023, 1, 12, 19, 10, 22, 264, DateTimeKind.Local).AddTicks(4701), 6, 6, 6, 6, new DateTime(2023, 1, 12, 19, 5, 22, 264, DateTimeKind.Local).AddTicks(4697) },
-                    { 7, new DateTime(2023, 1, 12, 19, 25, 22, 264, DateTimeKind.Local).AddTicks(4717), 6, 6, 7, 7, new DateTime(2023, 1, 12, 19, 5, 22, 264, DateTimeKind.Local).AddTicks(4714) }
+                    { 6, new DateTime(2023, 1, 16, 20, 8, 37, 410, DateTimeKind.Local).AddTicks(566), 6, 6, 6, 6, new DateTime(2023, 1, 16, 20, 3, 37, 410, DateTimeKind.Local).AddTicks(561) },
+                    { 7, new DateTime(2023, 1, 16, 20, 23, 37, 410, DateTimeKind.Local).AddTicks(581), 6, 6, 7, 7, new DateTime(2023, 1, 16, 20, 3, 37, 410, DateTimeKind.Local).AddTicks(578) }
                 });
 
             migrationBuilder.InsertData(
                 table: "notuserappointments",
                 columns: new[] { "appointmentid", "appointmentdate", "appointmentstatussid", "doctorid", "notuserparentnpersonid", "patientinformationid", "timecreated" },
-                values: new object[] { 6, new DateTime(2023, 1, 2, 19, 5, 22, 264, DateTimeKind.Local).AddTicks(4962), 8, 9, 9, 9, new DateTime(2022, 12, 3, 19, 5, 22, 264, DateTimeKind.Local).AddTicks(4967) });
+                values: new object[] { 6, new DateTime(2023, 1, 6, 20, 3, 37, 410, DateTimeKind.Local).AddTicks(856), 8, 9, 9, 9, new DateTime(2022, 12, 7, 20, 3, 37, 410, DateTimeKind.Local).AddTicks(861) });
 
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_districtid",
@@ -2128,14 +2128,14 @@ namespace SmileyMeow.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "ix_notuserparentnpet_animalid",
+                table: "notuserparentnpet",
+                column: "animalid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_notuserparentnpet_notuserparentid",
                 table: "notuserparentnpet",
                 column: "notuserparentid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_notuserparentnpet_notuserparentspetanimalid",
-                table: "notuserparentnpet",
-                column: "notuserparentspetanimalid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_notuserparents_addressid",

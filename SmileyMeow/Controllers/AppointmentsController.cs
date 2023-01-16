@@ -53,6 +53,7 @@ public class AppointmentsController : BasyController
         }
 
         UserAppointmentViewModel userAppointmentViewModel = await MakeUserViewModelAgain(appointment, selectedFormInputNotUserDTO, patientInformation, loggedUser);
+        ModelState.AddModelError("","There is already an appointment for this date");
         return View(userAppointmentViewModel);
     }
 
@@ -91,7 +92,7 @@ public class AppointmentsController : BasyController
             NotUserAppointmentViewModel appointmentViewModell = await MakeNotUserViewModelAgain(
             notUserParent, notUserParentsPet, patientInformation,
             notUserAppointment, address, selectedFormInputNotUserDTO);
-
+            ModelState.AddModelError("","You have choose invalid date or time");
             return View(appointmentViewModell);
         }
         List<NotUserAppointment> doctorAppointments = await GetNotUserAppointments(notUserAppointment);
@@ -112,7 +113,7 @@ public class AppointmentsController : BasyController
 
 
         NotUserAppointmentViewModel appointmentViewModel = await MakeNotUserViewModelAgain(notUserParent, notUserParentsPet, patientInformation, notUserAppointment, address, selectedFormInputNotUserDTO);
-
+        ModelState.AddModelError("","There is already an appointment for this date");
         return View(appointmentViewModel);
     }
     public IActionResult AppointmentsResult() {
@@ -125,7 +126,9 @@ public class AppointmentsController : BasyController
         .Where(a => a.DoctorId == notUserAppointment.DoctorId &&
         a.AppointmentDate.Year == notUserAppointment.AppointmentDate.Year
         && a.AppointmentDate.Month == notUserAppointment.AppointmentDate.Month
-        && a.AppointmentDate.Day == notUserAppointment.AppointmentDate.Day)
+        && a.AppointmentDate.Day == notUserAppointment.AppointmentDate.Day && 
+        notUserAppointment.AppointmentDate.Hour == a.AppointmentDate.Hour && 
+        notUserAppointment.AppointmentDate.Minute == a.AppointmentDate.Minute)
         .ToListAsync();
     }
     private async Task<List<Appointment>> GetUserAppointments(Appointment appointment)
@@ -134,7 +137,9 @@ public class AppointmentsController : BasyController
         .Where(a => a.DoctorId == appointment.DoctorId &&
         a.AppointmentDate.Year == appointment.AppointmentDate.Year
         && a.AppointmentDate.Month == appointment.AppointmentDate.Month
-        && a.AppointmentDate.Day == appointment.AppointmentDate.Day)
+        && a.AppointmentDate.Day == appointment.AppointmentDate.Day && 
+        appointment.AppointmentDate.Hour == a.AppointmentDate.Hour && 
+        a.AppointmentDate.Minute == appointment.AppointmentDate.Minute)
         .ToListAsync();
     }
 
