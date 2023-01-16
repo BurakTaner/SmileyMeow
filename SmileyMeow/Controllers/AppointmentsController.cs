@@ -129,6 +129,7 @@ public class AppointmentsController : BasyController
         && a.AppointmentDate.Day == notUserAppointment.AppointmentDate.Day && 
         notUserAppointment.AppointmentDate.Hour == a.AppointmentDate.Hour && 
         notUserAppointment.AppointmentDate.Minute == a.AppointmentDate.Minute)
+        .AsSplitQuery()
         .ToListAsync();
     }
     private async Task<List<Appointment>> GetUserAppointments(Appointment appointment)
@@ -140,6 +141,7 @@ public class AppointmentsController : BasyController
         && a.AppointmentDate.Day == appointment.AppointmentDate.Day && 
         appointment.AppointmentDate.Hour == a.AppointmentDate.Hour && 
         a.AppointmentDate.Minute == appointment.AppointmentDate.Minute)
+        .AsSplitQuery()
         .ToListAsync();
     }
 
