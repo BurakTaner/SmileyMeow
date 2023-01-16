@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AnimalAPI.Migrations
 {
     [DbContext(typeof(AnimalAPIDbContext))]
-    [Migration("20230113002052_Initial Migration")]
+    [Migration("20230116163326_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
